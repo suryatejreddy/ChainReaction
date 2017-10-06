@@ -13,6 +13,8 @@ public class Cell
     private int numberOfBallsPresent;
     private ArrayList<Cell> neighbouringCells;
     private Player playerOccupiedBy;
+    private int coordinateX;
+    private int coordinateY;
 
     public Cell(int criticalMass, ArrayList<Cell> neighbouringCells, int numberOfBallsPresent, Player player)
     {
@@ -28,12 +30,22 @@ public class Cell
         return criticalMass;
     }
 
+    public int getCoordinateX()
+    {
+        return coordinateX;
+    }
+
+    public int getCoordinateY()
+    {
+        return coordinateY;
+    }
+
     public ArrayList<Cell> getNeighbouringCells()
     {
         return neighbouringCells;
     }
 
-    public boolean isCellIsOccupied()
+    public boolean isCellOccupied()
     {
         return cellIsOccupied;
     }
@@ -66,6 +78,16 @@ public class Cell
     public void setNumberOfBallsPresent(int numberOfBallsPresent)
     {
         this.numberOfBallsPresent = numberOfBallsPresent;
+    }
+
+    public void setCoordinateX(int coordinateX)
+    {
+        this.coordinateX = coordinateX;
+    }
+
+    public void setCoordinateY(int coordinateY)
+    {
+        this.coordinateY = coordinateY;
     }
 
     public void setPlayerOccupiedBy(Player playerOccupiedBy)
