@@ -29,6 +29,8 @@ public class Matrix
         {
             for (j=0;j<sideLengthY;j++)
             {
+                cells.get(i).get(j).setCoordinateX(i);
+                cells.get(i).get(j).setCoordinateY(j);
                 if(cellIsACornerCell(i,j))
                 {
                     cells.get(i).get(j).setCriticalMass(Cell.TYPE_CORNER);
@@ -175,5 +177,42 @@ public class Matrix
         if(i==sideLengthY-1 && j==sideLengthX-1)
             return true;
         return false;
+    }
+
+    public boolean checkIfCellIsFree(Cell currentCell)
+    {
+        if(currentCell.isCellOccupied())
+            return false;
+        return true;
+    }
+
+    public ArrayList<ArrayList<Cell>> getCells()
+    {
+        return cells;
+    }
+
+    public int getSideLengthX()
+    {
+        return sideLengthX;
+    }
+
+    public int getSideLengthY()
+    {
+        return sideLengthY;
+    }
+
+    public void setCells(ArrayList<ArrayList<Cell>> cells)
+    {
+        this.cells = cells;
+    }
+
+    public void setSideLengthX(int sideLengthX)
+    {
+        this.sideLengthX = sideLengthX;
+    }
+
+    public void setSideLengthY(int sideLengthY)
+    {
+        this.sideLengthY = sideLengthY;
     }
 }
