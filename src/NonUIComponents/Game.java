@@ -1,17 +1,26 @@
 package NonUIComponents;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Game
 {
     private ArrayList<Player> players;
 
+
+    private Queue<Player> allPlayers;
+
     public Game()
     {
         players=new ArrayList<Player>();
+        allPlayers = new LinkedList<Player>();
         for(int i=0;i<players.size();i++)
+        {
             players.set(i, new Player(i, new ArrayList<Cell>(), true));
+            allPlayers.add(new Player(i,new ArrayList<Cell>(),true));
+        }
     }
 
     public ArrayList<Player> getPlayers()
@@ -64,27 +73,51 @@ public class Game
         Matrix gameMatrix=new Matrix(x, y);
         while(!isGameOver() && i<players.size())
         {
-            players.get(i).setTakenFirstMove(true);
-            System.out.println("Player "+(i+1)+"'s chance.");
-            System.out.println("Enter coordinates of matrix(0 based) to tap.");
-            Player currentPlayer= findCurrentPlayer(i);
-            int coordX, coordY;
-            coordX=scanner.nextInt();
-            coordY=scanner.nextInt();
-            Cell cellChosen=findChosenCell(coordX, coordY, gameMatrix);
-
-            if(!gameMatrix.checkIfCellIsFree(cellChosen))
-            {
-                System.out.println("Cell is already occupied by "+cellChosen.getPlayerOccupiedBy().getPlayerColourByString()+" player.");
-                continue;
+            Player curPlayer = allPlayers.remove();
+            System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
+            System.out.println("Enter coordiantes");
+            int moveX = scanner.nextInt();
+            int moveY = scanner.nextInt();
+            Cell cellSelected = gameMatrix.getCellFromCoordinate(moveX,moveY);
+            if (cellSelected.isCellOccupied()){
+                int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
+                if (curCellColor == curPlayer.getPlayerColour()){ // check if player is adding to his color
+                    //add ball function
+                }
+                else{  //if not
+                    //show error, wrong move
+                }
+            }
+            else{
+                //TODO
+                //add ball function
             }
 
-            players.get(i).makeMove(coordX, coordY, gameMatrix, this, i, cellChosen, currentPlayer);
-            setPlayersDead();
-            if(i==players.size()-1)
-                i=0;
-            else
-                i++;
+
+//            players.get(i).setTakenFirstMove(true);
+//            System.out.println("Player "+(i+1)+"'s chance.");
+//            System.out.println("Enter coordinates of matrix(0 based) to tap.");
+//            Player currentPlayer= findCurrentPlayer(i);
+//            int coordX, coordY;
+//            coordX=scanner.nextInt();
+//            coordY=scanner.nextInt();
+//            Cell cellChosen=findChosenCell(coordX, coordY, gameMatrix);
+//
+//            if(!gameMatrix.checkIfCellIsFree(cellChosen))
+//            {
+//                System.out.println("Cell is already occupied by "+cellChosen.getPlayerOccupiedBy().getPlayerColourByString()+" player.");
+//                continue;
+//            }
+//
+//            players.get(i).makeMove(coordX, coordY, gameMatrix, this, i, cellChosen, currentPlayer);
+//            setPlayersDead();
+//            if(i==players.size()-1)
+//                i=0;
+//            else
+//                i++;
+
+
+
         }
     }
 

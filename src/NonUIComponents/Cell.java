@@ -94,38 +94,43 @@ public class Cell
 
     public void setPlayerOccupiedBy(Player playerOccupiedBy)
     {
-        this.getPlayerOccupiedBy().getCurrentOccupiedCells().remove(this);
-        this.getPlayerOccupiedBy().setCurrentOccupiedCells(this.getPlayerOccupiedBy().getCurrentOccupiedCells());
+        //what should happen here?
+        playerOccupiedBy.addCell(this);
         this.playerOccupiedBy = playerOccupiedBy;
+
+
+//        this.getPlayerOccupiedBy().getCurrentOccupiedCells().remove(this);
+//        this.getPlayerOccupiedBy().setCurrentOccupiedCells(this.getPlayerOccupiedBy().getCurrentOccupiedCells());
+//        this.playerOccupiedBy = playerOccupiedBy;
     }
 
-    public void addBall(Player currentPlayer, Matrix gameMatrix, Game game, int coordX, int coordY, int i, Cell cellChosen)
+    public void addBall(Player curPlayer)
     {
-        this.setCellIsOccupied(true);
-        this.setPlayerOccupiedBy(currentPlayer);
-        this.setNumberOfBallsPresent(this.getNumberOfBallsPresent()+1);
-        ArrayList<Cell> occupiedCellsByCurrentPlayer=game.getPlayers().get(i).getCurrentOccupiedCells();
-        occupiedCellsByCurrentPlayer.add(cellChosen);
-        game.getPlayers().get(i).setCurrentOccupiedCells(occupiedCellsByCurrentPlayer);
-        ArrayList<Cell> neighbours=this.getNeighbouringCells();
-        if(this.getNumberOfBallsPresent()==this.getCriticalMass()) {
-            try
-            {
-                neighbours.forEach(k -> k.addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen));
-            }
-            catch(StackOverflowError e)
-            {
-                e.printStackTrace();
-                return;
-            }
-        }
+          this.setCellIsOccupied(true);
+          this.setPlayerOccupiedBy(curPlayer);
+//        this.setCellIsOccupied(true);
+//        this.setPlayerOccupiedBy(currentPlayer);
+//        this.setNumberOfBallsPresent(this.getNumberOfBallsPresent()+1);
+//        ArrayList<Cell> occupiedCellsByCurrentPlayer=game.getPlayers().get(i).getCurrentOccupiedCells();
+//        occupiedCellsByCurrentPlayer.add(cellChosen);
+//        game.getPlayers().get(i).setCurrentOccupiedCells(occupiedCellsByCurrentPlayer);
+//        ArrayList<Cell> neighbours=this.getNeighbouringCells();
+//        if(this.getNumberOfBallsPresent()==this.getCriticalMass()) {
+//            try
+//            {
+//                neighbours.forEach(k -> k.addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen));
+//            }
+//            catch(StackOverflowError e)
+//            {
+//                e.printStackTrace();
+//                return;
+//            }
+//        }
+
     }
 
     public String toString(){
         String s = "(" + this.coordinateX + "," + this.coordinateY + ")";
-//        for (Cell c : this.neighbouringCells){
-//            s += c.toString() + "\n";
-//        }
         return s;
     }
 }
