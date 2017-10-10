@@ -117,11 +117,19 @@ public class Cell
           this.setPlayerOccupiedBy(curPlayer);
           this.numberOfBallsPresent += 1;
           if (this.numberOfBallsPresent == this.getCriticalMass()){
-              //TODO reduce balls for this cell
+
+              //TODO reduce balls for this cell, add exception for infinite recursion
                 this.emptyCell();
-              this.neighbouringCells.forEach((Cell neighbour) -> {
-                  neighbour.addBall(curPlayer);
-              });
+                try
+                {
+                    this.neighbouringCells.forEach((Cell neighbour) -> {
+                        neighbour.addBall(curPlayer);
+                    });
+                }
+                catch (StackOverflowError e)
+                {
+                    System.out.println("Yayyyy.. You won.");
+                }
           }
 
 //        this.setCellIsOccupied(true);
