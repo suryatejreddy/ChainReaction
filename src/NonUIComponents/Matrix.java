@@ -6,109 +6,103 @@ public class Matrix
 {
     private int sideLengthX;
     private int sideLengthY;
-    private ArrayList<ArrayList<Cell>> cells;
+    private ArrayList<ArrayList<Cell>> allCells;
 
     public Matrix(int sideLengthX, int sideLengthY)
+
     {
+
+        //matrix builds like a 2d graph, i.e, (0,0) is lower left corner
         this.sideLengthX=sideLengthX;
         this.sideLengthY=sideLengthY;
-        cells=new ArrayList<ArrayList<Cell>>();
-        cells.forEach(k->
-                {
-                    k = new ArrayList<Cell>();
-                    k.forEach(l->
-                            {
-                                l=new Cell(-1, new ArrayList<Cell>(), 0, null);
-                            }
-                    );
-                }
-        );
+        allCells=new ArrayList<ArrayList<Cell>>();
+        for (int i=0;i<sideLengthY;i++){
+            ArrayList<Cell> rowI = new ArrayList<Cell>();
+            for (int j=0;j<sideLengthX;j++){
+                Cell newCell = new Cell(-1,new ArrayList<Cell>(), 0,null,j,i);
+                rowI.add(newCell);
+            }
+            allCells.add(rowI);
+        }
 
-        int i,j;
-        for(i=0;i<sideLengthX;i++)
-        {
-            for (j=0;j<sideLengthY;j++)
-            {
-                cells.get(i).get(j).setCoordinateX(i);
-                cells.get(i).get(j).setCoordinateY(j);
-                if(cellIsACornerCell(i,j))
-                {
-                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_CORNER);
+        for (int i=0;i<sideLengthY;i++){
+            for (int j=0;j<sideLengthX;j++){
+                if (cellIsACornerCell(i,j)){
+                    allCells.get(i).get(j).setCriticalMass(Cell.TYPE_CORNER);
                     setNeighbouringCellsForCorner(i,j);
                 }
-                else if(cellIsAnEdgeCell(i,j))
-                {
-                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_EDGE);
+                else if (cellIsAnEdgeCell(i,j)){
+                    allCells.get(i).get(j).setCriticalMass(Cell.TYPE_EDGE);
                     setNeighbouringCellsForEdge(i,j);
                 }
-                else
-                {
-                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_NORMAL);
+                else{
+                    allCells.get(i).get(j).setCriticalMass(Cell.TYPE_NORMAL);
                     setNeighbouringCellsForNormal(i,j);
                 }
             }
         }
+
     }
 
     private void setNeighbouringCellsForNormal(int i, int j)
     {
-        Cell cell1=cells.get(i).get(j+1);
-        Cell cell2=cells.get(i-1).get(j);
-        Cell cell3=cells.get(i).get(j-1);
-        Cell cell4=cells.get(i+1).get(j);
+        Cell cell1=allCells.get(i).get(j+1);
+        Cell cell2=allCells.get(i-1).get(j);
+        Cell cell3=allCells.get(i).get(j-1);
+        Cell cell4=allCells.get(i+1).get(j);
         ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
         cellArrayList.add(cell1);
         cellArrayList.add(cell2);
         cellArrayList.add(cell3);
         cellArrayList.add(cell4);
-        cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+        allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
     }
 
     private void setNeighbouringCellsForEdge(int i, int j)
     {
         if(i==0)
         {
-            Cell cell1=cells.get(i).get(j+1);
-            Cell cell2=cells.get(i+1).get(j);
-            Cell cell3=cells.get(i).get(j-1);
+            Cell cell1=allCells.get(i).get(j+1);
+            Cell cell2=allCells.get(i+1).get(j);
+            Cell cell3=allCells.get(i).get(j-1);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
             cellArrayList.add(cell3);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
         else if(i==sideLengthY-1)
         {
-            Cell cell1=cells.get(i).get(j+1);
-            Cell cell2=cells.get(i-1).get(j);
-            Cell cell3=cells.get(i).get(j-1);
+            Cell cell1=allCells.get(i).get(j+1);
+            Cell cell2=allCells.get(i-1).get(j);
+            Cell cell3=allCells.get(i).get(j-1);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
             cellArrayList.add(cell3);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
         else if(j==0)
         {
-            Cell cell1=cells.get(i).get(j+1);
-            Cell cell2=cells.get(i-1).get(j);
-            Cell cell3=cells.get(i+1).get(j);
+            Cell cell1=allCells.get(i).get(j+1);
+            Cell cell2=allCells.get(i-1).get(j);
+            Cell cell3=allCells.get(i+1).get(j);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
             cellArrayList.add(cell3);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
         else if(j==sideLengthX-1)
         {
-            Cell cell1=cells.get(i).get(j-1);
-            Cell cell2=cells.get(i-1).get(j);
-            Cell cell3=cells.get(i+1).get(j);
+            Cell cell1=allCells.get(i).get(j-1);
+            Cell cell2=allCells.get(i-1).get(j);
+            Cell cell3=allCells.get(i+1).get(j);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
             cellArrayList.add(cell3);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
     }
 
@@ -116,39 +110,39 @@ public class Matrix
     {
         if(i==0 && j==0)
         {
-            Cell cell1=cells.get(i).get(j+1);
-            Cell cell2=cells.get(i+1).get(j);
+            Cell cell1=allCells.get(i).get(j+1);
+            Cell cell2=allCells.get(i+1).get(j);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
         else if(i==0 && j==sideLengthX-1)
         {
-            Cell cell1=cells.get(i).get(j-1);
-            Cell cell2=cells.get(i+1).get(j);
+            Cell cell1=allCells.get(i).get(j-1);
+            Cell cell2=allCells.get(i+1).get(j);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
         else if(i==sideLengthY-1 && j==0)
         {
-            Cell cell1=cells.get(i).get(j+1);
-            Cell cell2=cells.get(i-1).get(j);
+            Cell cell1=allCells.get(i).get(j+1);
+            Cell cell2=allCells.get(i-1).get(j);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
         else if(i==sideLengthY-1 && j==sideLengthX-1)
         {
-            Cell cell1=cells.get(i).get(j-1);
-            Cell cell2=cells.get(i-1).get(j);
+            Cell cell1=allCells.get(i).get(j-1);
+            Cell cell2=allCells.get(i-1).get(j);
             ArrayList<Cell> cellArrayList=new ArrayList<Cell>();
             cellArrayList.add(cell1);
             cellArrayList.add(cell2);
-            cells.get(i).get(j).setNeighbouringCells(cellArrayList);
+            allCells.get(i).get(j).setNeighbouringCells(cellArrayList);
         }
     }
 
@@ -188,7 +182,7 @@ public class Matrix
 
     public ArrayList<ArrayList<Cell>> getCells()
     {
-        return cells;
+        return allCells;
     }
 
     public int getSideLengthX()
@@ -201,9 +195,9 @@ public class Matrix
         return sideLengthY;
     }
 
-    public void setCells(ArrayList<ArrayList<Cell>> cells)
+    public void setCells(ArrayList<ArrayList<Cell>> allCells)
     {
-        this.cells = cells;
+        this.allCells = allCells;
     }
 
     public void setSideLengthX(int sideLengthX)
@@ -214,5 +208,9 @@ public class Matrix
     public void setSideLengthY(int sideLengthY)
     {
         this.sideLengthY = sideLengthY;
+    }
+
+    public Cell getCellFromCoordinate(int row, int column){
+        return this.allCells.get(row).get(column);
     }
 }

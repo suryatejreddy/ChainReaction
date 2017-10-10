@@ -2,6 +2,7 @@ package NonUIComponents;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Player
 {
@@ -16,6 +17,10 @@ public class Player
 
     private int playerColour;
     private ArrayList<Cell> currentOccupiedCells;
+
+
+    private HashSet<Cell> currentCells;
+
     private boolean isAlive;
     private boolean takenFirstMove;
 
@@ -85,6 +90,20 @@ public class Player
 
     public void makeMove(int coordX, int coordY, Matrix gameMatrix, Game game, int i, Cell cellChosen, Player currentPlayer)
     {
-        gameMatrix.getCells().get(coordY).get(coordX).burst(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
+        ArrayList<Cell> currentRow = gameMatrix.getCells().get(coordY);
+        Cell currentCell = currentRow.get(coordX);
+//        currentCell.addBall(currentPlayer,gameMatrix,game,coordX,coordY,i,cellChosen);
+//        gameMatrix.getCells().get(coordY).get(coordX).addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
     }
+
+    public void addCell(Cell curCell)
+    {
+        currentCells.add(curCell);
+    }
+
+    public void removeCell(Cell curCell)
+    {
+           currentCells.remove(curCell);
+    }
+
 }
