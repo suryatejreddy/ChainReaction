@@ -120,4 +120,12 @@ public class Cell
             }
         }
     }
+
+    public String toString(){
+        String s = "(" + this.coordinateX + "," + this.coordinateY + ")";
+//        for (Cell c : this.neighbouringCells){
+//            s += c.toString() + "\n";
+//        }
+        return s;
+    }
 }

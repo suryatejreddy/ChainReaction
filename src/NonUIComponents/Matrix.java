@@ -9,7 +9,10 @@ public class Matrix
     private ArrayList<ArrayList<Cell>> allCells;
 
     public Matrix(int sideLengthX, int sideLengthY)
+
     {
+
+        //matrix builds like a 2d graph, i.e, (0,0) is lower left corner
         this.sideLengthX=sideLengthX;
         this.sideLengthY=sideLengthY;
         allCells=new ArrayList<ArrayList<Cell>>();
@@ -205,5 +208,9 @@ public class Matrix
     public void setSideLengthY(int sideLengthY)
     {
         this.sideLengthY = sideLengthY;
+    }
+
+    public Cell getCellFromCoordinate(int row, int column){
+        return this.allCells.get(row).get(column);
     }
 }

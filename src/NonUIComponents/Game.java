@@ -54,11 +54,13 @@ public class Game
 
     private void playGame(Scanner scanner)
     {
-        int i=0;
+        int i = 0;
         System.out.println("Enter X and Y.");
         int x,y;
         x=scanner.nextInt();
         y=scanner.nextInt();
+        x = 2;
+        y = 2;
         Matrix gameMatrix=new Matrix(x, y);
         while(!isGameOver() && i<players.size())
         {
@@ -111,17 +113,17 @@ public class Game
     public static void main(String[] args)
     {
         int numberOfPlayers;
-        System.out.println("Enter number of players.");
+//        System.out.println("Enter number of players.");
         Scanner scanner=new Scanner(System.in);
-        numberOfPlayers=scanner.nextInt();
+//        numberOfPlayers=scanner.nextInt();
         int i=0;
         Game chainReactionGame=new Game();
-        while(i<numberOfPlayers)
-        {
-            Player player=new Player(i, new ArrayList<Cell>(), true);
-            chainReactionGame.getPlayers().add(player);
-            i++;
-        }
+//        while(i<numberOfPlayers)
+//        {
+//            Player player=new Player(i, new ArrayList<Cell>(), true);
+//            chainReactionGame.getPlayers().add(player);
+//            i++;
+//        }
         chainReactionGame.playGame(scanner);
     }
 }
