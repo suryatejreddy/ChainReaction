@@ -13,41 +13,57 @@ public class Matrix
         this.sideLengthX=sideLengthX;
         this.sideLengthY=sideLengthY;
         cells=new ArrayList<ArrayList<Cell>>();
-        cells.forEach(k->
-                {
-                    k = new ArrayList<Cell>();
-                    k.forEach(l->
-                            {
-                                l=new Cell(-1, new ArrayList<Cell>(), 0, null);
-                            }
-                    );
-                }
-        );
-
-        int i,j;
-        for(i=0;i<sideLengthX;i++)
-        {
-            for (j=0;j<sideLengthY;j++)
-            {
-                cells.get(i).get(j).setCoordinateX(i);
-                cells.get(i).get(j).setCoordinateY(j);
-                if(cellIsACornerCell(i,j))
-                {
-                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_CORNER);
-                    setNeighbouringCellsForCorner(i,j);
-                }
-                else if(cellIsAnEdgeCell(i,j))
-                {
-                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_EDGE);
+        for (int i=0;i<sideLengthY;i++){
+            ArrayList<Cell> rowI = new ArrayList<Cell>();
+            for (int j=0;j<sideLengthX;j++){
+                Cell newCell = new Cell(-1,new ArrayList<Cell>(), 0,null);
+                if (cellIsAnEdgeCell(i,j)){
                     setNeighbouringCellsForEdge(i,j);
                 }
-                else
-                {
-                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_NORMAL);
+                else if (cellIsACornerCell(i,j)){
+                    setNeighbouringCellsForCorner(i,j);
+                }
+                else {
                     setNeighbouringCellsForNormal(i,j);
                 }
             }
         }
+//
+//        cells.forEach(k->  //does it even come to this loop
+//                {
+//                    k = new ArrayList<Cell>();
+//                    k.forEach(l->
+//                            {
+//                                l=new Cell(-1, new ArrayList<Cell>(), 0, null);
+//                            }
+//                    );
+//                }
+//        );
+//
+//        int i,j;
+//        for(i=0;i<sideLengthX;i++)
+//        {
+//            for (j=0;j<sideLengthY;j++)
+//            {
+//                cells.get(i).get(j).setCoordinateX(i);
+//                cells.get(i).get(j).setCoordinateY(j);
+//                if(cellIsACornerCell(i,j))
+//                {
+//                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_CORNER);
+//                    setNeighbouringCellsForCorner(i,j);
+//                }
+//                else if(cellIsAnEdgeCell(i,j))
+//                {
+//                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_EDGE);
+//                    setNeighbouringCellsForEdge(i,j);
+//                }
+//                else
+//                {
+//                    cells.get(i).get(j).setCriticalMass(Cell.TYPE_NORMAL);
+//                    setNeighbouringCellsForNormal(i,j);
+//                }
+//            }
+//        }
     }
 
     private void setNeighbouringCellsForNormal(int i, int j)

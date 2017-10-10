@@ -97,7 +97,7 @@ public class Cell
         this.playerOccupiedBy = playerOccupiedBy;
     }
 
-    public void burst(Player currentPlayer, Matrix gameMatrix, Game game, int coordX, int coordY, int i, Cell cellChosen)
+    public void addBall(Player currentPlayer, Matrix gameMatrix, Game game, int coordX, int coordY, int i, Cell cellChosen)
     {
         this.setCellIsOccupied(true);
         this.setPlayerOccupiedBy(currentPlayer);
@@ -109,7 +109,7 @@ public class Cell
         if(this.getNumberOfBallsPresent()==this.getCriticalMass()) {
             try
             {
-                neighbours.forEach(k -> k.burst(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen));
+                neighbours.forEach(k -> k.addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen));
             }
             catch(StackOverflowError e)
             {

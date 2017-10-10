@@ -85,6 +85,9 @@ public class Player
 
     public void makeMove(int coordX, int coordY, Matrix gameMatrix, Game game, int i, Cell cellChosen, Player currentPlayer)
     {
-        gameMatrix.getCells().get(coordY).get(coordX).burst(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
+        ArrayList<Cell> currentRow = gameMatrix.getCells().get(coordY);
+        Cell currentCell = currentRow.get(coordX);
+        currentCell.addBall(currentPlayer,gameMatrix,game,coordX,coordY,i,cellChosen);
+//        gameMatrix.getCells().get(coordY).get(coordX).addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
     }
 }
