@@ -62,6 +62,7 @@ public class Game
         Matrix gameMatrix=new Matrix(x, y);
         while(!isGameOver() && i<players.size())
         {
+            players.get(i).setTakenFirstMove(true);
             System.out.println("Player "+(i+1)+"'s chance.");
             System.out.println("Enter coordinates of matrix(0 based) to tap.");
             Player currentPlayer= findCurrentPlayer(i);
@@ -71,19 +72,29 @@ public class Game
             Cell cellChosen=findChosenCell(coordX, coordY, gameMatrix);
 
             if(!gameMatrix.checkIfCellIsFree(cellChosen))
+            {
+                System.out.println("Cell is already occupied by "+cellChosen.getPlayerOccupiedBy().getPlayerColourByString()+" player.");
                 continue;
+            }
 
-            gameMatrix.getCells().get(coordY).get(coordX).setCellIsOccupied(true);
-            gameMatrix.getCells().get(coordY).get(coordX).setPlayerOccupiedBy(currentPlayer);
-            gameMatrix.getCells().get(coordY).get(coordX).setNumberOfBallsPresent(gameMatrix.getCells().get(coordY).get(coordX).getNumberOfBallsPresent()+1);
-            ArrayList<Cell> occupiedCellsByCurrentPlayer=players.get(i).getCurrentOccupiedCells();
-            occupiedCellsByCurrentPlayer.add(cellChosen);
-            players.get(i).setCurrentOccupiedCells(occupiedCellsByCurrentPlayer);
-
+            players.get(i).makeMove(coordX, coordY, gameMatrix, this, i, cellChosen, currentPlayer);
+            setPlayersDead();
             if(i==players.size()-1)
                 i=0;
             else
                 i++;
+        }
+    }
+
+    private void setPlayersDead()
+    {
+        for(Player p: this.getPlayers())
+        {
+            if(p.hasTakenFirstMove() && p.getCurrentOccupiedCells().size()==0)
+            {
+                p.setAlive(false);
+                players.remove(p);
+            }
         }
     }
 
