@@ -96,7 +96,14 @@ public class Player
 //        gameMatrix.getCells().get(coordY).get(coordX).addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
     }
 
-    public void addCell(Cell curCell){
+    public void addCell(Cell curCell)
+    {
         currentCells.add(curCell);
     }
+
+    public void removeCell(Cell curCell)
+    {
+           currentCells.remove(curCell);
+    }
+
 }

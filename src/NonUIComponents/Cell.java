@@ -97,17 +97,33 @@ public class Cell
         //what should happen here?
         playerOccupiedBy.addCell(this);
         this.playerOccupiedBy = playerOccupiedBy;
-
+        //TODO change color of balls for UI
 
 //        this.getPlayerOccupiedBy().getCurrentOccupiedCells().remove(this);
 //        this.getPlayerOccupiedBy().setCurrentOccupiedCells(this.getPlayerOccupiedBy().getCurrentOccupiedCells());
 //        this.playerOccupiedBy = playerOccupiedBy;
     }
 
+    public void emptyCell(){ //to be called when the cell bursts
+        this.numberOfBallsPresent = 0;
+        this.playerOccupiedBy.removeCell(this);
+
+    }
+
     public void addBall(Player curPlayer)
     {
+          //TODO change color of the ball for UI
           this.setCellIsOccupied(true);
           this.setPlayerOccupiedBy(curPlayer);
+          this.numberOfBallsPresent += 1;
+          if (this.numberOfBallsPresent == this.getCriticalMass()){
+              //TODO reduce balls for this cell
+                this.emptyCell();
+              this.neighbouringCells.forEach((Cell neighbour) -> {
+                  neighbour.addBall(curPlayer);
+              });
+          }
+
 //        this.setCellIsOccupied(true);
 //        this.setPlayerOccupiedBy(currentPlayer);
 //        this.setNumberOfBallsPresent(this.getNumberOfBallsPresent()+1);
