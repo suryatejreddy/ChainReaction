@@ -113,17 +113,17 @@ public class Game
     public static void main(String[] args)
     {
         int numberOfPlayers;
-//        System.out.println("Enter number of players.");
+        System.out.println("Enter number of players.");
         Scanner scanner=new Scanner(System.in);
-//        numberOfPlayers=scanner.nextInt();
+        numberOfPlayers=scanner.nextInt();
         int i=0;
         Game chainReactionGame=new Game();
-//        while(i<numberOfPlayers)
-//        {
-//            Player player=new Player(i, new ArrayList<Cell>(), true);
-//            chainReactionGame.getPlayers().add(player);
-//            i++;
-//        }
+        while(i<numberOfPlayers)
+        {
+            Player player=new Player(i, new ArrayList<Cell>(), true);
+            chainReactionGame.getPlayers().add(player);
+            i++;
+        }
         chainReactionGame.playGame(scanner);
     }
 }
