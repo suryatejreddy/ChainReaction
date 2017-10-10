@@ -16,13 +16,15 @@ public class Cell
     private int coordinateX;
     private int coordinateY;
 
-    public Cell(int criticalMass, ArrayList<Cell> neighbouringCells, int numberOfBallsPresent, Player player)
+    public Cell(int criticalMass, ArrayList<Cell> neighbouringCells, int numberOfBallsPresent, Player player,int x,int y)
     {
         this.cellIsOccupied=false;
         this.criticalMass=criticalMass;
         this.numberOfBallsPresent=numberOfBallsPresent;
         this.neighbouringCells=neighbouringCells;
         this.playerOccupiedBy=player;
+        this.coordinateX = x;
+        this.coordinateY = y;
     }
 
     public int getCriticalMass()
