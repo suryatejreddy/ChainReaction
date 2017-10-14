@@ -108,6 +108,7 @@ public class Cell
 
     public void addBall(Player curPlayer)
     {
+          curPlayer.setTakenFirstMove(true);
 
           if (this.cellIsOccupied && this.playerOccupiedBy != curPlayer)  //cell is occupied by someone else
           {
@@ -158,7 +159,7 @@ public class Cell
     public String toString(){
         String s = "(" + this.coordinateX + "," + this.coordinateY + ")" + " " ;
         if (this.playerOccupiedBy != null){
-            s += this.playerOccupiedBy.getPlayerColourByString();
+            s += this.playerOccupiedBy.getPlayerColourByString() + " " +  this.getNumberOfBallsPresent();
         }
         else{
             s += "Empty";

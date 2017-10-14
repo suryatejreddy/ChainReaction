@@ -64,38 +64,55 @@ public class Game
     private void playGame(Scanner scanner)
     {
         int i = 0;
-        System.out.println("Enter X and Y.");
-        int x,y;
-        x=scanner.nextInt();
-        y=scanner.nextInt();
-        x = 2;
-        y = 2;
+//        System.out.println("Enter X and Y.");
+//        int x,y;
+//        x=scanner.nextInt();
+//        y=scanner.nextInt();
+        int x = 2;
+        int y = 2;
         Matrix gameMatrix=new Matrix(x, y);
-        while(!isGameOver())
+        System.out.println(gameMatrix.getCells().toString());
+        while(allPlayers.size() > 0)
         {
-            Player curPlayer = allPlayers.remove();
+            Player curPlayer = allPlayers.peek();
             System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
             System.out.println("Enter coordiantes");
             int moveX = scanner.nextInt();
             int moveY = scanner.nextInt();
-            Cell cellSelected = gameMatrix.getCellFromCoordinate(moveX,moveY);
+
+            Cell cellSelected = gameMatrix.getCellFromCoordinate(moveY,moveX);
+
+
             if (cellSelected.isCellOccupied()){
                 int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
                 if (curCellColor == curPlayer.getPlayerColour()){ // check if player is adding to his color
                     //add ball function
                     cellSelected.addBall(curPlayer);
+                    allPlayers.remove(curPlayer);
                 }
                 else{  //if not
                     //show error, wrong move
+                    //we should not remove the player from the queue
                     System.out.println("can't put ball here");
                 }
             }
             else{
                 cellSelected.addBall(curPlayer);
+                allPlayers.remove(curPlayer);
             }
+
+            for (Player randomPlayer : allPlayers){  //update status for all players to check if they are alive or dead
+                randomPlayer.checkPlayerStatus();
+                if (randomPlayer.isAlive() == false && randomPlayer.hasTakenFirstMove() == true){
+                    allPlayers.remove(randomPlayer);
+                }
+            }
+
             if (curPlayer.isAlive()){
                 allPlayers.add(curPlayer);
             }
+
+
             gameMatrix.printMatrix();
 
 
