@@ -27,6 +27,7 @@ public class Player
         this.isAlive=isAlive;
         this.playerColour=playerColour;
         this.takenFirstMove=false;
+        this.currentCells = new HashSet<Cell>();
     }
 
     public int getPlayerColour()

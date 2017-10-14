@@ -98,10 +98,6 @@ public class Cell
         playerOccupiedBy.addCell(this);
         this.playerOccupiedBy = playerOccupiedBy;
         //TODO change color of balls for UI
-
-//        this.getPlayerOccupiedBy().getCurrentOccupiedCells().remove(this);
-//        this.getPlayerOccupiedBy().setCurrentOccupiedCells(this.getPlayerOccupiedBy().getCurrentOccupiedCells());
-//        this.playerOccupiedBy = playerOccupiedBy;
     }
 
     public void emptyCell(){ //to be called when the cell bursts
@@ -154,7 +150,13 @@ public class Cell
     }
 
     public String toString(){
-        String s = "(" + this.coordinateX + "," + this.coordinateY + ")";
+        String s = "(" + this.coordinateX + "," + this.coordinateY + ")" + " " ;
+        if (this.playerOccupiedBy != null){
+            s += this.playerOccupiedBy.getPlayerColourByString();
+        }
+        else{
+            s += "Empty";
+        }
         return s;
     }
 }

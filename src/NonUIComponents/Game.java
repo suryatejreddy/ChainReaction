@@ -79,9 +79,6 @@ public class Game
             int moveX = scanner.nextInt();
             int moveY = scanner.nextInt();
             Cell cellSelected = gameMatrix.getCellFromCoordinate(moveX,moveY);
-
-
-
             if (cellSelected.isCellOccupied()){
                 int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
                 if (curCellColor == curPlayer.getPlayerColour()){ // check if player is adding to his color
@@ -96,6 +93,10 @@ public class Game
             else{
                 cellSelected.addBall(curPlayer);
             }
+            if (curPlayer.isAlive()){
+                allPlayers.add(curPlayer);
+            }
+            gameMatrix.printMatrix();
 
 
         }
@@ -137,8 +138,6 @@ public class Game
             Player player = new Player(i, true);
             chainReactionGame.allPlayers.add(player); //adding the player to the game
             i ++;
-//            chainReactionGame.getPlayers().add(player);
-//            i++;
         }
         chainReactionGame.playGame(scanner);
     }

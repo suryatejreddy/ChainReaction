@@ -213,4 +213,14 @@ public class Matrix
     public Cell getCellFromCoordinate(int row, int column){
         return this.allCells.get(row).get(column);
     }
+
+    public void printMatrix(){
+        for (int rowNum = 0 ; rowNum < allCells.size() ; rowNum ++){
+            ArrayList<Cell> curRow = allCells.get(rowNum);
+            for (int colNum =0; colNum < curRow.size() ; colNum ++){
+                System.out.print(curRow.get(colNum) + "\t");
+            }
+            System.out.println("");
+        }
+    }
 }
