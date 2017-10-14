@@ -63,13 +63,12 @@ public class Game
 
     private void playGame(Scanner scanner)
     {
-        int i = 0;
-//        System.out.println("Enter X and Y.");
-//        int x,y;
-//        x=scanner.nextInt();
-//        y=scanner.nextInt();
-        int x = 2;
-        int y = 2;
+        System.out.println("Enter X and Y.");
+        int x,y;
+        x=scanner.nextInt();
+        y=scanner.nextInt();
+//        int x = 3;
+//        int y = 3;
         Matrix gameMatrix=new Matrix(x, y);
 
         while(allPlayers.size() > 1)
@@ -119,8 +118,9 @@ public class Game
 
             gameMatrix.printMatrix();
 
-
         }
+
+        System.out.println(allPlayers.peek() + " Won! Yipeee");
     }
 
     private void setPlayersDead()

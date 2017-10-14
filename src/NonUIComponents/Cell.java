@@ -103,6 +103,8 @@ public class Cell
     public void emptyCell(){ //to be called when the cell bursts
         this.numberOfBallsPresent = 0;
         this.playerOccupiedBy.removeCell(this);
+        this.playerOccupiedBy = null;
+        this.cellIsOccupied = false;
 
     }
 
