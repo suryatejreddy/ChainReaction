@@ -85,6 +85,7 @@ public class Player
 //        gameMatrix.getCells().get(coordY).get(coordX).addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
     }
 
+
     public void addCell(Cell curCell)
     {
         currentCells.add(curCell);
@@ -94,6 +95,15 @@ public class Player
     {
            currentCells.remove(curCell);
     }
+
+
+    public void checkPlayerStatus() //updates if the player is dead or alive;
+    {
+        if (this.currentCells.size() == 0) {
+            this.setAlive(false);
+        }
+    }
+
 
     @Override
     public String toString(){

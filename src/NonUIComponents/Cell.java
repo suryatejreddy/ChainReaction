@@ -108,7 +108,13 @@ public class Cell
 
     public void addBall(Player curPlayer)
     {
-          //TODO change color of the ball for UI
+
+          if (this.cellIsOccupied && this.playerOccupiedBy != curPlayer)  //cell is occupied by someone else
+          {
+              //TODO change color of the ball for UI
+              this.playerOccupiedBy.removeCell(this); //removing it from his list
+
+          }
           this.setCellIsOccupied(true);
           this.setPlayerOccupiedBy(curPlayer);
           this.numberOfBallsPresent += 1;
