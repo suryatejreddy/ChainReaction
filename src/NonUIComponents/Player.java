@@ -6,23 +6,15 @@ import java.util.HashSet;
 
 public class Player
 {
-//    public static final int VIOLET=0;
-//    public static final int BLUE=1;
-//    public static final int GREEN=2;
-//    public static final int YELLOW=3;
-//    public static final int ORANGE=4;
-//    public static final int RED=5;
-//    public static final int BROWN=6;
-//    public static final int BLACK=7;
-
-    public static final int VIOLET=5;
-    public static final int BLUE=2;
-    public static final int GREEN=1;
+    public static final int VIOLET=0;
+    public static final int BLUE=1;
+    public static final int GREEN=2;
     public static final int YELLOW=3;
     public static final int ORANGE=4;
-    public static final int RED=0;
+    public static final int RED=5;
     public static final int BROWN=6;
     public static final int BLACK=7;
+
 
     private int playerColour;
 
