@@ -16,17 +16,14 @@ public class Player
     public static final int BLACK=7;
 
     private int playerColour;
-    private ArrayList<Cell> currentOccupiedCells;
-
 
     private HashSet<Cell> currentCells;
 
     private boolean isAlive;
     private boolean takenFirstMove;
 
-    public Player(int playerColour, ArrayList<Cell> currentOccupiedCells, boolean isAlive)
+    public Player(int playerColour,boolean isAlive)
     {
-        this.currentOccupiedCells=currentOccupiedCells;
         this.isAlive=isAlive;
         this.playerColour=playerColour;
         this.takenFirstMove=false;
@@ -58,10 +55,6 @@ public class Player
         return null;
     }
 
-    public ArrayList<Cell> getCurrentOccupiedCells()
-    {
-        return currentOccupiedCells;
-    }
 
     public boolean isAlive()
     {
@@ -71,11 +64,6 @@ public class Player
     public void setAlive(boolean alive)
     {
         isAlive = alive;
-    }
-
-    public void setCurrentOccupiedCells(ArrayList<Cell> currentOccupiedCells)
-    {
-        this.currentOccupiedCells = currentOccupiedCells;
     }
 
     public void setPlayerColour(int playerColour)
@@ -104,6 +92,11 @@ public class Player
     public void removeCell(Cell curCell)
     {
            currentCells.remove(curCell);
+    }
+
+    @Override
+    public String toString(){
+        return ("Player of color " + this.getPlayerColourByString() );
     }
 
 }
