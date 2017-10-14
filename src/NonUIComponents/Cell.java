@@ -118,10 +118,10 @@ public class Cell
           this.numberOfBallsPresent += 1;
           if (this.numberOfBallsPresent == this.getCriticalMass()){
 
-              //TODO reduce balls for this cell, add exception for infinite recursion
                 this.emptyCell();
                 try
                 {
+                    //TODO add multi threading here
                     this.neighbouringCells.forEach((Cell neighbour) -> {
                         neighbour.addBall(curPlayer);
                     });
