@@ -82,21 +82,25 @@ public class Game
             Cell cellSelected = gameMatrix.getCellFromCoordinate(moveY,moveX);
 
 
-            if (cellSelected.isCellOccupied()){
+            if (cellSelected.isCellOccupied())
+            {
                 int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-                if (curCellColor == curPlayer.getPlayerColour()){ // check if player is adding to his color
+                if (curCellColor == curPlayer.getPlayerColour())
+                { // check if player is adding to his color
                     //add ball function
                     cellSelected.addBall(curPlayer);
                     allPlayers.remove(curPlayer);
                 }
-                else{  //if not
+                else
+                {  //if not
                     //show error, wrong move
                     //we should not remove the player from the queue
                     System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player.");
                     continue;
                 }
             }
-            else{
+            else
+            {
                 cellSelected.addBall(curPlayer);
                 allPlayers.remove(curPlayer);
             }
@@ -114,15 +118,12 @@ public class Game
             }
 
 
-            if (curPlayer.isAlive()){
+            if (curPlayer.isAlive())
+            {
                 allPlayers.add(curPlayer);
             }
 
-
             gameMatrix.printMatrix();
-//            if(allPlayers.size()==1)
-//                break;
-
         }
 
         System.out.println(allPlayers.peek() + " Won! Yipeee");

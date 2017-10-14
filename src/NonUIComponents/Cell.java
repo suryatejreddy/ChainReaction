@@ -100,7 +100,8 @@ public class Cell
         //TODO change color of balls for UI
     }
 
-    public void emptyCell(){ //to be called when the cell bursts
+    public void emptyCell()
+    { //to be called when the cell bursts
         this.numberOfBallsPresent = 0;
         this.playerOccupiedBy.removeCell(this);
         this.playerOccupiedBy = null;
@@ -121,13 +122,15 @@ public class Cell
           this.setCellIsOccupied(true);
           this.setPlayerOccupiedBy(curPlayer);
           this.numberOfBallsPresent += 1;
-          if (this.numberOfBallsPresent == this.getCriticalMass()){
+          if (this.numberOfBallsPresent == this.getCriticalMass())
+          {
 
                 this.emptyCell();
                 try
                 {
                     //TODO add multi threading here
-                    this.neighbouringCells.forEach((Cell neighbour) -> {
+                    this.neighbouringCells.forEach((Cell neighbour) ->
+                    {
                         neighbour.addBall(curPlayer);
                     });
                 }
