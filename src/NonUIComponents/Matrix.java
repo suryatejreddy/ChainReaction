@@ -215,10 +215,10 @@ public class Matrix
     }
 
     public void printMatrix(){
-        for (int rowNum = 0 ; rowNum < allCells.size() ; rowNum ++){
+        for (int rowNum = allCells.size() - 1 ; rowNum >= 0 ; rowNum --){
             ArrayList<Cell> curRow = allCells.get(rowNum);
             for (int colNum =0; colNum < curRow.size() ; colNum ++){
-                System.out.print(curRow.get(colNum) + "\t");
+                System.out.print(curRow.get(colNum) + "\t\t\t");
             }
             System.out.println("");
         }

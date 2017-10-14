@@ -71,8 +71,8 @@ public class Game
         int x = 2;
         int y = 2;
         Matrix gameMatrix=new Matrix(x, y);
-        System.out.println(gameMatrix.getCells().toString());
-        while(allPlayers.size() > 0)
+
+        while(allPlayers.size() > 1)
         {
             Player curPlayer = allPlayers.peek();
             System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
@@ -102,11 +102,15 @@ public class Game
             }
 
             for (Player randomPlayer : allPlayers){  //update status for all players to check if they are alive or dead
-                randomPlayer.checkPlayerStatus();
-                if (randomPlayer.isAlive() == false && randomPlayer.hasTakenFirstMove() == true){
-                    allPlayers.remove(randomPlayer);
+                if (randomPlayer.hasTakenFirstMove())
+                {
+                    randomPlayer.checkPlayerStatus();
+                    if (randomPlayer.isAlive() == false) {
+                        allPlayers.remove(randomPlayer);
+                    }
                 }
             }
+
 
             if (curPlayer.isAlive()){
                 allPlayers.add(curPlayer);
