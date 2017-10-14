@@ -15,6 +15,7 @@ public class Player
     public static final int BROWN=6;
     public static final int BLACK=7;
 
+
     private int playerColour;
 
     private HashSet<Cell> currentCells;
@@ -27,6 +28,7 @@ public class Player
         this.isAlive=isAlive;
         this.playerColour=playerColour;
         this.takenFirstMove=false;
+        this.currentCells = new HashSet<Cell>();
     }
 
     public int getPlayerColour()
@@ -84,6 +86,7 @@ public class Player
 //        gameMatrix.getCells().get(coordY).get(coordX).addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
     }
 
+
     public void addCell(Cell curCell)
     {
         currentCells.add(curCell);
@@ -93,6 +96,15 @@ public class Player
     {
            currentCells.remove(curCell);
     }
+
+
+    public void checkPlayerStatus() //updates if the player is dead or alive;
+    {
+        if (this.currentCells.size() == 0) {
+            this.setAlive(false);
+        }
+    }
+
 
     @Override
     public String toString(){

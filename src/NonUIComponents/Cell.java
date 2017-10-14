@@ -98,21 +98,26 @@ public class Cell
         playerOccupiedBy.addCell(this);
         this.playerOccupiedBy = playerOccupiedBy;
         //TODO change color of balls for UI
-
-//        this.getPlayerOccupiedBy().getCurrentOccupiedCells().remove(this);
-//        this.getPlayerOccupiedBy().setCurrentOccupiedCells(this.getPlayerOccupiedBy().getCurrentOccupiedCells());
-//        this.playerOccupiedBy = playerOccupiedBy;
     }
 
     public void emptyCell(){ //to be called when the cell bursts
         this.numberOfBallsPresent = 0;
         this.playerOccupiedBy.removeCell(this);
+        this.playerOccupiedBy = null;
+        this.cellIsOccupied = false;
 
     }
 
     public void addBall(Player curPlayer)
     {
-          //TODO change color of the ball for UI
+          curPlayer.setTakenFirstMove(true);
+
+          if (this.cellIsOccupied && this.playerOccupiedBy != curPlayer)  //cell is occupied by someone else
+          {
+              //TODO change color of the ball for UI
+              this.playerOccupiedBy.removeCell(this); //removing it from his list
+
+          }
           this.setCellIsOccupied(true);
           this.setPlayerOccupiedBy(curPlayer);
           this.numberOfBallsPresent += 1;
@@ -154,7 +159,13 @@ public class Cell
     }
 
     public String toString(){
-        String s = "(" + this.coordinateX + "," + this.coordinateY + ")";
+        String s = "(" + this.coordinateX + "," + this.coordinateY + ")" + " " ;
+        if (this.playerOccupiedBy != null){
+            s += this.playerOccupiedBy.getPlayerColourByString().substring(0,1) + "" +  this.getNumberOfBallsPresent();
+        }
+        else{
+            s += "E ";
+        }
         return s;
     }
 }

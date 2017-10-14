@@ -63,23 +63,23 @@ public class Game
 
     private void playGame(Scanner scanner)
     {
-        int i = 0;
         System.out.println("Enter X and Y.");
         int x,y;
         x=scanner.nextInt();
         y=scanner.nextInt();
-        x = 2;
-        y = 2;
+//        int x = 3;
+//        int y = 3;
         Matrix gameMatrix=new Matrix(x, y);
-        while(!isGameOver())
+
+        while(allPlayers.size() > 1)
         {
-            Player curPlayer = allPlayers.remove();
+            Player curPlayer = allPlayers.peek();
             System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
             System.out.println("Enter coordiantes");
             int moveX = scanner.nextInt();
             int moveY = scanner.nextInt();
-            Cell cellSelected = gameMatrix.getCellFromCoordinate(moveX,moveY);
 
+            Cell cellSelected = gameMatrix.getCellFromCoordinate(moveY,moveX);
 
 
             if (cellSelected.isCellOccupied()){
@@ -87,18 +87,40 @@ public class Game
                 if (curCellColor == curPlayer.getPlayerColour()){ // check if player is adding to his color
                     //add ball function
                     cellSelected.addBall(curPlayer);
+                    allPlayers.remove(curPlayer);
                 }
                 else{  //if not
                     //show error, wrong move
+                    //we should not remove the player from the queue
                     System.out.println("can't put ball here");
                 }
             }
             else{
                 cellSelected.addBall(curPlayer);
+                allPlayers.remove(curPlayer);
+            }
+
+            for (Player randomPlayer : allPlayers){  //update status for all players to check if they are alive or dead
+                if (randomPlayer.hasTakenFirstMove())
+                {
+                    randomPlayer.checkPlayerStatus();
+                    if (randomPlayer.isAlive() == false) {
+                        allPlayers.remove(randomPlayer);
+                    }
+                }
             }
 
 
+            if (curPlayer.isAlive()){
+                allPlayers.add(curPlayer);
+            }
+
+
+            gameMatrix.printMatrix();
+
         }
+
+        System.out.println(allPlayers.peek() + " Won! Yipeee");
     }
 
     private void setPlayersDead()
@@ -137,8 +159,6 @@ public class Game
             Player player = new Player(i, true);
             chainReactionGame.allPlayers.add(player); //adding the player to the game
             i ++;
-//            chainReactionGame.getPlayers().add(player);
-//            i++;
         }
         chainReactionGame.playGame(scanner);
     }
