@@ -161,10 +161,10 @@ public class Cell
     public String toString(){
         String s = "(" + this.coordinateX + "," + this.coordinateY + ")" + " " ;
         if (this.playerOccupiedBy != null){
-            s += this.playerOccupiedBy.getPlayerColourByString() + " " +  this.getNumberOfBallsPresent();
+            s += this.playerOccupiedBy.getPlayerColourByString().substring(0,1) + "" +  this.getNumberOfBallsPresent();
         }
         else{
-            s += "Empty";
+            s += "E ";
         }
         return s;
     }
