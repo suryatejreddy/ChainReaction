@@ -131,7 +131,7 @@ public class Cell
                         neighbour.addBall(curPlayer);
                     });
                 }
-                catch (StackOverflowError e)
+                catch(StackOverflowError e)
                 {
                     System.out.println("Yayyyy.. You won.");
                 }
@@ -158,12 +158,15 @@ public class Cell
 
     }
 
-    public String toString(){
+    public String toString()
+    {
         String s = "(" + this.coordinateX + "," + this.coordinateY + ")" + " " ;
-        if (this.playerOccupiedBy != null){
+        if (this.playerOccupiedBy != null)
+        {
             s += this.playerOccupiedBy.getPlayerColourByString().substring(0,1) + "" +  this.getNumberOfBallsPresent();
         }
-        else{
+        else
+        {
             s += "E ";
         }
         return s;

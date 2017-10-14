@@ -92,7 +92,8 @@ public class Game
                 else{  //if not
                     //show error, wrong move
                     //we should not remove the player from the queue
-                    System.out.println("can't put ball here");
+                    System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player.");
+                    continue;
                 }
             }
             else{
@@ -100,11 +101,13 @@ public class Game
                 allPlayers.remove(curPlayer);
             }
 
-            for (Player randomPlayer : allPlayers){  //update status for all players to check if they are alive or dead
+            for (Player randomPlayer : allPlayers)
+            {  //update status for all players to check if they are alive or dead
                 if (randomPlayer.hasTakenFirstMove())
                 {
                     randomPlayer.checkPlayerStatus();
-                    if (randomPlayer.isAlive() == false) {
+                    if (!randomPlayer.isAlive())
+                    {
                         allPlayers.remove(randomPlayer);
                     }
                 }
@@ -117,6 +120,8 @@ public class Game
 
 
             gameMatrix.printMatrix();
+//            if(allPlayers.size()==1)
+//                break;
 
         }
 
