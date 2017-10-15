@@ -4,23 +4,13 @@ import NonUIComponents.Game;
 import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.nio.file.Paths;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main extends Application
 {
@@ -30,13 +20,9 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-
-
-
         primaryStage.setTitle("Hello World");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/Images/chainReactionIcon.png")));
         Game.main(null);
-
         BooleanProperty[][] switches = new BooleanProperty[dimX][dimY];
         for (int i=0;i<dimX;i++)
         {
@@ -52,20 +38,6 @@ public class Main extends Application
         scene.getStylesheets().add("./Stylesheets/grid-with-borders.css");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-
-
-//        String musicFile = "./AudioFiles/gameIntro.wav";     // For example
-//
-//        Media sound = new Media(new File(musicFile).toURI().toString());
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//        //mediaPlayer.play();
-//
-//        musicFile="./AudioFiles/gameOver.wav";
-//        sound = new Media(new File(musicFile).toURI().toString());
-//        mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
     }
 
     public static void setDimensions(int x, int y)
