@@ -107,7 +107,8 @@ public class Player
 
 
     @Override
-    public String toString(){
+    public String toString()
+    {
         return ("Player of color " + this.getPlayerColourByString() );
     }
 

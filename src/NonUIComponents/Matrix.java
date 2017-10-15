@@ -16,32 +16,38 @@ public class Matrix
         this.sideLengthX=sideLengthX;
         this.sideLengthY=sideLengthY;
         allCells=new ArrayList<ArrayList<Cell>>();
-        for (int i=0;i<sideLengthY;i++){
+        for (int i=0;i<sideLengthY;i++)
+        {
             ArrayList<Cell> rowI = new ArrayList<Cell>();
-            for (int j=0;j<sideLengthX;j++){
+            for (int j=0;j<sideLengthX;j++)
+            {
                 Cell newCell = new Cell(-1,new ArrayList<Cell>(), 0,null,j,i);
                 rowI.add(newCell);
             }
             allCells.add(rowI);
         }
 
-        for (int i=0;i<sideLengthY;i++){
-            for (int j=0;j<sideLengthX;j++){
-                if (cellIsACornerCell(i,j)){
+        for (int i=0;i<sideLengthY;i++)
+        {
+            for (int j=0;j<sideLengthX;j++)
+            {
+                if (cellIsACornerCell(i,j))
+                {
                     allCells.get(i).get(j).setCriticalMass(Cell.TYPE_CORNER);
                     setNeighbouringCellsForCorner(i,j);
                 }
-                else if (cellIsAnEdgeCell(i,j)){
+                else if (cellIsAnEdgeCell(i,j))
+                {
                     allCells.get(i).get(j).setCriticalMass(Cell.TYPE_EDGE);
                     setNeighbouringCellsForEdge(i,j);
                 }
-                else{
+                else
+                {
                     allCells.get(i).get(j).setCriticalMass(Cell.TYPE_NORMAL);
                     setNeighbouringCellsForNormal(i,j);
                 }
             }
         }
-
     }
 
     private void setNeighbouringCellsForNormal(int i, int j)
@@ -214,10 +220,13 @@ public class Matrix
         return this.allCells.get(row).get(column);
     }
 
-    public void printMatrix(){
-        for (int rowNum = allCells.size() - 1 ; rowNum >= 0 ; rowNum --){
+    public void printMatrix()
+    {
+        for (int rowNum = allCells.size() - 1 ; rowNum >= 0 ; rowNum --)
+        {
             ArrayList<Cell> curRow = allCells.get(rowNum);
-            for (int colNum =0; colNum < curRow.size() ; colNum ++){
+            for (int colNum =0; colNum < curRow.size() ; colNum ++)
+            {
                 System.out.print(curRow.get(colNum) + "\t\t\t");
             }
             System.out.println("");

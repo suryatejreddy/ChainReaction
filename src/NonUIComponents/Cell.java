@@ -100,7 +100,8 @@ public class Cell
         //TODO change color of balls for UI
     }
 
-    public void emptyCell(){ //to be called when the cell bursts
+    public void emptyCell()
+    { //to be called when the cell bursts
         this.numberOfBallsPresent = 0;
         this.playerOccupiedBy.removeCell(this);
         this.playerOccupiedBy = null;
@@ -121,17 +122,19 @@ public class Cell
           this.setCellIsOccupied(true);
           this.setPlayerOccupiedBy(curPlayer);
           this.numberOfBallsPresent += 1;
-          if (this.numberOfBallsPresent == this.getCriticalMass()){
+          if (this.numberOfBallsPresent == this.getCriticalMass())
+          {
 
                 this.emptyCell();
                 try
                 {
                     //TODO add multi threading here
-                    this.neighbouringCells.forEach((Cell neighbour) -> {
+                    this.neighbouringCells.forEach((Cell neighbour) ->
+                    {
                         neighbour.addBall(curPlayer);
                     });
                 }
-                catch (StackOverflowError e)
+                catch(StackOverflowError e)
                 {
                     System.out.println("Yayyyy.. You won.");
                 }
@@ -158,12 +161,15 @@ public class Cell
 
     }
 
-    public String toString(){
+    public String toString()
+    {
         String s = "(" + this.coordinateX + "," + this.coordinateY + ")" + " " ;
-        if (this.playerOccupiedBy != null){
+        if (this.playerOccupiedBy != null)
+        {
             s += this.playerOccupiedBy.getPlayerColourByString().substring(0,1) + "" +  this.getNumberOfBallsPresent();
         }
-        else{
+        else
+        {
             s += "E ";
         }
         return s;
