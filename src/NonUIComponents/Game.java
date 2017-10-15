@@ -146,8 +146,13 @@ public class Game
         return game.getCells().get(coordY).get(coordX);
     }
 
+    public static void playMusic(){
+
+    }
+
     public static void main(String[] args)
     {
+
         int numberOfPlayers;
         System.out.println("Enter number of players.");
         Scanner scanner = new Scanner(System.in);
