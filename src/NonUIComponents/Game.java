@@ -1,5 +1,7 @@
 package NonUIComponents;
 
+import sample.Main;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -69,6 +71,7 @@ public class Game
         y=scanner.nextInt();
 //        int x = 3;
 //        int y = 3;
+        Main.setDimensions(x,y);
         Matrix gameMatrix=new Matrix(x, y);
 
         while(allPlayers.size() > 1)
