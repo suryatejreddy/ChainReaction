@@ -1,5 +1,7 @@
 package NonUIComponents;
 
+import javafx.scene.layout.GridPane;
+
 import java.util.ArrayList;
 
 public class Matrix
@@ -7,6 +9,7 @@ public class Matrix
     private int sideLengthX;
     private int sideLengthY;
     private ArrayList<ArrayList<Cell>> allCells;
+    GridPane gridPane;
 
     public Matrix(int sideLengthX, int sideLengthY)
 
