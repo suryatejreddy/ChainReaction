@@ -12,8 +12,7 @@ import java.util.Scanner;
 public class ChainReaction
 {
     private ArrayList<Player> players;
-
-    private Queue<Player> allPlayers;
+    private static Queue<Player> allPlayers;
 
     public ChainReaction()
     {
@@ -64,7 +63,7 @@ public class ChainReaction
         this.players = players;
     }
 
-    private void playGame(Scanner scanner, Matrix gameMatrix)
+    public static void playGame(Scanner scanner, Matrix gameMatrix)
     {
         while(allPlayers.size() > 1)
         {
@@ -75,7 +74,7 @@ public class ChainReaction
             int moveY = scanner.nextInt();
 
             Cell cellSelected = gameMatrix.getCellFromCoordinate(moveY,moveX);
-
+            //Main.setCellClicker(curPlayer, moveX, moveY);
 
             if (cellSelected.isCellOccupied())
             {
@@ -159,17 +158,13 @@ public class ChainReaction
         {
             Player player = new Player(i, true);
             chainReactionGame.allPlayers.add(player); //adding the player to the game
-            i ++;
+            i++;
         }
         System.out.println("Enter X and Y.");
         int x,y;
         x=scanner.nextInt();
         y=scanner.nextInt();
-//        int x = 3;
-//        int y = 3;
-        Main.setDimensions(x,y);
+
         Matrix gameMatrix=new Matrix(x, y);
-        Main.setGameMatrix(gameMatrix);
-        Main.setScanner(scanner);
     }
 }
