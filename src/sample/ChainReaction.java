@@ -1,20 +1,20 @@
-package NonUIComponents;
+package sample;
 
-import sample.Main;
-
+import NonUIComponents.Cell;
+import NonUIComponents.Matrix;
+import NonUIComponents.Player;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Game
+//code of NonUIComponents.Game(without minute changes) but used in sample package for GUI. Didn't want to disturb existing classes.
+public class ChainReaction
 {
     private ArrayList<Player> players;
+    private static Queue<Player> allPlayers;
 
-
-    private Queue<Player> allPlayers;
-
-    public Game()
+    public ChainReaction()
     {
         players=new ArrayList<Player>();
         allPlayers = new LinkedList<Player>();
@@ -63,26 +63,18 @@ public class Game
         this.players = players;
     }
 
-    private void playGame(Scanner scanner)
+    public static void playGame(Scanner scanner, Matrix gameMatrix)
     {
-        System.out.println("Enter X and Y.");
-        int x,y;
-        x=scanner.nextInt();
-        y=scanner.nextInt();
-//        int x = 3;
-//        int y = 3;
-        Matrix gameMatrix=new Matrix(x, y);
-
         while(allPlayers.size() > 1)
         {
             Player curPlayer = allPlayers.peek();
             System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
-            System.out.println("Enter coordiantes");
+            System.out.println("Enter coordinates");
             int moveX = scanner.nextInt();
             int moveY = scanner.nextInt();
 
             Cell cellSelected = gameMatrix.getCellFromCoordinate(moveY,moveX);
-
+            //Main.setCellClicker(curPlayer, moveX, moveY);
 
             if (cellSelected.isCellOccupied())
             {
@@ -161,13 +153,18 @@ public class Game
         Scanner scanner = new Scanner(System.in);
         numberOfPlayers = scanner.nextInt();
         int i = 0 ;
-        Game chainReactionGame = new Game();
+        ChainReaction chainReactionGame = new ChainReaction();
         while(i<numberOfPlayers)
         {
             Player player = new Player(i, true);
             chainReactionGame.allPlayers.add(player); //adding the player to the game
-            i ++;
+            i++;
         }
-        chainReactionGame.playGame(scanner);
+        System.out.println("Enter X and Y.");
+        int x,y;
+        x=scanner.nextInt();
+        y=scanner.nextInt();
+
+        Matrix gameMatrix=new Matrix(x, y);
     }
 }

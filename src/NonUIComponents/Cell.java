@@ -1,5 +1,7 @@
 package NonUIComponents;
 
+import sample.ExtendedPlayer;
+
 import java.util.ArrayList;
 
 public class Cell
