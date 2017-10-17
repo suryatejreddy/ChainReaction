@@ -29,12 +29,12 @@ public class Main extends Application
     public static int clickedXPos;
     public static int clickedYPos;
 
-    private static Queue<Player> allPlayers;
+    private static Queue<ExtendedPlayer> allPlayers;
     private static Matrix gameMatrix;
 
     public Main()
     {
-        allPlayers = new LinkedList<Player>();
+        allPlayers = new LinkedList<ExtendedPlayer>();
     }
 
 //    public static void playGame(Scanner scanner, Matrix gameMatrix)
@@ -125,7 +125,6 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        System.out.println("start called.");
         primaryStage.setTitle("Chain Reaction");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/Images/chainReactionIcon.png")));
 
@@ -138,7 +137,7 @@ public class Main extends Application
 
         while(i<numberOfPlayers)
         {
-            Player player = new Player(i, true);
+            ExtendedPlayer player = new ExtendedPlayer(i, true);
             allPlayers.add(player); //adding the player to the game
             i++;
         }
@@ -241,7 +240,7 @@ public class Main extends Application
         primaryStage.show();
     }
 
-    public static Color getColor(Player player)
+    public static Color getColor(ExtendedPlayer player)
     {
         switch(player.getPlayerColour())
         {
@@ -322,10 +321,8 @@ public class Main extends Application
 
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
     {
-
-        ExtendedCell cell = new ExtendedCell(new StackPane(), x, y, null, new ArrayList<ExtendedCell>());
-
         Group group=new Group();
+        ExtendedCell cell = new ExtendedCell(group, new StackPane(), x, y, null, new ArrayList<ExtendedCell>());
 
         cell.getCell().setOnMouseClicked(e ->
         {
@@ -333,16 +330,18 @@ public class Main extends Application
                 cellSwitch.set(!cellSwitch.get());
             try
             {
-                System.out.println(x+" "+y);
-                Sphere sphere = new Sphere(10);
-
-                Player curPlayer=allPlayers.peek();
-                System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
-                Cell cellSelected = gameMatrix.getCellFromCoordinate(x,y);
+                System.out.println("x and y: "+x+" "+y);
+//                Sphere sphere = new Sphere(10);
+                ExtendedPlayer curPlayer=allPlayers.peek();
+                System.out.println("Current player : "+curPlayer);
+                //System.out.println("Chance of player with " + secondPlayer.getPlayerColourByString());
+                ExtendedCell cellSelected=gridPane.getCellFromCoordinate(x,y);
 
                 if (cellSelected.isCellOccupied())
                 {
+                    System.out.println("Came to cell is occupied.");
                     int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
+                    System.out.println("current cell colour: "+curCellColor);
                     if (curCellColor == curPlayer.getPlayerColour())
                     { // check if player is adding to his color
                         //add ball function
@@ -353,7 +352,7 @@ public class Main extends Application
                     {  //if not
                         //show error, wrong move
                         //we should not remove the player from the queue
-                        System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player."+clickedXPos+clickedYPos);
+                        System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player."+x+y);
                     }
                 }
                 else
@@ -362,7 +361,7 @@ public class Main extends Application
                     allPlayers.remove(curPlayer);
                 }
 
-                for (Player randomPlayer : allPlayers)
+                for (ExtendedPlayer randomPlayer : allPlayers)
                 {  //update status for all players to check if they are alive or dead
                     if (randomPlayer.hasTakenFirstMove())
                     {
@@ -380,33 +379,33 @@ public class Main extends Application
                     allPlayers.add(curPlayer);
                 }
 
-                gameMatrix.printMatrix();
+                //gameMatrix.printMatrix();
 
 
-                PhongMaterial phongMaterial = new PhongMaterial();
-                phongMaterial.setDiffuseColor(getColor(curPlayer));
-                phongMaterial.setSpecularColor(Color.BLACK);
-                sphere.setMaterial(phongMaterial);
-                switch (group.getChildren().size()) {
-                    case 0:
-                        sphere.setTranslateX(0);
-                        break;
-
-                    case 1:
-                        sphere.setTranslateX(10);
-                        break;
-
-                    case 2:
-                        sphere.setTranslateY(10);
-                        sphere.setTranslateX(5);
-                        break;
-
-                    default:
-                        break;
-                }
-                group.getChildren().add(sphere);
-                if(cell.getCell().getChildren().size()==0)
-                    cell.getCell().getChildren().add(group);
+//                PhongMaterial phongMaterial = new PhongMaterial();
+//                phongMaterial.setDiffuseColor(getColor(curPlayer));
+//                phongMaterial.setSpecularColor(Color.BLACK);
+//                sphere.setMaterial(phongMaterial);
+//                switch (group.getChildren().size()) {
+//                    case 0:
+//                        sphere.setTranslateX(0);
+//                        break;
+//
+//                    case 1:
+//                        sphere.setTranslateX(10);
+//                        break;
+//
+//                    case 2:
+//                        sphere.setTranslateY(10);
+//                        sphere.setTranslateX(5);
+//                        break;
+//
+//                    default:
+//                        break;
+//                }
+//                group.getChildren().add(sphere);
+//                if(cell.getCell().getChildren().size()==0)
+//                    cell.getCell().getChildren().add(group);
                 //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
             }
             catch(IndexOutOfBoundsException e1)
@@ -417,6 +416,12 @@ public class Main extends Application
             catch(Exception e2)
             {
                 e2.printStackTrace();
+            }
+
+            if(allPlayers.size()==1)
+            {
+                System.out.println("Player"+allPlayers.peek()+" won.");
+                System.exit(0);
             }
 
         });
@@ -432,7 +437,7 @@ public class Main extends Application
         int numRows=switches[0].length;
 
         GridPane grid=new GridPane();
-        ExtendedGrid returnGrid=new ExtendedGrid(null, null, switches.length, switches[0].length);
+        ExtendedGrid returnGrid=new ExtendedGrid(new ArrayList<ExtendedCell>(), new GridPane(), switches.length, switches[0].length);
         ArrayList<ExtendedCell> returnExtendedCells=new ArrayList<ExtendedCell>();
 
         for (int x=0;x<numCols;x++)
@@ -464,6 +469,7 @@ public class Main extends Application
         grid.getStyleClass().add("grid");
         returnGrid.setGridPane(grid);
         returnGrid.setExtendedCells(returnExtendedCells);
+        returnGrid.setCellDetails();
         return returnGrid;
     }
 

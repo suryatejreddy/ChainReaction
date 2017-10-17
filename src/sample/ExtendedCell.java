@@ -2,7 +2,11 @@ package sample;
 
 import NonUIComponents.Cell;
 import NonUIComponents.Player;
+import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Sphere;
 
 import java.util.ArrayList;
 
@@ -22,9 +26,11 @@ public class ExtendedCell
     private int numberOfBallsPresent;
     private ArrayList<ExtendedCell> neighbouringCells;
     private boolean cellIsOccupied;
+    private Group group;
 
-    public ExtendedCell(StackPane cell, int coordX, int coordY, ExtendedPlayer player, ArrayList<ExtendedCell> neighbouringCells)
+    public ExtendedCell(Group group, StackPane cell, int coordX, int coordY, ExtendedPlayer player, ArrayList<ExtendedCell> neighbouringCells)
     {
+        this.group=group;
         this.cell=cell;
         this.coordX=coordX;
         this.coordY=coordY;
@@ -35,7 +41,7 @@ public class ExtendedCell
         this.neighbouringCells=neighbouringCells;
     }
 
-    public ExtendedPlayer getPlayer()
+    public ExtendedPlayer getPlayerOccupiedBy()
     {
         return playerOccupiedBy;
     }
@@ -63,6 +69,11 @@ public class ExtendedCell
     public boolean isCellOccupied()
     {
         return cellIsOccupied;
+    }
+
+    public Group getGroup()
+    {
+        return group;
     }
 
     public int getNumberOfBallsPresent()
@@ -126,11 +137,15 @@ public class ExtendedCell
 
     public void emptyCell()
     { //to be called when the cell bursts
+
+        for (int i = 0; i < numberOfBallsPresent; i++)
+        {
+            getGroup().getChildren().remove(i);
+        }
         this.numberOfBallsPresent = 0;
         this.playerOccupiedBy.removeCell(this);
         this.playerOccupiedBy = null;
         this.cellIsOccupied = false;
-
     }
 
     public void addBall(ExtendedPlayer curPlayer)
@@ -141,11 +156,47 @@ public class ExtendedCell
         {
             //TODO change color of the ball for UI
             this.playerOccupiedBy.removeCell(this); //removing it from his list
-
+            for(int i=0;i<numberOfBallsPresent;i++)
+            {
+                Sphere sphere=(Sphere) getGroup().getChildren().get(i);
+                PhongMaterial phongMaterial = new PhongMaterial();
+                phongMaterial.setDiffuseColor(Main.getColor(curPlayer));
+                phongMaterial.setSpecularColor(Color.BLACK);
+                sphere.setMaterial(phongMaterial);
+                getGroup().getChildren().remove(i);
+                getGroup().getChildren().add(sphere);
+            }
         }
         this.setCellIsOccupied(true);
         this.setPlayerOccupiedBy(curPlayer);
-        this.numberOfBallsPresent += 1;
+        this.numberOfBallsPresent+=1;
+
+        Sphere sphere = new Sphere(10);
+        PhongMaterial phongMaterial = new PhongMaterial();
+        phongMaterial.setDiffuseColor(Main.getColor(curPlayer));
+        phongMaterial.setSpecularColor(Color.BLACK);
+        sphere.setMaterial(phongMaterial);
+        switch (getGroup().getChildren().size())
+        {
+            case 0:
+                sphere.setTranslateX(0);
+                break;
+
+            case 1:
+                sphere.setTranslateX(10);
+                break;
+
+            case 2:
+                sphere.setTranslateY(10);
+                sphere.setTranslateX(5);
+                break;
+
+            default:
+                break;
+        }
+        getGroup().getChildren().add(sphere);
+        if(getCell().getChildren().size()==0)
+            getCell().getChildren().add(group);
         if (this.numberOfBallsPresent == this.getCriticalMass())
         {
 
