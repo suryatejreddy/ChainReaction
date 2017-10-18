@@ -1,20 +1,14 @@
 package sample;
 
-import NonUIComponents.Cell;
 import NonUIComponents.Matrix;
-import NonUIComponents.Player;
 import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,9 +21,25 @@ public class Main extends Application {
     public static ExtendedCell cell;                //UI Cell.
     public static int clickedXPos;
     public static int clickedYPos;
+    public static ArrayList<String> namesOfStylesheets;
 
     private static Queue<ExtendedPlayer> allPlayers;
-    private static Matrix gameMatrix;
+    private static boolean gameOver;
+    private static Scene scene;
+
+    static
+    {
+        gameOver=false;
+        namesOfStylesheets=new ArrayList<String>();
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-violet.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-blue.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-green.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-yellow.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-orange.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-red.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-brown.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-white.css");
+    }
 
     public Main() {
         allPlayers = new LinkedList<ExtendedPlayer>();
@@ -120,7 +130,8 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception
+    {
         primaryStage.setTitle("Chain Reaction");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/Images/chainReactionIcon.png")));
 
@@ -131,7 +142,8 @@ public class Main extends Application {
         numberOfPlayers = scanner.nextInt();
         int i = 0;
 
-        while (i < numberOfPlayers) {
+        while (i < numberOfPlayers)
+        {
             ExtendedPlayer player = new ExtendedPlayer(i, true);
             allPlayers.add(player); //adding the player to the game
             i++;
@@ -144,17 +156,18 @@ public class Main extends Application {
 //        setGameMatrix(gameMatrix);
 
         BooleanProperty[][] switches = new BooleanProperty[x][y];
-        for (i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
+        for (i = 0; i < x; i++)
+        {
+            for (int j = 0; j < y; j++)
+            {
                 switches[i][j] = new SimpleBooleanProperty();
             }
         }
 
         gridPane = createGrid(x, y);
         StackPane root = new StackPane(gridPane.getGridPane());
-        Scene scene = new Scene(root, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
-        scene.getStylesheets().add("./Stylesheets/grid-with-borders.css");
-
+        scene = new Scene(root, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
+        scene.getStylesheets().add(namesOfStylesheets.get(0));
 
 //        while(allPlayers.size() > 1)
 //        {
@@ -215,10 +228,20 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
+//        while(true)
+//        {
+//            if(gameOver)
+//            {
+//                System.out.println("Game Over... oops");
+//                System.exit(0);
+//            }
+//        }
     }
 
-    public static Color getColor(ExtendedPlayer player) {
-        switch (player.getPlayerColour()) {
+    public static Color getColor(ExtendedPlayer player)
+    {
+        switch (player.getPlayerColour())
+        {
             case 0:
                 return Color.VIOLET;
             case 1:
@@ -322,9 +345,11 @@ public class Main extends Application {
 
                 System.out.println();
                 ExtendedPlayer curPlayer = allPlayers.peek();
+                ExtendedPlayer nextPlayer= (ExtendedPlayer) allPlayers.toArray()[1];
                 System.out.println("Current player who just took move : " + curPlayer);
                 ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
                 int continueCondition=0;
+
 
                 if (cellSelected.isCellOccupied())
                 {
@@ -336,6 +361,7 @@ public class Main extends Application {
                         //add ball function
                         cellSelected.addBall(curPlayer);
                         allPlayers.remove(curPlayer);
+                        setGridBorderColour(nextPlayer);
                     }
                     else
                     {  //if not
@@ -349,6 +375,7 @@ public class Main extends Application {
                 {
                     cellSelected.addBall(curPlayer);
                     allPlayers.remove(curPlayer);
+                    setGridBorderColour(nextPlayer);
                 }
 
                 for (ExtendedPlayer randomPlayer : allPlayers)
@@ -413,13 +440,26 @@ public class Main extends Application {
             if (allPlayers.size() == 1)
             {
                 System.out.println("Player" + allPlayers.peek() + " won.");
-                System.exit(0);
+                gameOver=true;
             }
 
         });
 
         cell.getCell().getStyleClass().add("cell");
         return cell;
+    }
+
+    private static void setGridBorderColour(ExtendedPlayer curPlayer)
+    {
+        String colour=curPlayer.getPlayerColourByString().toLowerCase();
+        namesOfStylesheets.forEach(e ->
+        {
+            if(e.contains(colour))
+            {
+                scene.getStylesheets().clear();
+                scene.getStylesheets().add(e);
+            }
+        });
     }
 
     private static ExtendedGrid createGrid(int sidelengthX, int sidelengthY)
