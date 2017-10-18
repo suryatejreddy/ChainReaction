@@ -21,8 +21,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main extends Application
-{
+public class Main extends Application {
 
     public static ExtendedGrid gridPane;    //UI grid for entire grid.
     public static ExtendedCell cell;                //UI Cell.
@@ -32,8 +31,7 @@ public class Main extends Application
     private static Queue<ExtendedPlayer> allPlayers;
     private static Matrix gameMatrix;
 
-    public Main()
-    {
+    public Main() {
         allPlayers = new LinkedList<ExtendedPlayer>();
     }
 
@@ -117,14 +115,12 @@ public class Main extends Application
 //        Matrix gameMatrix=new Matrix(x, y);
 //    }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception
-    {
+    public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Chain Reaction");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/Images/chainReactionIcon.png")));
 
@@ -133,35 +129,31 @@ public class Main extends Application
         System.out.println("Enter number of players.");
         Scanner scanner = new Scanner(System.in);
         numberOfPlayers = scanner.nextInt();
-        int i=0;
+        int i = 0;
 
-        while(i<numberOfPlayers)
-        {
+        while (i < numberOfPlayers) {
             ExtendedPlayer player = new ExtendedPlayer(i, true);
             allPlayers.add(player); //adding the player to the game
             i++;
         }
         System.out.println("Enter X and Y.");
-        int x,y;
-        x=scanner.nextInt();
-        y=scanner.nextInt();
+        int x, y;
+        x = scanner.nextInt();
+        y = scanner.nextInt();
 //        Matrix gameMatrix=new Matrix(x, y);
 //        setGameMatrix(gameMatrix);
 
         BooleanProperty[][] switches = new BooleanProperty[x][y];
-        for (i=0;i<x;i++)
-        {
-            for (int j=0;j<y;j++)
-            {
-                switches[i][j]=new SimpleBooleanProperty();
+        for (i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                switches[i][j] = new SimpleBooleanProperty();
             }
         }
 
-        gridPane=createGrid(switches);
-        StackPane root=new StackPane(gridPane.getGridPane());
-        Scene scene=new Scene(root, (x*40)+100, (y*40)+100, Color.AZURE);
+        gridPane = createGrid(x, y);
+        StackPane root = new StackPane(gridPane.getGridPane());
+        Scene scene = new Scene(root, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
         scene.getStylesheets().add("./Stylesheets/grid-with-borders.css");
-
 
 
 //        while(allPlayers.size() > 1)
@@ -221,38 +213,30 @@ public class Main extends Application
 //        System.out.println(allPlayers.peek() + " Won! Yipeee");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    public static Color getColor(ExtendedPlayer player)
-    {
-        switch(player.getPlayerColour())
-        {
-            case 0: return Color.VIOLET;
-            case 1: return Color.BLUE;
-            case 2: return Color.GREEN;
-            case 3: return Color.YELLOW;
-            case 4: return Color.ORANGE;
-            case 5: return Color.RED;
-            case 6: return Color.BROWN;
-            case 7: return Color.BLACK;
-            default: return null;
+    public static Color getColor(ExtendedPlayer player) {
+        switch (player.getPlayerColour()) {
+            case 0:
+                return Color.VIOLET;
+            case 1:
+                return Color.BLUE;
+            case 2:
+                return Color.GREEN;
+            case 3:
+                return Color.YELLOW;
+            case 4:
+                return Color.ORANGE;
+            case 5:
+                return Color.RED;
+            case 6:
+                return Color.BROWN;
+            case 7:
+                return Color.WHITE;
+            default:
+                return null;
         }
     }
 
@@ -321,7 +305,7 @@ public class Main extends Application
 
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
     {
-        Group group=new Group();
+        Group group = new Group();
         ExtendedCell cell = new ExtendedCell(group, new StackPane(), x, y, null, new ArrayList<ExtendedCell>());
 
         cell.getCell().setOnMouseClicked(e ->
@@ -330,18 +314,23 @@ public class Main extends Application
                 cellSwitch.set(!cellSwitch.get());
             try
             {
-                System.out.println("x and y: "+x+" "+y);
-//                Sphere sphere = new Sphere(10);
-                ExtendedPlayer curPlayer=allPlayers.peek();
-                System.out.println("Current player : "+curPlayer);
-                //System.out.println("Chance of player with " + secondPlayer.getPlayerColourByString());
-                ExtendedCell cellSelected=gridPane.getCellFromCoordinate(x,y);
+                System.out.println("x and y: " + x + " " + y);
+                for(int i=0;i<allPlayers.toArray().length;i++)
+                {
+                    System.out.println(allPlayers.toArray()[i].toString());
+                }
+
+                System.out.println();
+                ExtendedPlayer curPlayer = allPlayers.peek();
+                System.out.println("Current player who just took move : " + curPlayer);
+                ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
+                int continueCondition=0;
 
                 if (cellSelected.isCellOccupied())
                 {
                     System.out.println("Came to cell is occupied.");
                     int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-                    System.out.println("current cell colour: "+curCellColor);
+                    System.out.println("current cell colour: " + curCellColor);
                     if (curCellColor == curPlayer.getPlayerColour())
                     { // check if player is adding to his color
                         //add ball function
@@ -352,7 +341,8 @@ public class Main extends Application
                     {  //if not
                         //show error, wrong move
                         //we should not remove the player from the queue
-                        System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player."+x+y);
+                        System.out.println("can't put ball here.already occupied by " + cellSelected.getPlayerOccupiedBy().getPlayerColourByString() + " player." + cellSelected.getCoordX() + cellSelected.getCoordY());
+                        continueCondition=1;
                     }
                 }
                 else
@@ -365,6 +355,7 @@ public class Main extends Application
                 {  //update status for all players to check if they are alive or dead
                     if (randomPlayer.hasTakenFirstMove())
                     {
+
                         randomPlayer.checkPlayerStatus();
                         if (!randomPlayer.isAlive())
                         {
@@ -374,7 +365,7 @@ public class Main extends Application
                 }
 
 
-                if (curPlayer.isAlive())
+                if (curPlayer.isAlive() && continueCondition==0)
                 {
                     allPlayers.add(curPlayer);
                 }
@@ -408,19 +399,20 @@ public class Main extends Application
 //                    cell.getCell().getChildren().add(group);
                 //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
             }
-            catch(IndexOutOfBoundsException e1)
+            catch (IndexOutOfBoundsException e1)
             {
                 e1.printStackTrace();
                 System.out.println(allPlayers.peek());
             }
-            catch(Exception e2)
+            catch (Exception e2)
             {
                 e2.printStackTrace();
             }
 
-            if(allPlayers.size()==1)
+
+            if (allPlayers.size() == 1)
             {
-                System.out.println("Player"+allPlayers.peek()+" won.");
+                System.out.println("Player" + allPlayers.peek() + " won.");
                 System.exit(0);
             }
 
@@ -430,25 +422,21 @@ public class Main extends Application
         return cell;
     }
 
-    private static ExtendedGrid createGrid(BooleanProperty[][] switches)
+    private static ExtendedGrid createGrid(int sidelengthX, int sidelengthY)
     {
+        GridPane grid = new GridPane();
+        ExtendedGrid returnGrid = new ExtendedGrid(new ArrayList<ExtendedCell>(), new GridPane(), sidelengthX, sidelengthY);
+        ArrayList<ExtendedCell> returnExtendedCells = new ArrayList<ExtendedCell>();
 
-        int numCols=switches.length;
-        int numRows=switches[0].length;
-
-        GridPane grid=new GridPane();
-        ExtendedGrid returnGrid=new ExtendedGrid(new ArrayList<ExtendedCell>(), new GridPane(), switches.length, switches[0].length);
-        ArrayList<ExtendedCell> returnExtendedCells=new ArrayList<ExtendedCell>();
-
-        for (int x=0;x<numCols;x++)
+        for (int x = 0; x < sidelengthX; x++)
         {
-            ColumnConstraints cc=new ColumnConstraints();
+            ColumnConstraints cc = new ColumnConstraints();
             cc.setFillWidth(true);
             cc.setHgrow(Priority.ALWAYS);
             grid.getColumnConstraints().add(cc);
         }
 
-        for (int y=0;y<numRows;y++)
+        for (int y = 0; y < sidelengthY; y++)
         {
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(true);
@@ -456,11 +444,13 @@ public class Main extends Application
             grid.getRowConstraints().add(rc);
         }
 
-        for (int x=0;x<numCols;x++)
+        BooleanProperty[][] switches=new BooleanProperty[sidelengthX][sidelengthY];
+        for (int x = 0; x < sidelengthX; x++)
         {
-            for (int y=0;y<numRows;y++)
+            for (int y = 0; y < sidelengthY; y++)
             {
-                ExtendedCell cell=createCell(switches[x][y], x, numRows-y-1);
+                switches[x][y]=new SimpleBooleanProperty();
+                ExtendedCell cell = createCell(switches[x][y], x, sidelengthY-1-y);
                 returnExtendedCells.add(cell);
                 grid.add(cell.getCell(), x, y);
             }
@@ -470,11 +460,8 @@ public class Main extends Application
         returnGrid.setGridPane(grid);
         returnGrid.setExtendedCells(returnExtendedCells);
         returnGrid.setCellDetails();
+        returnGrid.initCells();
         return returnGrid;
     }
 
-    public void setGameMatrix(Matrix gameMatrix)
-    {
-        this.gameMatrix = gameMatrix;
-    }
 }

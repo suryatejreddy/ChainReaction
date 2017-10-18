@@ -138,10 +138,11 @@ public class ExtendedCell
     public void emptyCell()
     { //to be called when the cell bursts
 
-        for (int i = 0; i < numberOfBallsPresent; i++)
-        {
-            getGroup().getChildren().remove(i);
-        }
+//        for (int i = 0; i < numberOfBallsPresent; i++)
+//        {
+//            getGroup().getChildren().remove(i);
+//        }
+        getGroup().getChildren().clear();
         this.numberOfBallsPresent = 0;
         this.playerOccupiedBy.removeCell(this);
         this.playerOccupiedBy = null;
@@ -155,8 +156,9 @@ public class ExtendedCell
         if (this.cellIsOccupied && this.playerOccupiedBy != curPlayer)  //cell is occupied by someone else
         {
             //TODO change color of the ball for UI
+            System.out.println("Came to recursive call's beginning");
             this.playerOccupiedBy.removeCell(this); //removing it from his list
-            for(int i=0;i<numberOfBallsPresent;i++)
+            for(int i=0;i<getGroup().getChildren().size();i++)
             {
                 Sphere sphere=(Sphere) getGroup().getChildren().get(i);
                 PhongMaterial phongMaterial = new PhongMaterial();
@@ -164,6 +166,25 @@ public class ExtendedCell
                 phongMaterial.setSpecularColor(Color.BLACK);
                 sphere.setMaterial(phongMaterial);
                 getGroup().getChildren().remove(i);
+                switch (getGroup().getChildren().size())
+                {
+                    case 0:
+                        sphere.setTranslateX(0);
+                        break;
+
+                    case 1:
+                        sphere.setTranslateX(10);
+                        break;
+
+                    case 2:
+                        sphere.setTranslateY(10);
+                        sphere.setTranslateX(5);
+                        break;
+
+                    default:
+                        break;
+                }
+
                 getGroup().getChildren().add(sphere);
             }
         }

@@ -64,6 +64,14 @@ public class ExtendedGrid
         return extendedCell;
     }
 
+    public void initCells()
+    {
+        getExtendedCells().forEach(e ->
+        {
+            e.getGroup().getChildren().clear();
+        });
+    }
+
     private void setNeighbouringCellsForNormal(int i, int j)
     {
         ExtendedCell cell1=getCurrentExtendedCell(i, j+1);
