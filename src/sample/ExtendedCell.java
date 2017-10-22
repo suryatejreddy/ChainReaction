@@ -186,6 +186,7 @@ public class ExtendedCell
                 }
 
                 getGroup().getChildren().add(sphere);
+
             }
         }
         this.setCellIsOccupied(true);
