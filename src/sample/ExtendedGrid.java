@@ -19,7 +19,16 @@ public class ExtendedGrid
         this.gridPane = grid;
         this.sideLengthX=sideLengthX;
         this.sideLengthY=sideLengthY;
+    }
 
+    public ExtendedCell getCellFromCoordinate(int row, int column)
+    {
+        return this.getCurrentExtendedCell(row, column);
+    }
+
+    //method to set the critical mass and neighbouring cells for an extended cell of the extended grid.
+    public void setCellDetails()
+    {
         for(int i=0;i<sideLengthY;i++)
         {
             for(int j=0;j<sideLengthX;j++)
@@ -53,6 +62,14 @@ public class ExtendedGrid
         }
 
         return extendedCell;
+    }
+
+    public void initCells()
+    {
+        getExtendedCells().forEach(e ->
+        {
+            e.getGroup().getChildren().clear();
+        });
     }
 
     private void setNeighbouringCellsForNormal(int i, int j)

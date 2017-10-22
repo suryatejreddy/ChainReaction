@@ -16,7 +16,7 @@ public class ExtendedPlayer
     public static final int ORANGE=4;
     public static final int RED=5;
     public static final int BROWN=6;
-    public static final int BLACK=7;
+    public static final int WHITE=7;
 
 
     private int playerColour;
@@ -55,7 +55,7 @@ public class ExtendedPlayer
             case ORANGE:    return "Orange";
             case RED:       return "Red";
             case BROWN:     return "Brown";
-            case BLACK:     return "Black";
+            case WHITE:     return "White";
         }
         return null;
     }
