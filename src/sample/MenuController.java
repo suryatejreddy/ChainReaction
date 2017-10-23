@@ -71,5 +71,11 @@ public class MenuController {
         System.out.println("starting now");
         sample.Main.launchGame(numPlayers,x,y);
     }
+
+    public void showSettings() throws Exception
+    {
+        Main ob = new Main();
+        ob.showSettings();
+    }
 }
 

@@ -32,6 +32,8 @@ public class Main extends Application {
     private static boolean gameOver;
     private static Scene scene;
 
+    public static Scene menu;
+
 
     public static Stage MainStage;
 
@@ -240,12 +242,15 @@ public class Main extends Application {
 
         Parent root = loader.load();
 
-        MenuController myController = loader.getController();
+        Scene tempScene = new Scene(root,560,560);
+        menu = tempScene;
+
+//        MenuController myController = loader.getController();
 
         MainStage = primaryStage;
 
 
-        primaryStage.setScene(new Scene(root,560,560));
+        primaryStage.setScene(tempScene);
         primaryStage.show();
 
     }
@@ -254,6 +259,23 @@ public class Main extends Application {
     {
         Scene newScene = getGameScene(n,x,y);
         MainStage.setScene(newScene);
+    }
+
+
+
+    public void showSettings() throws Exception
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+
+        Parent root = loader.load();
+
+        MainStage.setScene( new Scene(root,560,560));
+
+    }
+
+    public void backToMenu()
+    {
+        MainStage.setScene(menu);
     }
 
 
