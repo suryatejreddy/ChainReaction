@@ -6,20 +6,22 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+
+import java.util.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+
 public class Main extends Application {
 
     public static ExtendedGrid gridPane;    //UI grid for entire grid.
@@ -164,8 +166,27 @@ public class Main extends Application {
 
         gridPane = createGrid(x, y);
         StackPane root = new StackPane(gridPane.getGridPane());
-        scene = new Scene(root, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
+        AnchorPane root1 = new AnchorPane(root);
+        root1.setPrefHeight(50);
+        root1.setMaxHeight(50);
+        root1.setMinHeight(50);
+        BorderPane rootX=new BorderPane();
+        rootX.setTop(root1);
+        rootX.setCenter(root);
+
+        ComboBox<String> comboBox=new ComboBox<String>();
+        comboBox.getItems().clear();
+        comboBox.getItems().addAll("New game", "Exit Game");
+        comboBox.getSelectionModel().selectFirst();
+        comboBox.setMaxWidth(150);
+        comboBox.setMinWidth(150);
+        comboBox.setPrefWidth(150);
+
+        root1.getChildren().add(comboBox);
+
+        scene = new Scene(rootX, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
         scene.getStylesheets().add(namesOfStylesheets.get(0));
+
 
 //        while(allPlayers.size() > 1)
 //        {
