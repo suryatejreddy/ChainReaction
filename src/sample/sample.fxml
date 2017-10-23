@@ -25,7 +25,7 @@
             </font>
         </Label>
         <ComboBox layoutX="307.0" layoutY="247.0" prefWidth="150.0" promptText="9x6" visibleRowCount="2" fx:id="gridSize" />
-        <Button layoutX="109.0" layoutY="305.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="139.0" text="Play Game" fx:id="playGame"/>
+        <Button layoutX="109.0" layoutY="305.0" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="41.0" prefWidth="139.0" text="Play Game" fx:id="playGame"/>
         <Button layoutX="313.0" layoutY="305.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="139.0" text="Resume Game" fx:id="resumeGame" />
         <Button layoutX="215.0" layoutY="380.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" text="Settings"  fx:id="settings"/>
     </children>

@@ -9,12 +9,17 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
-
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 public class Main extends Application {
 
     public static ExtendedGrid gridPane;    //UI grid for entire grid.
@@ -26,6 +31,9 @@ public class Main extends Application {
     private static Queue<ExtendedPlayer> allPlayers;
     private static boolean gameOver;
     private static Scene scene;
+
+
+    public static Stage MainStage;
 
     static
     {
@@ -129,17 +137,8 @@ public class Main extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception
+    public static Scene getGameScene(int numberOfPlayers, int x , int y)
     {
-        primaryStage.setTitle("Chain Reaction");
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/Images/chainReactionIcon.png")));
-
-
-        int numberOfPlayers;
-        System.out.println("Enter number of players.");
-        Scanner scanner = new Scanner(System.in);
-        numberOfPlayers = scanner.nextInt();
         int i = 0;
 
         while (i < numberOfPlayers)
@@ -149,9 +148,6 @@ public class Main extends Application {
             i++;
         }
         System.out.println("Enter X and Y.");
-        int x, y;
-        x = scanner.nextInt();
-        y = scanner.nextInt();
 //        Matrix gameMatrix=new Matrix(x, y);
 //        setGameMatrix(gameMatrix);
 
@@ -226,8 +222,7 @@ public class Main extends Application {
 //        System.out.println(allPlayers.peek() + " Won! Yipeee");
 
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+          return scene;
 //        while(true)
 //        {
 //            if(gameOver)
@@ -237,6 +232,31 @@ public class Main extends Application {
 //            }
 //        }
     }
+    @Override
+    public void start(Stage primaryStage) throws Exception
+    {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+
+        Parent root = loader.load();
+
+        MenuController myController = loader.getController();
+
+        MainStage = primaryStage;
+
+
+        primaryStage.setScene(new Scene(root,560,560));
+        primaryStage.show();
+
+    }
+
+    public static void launchGame(int n, int x , int y)
+    {
+        Scene newScene = getGameScene(n,x,y);
+        MainStage.setScene(newScene);
+    }
+
+
 
     public static Color getColor(ExtendedPlayer player)
     {

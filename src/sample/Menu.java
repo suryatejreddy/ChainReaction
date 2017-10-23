@@ -5,23 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-public class Menu extends Application{
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
-
-        Parent root = loader.load();
-
-        MenuController myController = loader.getController();
-
-
-        primaryStage.setScene(new Scene(root,560,560));
-        primaryStage.show();
-
-
-
-    }
-
-}
+//
+//public class Menu extends Application{
+////    @Override
+////    public void start(Stage primaryStage) throws Exception{
+////
+////        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+////
+////        Parent root = loader.load();
+////
+////        MenuController myController = loader.getController();
+////
+////
+////        primaryStage.setScene(new Scene(root,560,560));
+////        primaryStage.show();
+////
+////
+////    }
+//
+//
+//}
