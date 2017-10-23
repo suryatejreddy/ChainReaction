@@ -6,14 +6,21 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+
+import java.util.*;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class Main extends Application {
 
@@ -26,6 +33,11 @@ public class Main extends Application {
     private static Queue<ExtendedPlayer> allPlayers;
     private static boolean gameOver;
     private static Scene scene;
+
+    public static Scene menu;
+
+
+    public static Stage MainStage;
 
     static
     {
@@ -129,17 +141,8 @@ public class Main extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception
+    public static Scene getGameScene(int numberOfPlayers, int x , int y)
     {
-        primaryStage.setTitle("Chain Reaction");
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/Images/chainReactionIcon.png")));
-
-
-        int numberOfPlayers;
-        System.out.println("Enter number of players.");
-        Scanner scanner = new Scanner(System.in);
-        numberOfPlayers = scanner.nextInt();
         int i = 0;
 
         while (i < numberOfPlayers)
@@ -149,9 +152,6 @@ public class Main extends Application {
             i++;
         }
         System.out.println("Enter X and Y.");
-        int x, y;
-        x = scanner.nextInt();
-        y = scanner.nextInt();
 //        Matrix gameMatrix=new Matrix(x, y);
 //        setGameMatrix(gameMatrix);
 
@@ -166,8 +166,27 @@ public class Main extends Application {
 
         gridPane = createGrid(x, y);
         StackPane root = new StackPane(gridPane.getGridPane());
-        scene = new Scene(root, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
+        AnchorPane root1 = new AnchorPane(root);
+        root1.setPrefHeight(50);
+        root1.setMaxHeight(50);
+        root1.setMinHeight(50);
+        BorderPane rootX=new BorderPane();
+        rootX.setTop(root1);
+        rootX.setCenter(root);
+
+        ComboBox<String> comboBox=new ComboBox<String>();
+        comboBox.getItems().clear();
+        comboBox.getItems().addAll("New game", "Exit Game");
+        comboBox.getSelectionModel().selectFirst();
+        comboBox.setMaxWidth(150);
+        comboBox.setMinWidth(150);
+        comboBox.setPrefWidth(150);
+
+        root1.getChildren().add(comboBox);
+
+        scene = new Scene(rootX, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
         scene.getStylesheets().add(namesOfStylesheets.get(0));
+
 
 //        while(allPlayers.size() > 1)
 //        {
@@ -226,8 +245,7 @@ public class Main extends Application {
 //        System.out.println(allPlayers.peek() + " Won! Yipeee");
 
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+          return scene;
 //        while(true)
 //        {
 //            if(gameOver)
@@ -237,6 +255,51 @@ public class Main extends Application {
 //            }
 //        }
     }
+    @Override
+    public void start(Stage primaryStage) throws Exception
+    {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+
+        Parent root = loader.load();
+
+        Scene tempScene = new Scene(root,560,560);
+        menu = tempScene;
+
+//        MenuController myController = loader.getController();
+
+        MainStage = primaryStage;
+
+
+        primaryStage.setScene(tempScene);
+        primaryStage.show();
+
+    }
+
+    public static void launchGame(int n, int x , int y)
+    {
+        Scene newScene = getGameScene(n,x,y);
+        MainStage.setScene(newScene);
+    }
+
+
+
+    public void showSettings() throws Exception
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+
+        Parent root = loader.load();
+
+        MainStage.setScene( new Scene(root,560,560));
+
+    }
+
+    public void backToMenu()
+    {
+        MainStage.setScene(menu);
+    }
+
+
 
     public static Color getColor(ExtendedPlayer player)
     {

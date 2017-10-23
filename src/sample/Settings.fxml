@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight=" .0" prefWidth="536.0" style="-fx-background-color: #141428;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SettingsController">
+    <children>
+        <ImageView fx:id="myImage" fitHeight="150.0" fitWidth="200.0" layoutX="168.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@settings.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="119.0" layoutY="184.0" text="Player 1" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="218.0" text="Player 2" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="259.0" text="Player 3" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="290.0" text="Player 4" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="333.0" text="Player 5" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="372.0" text="Player 6" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="409.0" text="Player 7" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="452.0" text="Player 8" textFill="#f5f4f4">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="playerCount1" layoutX="315.0" layoutY="216.0" prefWidth="150.0" promptText="VIOLET" visibleRowCount="8" />
+        <ComboBox fx:id="playerCount2" layoutX="315.0" layoutY="261.0" prefWidth="150.0" promptText="BLUE" visibleRowCount="8" />
+        <ComboBox fx:id="playerCount3" layoutX="315.0" layoutY="296.0" prefWidth="150.0" promptText="GREEN" visibleRowCount="8" />
+        <ComboBox fx:id="playerCount4" layoutX="315.0" layoutY="331.0" prefWidth="150.0" promptText="YELLOW" visibleRowCount="8" />
+        <ComboBox fx:id="playerCount5" layoutX="315.0" layoutY="369.0" prefWidth="150.0" promptText="ORANGE" visibleRowCount="8" />
+        <ComboBox fx:id="playerCount6" layoutX="315.0" layoutY="403.0" prefWidth="150.0" promptText="RED" visibleRowCount="8" />
+        <ComboBox fx:id="playerCount7" layoutX="315.0" layoutY="438.0" prefWidth="150.0" promptText="BROWN" visibleRowCount="8" />
+        <ComboBox fx:id="playerCount8" layoutX="315.0" layoutY="182.0" prefWidth="150.0" promptText="WHITE" visibleRowCount="8" />
+        <Button fx:id="backButton" layoutX="213.0" layoutY="501.0" onMouseClicked="#backToGame" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" text="Back" />
+    </children>
+</AnchorPane>

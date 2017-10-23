@@ -2,11 +2,16 @@ package sample;
 
 import NonUIComponents.Cell;
 import NonUIComponents.Player;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -39,6 +44,25 @@ public class ExtendedCell
         this.criticalMass=-1;
         this.numberOfBallsPresent=0;
         this.neighbouringCells=neighbouringCells;
+
+    }
+
+    public void addAnimation()
+    {
+        RotateTransition rot = new RotateTransition(Duration.millis(2000 + this.coordX + this.coordY),getGroup());
+        rot.setFromAngle(0);
+        rot.setToAngle(360);
+        rot.setInterpolator(Interpolator.EASE_BOTH);
+        rot.setCycleCount(RotateTransition.INDEFINITE);
+        rot.setAxis(Rotate.Z_AXIS);
+        rot.setAutoReverse(false);
+        rot.play();
+
+    }
+
+    public void startRotation()
+    {
+        this.addAnimation();
     }
 
     public ExtendedPlayer getPlayerOccupiedBy()
@@ -186,6 +210,7 @@ public class ExtendedCell
                 }
 
                 getGroup().getChildren().add(sphere);
+
             }
         }
         this.setCellIsOccupied(true);
@@ -216,6 +241,7 @@ public class ExtendedCell
                 break;
         }
         getGroup().getChildren().add(sphere);
+        this.startRotation();
         if(getCell().getChildren().size()==0)
             getCell().getChildren().add(group);
         if (this.numberOfBallsPresent == this.getCriticalMass())
