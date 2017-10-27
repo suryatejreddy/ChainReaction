@@ -1,26 +1,19 @@
 package sample;
 
-import NonUIComponents.Matrix;
 import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.util.*;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class Main extends Application {
 
@@ -259,7 +252,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception
     {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML_Files/sample.fxml"));
 
         Parent root = loader.load();
 
@@ -286,7 +279,7 @@ public class Main extends Application {
 
     public void showSettings() throws Exception
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML_Files/Settings.fxml"));
 
         Parent root = loader.load();
 
