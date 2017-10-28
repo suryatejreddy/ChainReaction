@@ -294,20 +294,25 @@ public class ExtendedCell
             }
             mainTransition.play();
 
-            mainTransition.setOnFinished(e -> {
+            mainTransition.setOnFinished(e ->
+            {
                 this.cell.getChildren().clear();
-            });
-            try
-            {
-                this.neighbouringCells.forEach((ExtendedCell neighbour) ->
+                for (int i=0;i < this.neighbouringCells.size() ; i ++)
                 {
-                    neighbour.addBall(curPlayer,false);
-                });
-            }
-            catch(StackOverflowError e)
-            {
-                System.out.println("Yayyyy.. You won.");
-            }
+
+                    ExtendedCell neighbour = this.neighbouringCells.get(i);
+                    try
+                    {
+                        neighbour.addBall(curPlayer,true);
+                    }
+                    catch (StackOverflowError s1)
+                    {
+                        System.out.println("Yayy... You won.");
+                    }
+
+
+                }
+            });
 
 
         }
