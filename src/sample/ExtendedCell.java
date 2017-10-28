@@ -47,7 +47,7 @@ public class ExtendedCell
 
     public void addAnimation()
     {
-        double rotateTime = 4000.0/this.numberOfBallsPresent;
+        double rotateTime = (1000.0 * this.criticalMass)/(this.numberOfBallsPresent);
         RotateTransition rot = new RotateTransition(Duration.millis(rotateTime + this.coordX + this.coordY),getGroup());
         rot.setFromAngle(0);
         rot.setToAngle(360);

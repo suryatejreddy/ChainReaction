@@ -258,6 +258,23 @@ public class Main extends Application {
     }
 
 
+
+    public static void updatePlayerStats(Queue<ExtendedPlayer> allPlayers)
+    {
+        for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); ) {
+            ExtendedPlayer randomPlayer = iter.next();
+            if (randomPlayer.hasTakenFirstMove())
+            {
+                randomPlayer.checkPlayerStatus();
+                if (!randomPlayer.isAlive())
+                {
+                    iter.remove();
+                }
+            }
+        }
+    }
+
+
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y  ){
         if (!cellSwitch.get())
             cellSwitch.set(!cellSwitch.get());
@@ -265,7 +282,6 @@ public class Main extends Application {
         {
 
             ExtendedPlayer curPlayer = allPlayers.peek();
-            ExtendedPlayer nextPlayer= (ExtendedPlayer) allPlayers.toArray()[1];
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
 
             int continueCondition=0;
@@ -279,6 +295,8 @@ public class Main extends Application {
                     //add ball function
                     cellSelected.addBall(curPlayer);
                     allPlayers.remove(curPlayer);
+                    updatePlayerStats(allPlayers);
+                    ExtendedPlayer nextPlayer = allPlayers.peek();
                     setGridBorderColour(nextPlayer);
                 }
                 else
@@ -293,24 +311,12 @@ public class Main extends Application {
             {
                 cellSelected.addBall(curPlayer);
                 allPlayers.remove(curPlayer);
+                updatePlayerStats(allPlayers);
+                ExtendedPlayer nextPlayer = allPlayers.peek();
                 setGridBorderColour(nextPlayer);
             }
 
 
-
-            for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); ) {
-                ExtendedPlayer randomPlayer = iter.next();
-                if (randomPlayer.hasTakenFirstMove())
-                {
-
-                    randomPlayer.checkPlayerStatus();
-                    if (!randomPlayer.isAlive())
-                    {
-                        iter.remove();
-                    }
-                }
-
-            }
 
             if (curPlayer.isAlive() && continueCondition==0)
             {
@@ -335,6 +341,7 @@ public class Main extends Application {
         {
 //            System.out.println("Player" + allPlayers.peek() + " won.");
             gameOver=true;
+            System.out.println("game over. yaayyyy");
         }
 
     }
