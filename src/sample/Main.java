@@ -322,7 +322,7 @@ public class Main extends Application {
                 allPlayers.add(curPlayer);
             }
 
-            //System.out.println(allPlayers.toString());
+//            System.out.println(allPlayers.toString());
             gridPane.printGrid();
 
         }

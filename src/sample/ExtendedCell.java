@@ -219,7 +219,6 @@ public class ExtendedCell
     {
         curPlayer.setTakenFirstMove(true);
 
-
         if (this.cellIsOccupied && this.playerOccupiedBy != curPlayer)  //cell is occupied by someone else
         {
 
@@ -282,7 +281,7 @@ public class ExtendedCell
                 Sphere curSphere = allSpheres.get(i);
                 ExtendedCell neighbour = this.neighbouringCells.get(i);
                 TranslateTransition move = new TranslateTransition();
-                move.setDuration(Duration.seconds(1));
+                move.setDuration(Duration.seconds(0.5));
                 move.setNode(curSphere);
                 int moveX = neighbour.coordX - this.coordX;
                 int moveY = neighbour.coordY - this.coordY;
