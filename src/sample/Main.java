@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+
 
 import java.util.*;
 
@@ -159,6 +161,8 @@ public class Main extends Application {
 
         gridPane = createGrid(x, y);
         StackPane root = new StackPane(gridPane.getGridPane());
+        root.setStyle("-fx-background-color: null;");
+
         AnchorPane root1 = new AnchorPane(root);
         root1.setPrefHeight(50);
         root1.setMaxHeight(50);
@@ -177,7 +181,7 @@ public class Main extends Application {
 
         root1.getChildren().add(comboBox);
 
-        scene = new Scene(rootX, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
+        scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
         scene.getStylesheets().add(namesOfStylesheets.get(0));
 
 
@@ -382,78 +386,72 @@ public class Main extends Application {
 //        });
 //    }
 
-    private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
-    {
-        Group group = new Group();
-        ExtendedCell cell = new ExtendedCell(group, new StackPane(), x, y, null, new ArrayList<ExtendedCell>());
-
-        cell.getCell().setOnMouseClicked(e ->
+    private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y  ){
+        if (!cellSwitch.get())
+            cellSwitch.set(!cellSwitch.get());
+        try
         {
-            if (!cellSwitch.get())
-                cellSwitch.set(!cellSwitch.get());
-            try
+//            System.out.println("x and y: " + x + " " + y);
+            for(int i=0;i<allPlayers.toArray().length;i++)
             {
-                System.out.println("x and y: " + x + " " + y);
-                for(int i=0;i<allPlayers.toArray().length;i++)
-                {
-                    System.out.println(allPlayers.toArray()[i].toString());
-                }
+//                System.out.println(allPlayers.toArray()[i].toString());
+            }
 
-                System.out.println();
-                ExtendedPlayer curPlayer = allPlayers.peek();
-                ExtendedPlayer nextPlayer= (ExtendedPlayer) allPlayers.toArray()[1];
-                System.out.println("Current player who just took move : " + curPlayer);
-                ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
-                int continueCondition=0;
+//            System.out.println();
+            ExtendedPlayer curPlayer = allPlayers.peek();
+            ExtendedPlayer nextPlayer= (ExtendedPlayer) allPlayers.toArray()[1];
+//            System.out.println("Current player who just took move : " + curPlayer);
+            ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
+            int continueCondition=0;
 
 
-                if (cellSelected.isCellOccupied())
-                {
-                    System.out.println("Came to cell is occupied.");
-                    int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-                    System.out.println("current cell colour: " + curCellColor);
-                    if (curCellColor == curPlayer.getPlayerColour())
-                    { // check if player is adding to his color
-                        //add ball function
-                        cellSelected.addBall(curPlayer);
-                        allPlayers.remove(curPlayer);
-                        setGridBorderColour(nextPlayer);
-                    }
-                    else
-                    {  //if not
-                        //show error, wrong move
-                        //we should not remove the player from the queue
-                        System.out.println("can't put ball here.already occupied by " + cellSelected.getPlayerOccupiedBy().getPlayerColourByString() + " player." + cellSelected.getCoordX() + cellSelected.getCoordY());
-                        continueCondition=1;
-                    }
-                }
-                else
-                {
+            if (cellSelected.isCellOccupied())
+            {
+//                System.out.println("Came to cell is occupied.");
+                int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
+//                System.out.println("current cell colour: " + curCellColor);
+                if (curCellColor == curPlayer.getPlayerColour())
+                { // check if player is adding to his color
+                    //add ball function
                     cellSelected.addBall(curPlayer);
                     allPlayers.remove(curPlayer);
                     setGridBorderColour(nextPlayer);
                 }
+                else
+                {  //if not
+                    //show error, wrong move
+                    //we should not remove the player from the queue
+//                    System.out.println("can't put ball here.already occupied by " + cellSelected.getPlayerOccupiedBy().getPlayerColourByString() + " player." + cellSelected.getCoordX() + cellSelected.getCoordY());
+                    continueCondition=1;
+                }
+            }
+            else
+            {
+                cellSelected.addBall(curPlayer);
+                allPlayers.remove(curPlayer);
+                setGridBorderColour(nextPlayer);
+            }
 
-                for (ExtendedPlayer randomPlayer : allPlayers)
-                {  //update status for all players to check if they are alive or dead
-                    if (randomPlayer.hasTakenFirstMove())
+            for (ExtendedPlayer randomPlayer : allPlayers)
+            {  //update status for all players to check if they are alive or dead
+                if (randomPlayer.hasTakenFirstMove())
+                {
+
+                    randomPlayer.checkPlayerStatus();
+                    if (!randomPlayer.isAlive())
                     {
-
-                        randomPlayer.checkPlayerStatus();
-                        if (!randomPlayer.isAlive())
-                        {
-                            allPlayers.remove(randomPlayer);
-                        }
+                        allPlayers.remove(randomPlayer);
                     }
                 }
+            }
 
 
-                if (curPlayer.isAlive() && continueCondition==0)
-                {
-                    allPlayers.add(curPlayer);
-                }
+            if (curPlayer.isAlive() && continueCondition==0)
+            {
+                allPlayers.add(curPlayer);
+            }
 
-                //gameMatrix.printMatrix();
+            //gameMatrix.printMatrix();
 
 
 //                PhongMaterial phongMaterial = new PhongMaterial();
@@ -480,25 +478,36 @@ public class Main extends Application {
 //                group.getChildren().add(sphere);
 //                if(cell.getCell().getChildren().size()==0)
 //                    cell.getCell().getChildren().add(group);
-                //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
-            }
-            catch (IndexOutOfBoundsException e1)
-            {
-                e1.printStackTrace();
-                System.out.println(allPlayers.peek());
-            }
-            catch (Exception e2)
-            {
-                e2.printStackTrace();
-            }
+            //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
+        }
+        catch (IndexOutOfBoundsException e1)
+        {
+            e1.printStackTrace();
+            System.out.println(allPlayers.peek());
+        }
+        catch (Exception e2)
+        {
+            e2.printStackTrace();
+        }
 
 
-            if (allPlayers.size() == 1)
-            {
-                System.out.println("Player" + allPlayers.peek() + " won.");
-                gameOver=true;
-            }
+        if (allPlayers.size() == 1)
+        {
+//            System.out.println("Player" + allPlayers.peek() + " won.");
+            gameOver=true;
+        }
 
+    }
+
+
+    private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
+    {
+        Group group = new Group();
+        ExtendedCell cell = new ExtendedCell(group, new StackPane(), x, y, null, new ArrayList<ExtendedCell>());
+
+        cell.getCell().setOnMouseClicked(e ->
+        {
+            clickedOnCell(e,cellSwitch,x,y);
         });
 
         cell.getCell().getStyleClass().add("cell");
@@ -528,7 +537,8 @@ public class Main extends Application {
         {
             ColumnConstraints cc = new ColumnConstraints();
             cc.setFillWidth(true);
-            cc.setHgrow(Priority.ALWAYS);
+            cc.setPrefWidth(100);
+//            cc.setHgrow(Priority.SOMETIMES);
             grid.getColumnConstraints().add(cc);
         }
 
@@ -536,7 +546,8 @@ public class Main extends Application {
         {
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(true);
-            rc.setVgrow(Priority.ALWAYS);
+            rc.setPercentHeight(100);
+//            rc.setVgrow(Priority.SOMETIMES);
             grid.getRowConstraints().add(rc);
         }
 
