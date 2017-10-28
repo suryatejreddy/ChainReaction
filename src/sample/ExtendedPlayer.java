@@ -108,11 +108,24 @@ public class ExtendedPlayer
         }
     }
 
+    public String isAliveString()
+    {
+        if (this.isAlive)
+        {
+            return "is alive";
+        }
+        else
+        {
+            return "is dead";
+        }
+    }
+
+
 
     @Override
     public String toString()
     {
-        return ("Player of color " + this.getPlayerColourByString() );
+        return (this.getPlayerColourByString() + " " + this.isAliveString());
     }
 
 }
