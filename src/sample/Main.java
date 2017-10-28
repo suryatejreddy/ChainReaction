@@ -323,93 +323,23 @@ public class Main extends Application {
         }
     }
 
-//    public static void setCellClicker(Player player, int x, int y)
-//    {
-//        cell=gridPane.getExtendedCells().get(0);
-//        for(ExtendedCell c: gridPane.getExtendedCells())
-//        {
-//            if(c.getCoordX()==x && c.getCoordY()==y)
-//            {
-//                cell=c;
-//                break;
-//            }
-//        }
-//
-//        Group group=new Group();
-//        cell.getCell().setOnMouseClicked(new EventHandler<MouseEvent>()
-//        {
-//            @Override
-//            public void handle(MouseEvent mouseEvent)
-//            {
-//                try
-//                {
-//                    System.out.println(x+" "+y);
-//                    clickedXPos=x;
-//                    clickedYPos=y;
-//                    
-//                    Player curPlayer=allPlayers.peek();
-//                    Sphere sphere = new Sphere(10);
-//                    PhongMaterial phongMaterial = new PhongMaterial();
-//                    phongMaterial.setDiffuseColor(getColor(curPlayer));
-//                    phongMaterial.setSpecularColor(Color.BLACK);
-//                    sphere.setMaterial(phongMaterial);
-//
-//                    switch (group.getChildren().size())
-//                    {
-//                        case 0:
-//                            sphere.setTranslateX(0);
-//                            break;
-//
-//                        case 1:
-//                            sphere.setTranslateX(10);
-//                            break;
-//
-//                        case 2:
-//                            sphere.setTranslateY(10);
-//                            sphere.setTranslateX(5);
-//                            break;
-//
-//                        default:
-//                            break;
-//                    }
-//
-//                    group.getChildren().add(sphere);
-//                    if(cell.getCell().getChildren().size()==0)
-//                        cell.getCell().getChildren().add(group);
-//                    //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
-//                }
-//                catch(Exception e1)
-//                {
-//                    e1.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y  ){
         if (!cellSwitch.get())
             cellSwitch.set(!cellSwitch.get());
         try
         {
-//            System.out.println("x and y: " + x + " " + y);
-            for(int i=0;i<allPlayers.toArray().length;i++)
-            {
-//                System.out.println(allPlayers.toArray()[i].toString());
-            }
 
-//            System.out.println();
             ExtendedPlayer curPlayer = allPlayers.peek();
             ExtendedPlayer nextPlayer= (ExtendedPlayer) allPlayers.toArray()[1];
-//            System.out.println("Current player who just took move : " + curPlayer);
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
+
             int continueCondition=0;
 
 
             if (cellSelected.isCellOccupied())
             {
-//                System.out.println("Came to cell is occupied.");
                 int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-//                System.out.println("current cell colour: " + curCellColor);
                 if (curCellColor == curPlayer.getPlayerColour())
                 { // check if player is adding to his color
                     //add ball function
@@ -451,34 +381,6 @@ public class Main extends Application {
                 allPlayers.add(curPlayer);
             }
 
-            //gameMatrix.printMatrix();
-
-
-//                PhongMaterial phongMaterial = new PhongMaterial();
-//                phongMaterial.setDiffuseColor(getColor(curPlayer));
-//                phongMaterial.setSpecularColor(Color.BLACK);
-//                sphere.setMaterial(phongMaterial);
-//                switch (group.getChildren().size()) {
-//                    case 0:
-//                        sphere.setTranslateX(0);
-//                        break;
-//
-//                    case 1:
-//                        sphere.setTranslateX(10);
-//                        break;
-//
-//                    case 2:
-//                        sphere.setTranslateY(10);
-//                        sphere.setTranslateX(5);
-//                        break;
-//
-//                    default:
-//                        break;
-//                }
-//                group.getChildren().add(sphere);
-//                if(cell.getCell().getChildren().size()==0)
-//                    cell.getCell().getChildren().add(group);
-            //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
         }
         catch (IndexOutOfBoundsException e1)
         {
@@ -537,7 +439,7 @@ public class Main extends Application {
         {
             ColumnConstraints cc = new ColumnConstraints();
             cc.setFillWidth(true);
-            cc.setPrefWidth(100);
+            cc.setPercentWidth(100);
 //            cc.setHgrow(Priority.SOMETIMES);
             grid.getColumnConstraints().add(cc);
         }

@@ -47,7 +47,8 @@ public class ExtendedCell
 
     public void addAnimation()
     {
-        RotateTransition rot = new RotateTransition(Duration.millis(2000 + this.coordX + this.coordY),getGroup());
+        double rotateTime = 4000.0/this.numberOfBallsPresent;
+        RotateTransition rot = new RotateTransition(Duration.millis(rotateTime + this.coordX + this.coordY),getGroup());
         rot.setFromAngle(0);
         rot.setToAngle(360);
         rot.setInterpolator(Interpolator.EASE_BOTH);
@@ -223,11 +224,12 @@ public class ExtendedCell
         {
             //TODO change color of the ball for UI
             this.playerOccupiedBy.removeCell(this); //removing it from his list
-            for(int i=0;i<getGroup().getChildren().size();i++)
+            int groupSize = getGroup().getChildren().size();
+            getGroup().getChildren().clear();
+            for(int i=0;i<groupSize;i++)
             {
                 Sphere sphere = getNewSphere(Main.getColor(curPlayer));
                 setTranslationToSphere(sphere);
-                getGroup().getChildren().remove(i);
                 getGroup().getChildren().add(sphere);
             }
         }
