@@ -173,7 +173,7 @@ public class ExtendedGrid
             getCurrentExtendedCell(i, j).setNeighbouringCells(cellArrayList);
         }
     }
-
+    @SuppressWarnings("Duplicates")
     private boolean cellIsAnEdgeCell(int i, int j)
     {
         if(!cellIsACornerCell(i,j))
@@ -187,7 +187,7 @@ public class ExtendedGrid
 
         return false;
     }
-
+    @SuppressWarnings("Duplicates")
     private boolean cellIsACornerCell(int i, int j)
     {
         if(i==0 && j==0)
@@ -225,4 +225,19 @@ public class ExtendedGrid
     {
         this.extendedCells.add(cell);
     }
+
+    public void printGrid()
+    {
+        for (int i=sideLengthY-1;i>-1;i--)
+        {
+            for (int j =0;j<sideLengthX;j++)
+            {
+                System.out.print(getCellFromCoordinate(i,j) + " \t");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+
 }

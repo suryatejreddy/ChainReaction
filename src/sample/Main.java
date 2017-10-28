@@ -209,7 +209,7 @@ public class Main extends Application {
 
     public static void launchGame(int n, int x , int y)
     {
-        Scene newScene = getGameScene(n,5,8);
+        Scene newScene = getGameScene(n,x,y);
         MainStage.setScene(newScene);
     }
 
@@ -293,7 +293,7 @@ public class Main extends Application {
                 if (curCellColor == curPlayer.getPlayerColour())
                 { // check if player is adding to his color
                     //add ball function
-                    cellSelected.addBall(curPlayer);
+                    cellSelected.addBall(curPlayer,true);
                     allPlayers.remove(curPlayer);
                     updatePlayerStats(allPlayers); //remove dead players
                     ExtendedPlayer nextPlayer = allPlayers.peek();
@@ -309,7 +309,7 @@ public class Main extends Application {
             }
             else
             {
-                cellSelected.addBall(curPlayer);
+                cellSelected.addBall(curPlayer,true);
                 allPlayers.remove(curPlayer);
                 updatePlayerStats(allPlayers);  //remove dead players
                 ExtendedPlayer nextPlayer = allPlayers.peek();
@@ -322,7 +322,8 @@ public class Main extends Application {
                 allPlayers.add(curPlayer);
             }
 
-            System.out.println(allPlayers.toString());
+            //System.out.println(allPlayers.toString());
+            gridPane.printGrid();
 
         }
         catch (IndexOutOfBoundsException e1)
@@ -353,6 +354,7 @@ public class Main extends Application {
 
         cell.getCell().setOnMouseClicked(e ->
         {
+            System.out.println(x + " , " + y);
             clickedOnCell(e,cellSwitch,x,y);
         });
 
