@@ -274,7 +274,7 @@ public class Main extends Application {
         }
     }
 
-
+    @SuppressWarnings("Duplicates")
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y  ){
         if (!cellSwitch.get())
             cellSwitch.set(!cellSwitch.get());
@@ -295,7 +295,7 @@ public class Main extends Application {
                     //add ball function
                     cellSelected.addBall(curPlayer);
                     allPlayers.remove(curPlayer);
-                    updatePlayerStats(allPlayers);
+                    updatePlayerStats(allPlayers); //remove dead players
                     ExtendedPlayer nextPlayer = allPlayers.peek();
                     setGridBorderColour(nextPlayer);
                 }
@@ -311,11 +311,10 @@ public class Main extends Application {
             {
                 cellSelected.addBall(curPlayer);
                 allPlayers.remove(curPlayer);
-                updatePlayerStats(allPlayers);
+                updatePlayerStats(allPlayers);  //remove dead players
                 ExtendedPlayer nextPlayer = allPlayers.peek();
                 setGridBorderColour(nextPlayer);
             }
-
 
 
             if (curPlayer.isAlive() && continueCondition==0)
@@ -333,7 +332,7 @@ public class Main extends Application {
         }
         catch (Exception e2)
         {
-            e2.printStackTrace();
+            System.out.println("Game over. yaay");
         }
 
 

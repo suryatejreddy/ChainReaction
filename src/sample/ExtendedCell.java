@@ -254,7 +254,7 @@ public class ExtendedCell
 
         if (this.numberOfBallsPresent == this.getCriticalMass())
         {
-
+            //NON_UI Part
             this.emptyCell();
 
 
