@@ -31,7 +31,6 @@ public class Main extends Application {
 
     public static Scene menu;
 
-
     public static Stage MainStage;
 
     static
@@ -52,85 +51,6 @@ public class Main extends Application {
         allPlayers = new LinkedList<ExtendedPlayer>();
     }
 
-//    public static void playGame(Scanner scanner, Matrix gameMatrix)
-//    {
-//        while(allPlayers.size() > 1)
-//        {
-//            Player curPlayer = allPlayers.peek();
-//            System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
-//            System.out.println("Enter coordinates");
-//            int moveX = scanner.nextInt();
-//            int moveY = scanner.nextInt();
-//
-//            Cell cellSelected = gameMatrix.getCellFromCoordinate(moveY,moveX);
-//
-//            if (cellSelected.isCellOccupied())
-//            {
-//                int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-//                if (curCellColor == curPlayer.getPlayerColour())
-//                { // check if player is adding to his color
-//                    //add ball function
-//                    cellSelected.addBall(curPlayer);
-//                    allPlayers.remove(curPlayer);
-//                }
-//                else
-//                {  //if not
-//                    //show error, wrong move
-//                    //we should not remove the player from the queue
-//                    System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player.");
-//                    continue;
-//                }
-//            }
-//            else
-//            {
-//                cellSelected.addBall(curPlayer);
-//                allPlayers.remove(curPlayer);
-//            }
-//
-//            for (Player randomPlayer : allPlayers)
-//            {  //update status for all players to check if they are alive or dead
-//                if (randomPlayer.hasTakenFirstMove())
-//                {
-//                    randomPlayer.checkPlayerStatus();
-//                    if (!randomPlayer.isAlive())
-//                    {
-//                        allPlayers.remove(randomPlayer);
-//                    }
-//                }
-//            }
-//
-//
-//            if (curPlayer.isAlive())
-//            {
-//                allPlayers.add(curPlayer);
-//            }
-//
-//            gameMatrix.printMatrix();
-//        }
-//
-//        System.out.println(allPlayers.peek() + " Won! Yipeee");
-//    }
-
-//    public static void executeFirst()
-//    {
-//        int numberOfPlayers;
-//        System.out.println("Enter number of players.");
-//        Scanner scanner = new Scanner(System.in);
-//        numberOfPlayers = scanner.nextInt();
-//        int i = 0 ;
-//
-//        while(i<numberOfPlayers)
-//        {
-//            Player player = new Player(i, true);
-//            allPlayers.add(player); //adding the player to the game
-//            i++;
-//        }
-//        System.out.println("Enter X and Y.");
-//        int x,y;
-//        x=scanner.nextInt();
-//        y=scanner.nextInt();
-//        Matrix gameMatrix=new Matrix(x, y);
-//    }
 
     public static void main(String[] args) {
         launch(args);
@@ -293,7 +213,7 @@ public class Main extends Application {
                 if (curCellColor == curPlayer.getPlayerColour())
                 { // check if player is adding to his color
                     //add ball function
-                    cellSelected.addBall(curPlayer,true);
+                    cellSelected.addBall(curPlayer,true,false);
                     allPlayers.remove(curPlayer);
                     updatePlayerStats(allPlayers); //remove dead players
                     ExtendedPlayer nextPlayer = allPlayers.peek();
@@ -309,7 +229,7 @@ public class Main extends Application {
             }
             else
             {
-                cellSelected.addBall(curPlayer,true);
+                cellSelected.addBall(curPlayer,true,false);
                 allPlayers.remove(curPlayer);
                 updatePlayerStats(allPlayers);  //remove dead players
                 ExtendedPlayer nextPlayer = allPlayers.peek();

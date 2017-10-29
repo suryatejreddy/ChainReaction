@@ -215,7 +215,7 @@ public class ExtendedCell
         }
     }
 
-    public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI)
+    public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI, boolean callFromRecursion)
     {
         curPlayer.setTakenFirstMove(true);
 
@@ -225,7 +225,6 @@ public class ExtendedCell
             //TODO change color of the ball for UI
             //NON_UI_PART
             this.playerOccupiedBy.removeCell(this); //removing it from his list
-
             //UI_PART
             int groupSize = getGroup().getChildren().size();
             if (groupSize != 3)
@@ -241,11 +240,14 @@ public class ExtendedCell
             else{
 //                addBallInUI = false;
             }
+            curPlayer.addCell(this);
         }
+
         //NON_UI_PART
         this.setCellIsOccupied(true);
         this.setPlayerOccupiedBy(curPlayer);
         this.numberOfBallsPresent+=1;
+        System.out.println("adding ball to cell "  + this);
 
 
         //UI_PART, add a new Sphere
@@ -271,6 +273,8 @@ public class ExtendedCell
             //NON_UI Part
             this.emptyCell();
 
+            System.out.println("after emptying cell " + this);
+
 
             //part where i add animation
             this.getGroup().getChildren().clear();
@@ -281,7 +285,7 @@ public class ExtendedCell
                 Sphere curSphere = allSpheres.get(i);
                 ExtendedCell neighbour = this.neighbouringCells.get(i);
                 TranslateTransition move = new TranslateTransition();
-                move.setDuration(Duration.seconds(0.5));
+                move.setDuration(Duration.seconds(0.25));
                 move.setNode(curSphere);
                 int moveX = neighbour.coordX - this.coordX;
                 int moveY = neighbour.coordY - this.coordY;
@@ -302,18 +306,16 @@ public class ExtendedCell
                     ExtendedCell neighbour = this.neighbouringCells.get(i);
                     try
                     {
-                        neighbour.addBall(curPlayer,true);
+                        neighbour.addBall(curPlayer,true,true);
+                        System.out.println("Neighbour " + i + " is " + this);
                     }
                     catch (StackOverflowError s1)
                     {
                         System.out.println("Yayy... You won.");
                     }
 
-
                 }
             });
-
-
         }
 
     }
