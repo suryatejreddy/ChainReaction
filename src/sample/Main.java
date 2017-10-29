@@ -213,7 +213,7 @@ public class Main extends Application {
                 if (curCellColor == curPlayer.getPlayerColour())
                 { // check if player is adding to his color
                     //add ball function
-                    cellSelected.addBall(curPlayer,true,false);
+                    cellSelected.addBall(curPlayer,true);
                     allPlayers.remove(curPlayer);
                     updatePlayerStats(allPlayers); //remove dead players
                     ExtendedPlayer nextPlayer = allPlayers.peek();
@@ -229,7 +229,7 @@ public class Main extends Application {
             }
             else
             {
-                cellSelected.addBall(curPlayer,true,false);
+                cellSelected.addBall(curPlayer,true);
                 allPlayers.remove(curPlayer);
                 updatePlayerStats(allPlayers);  //remove dead players
                 ExtendedPlayer nextPlayer = allPlayers.peek();

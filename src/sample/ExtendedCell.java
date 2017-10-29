@@ -215,7 +215,7 @@ public class ExtendedCell
         }
     }
 
-    public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI, boolean callFromRecursion)
+    public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI)
     {
         curPlayer.setTakenFirstMove(true);
 
@@ -306,7 +306,7 @@ public class ExtendedCell
                     ExtendedCell neighbour = this.neighbouringCells.get(i);
                     try
                     {
-                        neighbour.addBall(curPlayer,true,true);
+                        neighbour.addBall(curPlayer,true);
                         System.out.println("Neighbour " + i + " is " + this);
                     }
                     catch (StackOverflowError s1)
