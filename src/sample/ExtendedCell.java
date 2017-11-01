@@ -215,7 +215,7 @@ public class ExtendedCell
         }
     }
 
-    public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI)
+    public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI, boolean callFromMain)
     {
         curPlayer.setTakenFirstMove(true);
 
@@ -247,7 +247,6 @@ public class ExtendedCell
         this.setCellIsOccupied(true);
         this.setPlayerOccupiedBy(curPlayer);
         this.numberOfBallsPresent+=1;
-        System.out.println("adding ball to cell "  + this);
 
 
         //UI_PART, add a new Sphere
@@ -272,8 +271,6 @@ public class ExtendedCell
         {
             //NON_UI Part
             this.emptyCell();
-
-            System.out.println("after emptying cell " + this);
 
 
             //part where i add animation
@@ -300,14 +297,17 @@ public class ExtendedCell
             mainTransition.setOnFinished(e ->
             {
                 this.cell.getChildren().clear();
+                boolean flag = true;
                 for (int i=0;i < this.neighbouringCells.size() ; i ++)
                 {
-
                     ExtendedCell neighbour = this.neighbouringCells.get(i);
+                    if (neighbour.numberOfBallsPresent == neighbour.criticalMass - 1)
+                    {
+                        flag = false;
+                    }
                     try
                     {
-                        neighbour.addBall(curPlayer,true);
-                        System.out.println("Neighbour " + i + " is " + this);
+                        neighbour.addBall(curPlayer,true,false);
                     }
                     catch (StackOverflowError s1)
                     {
@@ -315,7 +315,18 @@ public class ExtendedCell
                     }
 
                 }
+                if (flag)
+                {
+                    Main.onAnimationCompleted(curPlayer);
+                }
             });
+        }
+        else
+        {
+            if (callFromMain)
+            {
+                Main.onAnimationCompleted(curPlayer);
+            }
         }
 
     }

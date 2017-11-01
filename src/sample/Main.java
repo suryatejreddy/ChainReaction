@@ -213,11 +213,8 @@ public class Main extends Application {
                 if (curCellColor == curPlayer.getPlayerColour())
                 { // check if player is adding to his color
                     //add ball function
-                    cellSelected.addBall(curPlayer,true);
                     allPlayers.remove(curPlayer);
-                    updatePlayerStats(allPlayers); //remove dead players
-                    ExtendedPlayer nextPlayer = allPlayers.peek();
-                    setGridBorderColour(nextPlayer);
+                    cellSelected.addBall(curPlayer,true,true);
                 }
                 else
                 {  //if not
@@ -229,21 +226,11 @@ public class Main extends Application {
             }
             else
             {
-                cellSelected.addBall(curPlayer,true);
                 allPlayers.remove(curPlayer);
-                updatePlayerStats(allPlayers);  //remove dead players
-                ExtendedPlayer nextPlayer = allPlayers.peek();
-                setGridBorderColour(nextPlayer);
+                cellSelected.addBall(curPlayer,true,true);
             }
 
 
-            if (curPlayer.isAlive() && continueCondition==0)
-            {
-                allPlayers.add(curPlayer);
-            }
-
-//            System.out.println(allPlayers.toString());
-            gridPane.printGrid();
 
         }
         catch (IndexOutOfBoundsException e1)
@@ -257,14 +244,33 @@ public class Main extends Application {
         }
 
 
-        if (allPlayers.size() == 1)
-        {
-//            System.out.println("Player" + allPlayers.peek() + " won.");
-            gameOver=true;
-            System.out.println("game over. yaayyyy");
-        }
-
     }
+
+    public static void onAnimationCompleted(ExtendedPlayer curPlayer)
+    {
+        try{
+            updatePlayerStats(allPlayers);  //remove dead players
+            ExtendedPlayer nextPlayer = allPlayers.peek();
+            setGridBorderColour(nextPlayer);
+            if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
+            {
+                allPlayers.add(curPlayer);
+            }
+            System.out.println(allPlayers.toString());
+            gridPane.printGrid();
+            if (allPlayers.size() == 1)
+            {
+                gameOver=true;
+                System.out.println("game over. yaayyyy");
+            }
+        }
+        catch (Exception e1)
+        {
+            System.out.println(e1.getMessage());
+            System.out.println("You might have won");
+        }
+    }
+
 
 
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
