@@ -2,9 +2,7 @@ package sample;
 
 import NonUIComponents.Cell;
 import NonUIComponents.Player;
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
+import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -13,11 +11,12 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 //class to hold UI of Cell.
-public class ExtendedCell
+public class ExtendedCell implements Serializable
 {
     public static int TYPE_CORNER=2;
     public static int TYPE_EDGE=3;
@@ -49,7 +48,8 @@ public class ExtendedCell
 
     public void addAnimation()
     {
-        RotateTransition rot = new RotateTransition(Duration.millis(2000 + this.coordX + this.coordY),getGroup());
+        double rotateTime = (500.0 * this.criticalMass)/(this.numberOfBallsPresent);
+        RotateTransition rot = new RotateTransition(Duration.millis(rotateTime + this.coordX + this.coordY),getGroup());
         rot.setFromAngle(0);
         rot.setToAngle(360);
         rot.setInterpolator(Interpolator.EASE_BOTH);
@@ -171,57 +171,31 @@ public class ExtendedCell
         this.playerOccupiedBy.removeCell(this);
         this.playerOccupiedBy = null;
         this.cellIsOccupied = false;
+
     }
 
-    public void addBall(ExtendedPlayer curPlayer)
+    public Sphere getNewSphere(Color color)
     {
-        curPlayer.setTakenFirstMove(true);
+        Sphere s1 = new Sphere(10);
+        PhongMaterial phongMaterial2 = new PhongMaterial();
+        phongMaterial2.setDiffuseColor(color);
+        phongMaterial2.setSpecularColor(Color.BLACK);
+        s1.setMaterial(phongMaterial2);
+        return s1;
+    }
 
-        if (this.cellIsOccupied && this.playerOccupiedBy != curPlayer)  //cell is occupied by someone else
+    public ArrayList<Sphere> getAllSpheres(Color color,int numberOfSpheres)
+    {
+        ArrayList<Sphere> temp = new ArrayList<Sphere>();
+        for (int i=0;i<numberOfSpheres;i++)
         {
-            //TODO change color of the ball for UI
-            System.out.println("Came to recursive call's beginning");
-            this.playerOccupiedBy.removeCell(this); //removing it from his list
-            for(int i=0;i<getGroup().getChildren().size();i++)
-            {
-                Sphere sphere=(Sphere) getGroup().getChildren().get(i);
-                PhongMaterial phongMaterial = new PhongMaterial();
-                phongMaterial.setDiffuseColor(Main.getColor(curPlayer));
-                phongMaterial.setSpecularColor(Color.BLACK);
-                sphere.setMaterial(phongMaterial);
-                getGroup().getChildren().remove(i);
-                switch (getGroup().getChildren().size())
-                {
-                    case 0:
-                        sphere.setTranslateX(0);
-                        break;
-
-                    case 1:
-                        sphere.setTranslateX(10);
-                        break;
-
-                    case 2:
-                        sphere.setTranslateY(10);
-                        sphere.setTranslateX(5);
-                        break;
-
-                    default:
-                        break;
-                }
-
-                getGroup().getChildren().add(sphere);
-
-            }
+            temp.add(getNewSphere(color));
         }
-        this.setCellIsOccupied(true);
-        this.setPlayerOccupiedBy(curPlayer);
-        this.numberOfBallsPresent+=1;
+        return temp;
+    }
 
-        Sphere sphere = new Sphere(10);
-        PhongMaterial phongMaterial = new PhongMaterial();
-        phongMaterial.setDiffuseColor(Main.getColor(curPlayer));
-        phongMaterial.setSpecularColor(Color.BLACK);
-        sphere.setMaterial(phongMaterial);
+    public void setTranslationToSphere(Sphere sphere)
+    {
         switch (getGroup().getChildren().size())
         {
             case 0:
@@ -233,34 +207,129 @@ public class ExtendedCell
                 break;
 
             case 2:
-                sphere.setTranslateY(10);
                 sphere.setTranslateX(5);
+                sphere.setTranslateY(10);
                 break;
 
             default:
                 break;
         }
-        getGroup().getChildren().add(sphere);
-        this.startRotation();
-        if(getCell().getChildren().size()==0)
-            getCell().getChildren().add(group);
-        if (this.numberOfBallsPresent == this.getCriticalMass())
+    }
+
+    public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI, boolean callFromMain)
+    {
+        curPlayer.setTakenFirstMove(true);
+
+        if (this.cellIsOccupied && this.playerOccupiedBy != curPlayer)  //cell is occupied by someone else
         {
 
-            this.emptyCell();
-            try
+            //TODO change color of the ball for UI
+            //NON_UI_PART
+            this.playerOccupiedBy.removeCell(this); //removing it from his list
+            //UI_PART
+            int groupSize = getGroup().getChildren().size();
+            if (groupSize != 3)
             {
-                //TODO add multi threading here
-                this.neighbouringCells.forEach((ExtendedCell neighbour) ->
+                getGroup().getChildren().clear();
+                for(int i=0;i<groupSize;i++)
                 {
-                    neighbour.addBall(curPlayer);
-                });
+                    Sphere sphere = getNewSphere(Main.getColor(curPlayer));
+                    setTranslationToSphere(sphere);
+                    getGroup().getChildren().add(sphere);
+                }
             }
-            catch(StackOverflowError e)
+            else{
+//                addBallInUI = false;
+            }
+            curPlayer.addCell(this);
+        }
+
+        //NON_UI_PART
+        this.setCellIsOccupied(true);
+        this.setPlayerOccupiedBy(curPlayer);
+        this.numberOfBallsPresent+=1;
+
+
+        //UI_PART, add a new Sphere
+        if (addBallInUI)
+        {
+            Sphere sphere = getNewSphere(Main.getColor(curPlayer));
+            setTranslationToSphere(sphere);
+            getGroup().getChildren().add(sphere);
+
+            //Add the group in case it was not added
+            if(getCell().getChildren().size()==0)
             {
-                System.out.println("Yayyyy.. You won.");
+                getCell().getChildren().add(group);
             }
         }
+
+
+        this.startRotation();
+
+
+        if (this.numberOfBallsPresent == this.getCriticalMass())
+        {
+            //NON_UI Part
+            this.emptyCell();
+
+
+            //part where i add animation
+            this.getGroup().getChildren().clear();
+            ArrayList<Sphere> allSpheres = getAllSpheres(Main.getColor(curPlayer),4);
+            ParallelTransition mainTransition = new ParallelTransition();
+            for (int i=0;i<this.neighbouringCells.size();i++)
+            {
+                Sphere curSphere = allSpheres.get(i);
+                ExtendedCell neighbour = this.neighbouringCells.get(i);
+                TranslateTransition move = new TranslateTransition();
+                move.setDuration(Duration.seconds(0.25));
+                move.setNode(curSphere);
+                int moveX = neighbour.coordX - this.coordX;
+                int moveY = neighbour.coordY - this.coordY;
+                move.setToX(moveX*60);
+                move.setToY(moveY*60);
+                this.cell.getChildren().add(curSphere);
+                mainTransition.getChildren().add(move);
+                this.cell.toFront();
+            }
+            mainTransition.play();
+
+            mainTransition.setOnFinished(e ->
+            {
+                this.cell.getChildren().clear();
+                boolean flag = true;
+                for (int i=0;i < this.neighbouringCells.size() ; i ++)
+                {
+                    ExtendedCell neighbour = this.neighbouringCells.get(i);
+                    if (neighbour.numberOfBallsPresent == neighbour.criticalMass - 1)
+                    {
+                        flag = false;
+                    }
+                    try
+                    {
+                        neighbour.addBall(curPlayer,true,false);
+                    }
+                    catch (StackOverflowError s1)
+                    {
+                        System.out.println("Yayy... You won.");
+                    }
+
+                }
+                if (flag)
+                {
+                    Main.onAnimationCompleted(curPlayer);
+                }
+            });
+        }
+        else
+        {
+            if (callFromMain)
+            {
+                Main.onAnimationCompleted(curPlayer);
+            }
+        }
+
     }
 
     public String toString()

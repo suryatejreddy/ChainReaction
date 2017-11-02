@@ -4,10 +4,11 @@ import NonUIComponents.Cell;
 import NonUIComponents.Game;
 import NonUIComponents.Matrix;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ExtendedPlayer
+public class ExtendedPlayer implements Serializable
 {
     public static final int VIOLET=0;
     public static final int BLUE=1;
@@ -108,11 +109,24 @@ public class ExtendedPlayer
         }
     }
 
+    public String isAliveString()
+    {
+        if (this.isAlive)
+        {
+            return "is alive";
+        }
+        else
+        {
+            return "is dead";
+        }
+    }
+
+
 
     @Override
     public String toString()
     {
-        return ("Player of color " + this.getPlayerColourByString() );
+        return (this.getPlayerColourByString() + " " + this.isAliveString() + " in " + this.currentCells.size() +  " cells");
     }
 
 }

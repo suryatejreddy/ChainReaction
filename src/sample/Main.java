@@ -9,7 +9,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
+
+import java.awt.image.AreaAveragingScaleFilter;
+import java.io.*;
 import java.util.*;
 
 import javafx.fxml.FXMLLoader;
@@ -28,7 +32,6 @@ public class Main extends Application {
     private static Scene scene;
 
     public static Scene menu;
-
 
     public static Stage MainStage;
 
@@ -50,85 +53,6 @@ public class Main extends Application {
         allPlayers = new LinkedList<ExtendedPlayer>();
     }
 
-//    public static void playGame(Scanner scanner, Matrix gameMatrix)
-//    {
-//        while(allPlayers.size() > 1)
-//        {
-//            Player curPlayer = allPlayers.peek();
-//            System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
-//            System.out.println("Enter coordinates");
-//            int moveX = scanner.nextInt();
-//            int moveY = scanner.nextInt();
-//
-//            Cell cellSelected = gameMatrix.getCellFromCoordinate(moveY,moveX);
-//
-//            if (cellSelected.isCellOccupied())
-//            {
-//                int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-//                if (curCellColor == curPlayer.getPlayerColour())
-//                { // check if player is adding to his color
-//                    //add ball function
-//                    cellSelected.addBall(curPlayer);
-//                    allPlayers.remove(curPlayer);
-//                }
-//                else
-//                {  //if not
-//                    //show error, wrong move
-//                    //we should not remove the player from the queue
-//                    System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player.");
-//                    continue;
-//                }
-//            }
-//            else
-//            {
-//                cellSelected.addBall(curPlayer);
-//                allPlayers.remove(curPlayer);
-//            }
-//
-//            for (Player randomPlayer : allPlayers)
-//            {  //update status for all players to check if they are alive or dead
-//                if (randomPlayer.hasTakenFirstMove())
-//                {
-//                    randomPlayer.checkPlayerStatus();
-//                    if (!randomPlayer.isAlive())
-//                    {
-//                        allPlayers.remove(randomPlayer);
-//                    }
-//                }
-//            }
-//
-//
-//            if (curPlayer.isAlive())
-//            {
-//                allPlayers.add(curPlayer);
-//            }
-//
-//            gameMatrix.printMatrix();
-//        }
-//
-//        System.out.println(allPlayers.peek() + " Won! Yipeee");
-//    }
-
-//    public static void executeFirst()
-//    {
-//        int numberOfPlayers;
-//        System.out.println("Enter number of players.");
-//        Scanner scanner = new Scanner(System.in);
-//        numberOfPlayers = scanner.nextInt();
-//        int i = 0 ;
-//
-//        while(i<numberOfPlayers)
-//        {
-//            Player player = new Player(i, true);
-//            allPlayers.add(player); //adding the player to the game
-//            i++;
-//        }
-//        System.out.println("Enter X and Y.");
-//        int x,y;
-//        x=scanner.nextInt();
-//        y=scanner.nextInt();
-//        Matrix gameMatrix=new Matrix(x, y);
-//    }
 
     public static void main(String[] args) {
         launch(args);
@@ -137,7 +61,6 @@ public class Main extends Application {
     public static Scene getGameScene(int numberOfPlayers, int x , int y)
     {
         int i = 0;
-
         while (i < numberOfPlayers)
         {
             ExtendedPlayer player = new ExtendedPlayer(i, true);
@@ -159,6 +82,8 @@ public class Main extends Application {
 
         gridPane = createGrid(x, y);
         StackPane root = new StackPane(gridPane.getGridPane());
+        root.setStyle("-fx-background-color: null;");
+
         AnchorPane root1 = new AnchorPane(root);
         root1.setPrefHeight(50);
         root1.setMaxHeight(50);
@@ -167,86 +92,21 @@ public class Main extends Application {
         rootX.setTop(root1);
         rootX.setCenter(root);
 
-        ComboBox<String> comboBox=new ComboBox<String>();
-        comboBox.getItems().clear();
-        comboBox.getItems().addAll("New game", "Exit Game");
-        comboBox.getSelectionModel().selectFirst();
-        comboBox.setMaxWidth(150);
-        comboBox.setMinWidth(150);
-        comboBox.setPrefWidth(150);
 
-        root1.getChildren().add(comboBox);
+//        ComboBox<String> comboBox=new ComboBox<String>();
+//        comboBox.getItems().clear();
+//        comboBox.getItems().addAll("New game", "Exit Game");
+//        comboBox.getSelectionModel().selectFirst();
+//        comboBox.setMaxWidth(150);
+//        comboBox.setMinWidth(150);
+//        comboBox.setPrefWidth(150);
+//
+//        root1.getChildren().add(comboBox);
 
-        scene = new Scene(rootX, (x * 40) + 100, (y * 40) + 100, Color.AZURE);
+        scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
         scene.getStylesheets().add(namesOfStylesheets.get(0));
 
-
-//        while(allPlayers.size() > 1)
-//        {
-//            Player curPlayer = allPlayers.peek();
-//            System.out.println("Chance of player with " + curPlayer.getPlayerColourByString());
-//            //System.out.println("Enter coordinates");
-//            //int moveX = scanner.nextInt();
-//            //int moveY = scanner.nextInt();
-//
-//            Cell cellSelected = gameMatrix.getCellFromCoordinate(clickedYPos,clickedXPos);
-//
-//            if (cellSelected.isCellOccupied())
-//            {
-//                int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-//                if (curCellColor == curPlayer.getPlayerColour())
-//                { // check if player is adding to his color
-//                    //add ball function
-//                    cellSelected.addBall(curPlayer);
-//                    allPlayers.remove(curPlayer);
-//                }
-//                else
-//                {  //if not
-//                    //show error, wrong move
-//                    //we should not remove the player from the queue
-//                    System.out.println("can't put ball here.already occupied by "+cellSelected.getPlayerOccupiedBy().getPlayerColourByString()+" player."+clickedXPos+clickedYPos);
-//                    continue;
-//                }
-//            }
-//            else
-//            {
-//                cellSelected.addBall(curPlayer);
-//                allPlayers.remove(curPlayer);
-//            }
-//
-//            for (Player randomPlayer : allPlayers)
-//            {  //update status for all players to check if they are alive or dead
-//                if (randomPlayer.hasTakenFirstMove())
-//                {
-//                    randomPlayer.checkPlayerStatus();
-//                    if (!randomPlayer.isAlive())
-//                    {
-//                        allPlayers.remove(randomPlayer);
-//                    }
-//                }
-//            }
-//
-//
-//            if (curPlayer.isAlive())
-//            {
-//                allPlayers.add(curPlayer);
-//            }
-//
-//            gameMatrix.printMatrix();
-//        }
-//
-//        System.out.println(allPlayers.peek() + " Won! Yipeee");
-
-
-          return scene;
-//        while(true)
-//        {
-//            if(gameOver)
-//            {
-//                System.out.println("Game Over... oops");
-//                System.exit(0);
-//            }
-//        }
+        return scene;
     }
     @Override
     public void start(Stage primaryStage) throws Exception
@@ -319,68 +179,173 @@ public class Main extends Application {
         }
     }
 
-//    public static void setCellClicker(Player player, int x, int y)
-//    {
-//        cell=gridPane.getExtendedCells().get(0);
-//        for(ExtendedCell c: gridPane.getExtendedCells())
-//        {
-//            if(c.getCoordX()==x && c.getCoordY()==y)
-//            {
-//                cell=c;
-//                break;
-//            }
-//        }
-//
-//        Group group=new Group();
-//        cell.getCell().setOnMouseClicked(new EventHandler<MouseEvent>()
-//        {
-//            @Override
-//            public void handle(MouseEvent mouseEvent)
-//            {
-//                try
-//                {
-//                    System.out.println(x+" "+y);
-//                    clickedXPos=x;
-//                    clickedYPos=y;
-//                    
-//                    Player curPlayer=allPlayers.peek();
-//                    Sphere sphere = new Sphere(10);
-//                    PhongMaterial phongMaterial = new PhongMaterial();
-//                    phongMaterial.setDiffuseColor(getColor(curPlayer));
-//                    phongMaterial.setSpecularColor(Color.BLACK);
-//                    sphere.setMaterial(phongMaterial);
-//
-//                    switch (group.getChildren().size())
-//                    {
-//                        case 0:
-//                            sphere.setTranslateX(0);
-//                            break;
-//
-//                        case 1:
-//                            sphere.setTranslateX(10);
-//                            break;
-//
-//                        case 2:
-//                            sphere.setTranslateY(10);
-//                            sphere.setTranslateX(5);
-//                            break;
-//
-//                        default:
-//                            break;
-//                    }
-//
-//                    group.getChildren().add(sphere);
-//                    if(cell.getCell().getChildren().size()==0)
-//                        cell.getCell().getChildren().add(group);
-//                    //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
-//                }
-//                catch(Exception e1)
-//                {
-//                    e1.printStackTrace();
-//                }
-//            }
-//        });
-//    }
+
+
+    public static void updatePlayerStats(Queue<ExtendedPlayer> allPlayers)
+    {
+        for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); ) {
+            ExtendedPlayer randomPlayer = iter.next();
+            if (randomPlayer.hasTakenFirstMove())
+            {
+                randomPlayer.checkPlayerStatus();
+                if (!randomPlayer.isAlive())
+                {
+                    iter.remove();
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y  ){
+        if (!cellSwitch.get())
+            cellSwitch.set(!cellSwitch.get());
+        try
+        {
+
+            ExtendedPlayer curPlayer = allPlayers.peek();
+            ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
+
+
+            System.out.println("Before Making Move");
+            makeSerializeData(1);
+            deserializeData(1);
+
+            if (cellSelected.isCellOccupied())
+            {
+                int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
+                if (curCellColor == curPlayer.getPlayerColour())
+                { // check if player is adding to his color
+                    //add ball function
+                    allPlayers.remove(curPlayer);
+                    cellSelected.addBall(curPlayer,true,true);
+                }
+                else
+                {  //if not
+                    //show error, wrong move
+                    //we should not remove the player from the queue
+                }
+            }
+            else
+            {
+                allPlayers.remove(curPlayer);
+                cellSelected.addBall(curPlayer,true,true);
+            }
+
+
+
+        }
+        catch (IndexOutOfBoundsException e1)
+        {
+            e1.printStackTrace();
+            System.out.println(allPlayers.peek());
+        }
+        catch (Exception e2)
+        {
+            System.out.println("Game over. yaay");
+        }
+
+
+    }
+
+    public static void onAnimationCompleted(ExtendedPlayer curPlayer)
+    {
+        try{
+            updatePlayerStats(allPlayers);  //remove dead players
+            ExtendedPlayer nextPlayer = allPlayers.peek();
+            setGridBorderColour(nextPlayer);
+            if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
+            {
+                allPlayers.add(curPlayer);
+            }
+            System.out.println(allPlayers.toString());
+//            gridPane.printGrid();
+            System.out.println("After Making Move");
+            makeSerializeData(1);
+            deserializeData(1);
+            if (allPlayers.size() == 1)
+            {
+                gameOver=true;
+                System.out.println("game over. yaayyyy");
+            }
+        }
+        catch (Exception e1)
+        {
+            e1.printStackTrace();
+            System.out.println("You might have won");
+        }
+    }
+
+
+    public static void makeSerializeData(int file) throws IOException
+    {
+        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
+        for (ExtendedCell newCell : gridPane.getExtendedCells() )
+        {
+            SerializableCell serCell = new SerializableCell(newCell.getCoordX(),newCell.getCoordY(),-1,newCell.getNumberOfBallsPresent());
+            if (newCell.isCellOccupied())
+            {
+                serCell.playerColor = newCell.getPlayerOccupiedBy().getPlayerColour();
+            }
+            gameData.add(serCell);
+        }
+        serializeData(gameData,file);
+
+    }
+
+    public static void serializeData(ArrayList<SerializableCell> gameData , int file) throws IOException
+    {
+        ObjectOutputStream out = null;
+        String fileName = "data"+ Integer.toString(file) + ".ser";
+        try
+        {
+            out = new ObjectOutputStream(new FileOutputStream(fileName));
+            out.writeObject(gameData);
+        }
+        finally {
+            out.close();
+        }
+    }
+
+
+    public static void deserializeData(int file) throws IOException , ClassNotFoundException
+    {
+        ObjectInputStream in = null;
+        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
+        String fileName = "data"+ Integer.toString(file) + ".ser";
+        try
+        {
+            in = new ObjectInputStream(new FileInputStream(fileName));
+            gameData = (ArrayList<SerializableCell>) in.readObject();
+        }
+        finally
+        {
+            in.close();
+        }
+        for (int i=gridPane.getSideLengthY()-1;i>-1;i--)
+        {
+            for (int j =0;j<gridPane.getSideLengthY();j++)
+            {
+                System.out.print(getSerializableCellFromCoordinate(gameData,i,j) + " \t");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public static SerializableCell getSerializableCellFromCoordinate(ArrayList<SerializableCell> gameData, int x, int y)
+    {
+        for (SerializableCell myCell : gameData)
+        {
+            if (myCell.x == x && myCell.y == y)
+            {
+                return myCell;
+            }
+        }
+        return null;
+    }
+
+
 
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
     {
@@ -389,116 +354,7 @@ public class Main extends Application {
 
         cell.getCell().setOnMouseClicked(e ->
         {
-            if (!cellSwitch.get())
-                cellSwitch.set(!cellSwitch.get());
-            try
-            {
-                System.out.println("x and y: " + x + " " + y);
-                for(int i=0;i<allPlayers.toArray().length;i++)
-                {
-                    System.out.println(allPlayers.toArray()[i].toString());
-                }
-
-                System.out.println();
-                ExtendedPlayer curPlayer = allPlayers.peek();
-                ExtendedPlayer nextPlayer= (ExtendedPlayer) allPlayers.toArray()[1];
-                System.out.println("Current player who just took move : " + curPlayer);
-                ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
-                int continueCondition=0;
-
-
-                if (cellSelected.isCellOccupied())
-                {
-                    System.out.println("Came to cell is occupied.");
-                    int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-                    System.out.println("current cell colour: " + curCellColor);
-                    if (curCellColor == curPlayer.getPlayerColour())
-                    { // check if player is adding to his color
-                        //add ball function
-                        cellSelected.addBall(curPlayer);
-                        allPlayers.remove(curPlayer);
-                        setGridBorderColour(nextPlayer);
-                    }
-                    else
-                    {  //if not
-                        //show error, wrong move
-                        //we should not remove the player from the queue
-                        System.out.println("can't put ball here.already occupied by " + cellSelected.getPlayerOccupiedBy().getPlayerColourByString() + " player." + cellSelected.getCoordX() + cellSelected.getCoordY());
-                        continueCondition=1;
-                    }
-                }
-                else
-                {
-                    cellSelected.addBall(curPlayer);
-                    allPlayers.remove(curPlayer);
-                    setGridBorderColour(nextPlayer);
-                }
-
-                for (ExtendedPlayer randomPlayer : allPlayers)
-                {  //update status for all players to check if they are alive or dead
-                    if (randomPlayer.hasTakenFirstMove())
-                    {
-
-                        randomPlayer.checkPlayerStatus();
-                        if (!randomPlayer.isAlive())
-                        {
-                            allPlayers.remove(randomPlayer);
-                        }
-                    }
-                }
-
-
-                if (curPlayer.isAlive() && continueCondition==0)
-                {
-                    allPlayers.add(curPlayer);
-                }
-
-                //gameMatrix.printMatrix();
-
-
-//                PhongMaterial phongMaterial = new PhongMaterial();
-//                phongMaterial.setDiffuseColor(getColor(curPlayer));
-//                phongMaterial.setSpecularColor(Color.BLACK);
-//                sphere.setMaterial(phongMaterial);
-//                switch (group.getChildren().size()) {
-//                    case 0:
-//                        sphere.setTranslateX(0);
-//                        break;
-//
-//                    case 1:
-//                        sphere.setTranslateX(10);
-//                        break;
-//
-//                    case 2:
-//                        sphere.setTranslateY(10);
-//                        sphere.setTranslateX(5);
-//                        break;
-//
-//                    default:
-//                        break;
-//                }
-//                group.getChildren().add(sphere);
-//                if(cell.getCell().getChildren().size()==0)
-//                    cell.getCell().getChildren().add(group);
-                //cell.getCell().getChildren().forEach(l -> System.out.println(l.toString()));
-            }
-            catch (IndexOutOfBoundsException e1)
-            {
-                e1.printStackTrace();
-                System.out.println(allPlayers.peek());
-            }
-            catch (Exception e2)
-            {
-                e2.printStackTrace();
-            }
-
-
-            if (allPlayers.size() == 1)
-            {
-                System.out.println("Player" + allPlayers.peek() + " won.");
-                gameOver=true;
-            }
-
+            clickedOnCell(e,cellSwitch,x,y);
         });
 
         cell.getCell().getStyleClass().add("cell");
@@ -528,7 +384,8 @@ public class Main extends Application {
         {
             ColumnConstraints cc = new ColumnConstraints();
             cc.setFillWidth(true);
-            cc.setHgrow(Priority.ALWAYS);
+            cc.setPercentWidth(100);
+//            cc.setHgrow(Priority.SOMETIMES);
             grid.getColumnConstraints().add(cc);
         }
 
@@ -536,7 +393,8 @@ public class Main extends Application {
         {
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(true);
-            rc.setVgrow(Priority.ALWAYS);
+            rc.setPercentHeight(100);
+//            rc.setVgrow(Priority.SOMETIMES);
             grid.getRowConstraints().add(rc);
         }
 
