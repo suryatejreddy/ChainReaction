@@ -11,11 +11,12 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 //class to hold UI of Cell.
-public class ExtendedCell
+public class ExtendedCell implements Serializable
 {
     public static int TYPE_CORNER=2;
     public static int TYPE_EDGE=3;

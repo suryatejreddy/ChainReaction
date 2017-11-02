@@ -4,10 +4,11 @@ import NonUIComponents.Cell;
 import NonUIComponents.Game;
 import NonUIComponents.Matrix;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ExtendedPlayer
+public class ExtendedPlayer implements Serializable
 {
     public static final int VIOLET=0;
     public static final int BLUE=1;

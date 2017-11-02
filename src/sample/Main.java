@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 
+import java.awt.image.AreaAveragingScaleFilter;
+import java.io.*;
 import java.util.*;
 
 import javafx.fxml.FXMLLoader;
@@ -204,8 +206,10 @@ public class Main extends Application {
             ExtendedPlayer curPlayer = allPlayers.peek();
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
 
-            int continueCondition=0;
 
+            System.out.println("Before Making Move");
+            makeSerializeData(1);
+            deserializeData(1);
 
             if (cellSelected.isCellOccupied())
             {
@@ -220,8 +224,6 @@ public class Main extends Application {
                 {  //if not
                     //show error, wrong move
                     //we should not remove the player from the queue
-//                    System.out.println("can't put ball here.already occupied by " + cellSelected.getPlayerOccupiedBy().getPlayerColourByString() + " player." + cellSelected.getCoordX() + cellSelected.getCoordY());
-                    continueCondition=1;
                 }
             }
             else
@@ -257,7 +259,10 @@ public class Main extends Application {
                 allPlayers.add(curPlayer);
             }
             System.out.println(allPlayers.toString());
-            gridPane.printGrid();
+//            gridPane.printGrid();
+            System.out.println("After Making Move");
+            makeSerializeData(1);
+            deserializeData(1);
             if (allPlayers.size() == 1)
             {
                 gameOver=true;
@@ -266,9 +271,78 @@ public class Main extends Application {
         }
         catch (Exception e1)
         {
-            System.out.println(e1.getMessage());
+            e1.printStackTrace();
             System.out.println("You might have won");
         }
+    }
+
+
+    public static void makeSerializeData(int file) throws IOException
+    {
+        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
+        for (ExtendedCell newCell : gridPane.getExtendedCells() )
+        {
+            SerializableCell serCell = new SerializableCell(newCell.getCoordX(),newCell.getCoordY(),-1,newCell.getNumberOfBallsPresent());
+            if (newCell.isCellOccupied())
+            {
+                serCell.playerColor = newCell.getPlayerOccupiedBy().getPlayerColour();
+            }
+            gameData.add(serCell);
+        }
+        serializeData(gameData,file);
+
+    }
+
+    public static void serializeData(ArrayList<SerializableCell> gameData , int file) throws IOException
+    {
+        ObjectOutputStream out = null;
+        String fileName = "data"+ Integer.toString(file) + ".ser";
+        try
+        {
+            out = new ObjectOutputStream(new FileOutputStream(fileName));
+            out.writeObject(gameData);
+        }
+        finally {
+            out.close();
+        }
+    }
+
+
+    public static void deserializeData(int file) throws IOException , ClassNotFoundException
+    {
+        ObjectInputStream in = null;
+        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
+        String fileName = "data"+ Integer.toString(file) + ".ser";
+        try
+        {
+            in = new ObjectInputStream(new FileInputStream(fileName));
+            gameData = (ArrayList<SerializableCell>) in.readObject();
+        }
+        finally
+        {
+            in.close();
+        }
+        for (int i=gridPane.getSideLengthY()-1;i>-1;i--)
+        {
+            for (int j =0;j<gridPane.getSideLengthY();j++)
+            {
+                System.out.print(getSerializableCellFromCoordinate(gameData,i,j) + " \t");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public static SerializableCell getSerializableCellFromCoordinate(ArrayList<SerializableCell> gameData, int x, int y)
+    {
+        for (SerializableCell myCell : gameData)
+        {
+            if (myCell.x == x && myCell.y == y)
+            {
+                return myCell;
+            }
+        }
+        return null;
     }
 
 
@@ -280,7 +354,6 @@ public class Main extends Application {
 
         cell.getCell().setOnMouseClicked(e ->
         {
-            System.out.println(x + " , " + y);
             clickedOnCell(e,cellSwitch,x,y);
         });
 

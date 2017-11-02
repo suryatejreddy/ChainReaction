@@ -2,11 +2,13 @@ package sample;
 
 import NonUIComponents.Cell;
 import javafx.scene.layout.GridPane;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 //class to hold UI of Grid(Matrix)
-public class ExtendedGrid
+public class ExtendedGrid implements Serializable
 {
     private ArrayList<ExtendedCell> extendedCells;
     private GridPane gridPane;
@@ -237,6 +239,16 @@ public class ExtendedGrid
             System.out.println();
         }
         System.out.println();
+    }
+
+    public int getSideLengthX()
+    {
+        return this.sideLengthX;
+    }
+
+    public int getSideLengthY()
+    {
+        return this.sideLengthY;
     }
 
 
