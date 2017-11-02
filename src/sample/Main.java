@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
@@ -49,7 +50,8 @@ public class Main extends Application {
         namesOfStylesheets.add("Stylesheets/grid-with-borders-white.css");
     }
 
-    public Main() {
+    public Main()
+    {
         allPlayers = new LinkedList<ExtendedPlayer>();
     }
 
@@ -122,7 +124,6 @@ public class Main extends Application {
 //        MenuController myController = loader.getController();
 
         MainStage = primaryStage;
-
 
         primaryStage.setScene(tempScene);
         primaryStage.show();
@@ -200,10 +201,11 @@ public class Main extends Application {
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y  ){
         if (!cellSwitch.get())
             cellSwitch.set(!cellSwitch.get());
+        ExtendedPlayer curPlayer=null;
         try
         {
 
-            ExtendedPlayer curPlayer = allPlayers.peek();
+            curPlayer = allPlayers.peek();
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
 
 
@@ -242,10 +244,50 @@ public class Main extends Application {
         }
         catch (Exception e2)
         {
+            System.out.println("thuggs");
+            e2.printStackTrace();
+            System.out.println("You might have won");
             System.out.println("Game over. yaay");
+            Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
+            gameoverDialog.setTitle("Game Over");
+            gameoverDialog.setHeaderText(null);
+            gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
+            gameoverDialog.getButtonTypes().removeAll();
+            ButtonType buttonType=new ButtonType("Return to Menu");
+            gameoverDialog.getButtonTypes().add(buttonType);
+            gameoverDialog.setOnHidden(evt ->
+            {
+                try
+                {
+                    showMenu();
+                }
+                catch (IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+            });
+            gameoverDialog.show();
         }
 
 
+    }
+
+    public static void showMenu() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("../FXML_Files/sample.fxml"));
+        Parent root = loader.load();
+
+        Scene tempScene = new Scene(root,560,560);
+        menu = tempScene;
+
+        MainStage.setWidth(560);
+        MainStage.setMinWidth(560);
+        MainStage.setMaxWidth(560);
+        MainStage.setHeight(560);
+        MainStage.setMaxHeight(560);
+        MainStage.setMinHeight(560);
+        MainStage.setScene(tempScene);
+        MainStage.show();
     }
 
     public static void onAnimationCompleted(ExtendedPlayer curPlayer)
@@ -266,13 +308,55 @@ public class Main extends Application {
             if (allPlayers.size() == 1)
             {
                 gameOver=true;
-                System.out.println("game over. yaayyyy");
+                System.out.println("thuggs");
+                System.out.println("You might have won");
+                System.out.println("Game over. yaay");
+                Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
+                gameoverDialog.setTitle("Game Over");
+                gameoverDialog.setHeaderText(null);
+                gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
+                gameoverDialog.getButtonTypes().removeAll();
+                ButtonType buttonType=new ButtonType("Return to Menu");
+                gameoverDialog.getButtonTypes().add(buttonType);
+                gameoverDialog.setOnHidden(evt ->
+                {
+                    try
+                    {
+                        showMenu();
+                    }
+                    catch(IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                });
+                gameoverDialog.show();
             }
         }
         catch (Exception e1)
         {
+            System.out.println("thuggs");
             e1.printStackTrace();
             System.out.println("You might have won");
+            System.out.println("Game over. yaay");
+            Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
+            gameoverDialog.setTitle("Game Over");
+            gameoverDialog.setHeaderText(null);
+            gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
+            gameoverDialog.getButtonTypes().removeAll();
+            ButtonType buttonType=new ButtonType("Return to Menu");
+            gameoverDialog.getButtonTypes().add(buttonType);
+            gameoverDialog.setOnHidden(evt ->
+            {
+                try
+                {
+                    showMenu();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+            });
+            gameoverDialog.show();
         }
     }
 

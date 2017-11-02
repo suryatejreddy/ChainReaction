@@ -57,6 +57,5 @@ public class SettingsController {
     public void backToGame(){
         Main ob = new Main();
         ob.backToMenu();
-
     }
 }
