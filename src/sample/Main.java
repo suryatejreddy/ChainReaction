@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
@@ -12,20 +11,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
-
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
 import java.util.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class Main extends Application {
+public class Main extends Application
+{
 
     public static ExtendedGrid gridPane;    //UI grid for entire grid.
     public static ExtendedCell cell;                //UI Cell.
-    public static int clickedXPos;
-    public static int clickedYPos;
     public static ArrayList<String> namesOfStylesheets;
 
     private static Queue<ExtendedPlayer> allPlayers;
@@ -56,22 +52,22 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 
     public static Scene getGameScene(int numberOfPlayers, int x , int y)
     {
         int i = 0;
-        while (i < numberOfPlayers)
+        while (i<numberOfPlayers)
         {
-            ExtendedPlayer player = new ExtendedPlayer(i, true);
+            ExtendedPlayer player = new ExtendedPlayer(SettingsController.getSelectedColour(i), true);
             allPlayers.add(player); //adding the player to the game
             i++;
         }
+
         System.out.println("Enter X and Y.");
-//        Matrix gameMatrix=new Matrix(x, y);
-//        setGameMatrix(gameMatrix);
 
         BooleanProperty[][] switches = new BooleanProperty[x][y];
         for (i = 0; i < x; i++)
@@ -102,14 +98,14 @@ public class Main extends Application {
 //        comboBox.setMaxWidth(150);
 //        comboBox.setMinWidth(150);
 //        comboBox.setPrefWidth(150);
-//
 //        root1.getChildren().add(comboBox);
 
         scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
-        scene.getStylesheets().add(namesOfStylesheets.get(0));
+        scene.getStylesheets().add(namesOfStylesheets.get(allPlayers.peek().getPlayerColour()));
 
         return scene;
     }
+
     @Override
     public void start(Stage primaryStage) throws Exception
     {
@@ -121,13 +117,10 @@ public class Main extends Application {
         Scene tempScene = new Scene(root,560,560);
         menu = tempScene;
 
-//        MenuController myController = loader.getController();
-
         MainStage = primaryStage;
 
         primaryStage.setScene(tempScene);
         primaryStage.show();
-
     }
 
     public static void launchGame(int n, int x , int y)
@@ -135,8 +128,6 @@ public class Main extends Application {
         Scene newScene = getGameScene(n,x,y);
         MainStage.setScene(newScene);
     }
-
-
 
     public void showSettings() throws Exception
     {
@@ -198,7 +189,8 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("Duplicates")
-    private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y  ){
+    private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y )
+    {
         if (!cellSwitch.get())
             cellSwitch.set(!cellSwitch.get());
         ExtendedPlayer curPlayer=null;
@@ -244,7 +236,6 @@ public class Main extends Application {
         }
         catch (Exception e2)
         {
-            System.out.println("thuggs");
             e2.printStackTrace();
             System.out.println("You might have won");
             System.out.println("Game over. yaay");
