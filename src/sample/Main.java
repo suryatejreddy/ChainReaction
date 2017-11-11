@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,6 +28,9 @@ public class Main extends Application
     private static Queue<ExtendedPlayer> allPlayers;
     private static boolean gameOver;
     private static Scene scene;
+    private static int currentN;
+    private static int currentX;
+    private static int currentY;
 
     public static Scene menu;
 
@@ -36,6 +40,9 @@ public class Main extends Application
 
     static
     {
+        currentX=2;
+        currentX=9;
+        currentY=6;
         gameOver=false;
         namesOfStylesheets=new ArrayList<String>();
         namesOfStylesheets.add("Stylesheets/grid-with-borders-violet.css");
@@ -62,6 +69,7 @@ public class Main extends Application
 
     public static Scene getGameScene(int numberOfPlayers, int x , int y)
     {
+        allPlayers.clear();
         int i = 0;
         while (i<numberOfPlayers)
         {
@@ -102,11 +110,52 @@ public class Main extends Application
 //        comboBox.setMinWidth(150);
 //        comboBox.setPrefWidth(150);
 //        root1.getChildren().add(comboBox);
+        Button undoButton=new Button("Undo");
+        Button newGameButton=new Button("New Game");
+        Button exitButton=new Button("Exit Game");
+
+        newGameButton.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent)
+            {
+                startNewGame();
+            }
+        });
+
+
+        exitButton.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent)
+            {
+                try
+                {
+                    showMenu();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        BorderPane rootY=new BorderPane();
+        rootY.setRight(undoButton);
+        rootY.setLeft(newGameButton);
+        rootY.setCenter(exitButton);
+
+        root1.getChildren().add(rootY);
 
         scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
         scene.getStylesheets().add(namesOfStylesheets.get(allPlayers.peek().getPlayerColour()));
 
         return scene;
+    }
+
+    private static void startNewGame()
+    {
+        Main.launchGame(currentN, currentX, currentY);
     }
 
     @Override
@@ -129,6 +178,9 @@ public class Main extends Application
     public static void launchGame(int n, int x , int y)
     {
         Scene newScene = getGameScene(n,x,y);
+        currentN=n;
+        currentX=x;
+        currentY=y;
         MainStage.setScene(newScene);
     }
 
