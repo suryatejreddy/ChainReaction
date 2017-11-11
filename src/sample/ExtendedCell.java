@@ -228,7 +228,7 @@ public class ExtendedCell implements Serializable
             this.playerOccupiedBy.removeCell(this); //removing it from his list
             //UI_PART
             int groupSize = getGroup().getChildren().size();
-            if (groupSize != 3)
+            if (groupSize != this.criticalMass - 1)
             {
                 getGroup().getChildren().clear();
                 for(int i=0;i<groupSize;i++)
@@ -275,18 +275,24 @@ public class ExtendedCell implements Serializable
 
 
             //part where i add animation
+
             this.getGroup().getChildren().clear();
-            ArrayList<Sphere> allSpheres = getAllSpheres(Main.getColor(curPlayer),4);
+
+            ArrayList<Sphere> allSpheres = getAllSpheres(Main.getColor(curPlayer),this.getCriticalMass());
             ParallelTransition mainTransition = new ParallelTransition();
             for (int i=0;i<this.neighbouringCells.size();i++)
             {
                 Sphere curSphere = allSpheres.get(i);
                 ExtendedCell neighbour = this.neighbouringCells.get(i);
                 TranslateTransition move = new TranslateTransition();
-                move.setDuration(Duration.seconds(0.25));
+                move.setDuration(Duration.seconds(3));
                 move.setNode(curSphere);
                 int moveX = neighbour.coordX - this.coordX;
                 int moveY = neighbour.coordY - this.coordY;
+                if (this.criticalMass != 4)
+                {
+                    moveY = 0 - moveY;
+                }
                 move.setToX(moveX*60);
                 move.setToY(moveY*60);
                 this.cell.getChildren().add(curSphere);
