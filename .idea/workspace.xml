@@ -4,7 +4,6 @@
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -124,6 +123,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Vishaal Udandarao &lt;vishaal16119@iiitd.ac.in&gt;" />
         <option value="Vishaal Udandarao &lt;vishaal16119@iiitd.ac.i&gt;" />
       </list>
     </option>
@@ -788,7 +788,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510408129187</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Added buttons(exit, new game, undo) in UI.">
+      <created>1510411971594</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1510411971594</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -868,7 +875,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Minor changes." />
     <MESSAGE value="Made changes to showMatrix funtion." />
     <MESSAGE value="Created a function to play music." />
     <MESSAGE value="removed the media thing i tried" />
@@ -893,7 +899,8 @@
     <MESSAGE value="Movement Direction Bug" />
     <MESSAGE value="Fixed Sood's Bug" />
     <MESSAGE value="Added functionality to show alert only once." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added functionality to show alert only once." />
+    <MESSAGE value="Added buttons(exit, new game, undo) in UI." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added buttons(exit, new game, undo) in UI." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
