@@ -276,12 +276,8 @@ public class ExtendedCell implements Serializable
         if (this.numberOfBallsPresent >= this.getCriticalMass())
         {
 
-
             //NON_UI Part
             this.emptyCell();
-
-
-
 
             ArrayList<Sphere> allSpheres = getAllSpheres(Main.getColor(curPlayer),this.getCriticalMass());
             ParallelTransition mainTransition = new ParallelTransition();
@@ -290,7 +286,7 @@ public class ExtendedCell implements Serializable
                 Sphere curSphere = allSpheres.get(i);
                 ExtendedCell neighbour = this.neighbouringCells.get(i);
                 TranslateTransition move = new TranslateTransition();
-                move.setDuration(Duration.seconds(0.5));
+                move.setDuration(Duration.seconds(2));
                 move.setNode(curSphere);
                 int moveX = neighbour.coordX - this.coordX;
                 int moveY = neighbour.coordY - this.coordY;
