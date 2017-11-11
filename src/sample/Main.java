@@ -32,6 +32,8 @@ public class Main extends Application
 
     public static Stage MainStage;
 
+    public static boolean alertShown;
+
     static
     {
         gameOver=false;
@@ -44,6 +46,7 @@ public class Main extends Application
         namesOfStylesheets.add("Stylesheets/grid-with-borders-red.css");
         namesOfStylesheets.add("Stylesheets/grid-with-borders-brown.css");
         namesOfStylesheets.add("Stylesheets/grid-with-borders-white.css");
+        alertShown=false;
     }
 
     public Main()
@@ -289,25 +292,30 @@ public class Main extends Application
 
     public static void showAlert(ExtendedPlayer curPlayer)
     {
-        Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
-        gameoverDialog.setTitle("Game Over");
-        gameoverDialog.setHeaderText(null);
-        gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
-        gameoverDialog.getButtonTypes().removeAll();
-        ButtonType buttonType=new ButtonType("Return to Menu");
-        gameoverDialog.getButtonTypes().add(buttonType);
-        gameoverDialog.setOnHidden(evt ->
+        if(!alertShown)
         {
-            try
+            alertShown=true;
+            Alert gameoverDialog = new Alert(Alert.AlertType.NONE);
+            gameoverDialog.setTitle("Game Over");
+            gameoverDialog.setHeaderText(null);
+            gameoverDialog.setContentText("Player " + curPlayer.getPlayerColourByString() + " won!");
+            gameoverDialog.getButtonTypes().removeAll();
+            ButtonType buttonType = new ButtonType("Return to Menu");
+            gameoverDialog.getButtonTypes().add(buttonType);
+            gameoverDialog.setOnHidden(evt ->
             {
-                showMenu();
-            }
-            catch (IOException e1)
-            {
-                e1.printStackTrace();
-            }
-        });
-        gameoverDialog.show();
+                alertShown=false;
+                try
+                {
+                    showMenu();
+                }
+                catch (IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+            });
+            gameoverDialog.show();
+        }
     }
 
     public static void makeSerializeData(int file) throws IOException
