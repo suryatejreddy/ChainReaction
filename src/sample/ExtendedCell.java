@@ -51,8 +51,8 @@ public class ExtendedCell implements Serializable
         double rotateTime = (500.0 * this.criticalMass)/(this.numberOfBallsPresent);
         RotateTransition rot = new RotateTransition(Duration.millis(rotateTime + this.coordX + this.coordY),getGroup());
         rot.setFromAngle(0);
-        rot.setToAngle(360);
-        rot.setInterpolator(Interpolator.EASE_BOTH);
+        rot.setByAngle(360);
+        rot.setInterpolator(Interpolator.LINEAR);
         rot.setCycleCount(RotateTransition.INDEFINITE);
         rot.setAxis(Rotate.Z_AXIS);
         rot.setAutoReverse(false);
@@ -167,11 +167,17 @@ public class ExtendedCell implements Serializable
 //            getGroup().getChildren().remove(i);
 //        }
         getGroup().getChildren().clear();
-        this.numberOfBallsPresent = 0;
+        this.numberOfBallsPresent = this.numberOfBallsPresent - criticalMass;
         this.playerOccupiedBy.removeCell(this);
         this.playerOccupiedBy = null;
         this.cellIsOccupied = false;
 
+        for(int i=0;i<numberOfBallsPresent;i++)
+        {
+            getGroup().getChildren().add(getNewSphere(Main.getColor(this.playerOccupiedBy)));
+        }
+        cell.getChildren().clear();
+        cell.getChildren().add(getGroup());
     }
 
     public Sphere getNewSphere(Color color)
@@ -237,6 +243,9 @@ public class ExtendedCell implements Serializable
                     setTranslationToSphere(sphere);
                     getGroup().getChildren().add(sphere);
                 }
+
+//                cell.getChildren().clear();
+//                cell.getChildren().add(getGroup());
             }
             else{
 //                addBallInUI = false;
@@ -251,32 +260,28 @@ public class ExtendedCell implements Serializable
 
 
         //UI_PART, add a new Sphere
-        if (addBallInUI)
-        {
-            Sphere sphere = getNewSphere(Main.getColor(curPlayer));
-            setTranslationToSphere(sphere);
-            getGroup().getChildren().add(sphere);
-
+        Sphere sphere = getNewSphere(Main.getColor(curPlayer));
+        setTranslationToSphere(sphere);
+        getGroup().getChildren().add(sphere);
             //Add the group in case it was not added
-            if(getCell().getChildren().size()==0)
-            {
-                getCell().getChildren().add(group);
-            }
+        if(getCell().getChildren().size()==0)
+        {
+             getCell().getChildren().add(group);
         }
 
 
         this.startRotation();
 
 
-        if (this.numberOfBallsPresent == this.getCriticalMass())
+        if (this.numberOfBallsPresent >= this.getCriticalMass())
         {
+
+
             //NON_UI Part
             this.emptyCell();
 
 
-            //part where i add animation
 
-            this.getGroup().getChildren().clear();
 
             ArrayList<Sphere> allSpheres = getAllSpheres(Main.getColor(curPlayer),this.getCriticalMass());
             ParallelTransition mainTransition = new ParallelTransition();
@@ -285,7 +290,7 @@ public class ExtendedCell implements Serializable
                 Sphere curSphere = allSpheres.get(i);
                 ExtendedCell neighbour = this.neighbouringCells.get(i);
                 TranslateTransition move = new TranslateTransition();
-                move.setDuration(Duration.seconds(3));
+                move.setDuration(Duration.seconds(0.5));
                 move.setNode(curSphere);
                 int moveX = neighbour.coordX - this.coordX;
                 int moveY = neighbour.coordY - this.coordY;
@@ -303,7 +308,19 @@ public class ExtendedCell implements Serializable
 
             mainTransition.setOnFinished(e ->
             {
+
                 this.cell.getChildren().clear();
+
+                getGroup().getChildren().clear();
+                for(int i=0;i<numberOfBallsPresent;i++)
+                {
+                    Sphere newSphere = getNewSphere(Main.getColor(this.playerOccupiedBy));
+                    setTranslationToSphere(newSphere);
+                    getGroup().getChildren().add(newSphere);
+                }
+                this.cell.getChildren().add(getGroup());
+
+
                 boolean flag = true;
                 for (int i=0;i < this.neighbouringCells.size() ; i ++)
                 {
@@ -324,6 +341,7 @@ public class ExtendedCell implements Serializable
                 }
                 if (flag)
                 {
+                    System.out.println(this + " is lastt ");
                     Main.onAnimationCompleted(curPlayer);
                 }
             });

@@ -208,8 +208,6 @@ public class Main extends Application {
             curPlayer = allPlayers.peek();
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
 
-
-            System.out.println("Before Making Move");
 //            makeSerializeData(1);
 //            deserializeData(1);
 
@@ -241,29 +239,8 @@ public class Main extends Application {
         }
         catch (Exception e2)
         {
-            System.out.println("thuggs");
 //            e2.printStackTrace();
-//            System.out.println("You might have won");
-//            System.out.println("Game over. yaay");
-//            Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
-//            gameoverDialog.setTitle("Game Over");
-//            gameoverDialog.setHeaderText(null);
-//            gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
-//            gameoverDialog.getButtonTypes().removeAll();
-//            ButtonType buttonType=new ButtonType("Return to Menu");
-//            gameoverDialog.getButtonTypes().add(buttonType);
-//            gameoverDialog.setOnHidden(evt ->
-//            {
-//                try
-//                {
-//                    showMenu();
-//                }
-//                catch (IOException e1)
-//                {
-//                    e1.printStackTrace();
-//                }
-//            });
-//            gameoverDialog.show();
+            showAlert(curPlayer);
         }
 
 
@@ -300,7 +277,6 @@ public class Main extends Application {
             }
             System.out.println(allPlayers.toString());
 //            gridPane.printGrid();
-            System.out.println("After Making Move");
 //            makeSerializeData(1);
 //            deserializeData(1);
             if (allPlayers.size() == 1)
@@ -308,56 +284,39 @@ public class Main extends Application {
                 gameOver=true;
                 System.out.println("thuggs");
 //                System.out.println("You might have won");
-//                System.out.println("Game over. yaay");
-//                Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
-//                gameoverDialog.setTitle("Game Over");
-//                gameoverDialog.setHeaderText(null);
-//                gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
-//                gameoverDialog.getButtonTypes().removeAll();
-//                ButtonType buttonType=new ButtonType("Return to Menu");
-//                gameoverDialog.getButtonTypes().add(buttonType);
-//                gameoverDialog.setOnHidden(evt ->
-//                {
-//                    try
-//                    {
-//                        showMenu();
-//                    }
-//                    catch(IOException e)
-//                    {
-//                        e.printStackTrace();
-//                    }
-//                });
-//                gameoverDialog.show();
+                showAlert(curPlayer);
             }
         }
         catch (Exception e1)
         {
             System.out.println("thuggs");
 //            e1.printStackTrace();
-//            System.out.println("You might have won");
-//            System.out.println("Game over. yaay");
-//            Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
-//            gameoverDialog.setTitle("Game Over");
-//            gameoverDialog.setHeaderText(null);
-//            gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
-//            gameoverDialog.getButtonTypes().removeAll();
-//            ButtonType buttonType=new ButtonType("Return to Menu");
-//            gameoverDialog.getButtonTypes().add(buttonType);
-//            gameoverDialog.setOnHidden(evt ->
-//            {
-//                try
-//                {
-//                    showMenu();
-//                }
-//                catch(IOException e)
-//                {
-//                    e.printStackTrace();
-//                }
-//            });
-//            gameoverDialog.show();
+            showAlert(curPlayer);
         }
     }
 
+    public static void showAlert(ExtendedPlayer curPlayer)
+    {
+        Alert gameoverDialog= new Alert(Alert.AlertType.NONE);
+        gameoverDialog.setTitle("Game Over");
+        gameoverDialog.setHeaderText(null);
+        gameoverDialog.setContentText("Player "+curPlayer.getPlayerColourByString()+" won!");
+        gameoverDialog.getButtonTypes().removeAll();
+        ButtonType buttonType=new ButtonType("Return to Menu");
+        gameoverDialog.getButtonTypes().add(buttonType);
+        gameoverDialog.setOnHidden(evt ->
+        {
+            try
+            {
+                showMenu();
+            }
+            catch (IOException e1)
+            {
+                e1.printStackTrace();
+            }
+        });
+        gameoverDialog.show();
+    }
 
     public static void makeSerializeData(int file) throws IOException
     {
