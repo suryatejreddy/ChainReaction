@@ -241,6 +241,14 @@ public class ExtendedGrid implements Serializable
         System.out.println();
     }
 
+    public void updateGrid()
+    {
+        ExtendedCell cell = getCellFromCoordinate(1,4);
+        System.out.println(cell.getNumberOfBallsPresent() + " " + cell.getGroup().getChildren().size() + "-----------------");
+    }
+
+
+
     public int getSideLengthX()
     {
         return this.sideLengthX;
