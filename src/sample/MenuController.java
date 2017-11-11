@@ -1,13 +1,18 @@
 package sample;
 
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class MenuController {
+public class MenuController
+{
+
+    static int numPlayers;
 
     @FXML
     public ImageView myImage;
@@ -27,8 +32,13 @@ public class MenuController {
     @FXML
     public Button settings;
 
+    static
+    {
+        numPlayers=2;
+    }
 
-    public void setData(){
+    public void setData()
+    {
 
         playerCount.getItems().clear();
 
@@ -47,23 +57,44 @@ public class MenuController {
         gridSize.getItems().addAll("9x6","15x10");
 
         gridSize.getSelectionModel().selectFirst();
+
+        gridSize.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1)
+            {
+                numPlayers=Integer.parseInt(playerCount.getValue().toString());
+            }
+
+        });
     }
 
-    public void initialize() {
+    public void initialize()
+    {
         setData();
     }
 
-    public void startGame(){
-        int numPlayers = Integer.parseInt(playerCount.getValue().toString());
+    public void startGame()
+    {
+        numPlayers = Integer.parseInt(playerCount.getValue().toString());
         int x;
         int y;
+
+        if(SettingsController.clashExists())
+        {
+            SettingsController.showWarning();
+            return;
+        }
+
         String gridSizeData = (gridSize.getValue().toString());
 
-        if (gridSizeData.compareTo("9x6") == 0){
+        if (gridSizeData.compareTo("9x6") == 0)
+        {
             x = 9;
             y = 6;
         }
-        else{
+        else
+        {
             x = 15;
             y = 10;
         }
