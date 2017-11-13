@@ -39,7 +39,7 @@ public class Main extends Application implements Serializable
     public static final String SERIALIZE_QUEUE_FILE_UNDO="serializeQueueUndo.ser";
     public static final String SERIALIZE_GRID_FILE_UNDO="serializeGridUndo.ser";
     public static final String SERIALIZE_QUEUE_FILE_RESUME = "serializeQueueResume.ser";
-    public static final String SERIALIZE_GRID_FILE_RESUME = "serializeGridUndo.ser";
+    public static final String SERIALIZE_GRID_FILE_RESUME = "serializeGridResume.ser";
 
 
     public static final int TYPE_UNDO = 0;
@@ -252,16 +252,6 @@ public class Main extends Application implements Serializable
         rootX.setTop(root1);
         rootX.setCenter(root);
 
-
-//        ComboBox<String> comboBox=new ComboBox<String>();
-//        comboBox.getItems().clear();
-//        comboBox.getItems().addAll("New game", "Exit Game");
-//        comboBox.getSelectionModel().selectFirst();
-//        comboBox.setMaxWidth(150);
-//        comboBox.setMinWidth(150);
-//        comboBox.setPrefWidth(150);
-//        root1.getChildren().add(comboBox);
-
         Button undoButton=new Button("Undo");
         Button newGameButton=new Button("New Game");
         Button exitButton=new Button("Exit Game");
@@ -286,19 +276,8 @@ public class Main extends Application implements Serializable
                 {
                     newGrid=deserializeGrid(TYPE_UNDO);
                     newPlayers=deserializeQueue(TYPE_UNDO);
-
-                    System.out.println(allPlayers.toString()+" allplayers in undo");
-                    System.out.println(newPlayers.toString()+" newplayers in undo");
-                    Iterator<ExtendedPlayer> iterator=newPlayers.iterator();
-                    while(iterator.hasNext())
-                        System.out.println(iterator.next().getPlayerColourByString()+" player's turn");
-
-                    System.out.println();
-                    System.out.println("New Grid-deserialized");
-                    newGrid.printGrid();
-                    System.out.println();
-                    System.out.println("gridPane");
-                    gridPane.printGrid();
+                    setPlayers(newPlayers);
+                    compareGrid(newGrid,newPlayers);
                 }
                 catch(IOException e)
                 {
@@ -309,11 +288,6 @@ public class Main extends Application implements Serializable
                     e.printStackTrace();
                 }
                 //setGridPane(newGrid);
-                compareGrid(newGrid);
-                setPlayers(newPlayers);
-
-                if(allPlayers.peek().hasTakenFirstMove())
-                    setGridBorderColour(allPlayers.peek());
             }
         });
 
@@ -378,87 +352,64 @@ public class Main extends Application implements Serializable
 
     public static void setPlayers(Queue<ExtendedPlayer> newPlayers)
     {
-        int i=0;
-        allPlayers=newPlayers;
-        for(Object o: newPlayers.toArray())
+        allPlayers.clear();
+        int numberOfPlayers = newPlayers.size();
+        int i = 0;
+        while (i<numberOfPlayers)
         {
-            ((ExtendedPlayer)allPlayers.toArray()[i]).setCurrentCells(((ExtendedPlayer) o).getCurrentCells());
+            ExtendedPlayer player = new ExtendedPlayer(SettingsController.getSelectedColour(i), true);
+            allPlayers.add(player); //adding the player to the game
             i++;
         }
     }
 
 
-//    public static void setGridForResume()
-//    {
-//        Main.setGridBorderColour(allPlayers.peek());
-//        for(int i=0;i<gridPane.getExtendedCells().size();i++)
-//        {
-//            gridPane.getExtendedCells().get(i).setCell(new StackPane());
-//            gridPane.getExtendedCells().get(i).setGroup(new Group());
-//            for(int j=0;j<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
-//            {
-//                Sphere newSphere=new Sphere(10);
-//
-//                gridPane.getExtendedCells().get(i).getGroup().getChildren().add()
-//            }
-//        }
-//    }
-
-    @SuppressWarnings("Duplicates")
-    public static void compareGrid(ExtendedGrid newGrid)
+    public static void compareGrid(ExtendedGrid newGrid, Queue<ExtendedPlayer> newPlayers)
     {
-        for(int i=0;i<newGrid.getExtendedCells().size();i++)
+        for (int i=newGrid.getSideLengthY()-1;i>-1;i--)
         {
-            if(newGrid.getExtendedCells().get(i).getPlayerOccupiedBy()!=null && newGrid.getExtendedCells().get(i).getPlayerOccupiedBy()!=gridPane.getExtendedCells().get(i).getPlayerOccupiedBy())
+            for (int j =0;j<newGrid.getSideLengthX();j++)
             {
-                gridPane.getExtendedCells().get(i).setPlayer(newGrid.getExtendedCells().get(i).getPlayerOccupiedBy());
-            }
+                ExtendedCell newCell = newGrid.getCellFromCoordinate(i,j);
+                ExtendedCell currentCell = gridPane.getCellFromCoordinate(i,j);
 
-            if(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent()>gridPane.getExtendedCells().get(i).getNumberOfBallsPresent())
-            {
-                for(int j=0;j<newGrid.getExtendedCells().get(i).getNumberOfBallsPresent()-gridPane.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
+                currentCell.emptyCell();
+
+                if (newCell.isCellOccupied())
                 {
-                    Sphere sphere=ExtendedCell.staticGetSphere(Main.getColor(gridPane.getExtendedCells().get(i).getPlayerOccupiedBy()));
-
-                    switch (gridPane.getExtendedCells().get(i).getNumberOfBallsPresent())
+                    for (int k =0 ; k < newCell.getNumberOfBallsPresent();k ++)
                     {
-                        case 0:
-                            sphere.setTranslateX(0);
-                            break;
-
-                        case 1:
-                            sphere.setTranslateX(10);
-                            break;
-
-                        case 2:
-                            sphere.setTranslateX(5);
-                            sphere.setTranslateY(10);
-                            break;
-
-                        default:
-                            break;
+                        currentCell.addBall(getPlayerOfColor(newCell.getPlayerOccupiedBy().getPlayerColour(),allPlayers),true,true);
                     }
-
-
-
-                    gridPane.getExtendedCells().get(i).getGroup().getChildren().add(sphere);
                 }
 
-                gridPane.getExtendedCells().get(i).setNumberOfBallsPresent(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent());
             }
-            else if(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent()<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent())
-            {
-                for(int j=0;j<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent()-newGrid.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
-                {
-                    gridPane.getExtendedCells().get(i).getGroup().getChildren().remove(j);
-                }
-                gridPane.getExtendedCells().get(i).setNumberOfBallsPresent(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent());
-            }
-
-            gridPane.getExtendedCells().get(i).getCell().getChildren().clear();
-            gridPane.getExtendedCells().get(i).getCell().getChildren().add(gridPane.getExtendedCells().get(i).getGroup());
         }
+        ArrayList<ExtendedPlayer> tempList = new ArrayList<>();
+        for (ExtendedPlayer p : newPlayers)
+        {
+            tempList.add(getPlayerOfColor(p.getPlayerColour(),allPlayers));
+        }
+        int n = allPlayers.size();
+        allPlayers.clear();
+        for (int i=0;i < n; i ++)
+        {
+            allPlayers.add(tempList.get(i));
+        }
+        System.out.println(allPlayers);
+        setGridBorderColour(allPlayers.peek());
+    }
 
+    public static ExtendedPlayer getPlayerOfColor(int color, Queue<ExtendedPlayer> players)
+    {
+        for (ExtendedPlayer p : players)
+        {
+            if (p.getPlayerColour() == color)
+            {
+                return p;
+            }
+        }
+        return null;
     }
 
 
@@ -572,9 +523,6 @@ public class Main extends Application implements Serializable
         serializeGrid(TYPE_UNDO);
 
         Iterator<ExtendedPlayer> iterator=allPlayers.iterator();
-        while(iterator.hasNext())
-            System.out.println(iterator.next().getPlayerColourByString()+" player's turn");
-        System.out.println();
 
 
         try
@@ -582,9 +530,6 @@ public class Main extends Application implements Serializable
 
             curPlayer = allPlayers.peek();
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
-
-//            makeSerializeData(1);
-//            deserializeData(1);
 
             if (cellSelected.isCellOccupied())
             {
@@ -642,7 +587,7 @@ public class Main extends Application implements Serializable
     public static void onAnimationCompleted(ExtendedPlayer curPlayer)
     {
         try{
-            gridPane.printGrid();
+//            gridPane.printGrid();
             updatePlayerStats(allPlayers);  //remove dead players
 
             ExtendedPlayer nextPlayer = allPlayers.peek();
@@ -651,17 +596,14 @@ public class Main extends Application implements Serializable
             {
                 allPlayers.add(curPlayer);
             }
+
             serializeQueue(TYPE_RESUME);
             serializeGrid(TYPE_RESUME);
 
             resumeGameBool = true;
             serializeResume();
 
-            System.out.println(allPlayers.toString());
-//            gridPane.printGrid();
-//            makeSerializeData(1);
-//            deserializeData(1);
-            if (allPlayers.size() == 1)
+              if (allPlayers.size() == 1)
             {
                 gameOver=true;
                 System.out.println("thuggs");

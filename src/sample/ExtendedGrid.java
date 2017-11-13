@@ -68,6 +68,24 @@ public class ExtendedGrid implements Serializable
         return extendedCell;
     }
 
+    public int returnIndexOfCell(int i, int j)
+    {
+        int index = 0;
+        for(ExtendedCell c: extendedCells)
+        {
+            if(c.getCoordX()==j && c.getCoordY()==i)
+                return index;
+            index += 1;
+        }
+        return -1;
+    }
+
+    public void setNewExtendedCell(int i , int j , ExtendedCell newCell)
+    {
+        int index = returnIndexOfCell(i,j);
+        this.getExtendedCells().set(index,newCell);
+    }
+
     public void initCells()
     {
         getExtendedCells().forEach(e ->

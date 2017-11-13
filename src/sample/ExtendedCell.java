@@ -50,7 +50,8 @@ public class ExtendedCell implements Serializable
 
     public void addAnimation()
     {
-        double rotateTime = (500.0 * this.criticalMass)/(this.numberOfBallsPresent);
+
+        double rotateTime = (500.0 * this.criticalMass)/this.numberOfBallsPresent;
         RotateTransition rot = new RotateTransition(Duration.millis(rotateTime + this.coordX + this.coordY),getGroup());
         rot.setFromAngle(0);
         rot.setByAngle(360);
@@ -169,8 +170,18 @@ public class ExtendedCell implements Serializable
 //            getGroup().getChildren().remove(i);
 //        }
         getGroup().getChildren().clear();
-        this.numberOfBallsPresent = this.numberOfBallsPresent - criticalMass;
-        this.playerOccupiedBy.removeCell(this);
+        if (this.numberOfBallsPresent >= this.criticalMass)
+        {
+            this.numberOfBallsPresent = this.numberOfBallsPresent - criticalMass;
+        }
+        else
+        {
+            this.numberOfBallsPresent = 0;
+        }
+        if (this.playerOccupiedBy != null)
+        {
+            this.playerOccupiedBy.removeCell(this);
+        }
         this.playerOccupiedBy = null;
         this.cellIsOccupied = false;
 
@@ -295,8 +306,6 @@ public class ExtendedCell implements Serializable
             this.emptyCell();
 
 
-
-
             ArrayList<Sphere> allSpheres = getAllSpheres(Main.getColor(curPlayer),this.getCriticalMass());
             ParallelTransition mainTransition = new ParallelTransition();
             for (int i=0;i<this.neighbouringCells.size();i++)
@@ -304,7 +313,7 @@ public class ExtendedCell implements Serializable
                 Sphere curSphere = allSpheres.get(i);
                 ExtendedCell neighbour = this.neighbouringCells.get(i);
                 TranslateTransition move = new TranslateTransition();
-                move.setDuration(Duration.seconds(0.5));
+                move.setDuration(Duration.seconds(2));
                 move.setNode(curSphere);
                 int moveX = neighbour.coordX - this.coordX;
                 int moveY = neighbour.coordY - this.coordY;

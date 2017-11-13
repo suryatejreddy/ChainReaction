@@ -85,6 +85,7 @@ public class MenuController
         System.out.println("init called");
         setData();
 
+
         Main.deserializeResume();
 
 
@@ -103,14 +104,10 @@ public class MenuController
                     newPlayers=Main.deserializeQueue(Main.TYPE_RESUME);
                     newGrid=Main.deserializeGrid(Main.TYPE_RESUME);
 
-                    System.out.println("RESUME NIGGAS ------------- ");
-                    System.out.println(newPlayers.toString());
-                    newGrid.printGrid();
-
 
                     Main.launchGame(newPlayers.size(), newGrid.getSideLengthX(), newGrid.getSideLengthY());
-                    Main.compareGrid(newGrid);
                     Main.setPlayers(newPlayers);
+                    Main.compareGrid(newGrid,newPlayers);
 
                 }
                 catch(IOException e)
