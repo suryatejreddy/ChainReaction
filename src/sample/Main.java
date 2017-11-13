@@ -19,12 +19,14 @@ import java.util.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class Main extends Application
+public class Main extends Application implements Serializable
 {
 
     public static ExtendedGrid gridPane;    //UI grid for entire grid.
     public static ExtendedCell cell;                //UI Cell.
     public static ArrayList<String> namesOfStylesheets;
+
+    public static final long serialVersionUID=122836328L;
 
     private static Queue<ExtendedPlayer> allPlayers;
     private static boolean gameOver;
@@ -33,8 +35,11 @@ public class Main extends Application
     private static int currentX;
     private static int currentY;
 
-    public static String SERIALIZE_QUEUE_FILE="serializeQueue.ser";
-    public static String SERIALIZE_GRID_FILE="serializeGrid.ser";
+    public static final String SERIALIZE_RESUME_BOOL="serializeResumeBool.ser";
+    public static final String SERIALIZE_QUEUE_FILE="serializeQueue.ser";
+    public static final String SERIALIZE_GRID_FILE="serializeGrid.ser";
+
+    public static boolean resumeGameBool;
 
     public static Scene menu;
 
@@ -47,6 +52,7 @@ public class Main extends Application
         currentX=2;
         currentX=9;
         currentY=6;
+        resumeGameBool=false;
         gameOver=false;
         namesOfStylesheets=new ArrayList<String>();
         namesOfStylesheets.add("Stylesheets/grid-with-borders-violet.css");
@@ -60,8 +66,41 @@ public class Main extends Application
         alertShown=false;
     }
 
+    public static void setResumeGameBool(boolean resumeGameBool)
+    {
+        Main.resumeGameBool=resumeGameBool;
+    }
+    public static void serializeResume() throws IOException
+    {
+        ObjectOutputStream out=null;
+        try
+        {
+            out=new ObjectOutputStream(new FileOutputStream(SERIALIZE_RESUME_BOOL));
+            out.writeBoolean(resumeGameBool);
+        }
+        finally
+        {
+            out.close();
+        }
+    }
+
+    public static void deserializeResume() throws IOException
+    {
+        ObjectInputStream in=null;
+        try
+        {
+            in=new ObjectInputStream(new FileInputStream(SERIALIZE_RESUME_BOOL));
+            resumeGameBool=in.readBoolean();
+        }
+        finally
+        {
+            in.close();
+        }
+    }
+
     public Main()
     {
+        System.out.println("Main called");
         allPlayers = new LinkedList<ExtendedPlayer>();
     }
 
@@ -188,6 +227,15 @@ public class Main extends Application
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                Main.setResumeGameBool(true);
+                try
+                {
+                    serializeResume();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 try
                 {
                     newGrid=deserializeGrid();
@@ -228,6 +276,15 @@ public class Main extends Application
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                Main.setResumeGameBool(true);
+                try
+                {
+                    serializeResume();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 startNewGame();
             }
         });
@@ -238,6 +295,15 @@ public class Main extends Application
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                Main.setResumeGameBool(false);
+                try
+                {
+                    serializeResume();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 try
                 {
                     showMenu();
@@ -528,6 +594,13 @@ public class Main extends Application
             System.out.print("showAlert called from ");
             e1.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception
+    {
+        System.out.println("Stage is closing");
+        super.stop();
     }
 
     public static void showAlert(ExtendedPlayer curPlayer)

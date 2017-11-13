@@ -7,10 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+
+import java.io.*;
+
 
 public class MenuController
 {
+
 
     static int numPlayers;
 
@@ -69,9 +72,13 @@ public class MenuController
         });
     }
 
-    public void initialize()
+    public void initialize() throws IOException
     {
+        System.out.println("init called");
         setData();
+
+        Main.deserializeResume();
+        resumeGame.setDisable(!Main.resumeGameBool);
     }
 
     public void startGame()
@@ -100,6 +107,15 @@ public class MenuController
         }
 
         System.out.println("starting now");
+        Main.setResumeGameBool(true);
+        try
+        {
+            Main.serializeResume();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
         sample.Main.launchGame(numPlayers,x,y);
     }
 
