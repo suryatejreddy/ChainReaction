@@ -11,9 +11,11 @@ import java.util.ArrayList;
 public class ExtendedGrid implements Serializable
 {
     private ArrayList<ExtendedCell> extendedCells;
-    private GridPane gridPane;
+    private transient GridPane gridPane;
     private int sideLengthX;
     private int sideLengthY;
+
+    public static final long serialVersionUID=1266852L;
 
     public ExtendedGrid(ArrayList<ExtendedCell> cells, GridPane grid, int sideLengthX, int sideLengthY)
     {

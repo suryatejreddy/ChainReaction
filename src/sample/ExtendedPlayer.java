@@ -19,6 +19,8 @@ public class ExtendedPlayer implements Serializable
     public static final int BROWN=6;
     public static final int WHITE=7;
 
+    public static final long serialVersionUID=6898952L;
+
 
     private int playerColour;
 

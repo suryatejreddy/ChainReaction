@@ -22,7 +22,9 @@ public class ExtendedCell implements Serializable
     public static int TYPE_EDGE=3;
     public static int TYPE_NORMAL=4;
 
-    private StackPane cell;
+    public static final long serialVersionUID=12625252L;
+
+    private transient StackPane cell;
     private int coordX;
     private int coordY;
     private ExtendedPlayer playerOccupiedBy;
@@ -30,7 +32,7 @@ public class ExtendedCell implements Serializable
     private int numberOfBallsPresent;
     private ArrayList<ExtendedCell> neighbouringCells;
     private boolean cellIsOccupied;
-    private Group group;
+    private transient Group group;
 
     public ExtendedCell(Group group, StackPane cell, int coordX, int coordY, ExtendedPlayer player, ArrayList<ExtendedCell> neighbouringCells)
     {
@@ -180,6 +182,16 @@ public class ExtendedCell implements Serializable
         cell.getChildren().add(getGroup());
     }
 
+    public static Sphere staticGetSphere(Color color)
+    {
+        Sphere s=new Sphere(10);
+        PhongMaterial phongMaterial=new PhongMaterial();
+        phongMaterial.setDiffuseColor(color);
+        phongMaterial.setSpecularColor(Color.BLACK);
+        s.setMaterial(phongMaterial);
+        return s;
+    }
+
     public Sphere getNewSphere(Color color)
     {
         Sphere s1 = new Sphere(10);
@@ -221,6 +233,8 @@ public class ExtendedCell implements Serializable
                 break;
         }
     }
+
+
 
     public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI, boolean callFromMain)
     {
@@ -264,7 +278,7 @@ public class ExtendedCell implements Serializable
         setTranslationToSphere(sphere);
         getGroup().getChildren().add(sphere);
             //Add the group in case it was not added
-        if(getCell().getChildren().size()==0)
+        if(getCell()!=null && getCell().getChildren().size()==0)
         {
              getCell().getChildren().add(group);
         }
@@ -354,6 +368,11 @@ public class ExtendedCell implements Serializable
             }
         }
 
+    }
+
+    public void setGroup(Group group)
+    {
+        this.group = group;
     }
 
     public String toString()
