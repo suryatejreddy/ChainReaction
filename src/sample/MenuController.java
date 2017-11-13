@@ -3,14 +3,20 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.*;
+import java.util.Queue;
+
+
 public class MenuController
 {
+
 
     static int numPlayers;
 
@@ -69,9 +75,44 @@ public class MenuController
         });
     }
 
-    public void initialize()
+    public void initialize() throws IOException
     {
+        System.out.println("init called");
         setData();
+
+        Main.deserializeResume();
+        resumeGame.setDisable(!Main.resumeGameBool);
+
+        resumeGame.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent)
+            {
+                ExtendedGrid newGrid=null;
+                Queue<ExtendedPlayer> newPlayers=null;
+
+                try
+                {
+                    newPlayers=Main.deserializeQueue();
+                    newGrid=Main.deserializeGrid();
+                    System.out.println(newPlayers.toString());
+                    newGrid.printGrid();
+                    Main.launchGame(newPlayers.size(), newGrid.getSideLengthX(), newGrid.getSideLengthY());
+                    Main.allPlayers=Main.deserializeQueue();
+                    Main.gridPane=Main.deserializeGrid();
+                    Main.gridPane.printGrid();
+                    Main.gridPane=Main.setGridPane(Main.gridPane);
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+                catch(ClassNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void startGame()
@@ -100,6 +141,15 @@ public class MenuController
         }
 
         System.out.println("starting now");
+        Main.setResumeGameBool(true);
+        try
+        {
+            Main.serializeResume();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
         sample.Main.launchGame(numPlayers,x,y);
     }
 

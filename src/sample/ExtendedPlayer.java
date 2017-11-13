@@ -19,6 +19,8 @@ public class ExtendedPlayer implements Serializable
     public static final int BROWN=6;
     public static final int WHITE=7;
 
+    public static final long serialVersionUID=6898952L;
+
 
     private int playerColour;
 
@@ -129,4 +131,13 @@ public class ExtendedPlayer implements Serializable
         return (this.getPlayerColourByString() + " " + this.isAliveString() + " in " + this.currentCells.size() +  " cells");
     }
 
+    public void setCurrentCells(HashSet<ExtendedCell> currentCells)
+    {
+        this.currentCells=currentCells;
+    }
+
+    public HashSet<ExtendedCell> getCurrentCells()
+    {
+        return currentCells;
+    }
 }

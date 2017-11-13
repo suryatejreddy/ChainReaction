@@ -13,6 +13,8 @@ public class SerializableCell implements Serializable
     public static final int BROWN=6;
     public static final int WHITE=7;
 
+    public static final long serialVersionUID=16898909L;
+
 
     int x;
     int y;
