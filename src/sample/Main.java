@@ -99,18 +99,21 @@ public class Main extends Application
         }
     }
 
-    public static void deserializeQueue() throws IOException, ClassNotFoundException
+    public static Queue<ExtendedPlayer> deserializeQueue() throws IOException, ClassNotFoundException
     {
         ObjectInputStream in=null;
+        Queue<ExtendedPlayer> ret=null;
         try
         {
             in=new ObjectInputStream(new FileInputStream(SERIALIZE_QUEUE_FILE));
-            allPlayers=(Queue<ExtendedPlayer>) in.readObject();
+            ret=(Queue<ExtendedPlayer>) in.readObject();
         }
         finally
         {
             in.close();
         }
+
+        return ret;
     }
 
 
@@ -181,21 +184,27 @@ public class Main extends Application
         undoButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             ExtendedGrid newGrid=null;
+            Queue<ExtendedPlayer> newPlayers=null;
             @Override
             public void handle(MouseEvent mouseEvent)
             {
                 try
                 {
                     newGrid=deserializeGrid();
-                    deserializeQueue();
+                    newPlayers=deserializeQueue();
 
-                    System.out.println(allPlayers.toString()+" in undo");
-                    Iterator<ExtendedPlayer> iterator=allPlayers.iterator();
+                    System.out.println(allPlayers.toString()+" allplayers in undo");
+                    System.out.println(newPlayers.toString()+" newplayers in undo");
+                    Iterator<ExtendedPlayer> iterator=newPlayers.iterator();
                     while(iterator.hasNext())
                         System.out.println(iterator.next().getPlayerColourByString()+" player's turn");
 
                     System.out.println();
+                    System.out.println("New Grid-deserialized");
                     newGrid.printGrid();
+                    System.out.println();
+                    System.out.println("gridPane");
+                    gridPane.printGrid();
                 }
                 catch(IOException e)
                 {
@@ -205,8 +214,10 @@ public class Main extends Application
                 {
                     e.printStackTrace();
                 }
-                setGridPane(newGrid);
+                //setGridPane(newGrid);
                 compareGrid(newGrid);
+                setPlayers(newPlayers);
+
                 if(allPlayers.peek().hasTakenFirstMove())
                     setGridBorderColour(allPlayers.peek());
             }
@@ -251,6 +262,17 @@ public class Main extends Application
         return scene;
     }
 
+    private static void setPlayers(Queue<ExtendedPlayer> newPlayers)
+    {
+        int i=0;
+        allPlayers=newPlayers;
+        for(Object o: newPlayers.toArray())
+        {
+            ((ExtendedPlayer)allPlayers.toArray()[i]).setCurrentCells(((ExtendedPlayer) o).getCurrentCells());
+            i++;
+        }
+    }
+
     private static void compareGrid(ExtendedGrid newGrid)
     {
         for(int i=0;i<newGrid.getExtendedCells().size();i++)
@@ -289,6 +311,8 @@ public class Main extends Application
 
                     gridPane.getExtendedCells().get(i).getGroup().getChildren().add(sphere);
                 }
+
+                gridPane.getExtendedCells().get(i).setNumberOfBallsPresent(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent());
             }
             else if(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent()<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent())
             {
@@ -296,8 +320,10 @@ public class Main extends Application
                 {
                     gridPane.getExtendedCells().get(i).getGroup().getChildren().remove(j);
                 }
+                gridPane.getExtendedCells().get(i).setNumberOfBallsPresent(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent());
             }
         }
+
     }
 
 
@@ -638,7 +664,7 @@ public class Main extends Application
 
     private static ExtendedGrid setGridPane(ExtendedGrid gridPane)
     {
-        System.out.println("came to grid pane");
+        //System.out.println("came to grid pane");
         GridPane grid = new GridPane();
         for (int x = 0; x < gridPane.getSideLengthX(); x++)
         {
@@ -662,7 +688,7 @@ public class Main extends Application
 
         for (int i = 0; i <gridPane.getExtendedCells().size() ; i++)
         {
-            System.out.println("for loop "+i);
+            //System.out.println("for loop "+i);
             gridPane.getExtendedCells().get(i).setGroup(new Group());
             for(int j=0;j<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
             {
@@ -695,18 +721,9 @@ public class Main extends Application
             }
         }
 
-//        for (int x = 0; x < gridPane.getSideLengthX(); x++)
-//        {
-//            for (int y = 0; y < gridPane.getSideLengthY(); y++)
-//            {
-//                switches[x][y]=new SimpleBooleanProperty();
-//                ExtendedCell cell = createCell(switches[x][y], x, gridPane.getSideLengthY()-1-y);
-//                gridPane.getExtendedCells().add(cell);
-//                grid.add(cell.getCell(), x,        y);
-//            }
-//        }
 
-        System.out.println("Came out of for loop");
+
+        //System.out.println("Came out of for loop");
         grid.getStyleClass().add("grid");
         gridPane.setGridPane(grid);
         return gridPane;

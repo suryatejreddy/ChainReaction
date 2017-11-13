@@ -131,4 +131,13 @@ public class ExtendedPlayer implements Serializable
         return (this.getPlayerColourByString() + " " + this.isAliveString() + " in " + this.currentCells.size() +  " cells");
     }
 
+    public void setCurrentCells(HashSet<ExtendedCell> currentCells)
+    {
+        this.currentCells=currentCells;
+    }
+
+    public HashSet<ExtendedCell> getCurrentCells()
+    {
+        return currentCells;
+    }
 }
