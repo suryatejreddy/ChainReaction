@@ -36,8 +36,16 @@ public class Main extends Application implements Serializable
     private static int currentY;
 
     public static final String SERIALIZE_RESUME_BOOL="serializeResumeBool.ser";
-    public static final String SERIALIZE_QUEUE_FILE="serializeQueue.ser";
-    public static final String SERIALIZE_GRID_FILE="serializeGrid.ser";
+    public static final String SERIALIZE_QUEUE_FILE_UNDO="serializeQueueUndo.ser";
+    public static final String SERIALIZE_GRID_FILE_UNDO="serializeGridUndo.ser";
+    public static final String SERIALIZE_QUEUE_FILE_RESUME = "serializeQueueResume.ser";
+    public static final String SERIALIZE_GRID_FILE_RESUME = "serializeGridUndo.ser";
+
+
+    public static final int TYPE_UNDO = 0;
+    public static final int TYPE_RESUME = 1;
+
+
 
     public static boolean resumeGameBool;
 
@@ -111,12 +119,21 @@ public class Main extends Application implements Serializable
         launch(args);
     }
 
-    public static void serializeQueue() throws IOException
+    public static void serializeQueue(int type) throws IOException
     {
         ObjectOutputStream out=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_QUEUE_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_QUEUE_FILE_RESUME;
+        }
         try
         {
-            out=new ObjectOutputStream(new FileOutputStream(SERIALIZE_QUEUE_FILE));
+            out=new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(allPlayers);
         }
         finally
@@ -125,12 +142,21 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static void serializeGrid() throws IOException
+    public static void serializeGrid(int type) throws IOException
     {
         ObjectOutputStream out=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_GRID_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_GRID_FILE_RESUME;
+        }
         try
         {
-            out=new ObjectOutputStream(new FileOutputStream(SERIALIZE_GRID_FILE));
+            out=new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(gridPane);
         }
         finally
@@ -139,13 +165,22 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static Queue<ExtendedPlayer> deserializeQueue() throws IOException, ClassNotFoundException
+    public static Queue<ExtendedPlayer> deserializeQueue(int type) throws IOException, ClassNotFoundException
     {
         ObjectInputStream in=null;
         Queue<ExtendedPlayer> ret=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_QUEUE_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_QUEUE_FILE_RESUME;
+        }
         try
         {
-            in=new ObjectInputStream(new FileInputStream(SERIALIZE_QUEUE_FILE));
+            in=new ObjectInputStream(new FileInputStream(filename));
             ret=(Queue<ExtendedPlayer>) in.readObject();
         }
         finally
@@ -157,13 +192,22 @@ public class Main extends Application implements Serializable
     }
 
 
-    public static ExtendedGrid deserializeGrid() throws IOException, ClassNotFoundException
+    public static ExtendedGrid deserializeGrid(int type) throws IOException, ClassNotFoundException
     {
         ObjectInputStream in=null;
         ExtendedGrid ret=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_GRID_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_GRID_FILE_RESUME;
+        }
         try
         {
-            in=new ObjectInputStream(new FileInputStream(SERIALIZE_GRID_FILE));
+            in=new ObjectInputStream(new FileInputStream(filename));
             ret=(ExtendedGrid) in.readObject();
         }
         finally
@@ -240,8 +284,8 @@ public class Main extends Application implements Serializable
                 }
                 try
                 {
-                    newGrid=deserializeGrid();
-                    newPlayers=deserializeQueue();
+                    newGrid=deserializeGrid(TYPE_UNDO);
+                    newPlayers=deserializeQueue(TYPE_UNDO);
 
                     System.out.println(allPlayers.toString()+" allplayers in undo");
                     System.out.println(newPlayers.toString()+" newplayers in undo");
@@ -297,7 +341,7 @@ public class Main extends Application implements Serializable
             @Override
             public void handle(MouseEvent mouseEvent)
             {
-                Main.setResumeGameBool(false);
+                Main.setResumeGameBool(true);
                 try
                 {
                     serializeResume();
@@ -327,12 +371,12 @@ public class Main extends Application implements Serializable
         scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
         scene.getStylesheets().add(namesOfStylesheets.get(allPlayers.peek().getPlayerColour()));
 
-        Main.serializeGrid();
-        Main.serializeQueue();
+        Main.serializeGrid(TYPE_UNDO);
+        Main.serializeQueue(TYPE_UNDO);
         return scene;
     }
 
-    private static void setPlayers(Queue<ExtendedPlayer> newPlayers)
+    public static void setPlayers(Queue<ExtendedPlayer> newPlayers)
     {
         int i=0;
         allPlayers=newPlayers;
@@ -360,7 +404,8 @@ public class Main extends Application implements Serializable
 //        }
 //    }
 
-    private static void compareGrid(ExtendedGrid newGrid)
+    @SuppressWarnings("Duplicates")
+    public static void compareGrid(ExtendedGrid newGrid)
     {
         for(int i=0;i<newGrid.getExtendedCells().size();i++)
         {
@@ -523,8 +568,8 @@ public class Main extends Application implements Serializable
             cellSwitch.set(!cellSwitch.get());
         ExtendedPlayer curPlayer=null;
 
-        serializeQueue();
-        serializeGrid();
+        serializeQueue(TYPE_UNDO);
+        serializeGrid(TYPE_UNDO);
 
         Iterator<ExtendedPlayer> iterator=allPlayers.iterator();
         while(iterator.hasNext())
@@ -599,12 +644,19 @@ public class Main extends Application implements Serializable
         try{
             gridPane.printGrid();
             updatePlayerStats(allPlayers);  //remove dead players
+
             ExtendedPlayer nextPlayer = allPlayers.peek();
             setGridBorderColour(nextPlayer);
             if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
             {
                 allPlayers.add(curPlayer);
             }
+            serializeQueue(TYPE_RESUME);
+            serializeGrid(TYPE_RESUME);
+
+            resumeGameBool = true;
+            serializeResume();
+
             System.out.println(allPlayers.toString());
 //            gridPane.printGrid();
 //            makeSerializeData(1);
@@ -640,6 +692,14 @@ public class Main extends Application implements Serializable
         if(!alertShown)
         {
             alertShown=true;
+            resumeGameBool = false;
+            try {
+                serializeResume();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
             Alert gameoverDialog = new Alert(Alert.AlertType.NONE);
             gameoverDialog.setTitle("Game Over");
             gameoverDialog.setHeaderText(null);
@@ -663,21 +723,6 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static void makeSerializeData(int file) throws IOException
-    {
-        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
-        for (ExtendedCell newCell : gridPane.getExtendedCells() )
-        {
-            SerializableCell serCell = new SerializableCell(newCell.getCoordX(),newCell.getCoordY(),-1,newCell.getNumberOfBallsPresent());
-            if (newCell.isCellOccupied())
-            {
-                serCell.playerColor = newCell.getPlayerOccupiedBy().getPlayerColour();
-            }
-            gameData.add(serCell);
-        }
-        serializeData(gameData,file);
-
-    }
 
     public static void serializeData(ArrayList<SerializableCell> gameData , int file) throws IOException
     {
@@ -694,30 +739,6 @@ public class Main extends Application implements Serializable
     }
 
 
-    public static void deserializeData(int file) throws IOException , ClassNotFoundException
-    {
-        ObjectInputStream in = null;
-        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
-        String fileName = "data"+ Integer.toString(file) + ".ser";
-        try
-        {
-            in = new ObjectInputStream(new FileInputStream(fileName));
-            gameData = (ArrayList<SerializableCell>) in.readObject();
-        }
-        finally
-        {
-            in.close();
-        }
-        for (int i=gridPane.getSideLengthY()-1;i>-1;i--)
-        {
-            for (int j =0;j<gridPane.getSideLengthY();j++)
-            {
-                System.out.print(getSerializableCellFromCoordinate(gameData,i,j) + " \t");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 
     public static SerializableCell getSerializableCellFromCoordinate(ArrayList<SerializableCell> gameData, int x, int y)
     {
@@ -730,7 +751,6 @@ public class Main extends Application implements Serializable
         }
         return null;
     }
-
 
 
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
@@ -766,6 +786,7 @@ public class Main extends Application implements Serializable
             }
         });
     }
+
 
     public static ExtendedGrid setGridPane(ExtendedGrid gridPane)
     {
