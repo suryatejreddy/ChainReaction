@@ -26,6 +26,8 @@ public class Main extends Application implements Serializable
     public static ExtendedCell cell;                //UI Cell.
     public static ArrayList<String> namesOfStylesheets;
 
+    public static boolean undoCalled;
+
     public static final long serialVersionUID=122836328L;
 
     public static Queue<ExtendedPlayer> allPlayers;
@@ -53,6 +55,7 @@ public class Main extends Application implements Serializable
         currentX=9;
         currentY=6;
         resumeGameBool=false;
+        undoCalled=false;
         gameOver=false;
         namesOfStylesheets=new ArrayList<String>();
         namesOfStylesheets.add("Stylesheets/grid-with-borders-violet.css");
@@ -157,7 +160,7 @@ public class Main extends Application implements Serializable
     }
 
 
-    public static ExtendedGrid deserializeGrid() throws IOException, ClassNotFoundException
+    public static ExtendedGrid  deserializeGrid() throws IOException, ClassNotFoundException
     {
         ObjectInputStream in=null;
         ExtendedGrid ret=null;
@@ -176,6 +179,7 @@ public class Main extends Application implements Serializable
 
     public static Scene getGameScene(int numberOfPlayers, int x , int y) throws IOException
     {
+        undoCalled=false;
         allPlayers.clear();
         int i = 0;
         while (i<numberOfPlayers)
@@ -224,11 +228,13 @@ public class Main extends Application implements Serializable
 
         undoButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
+
             ExtendedGrid newGrid=null;
             Queue<ExtendedPlayer> newPlayers=null;
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                undoCalled=true;
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -275,9 +281,11 @@ public class Main extends Application implements Serializable
 
         newGameButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
+
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                undoCalled=false;
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -297,6 +305,7 @@ public class Main extends Application implements Serializable
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                undoCalled=false;
                 Main.setResumeGameBool(false);
                 try
                 {
@@ -503,7 +512,8 @@ public class Main extends Application implements Serializable
 
     public static void updatePlayerStats(Queue<ExtendedPlayer> allPlayers)
     {
-        for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); ) {
+        for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); )
+        {
             ExtendedPlayer randomPlayer = iter.next();
             if (randomPlayer.hasTakenFirstMove())
             {
@@ -598,17 +608,26 @@ public class Main extends Application implements Serializable
     {
         try{
             gridPane.printGrid();
-            updatePlayerStats(allPlayers);  //remove dead players
+            if(!undoCalled)
+                updatePlayerStats(allPlayers);  //remove dead players
             ExtendedPlayer nextPlayer = allPlayers.peek();
             setGridBorderColour(nextPlayer);
-            if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
+            if(curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
             {
                 allPlayers.add(curPlayer);
             }
-            System.out.println(allPlayers.toString());
-//            gridPane.printGrid();
+
 //            makeSerializeData(1);
 //            deserializeData(1);
+
+            if(Main.undoCalled)
+            {
+                gameOverForUndo(gridPane);
+                setGridBorderColour(allPlayers.peek());
+            }
+
+            System.out.println(allPlayers.toString());
+
             if (allPlayers.size() == 1)
             {
                 gameOver=true;
@@ -618,13 +637,44 @@ public class Main extends Application implements Serializable
                 System.out.println("showAlert called from allplayerssize==1");
             }
         }
-        catch (Exception e1)
+        catch(Exception e1)
         {
             System.out.println("thuggs");
 //            e1.printStackTrace();
             showAlert(curPlayer);
             System.out.print("showAlert called from ");
             e1.printStackTrace();
+        }
+    }
+
+    private static void gameOverForUndo(ExtendedGrid grid)
+    {
+        grid.printGrid();
+        int flag;
+        for(Iterator<ExtendedPlayer> iterator=allPlayers.iterator(); iterator.hasNext();)
+            System.out.println(iterator.next());
+
+        for(Iterator<ExtendedPlayer> iter=allPlayers.iterator(); iter.hasNext();)
+        {
+            flag=0;
+            ExtendedPlayer curPlayer=iter.next();
+            for(int i = 0; i< grid.getExtendedCells().size(); i++)
+            {
+
+                //System.out.println(grid.getExtendedCells().get(i).getPlayerOccupiedBy()+" for "+curPlayer+String.valueOf(curPlayer.getPlayerColour()==grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColour()));
+                if(grid.getExtendedCells()!=null && grid.getExtendedCells().get(i).getPlayerOccupiedBy()!=null && curPlayer!=null && (grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColour()==curPlayer.getPlayerColour()))//grid.getExtendedCells().get(i).getPlayerOccupiedBy().equals(curPlayer)) || grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColour()==curPlayer.getPlayerColour())
+                {
+                    System.out.println("Called from "+grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColourByString()+" from cell "+grid.getExtendedCells().get(i).getCoordX()+","+grid.getExtendedCells().get(i).getCoordY());
+                    flag=1;
+                    break;
+                }
+            }
+
+            if(flag==0)
+            {
+                iter.remove();
+            }
+
         }
     }
 
