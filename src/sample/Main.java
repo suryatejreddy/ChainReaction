@@ -278,6 +278,9 @@ public class Main extends Application implements Serializable
                     newPlayers=deserializeQueue(TYPE_UNDO);
                     setPlayers(newPlayers);
                     compareGrid(newGrid,newPlayers);
+
+                    serializeGrid(Main.TYPE_RESUME);
+                    serializeQueue(Main.TYPE_RESUME);
                 }
                 catch(IOException e)
                 {
