@@ -443,7 +443,7 @@ public class Main extends Application implements Serializable
         Scene newScene = null;
         try
         {
-            newScene = getGameScene(n,y,x);
+            newScene = getGameScene(n,x,y);
         }
         catch(IOException e)
         {
