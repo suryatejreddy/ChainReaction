@@ -137,13 +137,13 @@ public class MenuController
 
         if (gridSizeData.compareTo("9x6") == 0)
         {
-            x = 9;
-            y = 6;
+            x = 6;
+            y = 9;
         }
         else
         {
-            x = 15;
-            y = 10;
+            x = 10;
+            y = 15;
         }
 
         System.out.println("starting now");

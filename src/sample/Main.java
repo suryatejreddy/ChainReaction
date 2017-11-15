@@ -278,6 +278,9 @@ public class Main extends Application implements Serializable
                     newPlayers=deserializeQueue(TYPE_UNDO);
                     setPlayers(newPlayers);
                     compareGrid(newGrid,newPlayers);
+
+                    serializeGrid(Main.TYPE_RESUME);
+                    serializeQueue(Main.TYPE_RESUME);
                 }
                 catch(IOException e)
                 {
@@ -443,7 +446,7 @@ public class Main extends Application implements Serializable
         Scene newScene = null;
         try
         {
-            newScene = getGameScene(n,y,x);
+            newScene = getGameScene(n,x,y);
         }
         catch(IOException e)
         {
