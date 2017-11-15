@@ -26,8 +26,6 @@ public class Main extends Application implements Serializable
     public static ExtendedCell cell;                //UI Cell.
     public static ArrayList<String> namesOfStylesheets;
 
-    public static boolean undoCalled;
-
     public static final long serialVersionUID=122836328L;
 
     public static Queue<ExtendedPlayer> allPlayers;
@@ -38,8 +36,16 @@ public class Main extends Application implements Serializable
     private static int currentY;
 
     public static final String SERIALIZE_RESUME_BOOL="serializeResumeBool.ser";
-    public static final String SERIALIZE_QUEUE_FILE="serializeQueue.ser";
-    public static final String SERIALIZE_GRID_FILE="serializeGrid.ser";
+    public static final String SERIALIZE_QUEUE_FILE_UNDO="serializeQueueUndo.ser";
+    public static final String SERIALIZE_GRID_FILE_UNDO="serializeGridUndo.ser";
+    public static final String SERIALIZE_QUEUE_FILE_RESUME = "serializeQueueResume.ser";
+    public static final String SERIALIZE_GRID_FILE_RESUME = "serializeGridResume.ser";
+
+
+    public static final int TYPE_UNDO = 0;
+    public static final int TYPE_RESUME = 1;
+
+
 
     public static boolean resumeGameBool;
 
@@ -55,7 +61,6 @@ public class Main extends Application implements Serializable
         currentX=9;
         currentY=6;
         resumeGameBool=false;
-        undoCalled=false;
         gameOver=false;
         namesOfStylesheets=new ArrayList<String>();
         namesOfStylesheets.add("Stylesheets/grid-with-borders-violet.css");
@@ -69,12 +74,10 @@ public class Main extends Application implements Serializable
         alertShown=false;
     }
 
-
     public static void setResumeGameBool(boolean resumeGameBool)
     {
         Main.resumeGameBool=resumeGameBool;
     }
-
 
     public static void serializeResume() throws IOException
     {
@@ -116,12 +119,21 @@ public class Main extends Application implements Serializable
         launch(args);
     }
 
-    public static void serializeQueue() throws IOException
+    public static void serializeQueue(int type) throws IOException
     {
         ObjectOutputStream out=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_QUEUE_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_QUEUE_FILE_RESUME;
+        }
         try
         {
-            out=new ObjectOutputStream(new FileOutputStream(SERIALIZE_QUEUE_FILE));
+            out=new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(allPlayers);
         }
         finally
@@ -130,12 +142,21 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static void serializeGrid() throws IOException
+    public static void serializeGrid(int type) throws IOException
     {
         ObjectOutputStream out=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_GRID_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_GRID_FILE_RESUME;
+        }
         try
         {
-            out=new ObjectOutputStream(new FileOutputStream(SERIALIZE_GRID_FILE));
+            out=new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(gridPane);
         }
         finally
@@ -144,13 +165,22 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static Queue<ExtendedPlayer> deserializeQueue() throws IOException, ClassNotFoundException
+    public static Queue<ExtendedPlayer> deserializeQueue(int type) throws IOException, ClassNotFoundException
     {
         ObjectInputStream in=null;
         Queue<ExtendedPlayer> ret=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_QUEUE_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_QUEUE_FILE_RESUME;
+        }
         try
         {
-            in=new ObjectInputStream(new FileInputStream(SERIALIZE_QUEUE_FILE));
+            in=new ObjectInputStream(new FileInputStream(filename));
             ret=(Queue<ExtendedPlayer>) in.readObject();
         }
         finally
@@ -162,13 +192,22 @@ public class Main extends Application implements Serializable
     }
 
 
-    public static ExtendedGrid  deserializeGrid() throws IOException, ClassNotFoundException
+    public static ExtendedGrid deserializeGrid(int type) throws IOException, ClassNotFoundException
     {
         ObjectInputStream in=null;
         ExtendedGrid ret=null;
+        String filename = "";
+        if (type == TYPE_UNDO)
+        {
+            filename = SERIALIZE_GRID_FILE_UNDO;
+        }
+        else
+        {
+            filename = SERIALIZE_GRID_FILE_RESUME;
+        }
         try
         {
-            in=new ObjectInputStream(new FileInputStream(SERIALIZE_GRID_FILE));
+            in=new ObjectInputStream(new FileInputStream(filename));
             ret=(ExtendedGrid) in.readObject();
         }
         finally
@@ -181,7 +220,6 @@ public class Main extends Application implements Serializable
 
     public static Scene getGameScene(int numberOfPlayers, int x , int y) throws IOException
     {
-        undoCalled=false;
         allPlayers.clear();
         int i = 0;
         while (i<numberOfPlayers)
@@ -214,29 +252,17 @@ public class Main extends Application implements Serializable
         rootX.setTop(root1);
         rootX.setCenter(root);
 
-
-//        ComboBox<String> comboBox=new ComboBox<String>();
-//        comboBox.getItems().clear();
-//        comboBox.getItems().addAll("New game", "Exit Game");
-//        comboBox.getSelectionModel().selectFirst();
-//        comboBox.setMaxWidth(150);
-//        comboBox.setMinWidth(150);
-//        comboBox.setPrefWidth(150);
-//        root1.getChildren().add(comboBox);
-
         Button undoButton=new Button("Undo");
         Button newGameButton=new Button("New Game");
         Button exitButton=new Button("Exit Game");
 
         undoButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
-
             ExtendedGrid newGrid=null;
             Queue<ExtendedPlayer> newPlayers=null;
             @Override
             public void handle(MouseEvent mouseEvent)
             {
-                undoCalled=true;
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -248,21 +274,10 @@ public class Main extends Application implements Serializable
                 }
                 try
                 {
-                    newGrid=deserializeGrid();
-                    newPlayers=deserializeQueue();
-
-                    System.out.println(allPlayers.toString()+" allplayers in undo");
-                    System.out.println(newPlayers.toString()+" newplayers in undo");
-                    Iterator<ExtendedPlayer> iterator=newPlayers.iterator();
-                    while(iterator.hasNext())
-                        System.out.println(iterator.next().getPlayerColourByString()+" player's turn");
-
-                    System.out.println();
-                    System.out.println("New Grid-deserialized");
-                    newGrid.printGrid();
-                    System.out.println();
-                    System.out.println("gridPane");
-                    gridPane.printGrid();
+                    newGrid=deserializeGrid(TYPE_UNDO);
+                    newPlayers=deserializeQueue(TYPE_UNDO);
+                    setPlayers(newPlayers);
+                    compareGrid(newGrid,newPlayers);
                 }
                 catch(IOException e)
                 {
@@ -273,21 +288,14 @@ public class Main extends Application implements Serializable
                     e.printStackTrace();
                 }
                 //setGridPane(newGrid);
-                compareGrid(newGrid);
-                setPlayers(newPlayers);
-
-                if(allPlayers.peek().hasTakenFirstMove())
-                    setGridBorderColour(allPlayers.peek());
             }
         });
 
         newGameButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
-
             @Override
             public void handle(MouseEvent mouseEvent)
             {
-                undoCalled=false;
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -307,8 +315,7 @@ public class Main extends Application implements Serializable
             @Override
             public void handle(MouseEvent mouseEvent)
             {
-                undoCalled=false;
-                Main.setResumeGameBool(false);
+                Main.setResumeGameBool(true);
                 try
                 {
                     serializeResume();
@@ -338,93 +345,71 @@ public class Main extends Application implements Serializable
         scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
         scene.getStylesheets().add(namesOfStylesheets.get(allPlayers.peek().getPlayerColour()));
 
-        Main.serializeGrid();
-        Main.serializeQueue();
+        Main.serializeGrid(TYPE_UNDO);
+        Main.serializeQueue(TYPE_UNDO);
         return scene;
     }
 
-    private static void setPlayers(Queue<ExtendedPlayer> newPlayers)
+    public static void setPlayers(Queue<ExtendedPlayer> newPlayers)
     {
-        int i=0;
-        allPlayers=newPlayers;
-        for(Object o: newPlayers.toArray())
+        allPlayers.clear();
+        int numberOfPlayers = newPlayers.size();
+        int i = 0;
+        while (i<numberOfPlayers)
         {
-            ((ExtendedPlayer)allPlayers.toArray()[i]).setCurrentCells(((ExtendedPlayer) o).getCurrentCells());
+            ExtendedPlayer player = new ExtendedPlayer(SettingsController.getSelectedColour(i), true);
+            allPlayers.add(player); //adding the player to the game
             i++;
         }
     }
 
 
-//    public static void setGridForResume()
-//    {
-//        Main.setGridBorderColour(allPlayers.peek());
-//        for(int i=0;i<gridPane.getExtendedCells().size();i++)
-//        {
-//            gridPane.getExtendedCells().get(i).setCell(new StackPane());
-//            gridPane.getExtendedCells().get(i).setGroup(new Group());
-//            for(int j=0;j<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
-//            {
-//                Sphere newSphere=new Sphere(10);
-//
-//                gridPane.getExtendedCells().get(i).getGroup().getChildren().add()
-//            }
-//        }
-//    }
-
-    private static void compareGrid(ExtendedGrid newGrid)
+    public static void compareGrid(ExtendedGrid newGrid, Queue<ExtendedPlayer> newPlayers)
     {
-        for(int i=0;i<newGrid.getExtendedCells().size();i++)
+        for (int i=newGrid.getSideLengthY()-1;i>-1;i--)
         {
-            if(newGrid.getExtendedCells().get(i).getPlayerOccupiedBy()!=null && newGrid.getExtendedCells().get(i).getPlayerOccupiedBy()!=gridPane.getExtendedCells().get(i).getPlayerOccupiedBy())
+            for (int j =0;j<newGrid.getSideLengthX();j++)
             {
-                gridPane.getExtendedCells().get(i).setPlayer(newGrid.getExtendedCells().get(i).getPlayerOccupiedBy());
-            }
+                ExtendedCell newCell = newGrid.getCellFromCoordinate(i,j);
+                ExtendedCell currentCell = gridPane.getCellFromCoordinate(i,j);
 
-            if(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent()>gridPane.getExtendedCells().get(i).getNumberOfBallsPresent())
-            {
-                for(int j=0;j<newGrid.getExtendedCells().get(i).getNumberOfBallsPresent()-gridPane.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
+                currentCell.emptyCell();
+
+                if (newCell.isCellOccupied())
                 {
-                    Sphere sphere=ExtendedCell.staticGetSphere(Main.getColor(gridPane.getExtendedCells().get(i).getPlayerOccupiedBy()));
-
-                    switch (gridPane.getExtendedCells().get(i).getNumberOfBallsPresent())
+                    for (int k =0 ; k < newCell.getNumberOfBallsPresent();k ++)
                     {
-                        case 0:
-                            sphere.setTranslateX(0);
-                            break;
-
-                        case 1:
-                            sphere.setTranslateX(10);
-                            break;
-
-                        case 2:
-                            sphere.setTranslateX(5);
-                            sphere.setTranslateY(10);
-                            break;
-
-                        default:
-                            break;
+                        currentCell.addBall(getPlayerOfColor(newCell.getPlayerOccupiedBy().getPlayerColour(),allPlayers),true,true);
                     }
-
-
-
-                    gridPane.getExtendedCells().get(i).getGroup().getChildren().add(sphere);
                 }
 
-                gridPane.getExtendedCells().get(i).setNumberOfBallsPresent(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent());
             }
-            else if(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent()<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent())
-            {
-                for(int j=0;j<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent()-newGrid.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
-                {
-                    gridPane.getExtendedCells().get(i).getGroup().getChildren().remove(j);
-                }
-                gridPane.getExtendedCells().get(i).setNumberOfBallsPresent(newGrid.getExtendedCells().get(i).getNumberOfBallsPresent());
-            }
-
-            gridPane.getExtendedCells().get(i).getCell().getChildren().clear();
-            gridPane.getExtendedCells().get(i).getCell().getChildren().add(gridPane.getExtendedCells().get(i).getGroup());
         }
+        ArrayList<ExtendedPlayer> tempList = new ArrayList<>();
+        for (ExtendedPlayer p : newPlayers)
+        {
+            tempList.add(getPlayerOfColor(p.getPlayerColour(),allPlayers));
+        }
+        int n = allPlayers.size();
+        allPlayers.clear();
+        for (int i=0;i < n; i ++)
+        {
+            allPlayers.add(tempList.get(i));
+        }
+        System.out.println(allPlayers);
+        setGridBorderColour(allPlayers.peek());
+    }
 
+    public static ExtendedPlayer getPlayerOfColor(int color, Queue<ExtendedPlayer> players)
+    {
+        for (ExtendedPlayer p : players)
+        {
+            if (p.getPlayerColour() == color)
+            {
+                return p;
+            }
+        }
+        return null;
     }
 
 
@@ -514,8 +499,7 @@ public class Main extends Application implements Serializable
 
     public static void updatePlayerStats(Queue<ExtendedPlayer> allPlayers)
     {
-        for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); )
-        {
+        for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); ) {
             ExtendedPlayer randomPlayer = iter.next();
             if (randomPlayer.hasTakenFirstMove())
             {
@@ -535,13 +519,10 @@ public class Main extends Application implements Serializable
             cellSwitch.set(!cellSwitch.get());
         ExtendedPlayer curPlayer=null;
 
-        serializeQueue();
-        serializeGrid();
+        serializeQueue(TYPE_UNDO);
+        serializeGrid(TYPE_UNDO);
 
         Iterator<ExtendedPlayer> iterator=allPlayers.iterator();
-        while(iterator.hasNext())
-            System.out.println(iterator.next().getPlayerColourByString()+" player's turn");
-        System.out.println();
 
 
         try
@@ -549,9 +530,6 @@ public class Main extends Application implements Serializable
 
             curPlayer = allPlayers.peek();
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
-
-//            makeSerializeData(1);
-//            deserializeData(1);
 
             if (cellSelected.isCellOccupied())
             {
@@ -609,28 +587,23 @@ public class Main extends Application implements Serializable
     public static void onAnimationCompleted(ExtendedPlayer curPlayer)
     {
         try{
-            gridPane.printGrid();
-            if(!undoCalled)
-                updatePlayerStats(allPlayers);  //remove dead players
+//            gridPane.printGrid();
+            updatePlayerStats(allPlayers);  //remove dead players
+
             ExtendedPlayer nextPlayer = allPlayers.peek();
             setGridBorderColour(nextPlayer);
-            if(curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
+            if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
             {
                 allPlayers.add(curPlayer);
             }
 
-//            makeSerializeData(1);
-//            deserializeData(1);
+            serializeQueue(TYPE_RESUME);
+            serializeGrid(TYPE_RESUME);
 
-            if(Main.undoCalled)
-            {
-                gameOverForUndo(gridPane);
-                setGridBorderColour(allPlayers.peek());
-            }
+            resumeGameBool = true;
+            serializeResume();
 
-            System.out.println(allPlayers.toString());
-
-            if (allPlayers.size() == 1)
+              if (allPlayers.size() == 1)
             {
                 gameOver=true;
                 System.out.println("thuggs");
@@ -639,44 +612,13 @@ public class Main extends Application implements Serializable
                 System.out.println("showAlert called from allplayerssize==1");
             }
         }
-        catch(Exception e1)
+        catch (Exception e1)
         {
             System.out.println("thuggs");
 //            e1.printStackTrace();
             showAlert(curPlayer);
             System.out.print("showAlert called from ");
             e1.printStackTrace();
-        }
-    }
-
-    private static void gameOverForUndo(ExtendedGrid grid)
-    {
-        grid.printGrid();
-        int flag;
-        for(Iterator<ExtendedPlayer> iterator=allPlayers.iterator(); iterator.hasNext();)
-            System.out.println(iterator.next());
-
-        for(Iterator<ExtendedPlayer> iter=allPlayers.iterator(); iter.hasNext();)
-        {
-            flag=0;
-            ExtendedPlayer curPlayer=iter.next();
-            for(int i = 0; i< grid.getExtendedCells().size(); i++)
-            {
-
-                //System.out.println(grid.getExtendedCells().get(i).getPlayerOccupiedBy()+" for "+curPlayer+String.valueOf(curPlayer.getPlayerColour()==grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColour()));
-                if(grid.getExtendedCells()!=null && grid.getExtendedCells().get(i).getPlayerOccupiedBy()!=null && curPlayer!=null && (grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColour()==curPlayer.getPlayerColour()))//grid.getExtendedCells().get(i).getPlayerOccupiedBy().equals(curPlayer)) || grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColour()==curPlayer.getPlayerColour())
-                {
-                    System.out.println("Called from "+grid.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColourByString()+" from cell "+grid.getExtendedCells().get(i).getCoordX()+","+grid.getExtendedCells().get(i).getCoordY());
-                    flag=1;
-                    break;
-                }
-            }
-
-            if(flag==0)
-            {
-                iter.remove();
-            }
-
         }
     }
 
@@ -692,6 +634,14 @@ public class Main extends Application implements Serializable
         if(!alertShown)
         {
             alertShown=true;
+            resumeGameBool = false;
+            try {
+                serializeResume();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
             Alert gameoverDialog = new Alert(Alert.AlertType.NONE);
             gameoverDialog.setTitle("Game Over");
             gameoverDialog.setHeaderText(null);
@@ -715,21 +665,6 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static void makeSerializeData(int file) throws IOException
-    {
-        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
-        for (ExtendedCell newCell : gridPane.getExtendedCells() )
-        {
-            SerializableCell serCell = new SerializableCell(newCell.getCoordX(),newCell.getCoordY(),-1,newCell.getNumberOfBallsPresent());
-            if (newCell.isCellOccupied())
-            {
-                serCell.playerColor = newCell.getPlayerOccupiedBy().getPlayerColour();
-            }
-            gameData.add(serCell);
-        }
-        serializeData(gameData,file);
-
-    }
 
     public static void serializeData(ArrayList<SerializableCell> gameData , int file) throws IOException
     {
@@ -746,30 +681,6 @@ public class Main extends Application implements Serializable
     }
 
 
-    public static void deserializeData(int file) throws IOException , ClassNotFoundException
-    {
-        ObjectInputStream in = null;
-        ArrayList<SerializableCell> gameData = new ArrayList<SerializableCell>();
-        String fileName = "data"+ Integer.toString(file) + ".ser";
-        try
-        {
-            in = new ObjectInputStream(new FileInputStream(fileName));
-            gameData = (ArrayList<SerializableCell>) in.readObject();
-        }
-        finally
-        {
-            in.close();
-        }
-        for (int i=gridPane.getSideLengthY()-1;i>-1;i--)
-        {
-            for (int j =0;j<gridPane.getSideLengthY();j++)
-            {
-                System.out.print(getSerializableCellFromCoordinate(gameData,i,j) + " \t");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 
     public static SerializableCell getSerializableCellFromCoordinate(ArrayList<SerializableCell> gameData, int x, int y)
     {
@@ -782,7 +693,6 @@ public class Main extends Application implements Serializable
         }
         return null;
     }
-
 
 
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
@@ -818,6 +728,7 @@ public class Main extends Application implements Serializable
             }
         });
     }
+
 
     public static ExtendedGrid setGridPane(ExtendedGrid gridPane)
     {

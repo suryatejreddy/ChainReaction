@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="3" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serializeGrid.ser" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serializeGridResume.ser" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serializeGridUndo.ser" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serializeQueue.ser" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serializeQueueResume.ser" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serializeQueueUndo.ser" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serializeResumeBool.ser" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedGrid.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedGrid.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExtendedCell.java" afterPath="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExtendedGrid.java" afterPath="$PROJECT_DIR$/src/sample/ExtendedGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/MenuController.java" afterPath="$PROJECT_DIR$/src/sample/MenuController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,7 +31,7 @@
     <SUITE FILE_PATH="coverage/ChainReaction$Game.coverage" NAME="Game Coverage Results" MODIFIED="1508006470078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>NonUIComponents.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ChainReaction$Main.coverage" NAME="Main Coverage Results" MODIFIED="1509559047251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ChainReaction$Main.coverage" NAME="Main Coverage Results" MODIFIED="1510598819371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>sample.*</FILTER>
     </SUITE>
   </component>
@@ -28,14 +40,9 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-              <folding>
-                <element signature="e#15937#15968#0" expanded="true" />
-                <element signature="e#22629#22647#0" expanded="true" />
-                <element signature="e#23733#23751#0" expanded="true" />
-                <element signature="e#29100#29114#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="134">
+              <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -43,16 +50,22 @@
       <file leaf-file-name="ExtendedCell.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5670">
-              <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
+            <state relative-caret-position="3960">
+              <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1510738351329" expanded="true" signature="8197:10315" ph="{...}" />
-                <marker date="1510738351329" expanded="true" signature="8816:10151" ph="{...}" />
-                <marker date="1510738351329" expanded="false" signature="10354:10369" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="10388:10394" ph=" }" />
-                <marker date="1510738351329" expanded="true" signature="10429:10764" ph="{...}" />
+                <element signature="e#5483#5491#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="103" column="44" lean-forward="true" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -70,41 +83,10 @@
       <file leaf-file-name="ExtendedGrid.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ExtendedGrid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+            <state relative-caret-position="1422">
+              <caret line="82" column="22" lean-forward="false" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1510738351329" expanded="true" signature="2169:2228" ph="{...}" />
-                <marker date="1510738351329" expanded="true" signature="2303:2833" ph="{...}" />
-                <marker date="1510738351329" expanded="false" signature="2600:2614" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="true" signature="2898:4940" ph="{...}" />
-                <marker date="1510738351329" expanded="false" signature="3179:3193" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="false" signature="3695:3709" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="false" signature="4199:4213" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="false" signature="4715:4729" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="true" signature="5007:6701" ph="{...}" />
-                <marker date="1510738351329" expanded="false" signature="5233:5247" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="false" signature="5656:5670" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="false" signature="6079:6093" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="false" signature="6514:6528" ph="&lt;~&gt;" />
-                <marker date="1510738351329" expanded="true" signature="6793:7045" ph="{...}" />
-                <marker date="1510738351329" expanded="true" signature="7138:7415" ph="{...}" />
-                <marker date="1510738351329" expanded="false" signature="7470:7485" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="7506:7512" ph=" }" />
-                <marker date="1510738351329" expanded="false" signature="7547:7562" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="7578:7584" ph=" }" />
-                <marker date="1510738351329" expanded="false" signature="7657:7672" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="7707:7713" ph=" }" />
-                <marker date="1510738351329" expanded="false" signature="7761:7776" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="7801:7807" ph=" }" />
-                <marker date="1510738351329" expanded="false" signature="7859:7874" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="7903:7909" ph=" }" />
-                <marker date="1510738351329" expanded="true" signature="7943:8220" ph="{...}" />
-                <marker date="1510738351329" expanded="true" signature="8255:8445" ph="{...}" />
-                <marker date="1510738351329" expanded="false" signature="8480:8495" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="8519:8525" ph=" }" />
-                <marker date="1510738351329" expanded="false" signature="8558:8573" ph=" { " />
-                <marker date="1510738351329" expanded="false" signature="8597:8603" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -122,18 +104,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ExtendedCell</find>
-      <find>isCell</find>
-      <find>cell</find>
-      <find>clear</find>
-      <find>getNumber</find>
-      <find>seriali</find>
       <find>undobu</find>
       <find>showAlert</find>
       <find>deser</find>
       <find>deserializeGrid</find>
       <find>setpla</find>
-      <find>print</find>
       <find>tostr</find>
       <find>showalert</find>
       <find>compareGr</find>
@@ -150,8 +125,15 @@
       <find>create</find>
       <find>serialize</find>
       <find>serializeQueue</find>
-      <find>onan</find>
-      <find>onanim</find>
+      <find>resumeGame</find>
+      <find>compareGrid</find>
+      <find>TYPE_RESUME</find>
+      <find>setPlayers</find>
+      <find>print</find>
+      <find>serializeGrid</find>
+      <find>SERIALIZE_GRID_FILE_UNDO</find>
+      <find>onAnimationCompleted</find>
+      <find>compare</find>
     </findStrings>
     <replaceStrings>
       <replace>allCells</replace>
@@ -173,7 +155,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="uv119/something" />
       </map>
     </option>
   </component>
@@ -214,12 +196,12 @@
         <option value="$PROJECT_DIR$/src/sample/Cell.java" />
         <option value="$PROJECT_DIR$/src/sample/GameData.java" />
         <option value="$PROJECT_DIR$/src/sample/SerializableCell.java" />
-        <option value="$PROJECT_DIR$/src/sample/ExtendedGrid.java" />
-        <option value="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
         <option value="$PROJECT_DIR$/src/sample/ExtendedPlayer.java" />
         <option value="$PROJECT_DIR$/src/sample/Controller.java" />
-        <option value="$PROJECT_DIR$/src/sample/MenuController.java" />
+        <option value="$PROJECT_DIR$/src/sample/ExtendedGrid.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/sample/MenuController.java" />
+        <option value="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
       </list>
     </option>
   </component>
@@ -250,7 +232,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -261,25 +242,7 @@
             <path>
               <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
               <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
               <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
@@ -296,6 +259,12 @@
               <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
               <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="NonUIComponents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -303,8 +272,9 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -568,6 +538,7 @@
       <workItem from="1509806162243" duration="84000" />
       <workItem from="1510393129742" duration="10386000" />
       <workItem from="1510403880273" duration="702000" />
+      <workItem from="1510592445401" duration="13048000" />
     </task>
     <task id="LOCAL-00001" summary="Changed The Way Matrix is Initialized">
       <created>1507657030367</created>
@@ -884,56 +855,36 @@
       <option name="project" value="LOCAL" />
       <updated>1510566651428</updated>
     </task>
-    <task id="LOCAL-00046" summary="Added buggy resume functionality.">
-      <created>1510569989157</created>
+    <task id="LOCAL-00046" summary="Resume Working Partially. Before modifying compareGrid function.">
+      <created>1510597547879</created>
       <option name="number" value="00046" />
       <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1510569989157</updated>
+      <updated>1510597547879</updated>
     </task>
-    <task id="LOCAL-00047" summary="Undo working.">
-      <created>1510599461098</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1510599461098</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Undo working.">
-      <created>1510738049232</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1510738049232</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Undo working.">
-      <created>1510738195003</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1510738195003</updated>
-    </task>
-    <option name="localTasksCounter" value="50" />
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165063000" />
+    <option name="totallyTimeSpent" value="178111000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1307" height="780" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790446" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44894895" sideWeight="0.502682" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.4888889" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09771987" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.4888889" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25081432" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17394637" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17318007" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -948,10 +899,9 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="5.2083336E-4" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6261261" sideWeight="0.497318" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.003003003" sideWeight="0.497318" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -992,6 +942,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="Settings also working." />
     <MESSAGE value="Added drop down" />
     <MESSAGE value="Directory Cleaning" />
     <MESSAGE value="not working" />
@@ -1015,9 +966,8 @@
     <MESSAGE value="Undo working(few bugs)" />
     <MESSAGE value="2nd commit for undo.(not fully functional)" />
     <MESSAGE value="Added resume game enabling/disabling function." />
-    <MESSAGE value="Added buggy resume functionality." />
-    <MESSAGE value="Undo working." />
-    <option name="LAST_COMMIT_MESSAGE" value="Undo working." />
+    <MESSAGE value="Resume Working Partially. Before modifying compareGrid function." />
+    <option name="LAST_COMMIT_MESSAGE" value="Resume Working Partially. Before modifying compareGrid function." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1026,13 +976,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/NonUIComponents/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/NonUIComponents/Matrix.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1656">
@@ -1058,12 +1001,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="e#15937#15968#0" expanded="true" />
-            <element signature="e#22629#22647#0" expanded="true" />
-            <element signature="e#23733#23751#0" expanded="true" />
-            <element signature="e#29100#29114#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1334,52 +1272,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ExtendedGrid.java">
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/jfxrt.jar!/javafx/scene/Node.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1510738351329" expanded="true" signature="2169:2228" ph="{...}" />
-            <marker date="1510738351329" expanded="true" signature="2303:2833" ph="{...}" />
-            <marker date="1510738351329" expanded="false" signature="2600:2614" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="true" signature="2898:4940" ph="{...}" />
-            <marker date="1510738351329" expanded="false" signature="3179:3193" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="false" signature="3695:3709" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="false" signature="4199:4213" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="false" signature="4715:4729" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="true" signature="5007:6701" ph="{...}" />
-            <marker date="1510738351329" expanded="false" signature="5233:5247" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="false" signature="5656:5670" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="false" signature="6079:6093" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="false" signature="6514:6528" ph="&lt;~&gt;" />
-            <marker date="1510738351329" expanded="true" signature="6793:7045" ph="{...}" />
-            <marker date="1510738351329" expanded="true" signature="7138:7415" ph="{...}" />
-            <marker date="1510738351329" expanded="false" signature="7470:7485" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="7506:7512" ph=" }" />
-            <marker date="1510738351329" expanded="false" signature="7547:7562" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="7578:7584" ph=" }" />
-            <marker date="1510738351329" expanded="false" signature="7657:7672" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="7707:7713" ph=" }" />
-            <marker date="1510738351329" expanded="false" signature="7761:7776" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="7801:7807" ph=" }" />
-            <marker date="1510738351329" expanded="false" signature="7859:7874" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="7903:7909" ph=" }" />
-            <marker date="1510738351329" expanded="true" signature="7943:8220" ph="{...}" />
-            <marker date="1510738351329" expanded="true" signature="8255:8445" ph="{...}" />
-            <marker date="1510738351329" expanded="false" signature="8480:8495" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="8519:8525" ph=" }" />
-            <marker date="1510738351329" expanded="false" signature="8558:8573" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="8597:8603" ph=" }" />
-          </folding>
+        <state relative-caret-position="265">
+          <caret line="873" column="22" lean-forward="false" selection-start-line="873" selection-start-column="22" selection-end-line="873" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/ExtendedGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2628">
-          <caret line="159" column="5" lean-forward="true" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="1422">
+          <caret line="82" column="22" lean-forward="false" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1393,29 +1299,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5670">
-          <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
+        <state relative-caret-position="3960">
+          <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1510738351329" expanded="true" signature="8197:10315" ph="{...}" />
-            <marker date="1510738351329" expanded="true" signature="8816:10151" ph="{...}" />
-            <marker date="1510738351329" expanded="false" signature="10354:10369" ph=" { " />
-            <marker date="1510738351329" expanded="false" signature="10388:10394" ph=" }" />
-            <marker date="1510738351329" expanded="true" signature="10429:10764" ph="{...}" />
+            <element signature="e#5483#5491#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="103" column="44" lean-forward="true" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="e#15937#15968#0" expanded="true" />
-            <element signature="e#22629#22647#0" expanded="true" />
-            <element signature="e#23733#23751#0" expanded="true" />
-            <element signature="e#29100#29114#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="134">
+          <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>

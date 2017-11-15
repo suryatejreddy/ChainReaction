@@ -75,12 +75,20 @@ public class MenuController
         });
     }
 
+    public void enableResumeGame()
+    {
+        resumeGame.setDisable(false);
+    }
+
     public void initialize() throws IOException
     {
         System.out.println("init called");
         setData();
 
+
         Main.deserializeResume();
+
+
         resumeGame.setDisable(!Main.resumeGameBool);
 
         resumeGame.setOnMouseClicked(new EventHandler<MouseEvent>()
@@ -93,15 +101,14 @@ public class MenuController
 
                 try
                 {
-                    newPlayers=Main.deserializeQueue();
-                    newGrid=Main.deserializeGrid();
-                    System.out.println(newPlayers.toString());
-                    newGrid.printGrid();
+                    newPlayers=Main.deserializeQueue(Main.TYPE_RESUME);
+                    newGrid=Main.deserializeGrid(Main.TYPE_RESUME);
+
+
                     Main.launchGame(newPlayers.size(), newGrid.getSideLengthX(), newGrid.getSideLengthY());
-                    Main.allPlayers=Main.deserializeQueue();
-                    Main.gridPane=Main.deserializeGrid();
-                    Main.gridPane.printGrid();
-                    Main.gridPane=Main.setGridPane(Main.gridPane);
+                    Main.setPlayers(newPlayers);
+                    Main.compareGrid(newGrid,newPlayers);
+
                 }
                 catch(IOException e)
                 {
