@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +28,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="558">
+              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
                 <element signature="e#15937#15968#0" expanded="true" />
                 <element signature="e#22629#22647#0" expanded="true" />
@@ -226,7 +224,25 @@
             <path>
               <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
               <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
               <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
@@ -846,7 +862,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510599461098</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Undo working.">
+      <created>1510738049232</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1510738049232</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -854,7 +877,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1307" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1307,8 +1329,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="558">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
             <element signature="e#15937#15968#0" expanded="true" />
             <element signature="e#22629#22647#0" expanded="true" />
