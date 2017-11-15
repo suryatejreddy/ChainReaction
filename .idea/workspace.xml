@@ -519,14 +519,7 @@
       <workItem from="1510403880273" duration="702000" />
       <workItem from="1510592445401" duration="13219000" />
       <workItem from="1510670414955" duration="1122000" />
-      <workItem from="1510767867578" duration="5113000" />
-    </task>
-    <task id="LOCAL-00002" summary="Some minor changes to matrix initialization">
-      <created>1507658198910</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1507658198910</updated>
+      <workItem from="1510767867578" duration="5161000" />
     </task>
     <task id="LOCAL-00003" summary="Matrix being build properly.">
       <created>1507659624068</created>
@@ -864,11 +857,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510772926067</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Push pls">
+      <created>1510773100358</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1510773100359</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184517000" />
+    <option name="totallyTimeSpent" value="184565000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1922" height="1035" extended-state="6" />
@@ -944,7 +944,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="not working" />
     <MESSAGE value="Code Cleaning, added functions for repetitive code" />
     <MESSAGE value="It might be working now." />
     <MESSAGE value="Fixed Concurrency Error" />
@@ -969,7 +968,8 @@
     <MESSAGE value="Resume And Undo Fixes. Not Tested." />
     <MESSAGE value="Undo and Resume" />
     <MESSAGE value="Orientation fix." />
-    <option name="LAST_COMMIT_MESSAGE" value="Orientation fix." />
+    <MESSAGE value="Push pls" />
+    <option name="LAST_COMMIT_MESSAGE" value="Push pls" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
