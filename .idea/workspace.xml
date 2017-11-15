@@ -29,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="558">
-              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
                 <element signature="e#15937#15968#0" expanded="true" />
                 <element signature="e#22629#22647#0" expanded="true" />
@@ -43,10 +43,15 @@
       <file leaf-file-name="ExtendedCell.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5454">
-              <caret line="366" column="0" lean-forward="false" selection-start-line="366" selection-start-column="0" selection-end-line="366" selection-end-column="0" />
+            <state relative-caret-position="5670">
+              <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1510738351329" expanded="true" signature="8197:10315" ph="{...}" />
+                <marker date="1510738351329" expanded="true" signature="8816:10151" ph="{...}" />
+                <marker date="1510738351329" expanded="false" signature="10354:10369" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="10388:10394" ph=" }" />
+                <marker date="1510738351329" expanded="true" signature="10429:10764" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -65,10 +70,41 @@
       <file leaf-file-name="ExtendedGrid.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ExtendedGrid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
+            <state relative-caret-position="216">
               <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1510738351329" expanded="true" signature="2169:2228" ph="{...}" />
+                <marker date="1510738351329" expanded="true" signature="2303:2833" ph="{...}" />
+                <marker date="1510738351329" expanded="false" signature="2600:2614" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="true" signature="2898:4940" ph="{...}" />
+                <marker date="1510738351329" expanded="false" signature="3179:3193" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="false" signature="3695:3709" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="false" signature="4199:4213" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="false" signature="4715:4729" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="true" signature="5007:6701" ph="{...}" />
+                <marker date="1510738351329" expanded="false" signature="5233:5247" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="false" signature="5656:5670" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="false" signature="6079:6093" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="false" signature="6514:6528" ph="&lt;~&gt;" />
+                <marker date="1510738351329" expanded="true" signature="6793:7045" ph="{...}" />
+                <marker date="1510738351329" expanded="true" signature="7138:7415" ph="{...}" />
+                <marker date="1510738351329" expanded="false" signature="7470:7485" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="7506:7512" ph=" }" />
+                <marker date="1510738351329" expanded="false" signature="7547:7562" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="7578:7584" ph=" }" />
+                <marker date="1510738351329" expanded="false" signature="7657:7672" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="7707:7713" ph=" }" />
+                <marker date="1510738351329" expanded="false" signature="7761:7776" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="7801:7807" ph=" }" />
+                <marker date="1510738351329" expanded="false" signature="7859:7874" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="7903:7909" ph=" }" />
+                <marker date="1510738351329" expanded="true" signature="7943:8220" ph="{...}" />
+                <marker date="1510738351329" expanded="true" signature="8255:8445" ph="{...}" />
+                <marker date="1510738351329" expanded="false" signature="8480:8495" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="8519:8525" ph=" }" />
+                <marker date="1510738351329" expanded="false" signature="8558:8573" ph=" { " />
+                <marker date="1510738351329" expanded="false" signature="8597:8603" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -214,6 +250,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -266,9 +303,8 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1300,10 +1336,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/ExtendedGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
+        <state relative-caret-position="216">
           <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1510738351329" expanded="true" signature="2169:2228" ph="{...}" />
+            <marker date="1510738351329" expanded="true" signature="2303:2833" ph="{...}" />
+            <marker date="1510738351329" expanded="false" signature="2600:2614" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="true" signature="2898:4940" ph="{...}" />
+            <marker date="1510738351329" expanded="false" signature="3179:3193" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="false" signature="3695:3709" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="false" signature="4199:4213" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="false" signature="4715:4729" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="true" signature="5007:6701" ph="{...}" />
+            <marker date="1510738351329" expanded="false" signature="5233:5247" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="false" signature="5656:5670" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="false" signature="6079:6093" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="false" signature="6514:6528" ph="&lt;~&gt;" />
+            <marker date="1510738351329" expanded="true" signature="6793:7045" ph="{...}" />
+            <marker date="1510738351329" expanded="true" signature="7138:7415" ph="{...}" />
+            <marker date="1510738351329" expanded="false" signature="7470:7485" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="7506:7512" ph=" }" />
+            <marker date="1510738351329" expanded="false" signature="7547:7562" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="7578:7584" ph=" }" />
+            <marker date="1510738351329" expanded="false" signature="7657:7672" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="7707:7713" ph=" }" />
+            <marker date="1510738351329" expanded="false" signature="7761:7776" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="7801:7807" ph=" }" />
+            <marker date="1510738351329" expanded="false" signature="7859:7874" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="7903:7909" ph=" }" />
+            <marker date="1510738351329" expanded="true" signature="7943:8220" ph="{...}" />
+            <marker date="1510738351329" expanded="true" signature="8255:8445" ph="{...}" />
+            <marker date="1510738351329" expanded="false" signature="8480:8495" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="8519:8525" ph=" }" />
+            <marker date="1510738351329" expanded="false" signature="8558:8573" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="8597:8603" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1326,10 +1393,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5454">
-          <caret line="366" column="0" lean-forward="false" selection-start-line="366" selection-start-column="0" selection-end-line="366" selection-end-column="0" />
+        <state relative-caret-position="5670">
+          <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1510738351329" expanded="true" signature="8197:10315" ph="{...}" />
+            <marker date="1510738351329" expanded="true" signature="8816:10151" ph="{...}" />
+            <marker date="1510738351329" expanded="false" signature="10354:10369" ph=" { " />
+            <marker date="1510738351329" expanded="false" signature="10388:10394" ph=" }" />
+            <marker date="1510738351329" expanded="true" signature="10429:10764" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1337,7 +1409,7 @@
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
             <element signature="e#15937#15968#0" expanded="true" />
             <element signature="e#22629#22647#0" expanded="true" />
