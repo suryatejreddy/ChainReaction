@@ -69,10 +69,12 @@ public class Main extends Application implements Serializable
         alertShown=false;
     }
 
+
     public static void setResumeGameBool(boolean resumeGameBool)
     {
         Main.resumeGameBool=resumeGameBool;
     }
+
 
     public static void serializeResume() throws IOException
     {
