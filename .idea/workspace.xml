@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExtendedCell.java" afterPath="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -523,7 +520,7 @@
       <workItem from="1510403880273" duration="702000" />
       <workItem from="1510592445401" duration="13219000" />
       <workItem from="1510670414955" duration="1122000" />
-      <workItem from="1510767867578" duration="4180000" />
+      <workItem from="1510767867578" duration="4587000" />
     </task>
     <task id="LOCAL-00001" summary="Changed The Way Matrix is Initialized">
       <created>1507657030367</created>
@@ -854,11 +851,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510606563396</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Undo and Resume">
+      <created>1510772166675</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1510772166675</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183584000" />
+    <option name="totallyTimeSpent" value="183991000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1922" height="1035" extended-state="6" />
@@ -935,7 +939,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Added drop down" />
     <MESSAGE value="Directory Cleaning" />
     <MESSAGE value="not working" />
     <MESSAGE value="Code Cleaning, added functions for repetitive code" />
@@ -960,7 +963,8 @@
     <MESSAGE value="Added resume game enabling/disabling function." />
     <MESSAGE value="Resume Working Partially. Before modifying compareGrid function." />
     <MESSAGE value="Resume And Undo Fixes. Not Tested." />
-    <option name="LAST_COMMIT_MESSAGE" value="Resume And Undo Fixes. Not Tested." />
+    <MESSAGE value="Undo and Resume" />
+    <option name="LAST_COMMIT_MESSAGE" value="Undo and Resume" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
