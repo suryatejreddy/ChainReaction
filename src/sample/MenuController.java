@@ -85,7 +85,6 @@ public class MenuController
         System.out.println("init called");
         setData();
 
-
         Main.deserializeResume();
 
 
