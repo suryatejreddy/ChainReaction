@@ -352,12 +352,14 @@ public class Main extends Application implements Serializable
 
     public static void setPlayers(Queue<ExtendedPlayer> newPlayers)
     {
+        List tempList = new ArrayList(newPlayers);
         allPlayers.clear();
         int numberOfPlayers = newPlayers.size();
         int i = 0;
         while (i<numberOfPlayers)
         {
-            ExtendedPlayer player = new ExtendedPlayer(SettingsController.getSelectedColour(i), true);
+            ExtendedPlayer tempPlayer = (ExtendedPlayer) tempList.get(i);
+            ExtendedPlayer player = new ExtendedPlayer(SettingsController.getSelectedColour(tempPlayer.getPlayerColour()), true);
             allPlayers.add(player); //adding the player to the game
             i++;
         }
@@ -396,7 +398,6 @@ public class Main extends Application implements Serializable
         {
             allPlayers.add(tempList.get(i));
         }
-        System.out.println(allPlayers);
         setGridBorderColour(allPlayers.peek());
     }
 
@@ -438,10 +439,11 @@ public class Main extends Application implements Serializable
 
     public static void launchGame(int n, int x , int y)
     {
+
         Scene newScene = null;
         try
         {
-            newScene = getGameScene(n,x,y);
+            newScene = getGameScene(n,y,x);
         }
         catch(IOException e)
         {
@@ -589,7 +591,6 @@ public class Main extends Application implements Serializable
         try{
 //            gridPane.printGrid();
             updatePlayerStats(allPlayers);  //remove dead players
-
             ExtendedPlayer nextPlayer = allPlayers.peek();
             setGridBorderColour(nextPlayer);
             if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
@@ -663,6 +664,7 @@ public class Main extends Application implements Serializable
             });
             gameoverDialog.show();
         }
+
     }
 
 
