@@ -638,14 +638,6 @@ public class Main extends Application implements Serializable
         if(!alertShown)
         {
             alertShown=true;
-            resumeGameBool = false;
-            try {
-                serializeResume();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
             Alert gameoverDialog = new Alert(Alert.AlertType.NONE);
             gameoverDialog.setTitle("Game Over");
             gameoverDialog.setHeaderText(null);
@@ -667,6 +659,15 @@ public class Main extends Application implements Serializable
             });
             gameoverDialog.show();
         }
+        resumeGameBool = false;
+        try {
+            serializeResume();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
 
     }
 
