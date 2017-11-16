@@ -2,45 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Stylesheets/mainGrid.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-brown.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-orange.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-red.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-violet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-white.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/Stylesheets/grid-with-borders-yellow.css" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-blue.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-1.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-brown.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-2.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-green.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-3.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-orange.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-4.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-red.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-5.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-violet.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-6.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-white.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-7.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-yellow.css" afterPath="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-8.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedPlayer.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedPlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$1.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$2.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$3.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$1.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$2.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/FXML_Files/Settings.fxml" afterPath="$PROJECT_DIR$/out/production/ChainReaction/FXML_Files/Settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridResume.ser" afterPath="$PROJECT_DIR$/serializeGridResume.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridUndo.ser" afterPath="$PROJECT_DIR$/serializeGridUndo.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueResume.ser" afterPath="$PROJECT_DIR$/serializeQueueResume.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueUndo.ser" afterPath="$PROJECT_DIR$/serializeQueueUndo.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FXML_Files/Settings.fxml" afterPath="$PROJECT_DIR$/src/FXML_Files/Settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExtendedCell.java" afterPath="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExtendedPlayer.java" afterPath="$PROJECT_DIR$/src/sample/ExtendedPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/MenuController.java" afterPath="$PROJECT_DIR$/src/sample/MenuController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/SettingsController.java" afterPath="$PROJECT_DIR$/src/sample/SettingsController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,7 +25,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2030">
+            <state relative-caret-position="-1166">
               <caret line="523" column="26" lean-forward="false" selection-start-line="523" selection-start-column="26" selection-end-line="523" selection-end-column="26" />
               <folding />
             </state>
@@ -579,14 +541,7 @@
       <workItem from="1510776278514" duration="90000" />
       <workItem from="1510812744335" duration="1176000" />
       <workItem from="1510825158907" duration="2876000" />
-      <workItem from="1510836944932" duration="21490000" />
-    </task>
-    <task id="LOCAL-00007" summary="forgot what i added">
-      <created>1507669562803</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1507669562803</updated>
+      <workItem from="1510836944932" duration="21573000" />
     </task>
     <task id="LOCAL-00008" summary="Cleaned the mess i made. Important commit. Switiching to a new branch.">
       <created>1508000882766</created>
@@ -924,11 +879,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510827708142</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Resume">
+      <created>1510866847306</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1510866847308</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="211890000" />
+    <option name="totallyTimeSpent" value="211973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1922" height="1035" extended-state="6" />
@@ -1008,7 +970,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Code working without animation" />
     <MESSAGE value="Transition working 10%" />
     <MESSAGE value="I have no idea how, but it works. LOL" />
     <MESSAGE value="Pushing before  going to sleep." />
@@ -1033,7 +994,8 @@
     <MESSAGE value="Bug fixes." />
     <MESSAGE value="LEl" />
     <MESSAGE value="Made some shitty changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made some shitty changes." />
+    <MESSAGE value="Resume" />
+    <option name="LAST_COMMIT_MESSAGE" value="Resume" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1409,7 +1371,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2030">
+        <state relative-caret-position="-1166">
           <caret line="523" column="26" lean-forward="false" selection-start-line="523" selection-start-column="26" selection-end-line="523" selection-end-column="26" />
           <folding />
         </state>
