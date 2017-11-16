@@ -708,6 +708,19 @@ public class Main extends Application implements Serializable
         return false;
     }
 
+    public static void setForAllCells(Boolean flag)
+    {
+
+        for (int i=gridPane.getSideLengthY()-1;i>-1;i--)
+        {
+            for (int j =0;j<gridPane.getSideLengthX();j++)
+            {
+                ExtendedCell tempCell = gridPane.getCellFromCoordinate(i,j);
+                tempCell.getCell().setDisable(flag);
+            }
+        }
+    }
+
     @SuppressWarnings("Duplicates")
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y ) throws IOException
     {
@@ -725,7 +738,6 @@ public class Main extends Application implements Serializable
 
             curPlayer = allPlayers.peek();
             ExtendedCell cellSelected = gridPane.getCellFromCoordinate(y, x);
-
             if (cellSelected.isCellOccupied())
             {
                 Color curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour();
@@ -736,6 +748,7 @@ public class Main extends Application implements Serializable
                     serializeQueue(TYPE_UNDO);
                     serializeGrid(TYPE_UNDO);
                     allPlayers.remove(curPlayer);
+                    setForAllCells(true);
                     cellSelected.addBall(curPlayer,true,true);
 
                 }
@@ -752,6 +765,7 @@ public class Main extends Application implements Serializable
                 serializeQueue(TYPE_UNDO);
                 serializeGrid(TYPE_UNDO);
                 allPlayers.remove(curPlayer);
+                setForAllCells(true);
                 cellSelected.addBall(curPlayer,true,true);
             }
         }
@@ -794,6 +808,7 @@ public class Main extends Application implements Serializable
             updatePlayerStats(allPlayers);  //remove dead players
             ExtendedPlayer nextPlayer = allPlayers.peek();
             changeColorOfGrid(nextPlayer);
+            setForAllCells(false);
             if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
             {
                 allPlayers.add(curPlayer);
@@ -809,7 +824,6 @@ public class Main extends Application implements Serializable
             {
                 gameOver=true;
                 System.out.println("thuggs");
-//                System.out.println("You might have won");
                 showAlert(curPlayer);
                 System.out.println("showAlert called from allplayerssize==1");
             }
