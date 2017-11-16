@@ -2,19 +2,20 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SettingsController
 {
-
-
 
     @FXML
     public ColorPicker playerCount0;
@@ -40,32 +41,10 @@ public class SettingsController
     @FXML
     public ColorPicker playerCount7;
 
-    public static int playerColour0;
+    public static ArrayList<Color> selectedColors = new ArrayList<>();
 
-    public static int playerColour1;
+    static {
 
-    public static int playerColour2;
-
-    public static int playerColour3;
-
-    public static int playerColour4;
-
-    public static int playerColour5;
-
-    public static int playerColour6;
-
-    public static int playerColour7;
-
-    static
-    {
-        playerColour0=0;
-        playerColour1=1;
-        playerColour2=2;
-        playerColour3=3;
-        playerColour4=4;
-        playerColour5=5;
-        playerColour6=6;
-        playerColour7=7;
     }
 
 
@@ -135,113 +114,95 @@ public class SettingsController
         alert.show();
     }
 
-    public static int getSelectedColour(int i)
+    public static Color getSelectedColour(int i)
     {
-        switch(i)
-        {
-            case 0: return playerColour0;
-            case 1: return playerColour1;
-            case 2: return playerColour2;
-            case 3: return playerColour3;
-            case 4: return playerColour4;
-            case 5: return playerColour5;
-            case 6: return playerColour6;
-            case 7: return playerColour7;
-            default: return -1;
-        }
+        return selectedColors.get(i);
     }
+
+    public void setData()
+    {
+        playerCount0.setValue(ExtendedPlayer.colorOfPlayer1);
+        playerCount1.setValue(ExtendedPlayer.colorOfPlayer2);
+        playerCount2.setValue(ExtendedPlayer.colorOfPlayer3);
+        playerCount3.setValue(ExtendedPlayer.colorOfPlayer4);
+        playerCount4.setValue(ExtendedPlayer.colorOfPlayer5);
+        playerCount5.setValue(ExtendedPlayer.colorOfPlayer6);
+        playerCount6.setValue(ExtendedPlayer.colorOfPlayer7);
+        playerCount7.setValue(ExtendedPlayer.colorOfPlayer8);
+
+        playerCount0.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer1 = playerCount0.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        playerCount1.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer2 = playerCount1.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        playerCount2.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer3 = playerCount2.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        playerCount3.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer4 = playerCount3.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        playerCount4.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer5 = playerCount4.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        playerCount5.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer6 = playerCount5.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        playerCount6.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer7 = playerCount6.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        playerCount7.setOnAction((ActionEvent t) ->{
+            ExtendedPlayer.colorOfPlayer8 = playerCount7.getValue();
+            addColorsToMainArray();
+            Main.changeCSSforAllPlayers();
+        });
+
+        addColorsToMainArray();
+
+    }
+
 
     public void initialize()
     {
-//        setData(playerCount1);
-//        setData(playerCount2);
-//        setData(playerCount3);
-//        setData(playerCount4);
-//        setData(playerCount5);
-//        setData(playerCount6);
-//        setData(playerCount7);
-//        setData(playerCount0);
-//
-//        playerCount0.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour0=(int)t1;
-//                System.out.println(playerColour0);
-//            }
-//        });
-//
-//        playerCount1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour1=(int)t1;
-//                System.out.println(playerColour1);
-//            }
-//        });
-//
-//        playerCount2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour2=(int)t1;
-//                System.out.println(playerColour2);
-//            }
-//        });
-//
-//        playerCount3.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour3=(int)t1;
-//                System.out.println(playerColour3);
-//            }
-//        });
-//
-//        playerCount4.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour4=(int)t1;
-//                System.out.println(playerColour4);
-//            }
-//        });
-//
-//        playerCount5.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour5=(int)t1;
-//                System.out.println(playerColour5);
-//            }
-//        });
-//
-//        playerCount6.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour6=(int)t1;
-//                System.out.println(playerColour6);
-//            }
-//        });
-//
-//        playerCount7.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-//            {
-//                playerColour7=(int)t1;
-//                System.out.println(playerColour7);
-//            }
-//        });
+        setData();
     }
+
+    public void addColorsToMainArray()
+
+    {
+        selectedColors.clear();
+        selectedColors.add(playerCount0.getValue());
+        selectedColors.add(playerCount1.getValue());
+        selectedColors.add(playerCount2.getValue());
+        selectedColors.add(playerCount3.getValue());
+        selectedColors.add(playerCount4.getValue());
+        selectedColors.add(playerCount5.getValue());
+        selectedColors.add(playerCount6.getValue());
+        selectedColors.add(playerCount7.getValue());
+        Main.selectedColors = new ArrayList<>(selectedColors);
+    }
+
 
     public void backToGame()
     {
@@ -250,29 +211,35 @@ public class SettingsController
             showWarning();
             return;
         }
+        Main.selectedColors.clear();
+        addColorsToMainArray();
         Main ob = new Main();
         ob.backToMenu();
     }
 
+    public static Color[] getSelectedColors()
+    {
+        Color[] colourArray=new Color[8];
+        for (int i=0;i<8;i++)
+        {
+            colourArray[i] = selectedColors.get(i);
+        }
+        return  colourArray;
+
+    }
+
     public static boolean clashExists()
     {
-        int[] colourArray=new int[8];
-        colourArray[0]=playerColour0;
-        colourArray[1]=playerColour1;
-        colourArray[2]=playerColour2;
-        colourArray[3]=playerColour3;
-        colourArray[4]=playerColour4;
-        colourArray[5]=playerColour5;
-        colourArray[6]=playerColour6;
-        colourArray[7]=playerColour7;
-
+        Color[] colourArray = getSelectedColors();
         int flag=0;
 
         for(int i=0;i<MenuController.numPlayers;i++)
         {
+            Color color1 = colourArray[i];
             for(int j=i+1;j<MenuController.numPlayers;j++)
             {
-                if(colourArray[i]==colourArray[j])
+                Color color2 = colourArray[j];
+                if((color1.getRed() == color2.getRed()) && (color1.getGreen() == color2.getGreen()) && (color1.getBlue() == color2.getBlue()))
                 {
                     flag=1;
                     break;

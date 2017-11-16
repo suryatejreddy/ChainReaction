@@ -3,6 +3,7 @@ package sample;
 import NonUIComponents.Cell;
 import NonUIComponents.Game;
 import NonUIComponents.Matrix;
+import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,27 +20,48 @@ public class ExtendedPlayer implements Serializable
     public static final int BROWN=6;
     public static final int WHITE=7;
 
+    public static  Color colorOfPlayer1 = Color.VIOLET;
+    public static  Color colorOfPlayer2 = Color.BLUE;
+    public static  Color colorOfPlayer3 = Color.GREEN;
+    public static  Color colorOfPlayer4 = Color.YELLOW;
+    public static  Color colorOfPlayer5 = Color.ORANGE;
+    public static  Color colorOfPlayer6 = Color.RED;
+    public static  Color colorOfPlayer7 = Color.BROWN;
+    public static  Color colorOfPlayer8 = Color.WHITE;
+
+
+
     public static final long serialVersionUID=6898952L;
 
+    public transient Color playerColor;
 
-    private int playerColour;
+    public double r , g , b;
+
+    public int playerNumber;
+
+
+
 
     private HashSet<ExtendedCell> currentCells;
 
     private boolean isAlive;
     private boolean takenFirstMove;
 
-    public ExtendedPlayer(int playerColour,boolean isAlive)
+    public ExtendedPlayer(Color playerColour,boolean isAlive,int p)
     {
         this.isAlive=isAlive;
-        this.playerColour=playerColour;
+        this.playerColor=playerColour;
         this.takenFirstMove=false;
         this.currentCells = new HashSet<ExtendedCell>();
+        this.r = playerColour.getRed();
+        this.g = playerColour.getGreen();
+        this.b = playerColour.getBlue();
+        this.playerNumber = p;
     }
 
-    public int getPlayerColour()
+    public Color getPlayerColour()
     {
-        return playerColour;
+        return playerColor;
     }
 
     public boolean hasTakenFirstMove()
@@ -49,18 +71,7 @@ public class ExtendedPlayer implements Serializable
 
     public String getPlayerColourByString()
     {
-        switch(this.getPlayerColour())
-        {
-            case VIOLET:    return "Violet";
-            case BLUE:      return "Blue";
-            case GREEN:     return "Green";
-            case YELLOW:    return "Yellow";
-            case ORANGE:    return "Orange";
-            case RED:       return "Red";
-            case BROWN:     return "Brown";
-            case WHITE:     return "White";
-        }
-        return null;
+        return playerColor.toString();
     }
 
 
@@ -74,9 +85,9 @@ public class ExtendedPlayer implements Serializable
         isAlive = alive;
     }
 
-    public void setPlayerColour(int playerColour)
+    public void setPlayerColour(Color playerColour)
     {
-        this.playerColour = playerColour;
+        this.playerColor = playerColour;
     }
 
     public void setTakenFirstMove(boolean takenFirstMove)
@@ -131,6 +142,30 @@ public class ExtendedPlayer implements Serializable
         return (this.getPlayerColourByString() + " " + this.isAliveString() + " in " + this.currentCells.size() +  " cells");
     }
 
+    public static Color returnColorOfPlayer(int i)
+    {
+        switch (i){
+            case 0:
+                return colorOfPlayer1;
+            case 1:
+                return colorOfPlayer2;
+            case 2:
+                return colorOfPlayer3;
+            case 3:
+                return  colorOfPlayer4;
+            case 4:
+                return colorOfPlayer5;
+            case 5:
+                return colorOfPlayer6;
+            case 6:
+                return  colorOfPlayer7;
+            case 7:
+                return colorOfPlayer8;
+        }
+        return null;
+    }
+
+
     public void setCurrentCells(HashSet<ExtendedCell> currentCells)
     {
         this.currentCells=currentCells;
@@ -139,5 +174,10 @@ public class ExtendedPlayer implements Serializable
     public HashSet<ExtendedCell> getCurrentCells()
     {
         return currentCells;
+    }
+
+    public Color makeNewColor()
+    {
+        return Color.color(this.r,this.g,this.b);
     }
 }

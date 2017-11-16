@@ -263,7 +263,7 @@ public class ExtendedCell implements Serializable
                 getGroup().getChildren().clear();
                 for(int i=0;i<groupSize;i++)
                 {
-                    Sphere sphere = getNewSphere(Main.getColor(curPlayer));
+                    Sphere sphere = getNewSphere(curPlayer.getPlayerColour());
                     setTranslationToSphere(sphere);
                     getGroup().getChildren().add(sphere);
                 }
@@ -284,7 +284,7 @@ public class ExtendedCell implements Serializable
 
 
         //UI_PART, add a new Sphere
-        Sphere sphere = getNewSphere(Main.getColor(curPlayer));
+        Sphere sphere = getNewSphere(curPlayer.getPlayerColour());
         setTranslationToSphere(sphere);
         getGroup().getChildren().add(sphere);
             //Add the group in case it was not added
@@ -305,7 +305,7 @@ public class ExtendedCell implements Serializable
             this.emptyCell();
 
 
-            ArrayList<Sphere> allSpheres = getAllSpheres(Main.getColor(curPlayer),this.getCriticalMass());
+            ArrayList<Sphere> allSpheres = getAllSpheres(curPlayer.getPlayerColour(),this.getCriticalMass());
             ParallelTransition mainTransition = new ParallelTransition();
             for (int i=0;i<this.neighbouringCells.size();i++)
             {
@@ -336,7 +336,7 @@ public class ExtendedCell implements Serializable
                 getGroup().getChildren().clear();
                 for(int i=0;i<numberOfBallsPresent;i++)
                 {
-                    Sphere newSphere = getNewSphere(Main.getColor(this.playerOccupiedBy));
+                    Sphere newSphere = getNewSphere(curPlayer.getPlayerColour());
                     setTranslationToSphere(newSphere);
                     getGroup().getChildren().add(newSphere);
                 }

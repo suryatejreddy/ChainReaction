@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
@@ -9,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
@@ -45,7 +45,7 @@ public class Main extends Application implements Serializable
     public static final int TYPE_UNDO = 0;
     public static final int TYPE_RESUME = 1;
 
-
+    public static ArrayList<Color> selectedColors;
 
     public static boolean resumeGameBool;
 
@@ -55,6 +55,10 @@ public class Main extends Application implements Serializable
 
     public static boolean alertShown;
 
+    public static StackPane mainRoot;
+
+    public static boolean tempUsed = false;
+
     static
     {
         currentX=2;
@@ -63,15 +67,17 @@ public class Main extends Application implements Serializable
         resumeGameBool=false;
         gameOver=false;
         namesOfStylesheets=new ArrayList<String>();
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-violet.css");
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-blue.css");
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-green.css");
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-yellow.css");
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-orange.css");
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-red.css");
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-brown.css");
-        namesOfStylesheets.add("Stylesheets/grid-with-borders-white.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-1.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-2.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-3.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-4.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-5.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-6.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-7.css");
+        namesOfStylesheets.add("Stylesheets/grid-with-borders-8.css");
         alertShown=false;
+        selectedColors = new ArrayList<>();
+
     }
 
     public static void setResumeGameBool(boolean resumeGameBool)
@@ -165,6 +171,14 @@ public class Main extends Application implements Serializable
         }
     }
 
+    public static void initColorForPlayers(Queue<ExtendedPlayer> tempPlayers)
+    {
+        for (ExtendedPlayer temp : tempPlayers)
+        {
+            temp.playerColor = Color.color(temp.r,temp.g,temp.b);
+        }
+    }
+
     public static Queue<ExtendedPlayer> deserializeQueue(int type) throws IOException, ClassNotFoundException
     {
         ObjectInputStream in=null;
@@ -182,6 +196,7 @@ public class Main extends Application implements Serializable
         {
             in=new ObjectInputStream(new FileInputStream(filename));
             ret=(Queue<ExtendedPlayer>) in.readObject();
+            initColorForPlayers(ret);
         }
         finally
         {
@@ -218,18 +233,18 @@ public class Main extends Application implements Serializable
     }
 
 
+
     public static Scene getGameScene(int numberOfPlayers, int x , int y) throws IOException
     {
         allPlayers.clear();
         int i = 0;
         while (i<numberOfPlayers)
         {
-            ExtendedPlayer player = new ExtendedPlayer(SettingsController.getSelectedColour(i), true);
+            ExtendedPlayer player = new ExtendedPlayer(ExtendedPlayer.returnColorOfPlayer(i), true,i+1);
             allPlayers.add(player); //adding the player to the game
             i++;
         }
 
-        System.out.println("Enter X and Y.");
 
         BooleanProperty[][] switches = new BooleanProperty[x][y];
         for (i = 0; i < x; i++)
@@ -243,6 +258,7 @@ public class Main extends Application implements Serializable
         gridPane = createGrid(x, y);
         StackPane root = new StackPane(gridPane.getGridPane());
         root.setStyle("-fx-background-color: null;");
+        mainRoot = root;
 
         AnchorPane root1 = new AnchorPane(root);
         root1.setPrefHeight(50);
@@ -346,11 +362,20 @@ public class Main extends Application implements Serializable
         root1.getChildren().add(rootY);
 
         scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
-        scene.getStylesheets().add(namesOfStylesheets.get(allPlayers.peek().getPlayerColour()));
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("Stylesheets/grid-with-borders-1.css");
+        changeColorOfGrid(allPlayers.peek());
 
         Main.serializeGrid(TYPE_UNDO);
         Main.serializeQueue(TYPE_UNDO);
         return scene;
+    }
+
+    public static void changeColorOfGrid(ExtendedPlayer curPlayer)
+    {
+        Color presentColor = curPlayer.getPlayerColour();
+        String colorInString = toHex((int)(presentColor.getRed() * 255),(int) (presentColor.getGreen()*255), (int) (presentColor.getBlue()* 255));
+        mainRoot.setStyle("cell-border-color: " + colorInString + " ;");
     }
 
     public static void setPlayers(Queue<ExtendedPlayer> newPlayers)
@@ -361,11 +386,11 @@ public class Main extends Application implements Serializable
         int i = 0;
         while (i<numberOfPlayers)
         {
-            ExtendedPlayer tempPlayer = (ExtendedPlayer) tempList.get(i);
-            ExtendedPlayer player = new ExtendedPlayer(SettingsController.getSelectedColour(tempPlayer.getPlayerColour()), true);
+            ExtendedPlayer player = new ExtendedPlayer(ExtendedPlayer.returnColorOfPlayer(i), true, i +1);
             allPlayers.add(player); //adding the player to the game
             i++;
         }
+        initColorForPlayers(allPlayers);
     }
 
 
@@ -384,7 +409,7 @@ public class Main extends Application implements Serializable
                 {
                     for (int k =0 ; k < newCell.getNumberOfBallsPresent();k ++)
                     {
-                        currentCell.addBall(getPlayerOfColor(newCell.getPlayerOccupiedBy().getPlayerColour(),allPlayers),true,true);
+                        currentCell.addBall(getPlayerOfColor(newCell.getPlayerOccupiedBy().makeNewColor(),allPlayers),true,true);
                     }
                 }
 
@@ -401,14 +426,14 @@ public class Main extends Application implements Serializable
         {
             allPlayers.add(tempList.get(i));
         }
-        setGridBorderColour(allPlayers.peek());
+        changeColorOfGrid(allPlayers.peek());
     }
 
-    public static ExtendedPlayer getPlayerOfColor(int color, Queue<ExtendedPlayer> players)
+    public static ExtendedPlayer getPlayerOfColor(Color color, Queue<ExtendedPlayer> players)
     {
         for (ExtendedPlayer p : players)
         {
-            if (p.getPlayerColour() == color)
+            if (compareColors(p.playerColor,color))
             {
                 return p;
             }
@@ -442,7 +467,6 @@ public class Main extends Application implements Serializable
 
     public static void launchGame(int n, int x , int y)
     {
-
         Scene newScene = null;
         try
         {
@@ -477,27 +501,7 @@ public class Main extends Application implements Serializable
 
     public static Color getColor(ExtendedPlayer player)
     {
-        switch (player.getPlayerColour())
-        {
-            case 0:
-                return Color.VIOLET;
-            case 1:
-                return Color.BLUE;
-            case 2:
-                return Color.GREEN;
-            case 3:
-                return Color.YELLOW;
-            case 4:
-                return Color.ORANGE;
-            case 5:
-                return Color.RED;
-            case 6:
-                return Color.BROWN;
-            case 7:
-                return Color.WHITE;
-            default:
-                return null;
-        }
+        return player.getPlayerColour();
     }
 
 
@@ -515,6 +519,15 @@ public class Main extends Application implements Serializable
                 }
             }
         }
+    }
+
+    public static boolean compareColors(Color color1 , Color color2)
+    {
+        if ((color1.getRed() == color2.getRed())  && (color2.getBlue() == color2.getBlue()) && (color2.getGreen() == color2.getGreen()))
+        {
+            return true;
+        }
+        return false;
     }
 
     @SuppressWarnings("Duplicates")
@@ -538,8 +551,8 @@ public class Main extends Application implements Serializable
 
             if (cellSelected.isCellOccupied())
             {
-                int curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour(); //there are some balls existing there
-                if (curPlayer!=null && curCellColor == curPlayer.getPlayerColour())
+                Color curCellColor = cellSelected.getPlayerOccupiedBy().getPlayerColour();
+                if (curPlayer!=null && compareColors(curCellColor,curPlayer.getPlayerColour()))
                 { // check if player is adding to his color
                     //add ball function
                     allPlayers.remove(curPlayer);
@@ -595,7 +608,7 @@ public class Main extends Application implements Serializable
 //            gridPane.printGrid();
             updatePlayerStats(allPlayers);  //remove dead players
             ExtendedPlayer nextPlayer = allPlayers.peek();
-            setGridBorderColour(nextPlayer);
+            changeColorOfGrid(nextPlayer);
             if (curPlayer.isAlive()  && (!allPlayers.contains(curPlayer)))
             {
                 allPlayers.add(curPlayer);
@@ -641,7 +654,7 @@ public class Main extends Application implements Serializable
             Alert gameoverDialog = new Alert(Alert.AlertType.NONE);
             gameoverDialog.setTitle("Game Over");
             gameoverDialog.setHeaderText(null);
-            gameoverDialog.setContentText("Player " + curPlayer.getPlayerColourByString() + " won!");
+            gameoverDialog.setContentText("Player " + curPlayer.playerNumber + " won!");
             gameoverDialog.getButtonTypes().removeAll();
             ButtonType buttonType = new ButtonType("Return to Menu");
             gameoverDialog.getButtonTypes().add(buttonType);
@@ -671,36 +684,6 @@ public class Main extends Application implements Serializable
 
     }
 
-
-    public static void serializeData(ArrayList<SerializableCell> gameData , int file) throws IOException
-    {
-        ObjectOutputStream out = null;
-        String fileName = "data"+ Integer.toString(file) + ".ser";
-        try
-        {
-            out = new ObjectOutputStream(new FileOutputStream(fileName));
-            out.writeObject(gameData);
-        }
-        finally {
-            out.close();
-        }
-    }
-
-
-
-    public static SerializableCell getSerializableCellFromCoordinate(ArrayList<SerializableCell> gameData, int x, int y)
-    {
-        for (SerializableCell myCell : gameData)
-        {
-            if (myCell.x == x && myCell.y == y)
-            {
-                return myCell;
-            }
-        }
-        return null;
-    }
-
-
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
     {
         Group group = new Group();
@@ -722,7 +705,7 @@ public class Main extends Application implements Serializable
         return cell;
     }
 
-    public static void tryingSomeBullShit(String fileName)
+    public static void changeCss( Color color, String fileName)
     {
         List<String> lines = new ArrayList<String>();
         String line = null;
@@ -737,7 +720,9 @@ public class Main extends Application implements Serializable
             }
             fr.close();
             br.close();
-            lines.set(3, "    cell-border-color: #646464 ;");
+            String colorInHex = toHex((int)(color.getRed()*255),(int)(color.getGreen()*255), (int)(color.getBlue()*255));
+            String newLine = "    cell-border-color: " + colorInHex + " ;";
+            lines.set(3, newLine);
             FileWriter fw = new FileWriter(f1);
             BufferedWriter out = new BufferedWriter(fw);
             for(String s : lines)
@@ -751,18 +736,63 @@ public class Main extends Application implements Serializable
         }
     }
 
+    public static String toHex(int r, int g, int b) {
+        return "#" + toBrowserHexValue(r) + toBrowserHexValue(g) + toBrowserHexValue(b);
+    }
+
+    private static String toBrowserHexValue(int number) {
+        StringBuilder builder = new StringBuilder(Integer.toHexString(number & 0xff));
+        while (builder.length() < 2) {
+            builder.append("0");
+        }
+        return builder.toString().toUpperCase();
+    }
+
+    public static void getColorInCSSFile(int number)
+    {
+        String fileName = "Stylesheets/grid-with-borders-" + number + ".css";
+        List<String> lines = new ArrayList<String>();
+        String line = null;
+        try{
+            File f1 = new File("src/" + fileName);
+            FileReader fr = new FileReader(f1);
+            BufferedReader br = new BufferedReader(fr);
+            while ((line = br.readLine()) != null) {
+                if (line.contains("java"))
+                    line = line.replace("java", " ");
+                lines.add(line);
+            }
+            fr.close();
+            br.close();
+            System.out.println(lines.get(3));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public static void changeCSSforAllPlayers()
+    {
+        changeCss(ExtendedPlayer.colorOfPlayer1,"Stylesheets/grid-with-borders-1.css");
+        changeCss(ExtendedPlayer.colorOfPlayer2,"Stylesheets/grid-with-borders-2.css");
+        changeCss(ExtendedPlayer.colorOfPlayer3,"Stylesheets/grid-with-borders-3.css");
+        changeCss(ExtendedPlayer.colorOfPlayer4,"Stylesheets/grid-with-borders-4.css");
+        changeCss(ExtendedPlayer.colorOfPlayer5,"Stylesheets/grid-with-borders-5.css");
+        changeCss(ExtendedPlayer.colorOfPlayer6,"Stylesheets/grid-with-borders-6.css");
+        changeCss(ExtendedPlayer.colorOfPlayer7,"Stylesheets/grid-with-borders-7.css");
+        changeCss(ExtendedPlayer.colorOfPlayer8,"Stylesheets/grid-with-borders-8.css");
+
+    }
+
+
 
     private static void setGridBorderColour(ExtendedPlayer curPlayer)
     {
-        String colour=curPlayer.getPlayerColourByString().toLowerCase();
-        namesOfStylesheets.forEach(e ->
-        {
-            if(e.contains(colour))
-            {
-                scene.getStylesheets().clear();
-                scene.getStylesheets().add(e);
-            }
-        });
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(namesOfStylesheets.get(curPlayer.playerNumber - 1));
     }
 
 
@@ -824,13 +854,9 @@ public class Main extends Application implements Serializable
                 gridPane.getExtendedCells().get(i).getCell().getStyleClass().add("cell");
             }
         }
-
-
-
-        //System.out.println("Came out of for loop");
         grid.getStyleClass().add("grid");
         gridPane.setGridPane(grid);
-        Main.setGridBorderColour(allPlayers.peek());
+        changeColorOfGrid(allPlayers.peek());
         return gridPane;
     }
 

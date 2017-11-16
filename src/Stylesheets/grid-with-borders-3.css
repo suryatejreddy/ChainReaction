@@ -1,7 +1,7 @@
 .root {
     -fx-padding: 10 ;
     cell-color: black ;
-    cell-border-color: white ;
+    cell-border-color: #994D66 ;
 }
 .grid {
     /* 1 pixel border around the top and right of the grid: */
