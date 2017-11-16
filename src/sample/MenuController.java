@@ -92,9 +92,19 @@ public class MenuController
 
         resumeGame.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
+
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                try
+                {
+                    Main.playOnRecurse();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+
                 ExtendedGrid newGrid=null;
                 Queue<ExtendedPlayer> newPlayers=null;
 
@@ -123,6 +133,14 @@ public class MenuController
 
     public void startGame()
     {
+        try
+        {
+            Main.playOnRecurse();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
         numPlayers = Integer.parseInt(playerCount.getValue().toString());
         int x;
         int y;
@@ -161,6 +179,7 @@ public class MenuController
 
     public void showSettings() throws Exception
     {
+        Main.playOnRecurse();
         Main ob = new Main();
         ob.showSettings();
     }

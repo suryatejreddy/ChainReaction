@@ -122,14 +122,73 @@ public class Main extends Application implements Serializable
         System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
-        new Thread(new Runnable()
+        Thread x=new Thread(new Runnable()
         {
             @Override
             public void run()
             {
                 mediaPlayer.play();
             }
-        }).start();
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void playOnRecurse() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/onButton.wav");
+        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void playOnAlert() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/onAlert.wav");
+        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public static void playOnEnd() throws IOException
@@ -138,14 +197,23 @@ public class Main extends Application implements Serializable
         System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
-        new Thread(new Runnable()
+        Thread x=new Thread(new Runnable()
         {
             @Override
             public void run()
             {
                 mediaPlayer.play();
             }
-        }).start();
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
@@ -293,11 +361,20 @@ public class Main extends Application implements Serializable
 
         undoButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
+
             ExtendedGrid newGrid=null;
             Queue<ExtendedPlayer> newPlayers=null;
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                try
+                {
+                    Main.playOnRecurse();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -334,6 +411,14 @@ public class Main extends Application implements Serializable
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                try
+                {
+                    Main.playOnRecurse();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -353,6 +438,14 @@ public class Main extends Application implements Serializable
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                try
+                {
+                    Main.playOnRecurse();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 Main.setResumeGameBool(true);
                 try
                 {

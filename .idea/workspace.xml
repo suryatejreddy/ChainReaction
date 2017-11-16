@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AudioFiles/onClick.wav" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$1.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$1.class" />
+    <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="Added onClick and onEnd music files.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AudioFiles/onAlert.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AudioFiles/onButton.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AudioFiles/onRecurse.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$2.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$3.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$2.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$1.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$2.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$3.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$4.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$5.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$6.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$7.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$8.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridResume.ser" afterPath="$PROJECT_DIR$/serializeGridResume.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridUndo.ser" afterPath="$PROJECT_DIR$/serializeGridUndo.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueResume.ser" afterPath="$PROJECT_DIR$/serializeQueueResume.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueUndo.ser" afterPath="$PROJECT_DIR$/serializeQueueUndo.ser" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AudioFiles/onClick.wav" afterPath="$PROJECT_DIR$/src/AudioFiles/onClick.wav" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExtendedCell.java" afterPath="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/MenuController.java" afterPath="$PROJECT_DIR$/src/sample/MenuController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/SettingsController.java" afterPath="$PROJECT_DIR$/src/sample/SettingsController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,19 +49,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
-              <caret line="666" column="12" lean-forward="false" selection-start-line="666" selection-start-column="12" selection-end-line="666" selection-end-column="12" />
+            <state relative-caret-position="204">
+              <caret line="145" column="56" lean-forward="false" selection-start-line="145" selection-start-column="56" selection-end-line="145" selection-end-column="56" />
               <folding>
-                <element signature="e#4007#4008#0" expanded="true" />
-                <element signature="e#4057#4058#0" expanded="true" />
-                <element signature="e#4544#4545#0" expanded="true" />
-                <element signature="e#4594#4595#0" expanded="true" />
-                <element signature="e#15510#15541#0" expanded="true" />
-                <element signature="e#25643#25657#0" expanded="true" />
+                <element signature="e#4016#4017#0" expanded="true" />
+                <element signature="e#4066#4067#0" expanded="true" />
+                <element signature="e#4722#4723#0" expanded="true" />
+                <element signature="e#4772#4773#0" expanded="true" />
+                <element signature="e#5425#5426#0" expanded="true" />
+                <element signature="e#5475#5476#0" expanded="true" />
+                <element signature="e#6127#6128#0" expanded="true" />
+                <element signature="e#6177#6178#0" expanded="true" />
+                <element signature="e#17886#17917#0" expanded="true" />
+                <element signature="e#28019#28033#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/SettingsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -52,8 +83,8 @@
       <file leaf-file-name="ExtendedCell.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="251" column="0" lean-forward="false" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
+            <state relative-caret-position="1280">
+              <caret line="304" column="14" lean-forward="false" selection-start-line="304" selection-start-column="14" selection-end-line="311" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,11 +92,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="162" column="5" lean-forward="false" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+            <state relative-caret-position="234">
+              <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -105,9 +136,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tostr</find>
-      <find>showalert</find>
-      <find>compareGr</find>
       <find>comparegr</find>
       <find>in</find>
       <find>in undo</find>
@@ -115,7 +143,6 @@
       <find>Main</find>
       <find>starting now</find>
       <find>undo</find>
-      <find>undoBu</find>
       <find>setGridF</find>
       <find>setGrid</find>
       <find>create</find>
@@ -135,6 +162,10 @@
       <find>createce</find>
       <find>onclick</find>
       <find>showaler</find>
+      <find>oncl</find>
+      <find>onmouse</find>
+      <find>play</find>
+      <find>undoBu</find>
     </findStrings>
     <replaceStrings>
       <replace>allCells</replace>
@@ -177,7 +208,6 @@
         <option value="$PROJECT_DIR$/src/sample/MenuTest.java" />
         <option value="$PROJECT_DIR$/src/sample/menudisp.fxml" />
         <option value="$PROJECT_DIR$/src/sample/sample.fxml" />
-        <option value="$PROJECT_DIR$/src/sample/SettingsController.java" />
         <option value="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-brown.css" />
         <option value="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-green.css" />
         <option value="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-orange.css" />
@@ -200,10 +230,11 @@
         <option value="$PROJECT_DIR$/src/sample/ExtendedPlayer.java" />
         <option value="$PROJECT_DIR$/src/sample/Controller.java" />
         <option value="$PROJECT_DIR$/src/sample/ExtendedGrid.java" />
-        <option value="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/sample/MenuController.java" />
+        <option value="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
+        <option value="$PROJECT_DIR$/src/sample/SettingsController.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/sample/MenuController.java" />
       </list>
     </option>
   </component>
@@ -252,6 +283,12 @@
               <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="AudioFiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ChainReaction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ChainReaction" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -529,13 +566,6 @@
       <workItem from="1510774259628" duration="314000" />
       <workItem from="1510774600131" duration="1379000" />
       <workItem from="1510776278514" duration="14000" />
-    </task>
-    <task id="LOCAL-00005" summary="Changed ArrayList&lt;Players&gt; to Queue&lt;Players&gt;&#10;Changed ArrayList of cellsOccupiedByPlayer to HashSet">
-      <created>1507667662524</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1507667662524</updated>
     </task>
     <task id="LOCAL-00006" summary="implemented addBall function, slightly differently, not tested">
       <created>1507668377927</created>
@@ -873,7 +903,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510775030033</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Added onClick and onEnd music files.">
+      <created>1510839987580</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1510839987581</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -881,6 +918,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1307" height="780" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -895,7 +933,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1724138" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1724138" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -972,7 +1010,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Fixed Concurrency Error" />
     <MESSAGE value="Fixed wrong color error" />
     <MESSAGE value="Code working without animation" />
     <MESSAGE value="Transition working 10%" />
@@ -997,7 +1034,8 @@
     <MESSAGE value="Push pls" />
     <MESSAGE value="fixed grid size error." />
     <MESSAGE value="Bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes." />
+    <MESSAGE value="Added onClick and onEnd music files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added onClick and onEnd music files." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1025,12 +1063,16 @@
         <state relative-caret-position="162">
           <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
           <folding>
-            <element signature="e#4007#4008#0" expanded="true" />
-            <element signature="e#4057#4058#0" expanded="true" />
-            <element signature="e#4544#4545#0" expanded="true" />
-            <element signature="e#4594#4595#0" expanded="true" />
-            <element signature="e#15510#15541#0" expanded="true" />
-            <element signature="e#25643#25657#0" expanded="true" />
+            <element signature="e#4016#4017#0" expanded="true" />
+            <element signature="e#4066#4067#0" expanded="true" />
+            <element signature="e#4722#4723#0" expanded="true" />
+            <element signature="e#4772#4773#0" expanded="true" />
+            <element signature="e#5425#5426#0" expanded="true" />
+            <element signature="e#5475#5476#0" expanded="true" />
+            <element signature="e#6127#6128#0" expanded="true" />
+            <element signature="e#6177#6178#0" expanded="true" />
+            <element signature="e#17886#17917#0" expanded="true" />
+            <element signature="e#28019#28033#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1164,13 +1206,6 @@
     <entry file="file://$PROJECT_DIR$/src/FXML_Files/download.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/SettingsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="36" column="25" lean-forward="false" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FXML_Files/sample.fxml">
@@ -1334,34 +1369,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="251" column="0" lean-forward="false" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
+        <state relative-caret-position="1280">
+          <caret line="304" column="14" lean-forward="false" selection-start-line="304" selection-start-column="14" selection-end-line="311" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/SettingsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="162" column="5" lean-forward="false" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+        <state relative-caret-position="380">
+          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="666" column="12" lean-forward="false" selection-start-line="666" selection-start-column="12" selection-end-line="666" selection-end-column="12" />
+        <state relative-caret-position="204">
+          <caret line="145" column="56" lean-forward="false" selection-start-line="145" selection-start-column="56" selection-end-line="145" selection-end-column="56" />
           <folding>
-            <element signature="e#4007#4008#0" expanded="true" />
-            <element signature="e#4057#4058#0" expanded="true" />
-            <element signature="e#4544#4545#0" expanded="true" />
-            <element signature="e#4594#4595#0" expanded="true" />
-            <element signature="e#15510#15541#0" expanded="true" />
-            <element signature="e#25643#25657#0" expanded="true" />
+            <element signature="e#4016#4017#0" expanded="true" />
+            <element signature="e#4066#4067#0" expanded="true" />
+            <element signature="e#4722#4723#0" expanded="true" />
+            <element signature="e#4772#4773#0" expanded="true" />
+            <element signature="e#5425#5426#0" expanded="true" />
+            <element signature="e#5475#5476#0" expanded="true" />
+            <element signature="e#6127#6128#0" expanded="true" />
+            <element signature="e#6177#6178#0" expanded="true" />
+            <element signature="e#17886#17917#0" expanded="true" />
+            <element signature="e#28019#28033#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

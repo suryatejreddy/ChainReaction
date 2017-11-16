@@ -11,6 +11,7 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -301,6 +302,14 @@ public class ExtendedCell implements Serializable
         if (this.numberOfBallsPresent >= this.getCriticalMass())
         {
 
+//            try
+//            {
+//                Main.playOnRecurse();
+//            }
+//            catch(IOException e)
+//            {
+//                e.printStackTrace();
+//            }
 
             //NON_UI Part
             this.emptyCell();
@@ -371,6 +380,14 @@ public class ExtendedCell implements Serializable
         }
         else
         {
+//            try
+//            {
+//                Main.playOnClick();
+//            }
+//            catch(IOException e)
+//            {
+//                e.printStackTrace();
+//            }
             if (callFromMain)
             {
                 Main.onAnimationCompleted(curPlayer);
