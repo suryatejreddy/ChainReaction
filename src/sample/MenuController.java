@@ -3,6 +3,8 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -58,6 +60,10 @@ public class MenuController
                 "8");
 
         playerCount.getSelectionModel().selectFirst();
+
+        playerCount.setOnAction((Event t2) -> {
+            numPlayers = Integer.parseInt(playerCount.getValue().toString());
+        } );
         gridSize.getItems().clear();
 
         gridSize.getItems().addAll("9x6","15x10");
@@ -86,6 +92,8 @@ public class MenuController
         setData();
 
         Main.deserializeResume();
+
+        Main.changeCSSforAllPlayers();
 
 
         resumeGame.setDisable(!Main.resumeGameBool);
@@ -116,6 +124,8 @@ public class MenuController
 
                     Main.launchGame(newPlayers.size(), newGrid.getSideLengthX(), newGrid.getSideLengthY());
                     Main.setPlayers(newPlayers);
+                    Main.initColorForPlayers(Main.allPlayers);
+                    Main.initColorForPlayers(newPlayers);
                     Main.compareGrid(newGrid,newPlayers);
 
                 }
@@ -145,10 +155,13 @@ public class MenuController
         int x;
         int y;
 
-        if(SettingsController.clashExists())
+        if (Main.selectedColors.size() > 0)
         {
-            SettingsController.showWarning();
-            return;
+            if(SettingsController.clashExists())
+            {
+                SettingsController.showWarning();
+                return;
+            }
         }
 
         String gridSizeData = (gridSize.getValue().toString());
