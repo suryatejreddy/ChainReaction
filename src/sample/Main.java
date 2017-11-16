@@ -223,6 +223,32 @@ public class Main extends Application implements Serializable
         }
     }
 
+    public static void playOnError() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/error.wav");
+        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public static void main(String[] args)
     {
@@ -665,7 +691,7 @@ public class Main extends Application implements Serializable
     @SuppressWarnings("Duplicates")
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y ) throws IOException
     {
-        Main.playOnClick();
+
         if (!cellSwitch.get())
             cellSwitch.set(!cellSwitch.get());
         ExtendedPlayer curPlayer=null;
@@ -688,17 +714,21 @@ public class Main extends Application implements Serializable
                 if (curPlayer!=null && compareColors(curCellColor,curPlayer.getPlayerColour()))
                 { // check if player is adding to his color
                     //add ball function
+                    Main.playOnClick();
                     allPlayers.remove(curPlayer);
                     cellSelected.addBall(curPlayer,true,true);
+
                 }
                 else
                 {  //if not
                     //show error, wrong move
                     //we should not remove the player from the queue
+                    playOnError();
                 }
             }
             else
             {
+                Main.playOnClick();
                 allPlayers.remove(curPlayer);
                 cellSelected.addBall(curPlayer,true,true);
             }

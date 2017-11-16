@@ -339,7 +339,11 @@ public class ExtendedCell implements Serializable
 
             mainTransition.setOnFinished(e ->
             {
-
+                try {
+                    Main.playOnClick();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 this.cell.getChildren().clear();
 
                 getGroup().getChildren().clear();
