@@ -5,35 +5,40 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
+
+import java.awt.*;
 
 public class SettingsController
 {
 
-    @FXML
-    public ComboBox playerCount1;
+
 
     @FXML
-    public ComboBox playerCount2;
+    public ColorPicker playerCount0;
 
     @FXML
-    public ComboBox playerCount3;
+    public ColorPicker playerCount1;
 
     @FXML
-    public ComboBox playerCount4;
+    public ColorPicker playerCount2;
 
     @FXML
-    public ComboBox playerCount5;
+    public ColorPicker playerCount3;
 
     @FXML
-    public ComboBox playerCount6;
+    public ColorPicker playerCount4;
 
     @FXML
-    public ComboBox playerCount7;   //this is the last combobox
+    public ColorPicker playerCount5;
 
     @FXML
-    public ComboBox playerCount0;   //this is the first combobox
+    public ColorPicker playerCount6;
+
+    @FXML
+    public ColorPicker playerCount7;
 
     public static int playerColour0;
 
@@ -67,58 +72,58 @@ public class SettingsController
     public void setData(ComboBox playerCount)
     {
 
-        playerCount.getItems().clear();
-
-        playerCount.getItems().addAll(
-                "VIOLET",
-                "BLUE",
-                "GREEN",
-                "YELLOW",
-                "ORANGE",
-                "RED",
-                "BROWN",
-                "WHITE");
-
-        if(playerCount.equals(playerCount1))
-        {
-            playerCount.getSelectionModel().select(playerColour1);
-            System.out.println(playerCount1.getSelectionModel().getSelectedIndex());
-        }
-        else if(playerCount.equals(playerCount2))
-        {
-            playerCount.getSelectionModel().select(playerColour2);
-            System.out.println(playerCount2.getSelectionModel().getSelectedIndex());
-        }
-        else if(playerCount.equals(playerCount3))
-        {
-            playerCount.getSelectionModel().select(playerColour3);
-            System.out.println(playerCount3.getSelectionModel().getSelectedIndex());
-        }
-        else if(playerCount.equals(playerCount4))
-        {
-            playerCount.getSelectionModel().select(playerColour4);
-            System.out.println(playerCount4.getSelectionModel().getSelectedIndex());
-        }
-        else if(playerCount.equals(playerCount5))
-        {
-            playerCount.getSelectionModel().select(playerColour5);
-            System.out.println(playerCount5.getSelectionModel().getSelectedIndex());
-        }
-        else if(playerCount.equals(playerCount6))
-        {
-            playerCount.getSelectionModel().select(playerColour6);
-            System.out.println(playerCount6.getSelectionModel().getSelectedIndex());
-        }
-        else if(playerCount.equals(playerCount7))
-        {
-            playerCount.getSelectionModel().select(playerColour7);
-            System.out.println(playerCount7.getSelectionModel().getSelectedIndex());
-        }
-        else if(playerCount.equals(playerCount0))
-        {
-            playerCount.getSelectionModel().select(playerColour0);
-            System.out.println(playerCount0.getSelectionModel().getSelectedIndex());
-        }
+//        playerCount.getItems().clear();
+//
+//        playerCount.getItems().addAll(
+//                "VIOLET",
+//                "BLUE",
+//                "GREEN",
+//                "YELLOW",
+//                "ORANGE",
+//                "RED",
+//                "BROWN",
+//                "WHITE");
+//
+//        if(playerCount.equals(playerCount1))
+//        {
+//            playerCount.getSelectionModel().select(playerColour1);
+//            System.out.println(playerCount1.getSelectionModel().getSelectedIndex());
+//        }
+//        else if(playerCount.equals(playerCount2))
+//        {
+//            playerCount.getSelectionModel().select(playerColour2);
+//            System.out.println(playerCount2.getSelectionModel().getSelectedIndex());
+//        }
+//        else if(playerCount.equals(playerCount3))
+//        {
+//            playerCount.getSelectionModel().select(playerColour3);
+//            System.out.println(playerCount3.getSelectionModel().getSelectedIndex());
+//        }
+//        else if(playerCount.equals(playerCount4))
+//        {
+//            playerCount.getSelectionModel().select(playerColour4);
+//            System.out.println(playerCount4.getSelectionModel().getSelectedIndex());
+//        }
+//        else if(playerCount.equals(playerCount5))
+//        {
+//            playerCount.getSelectionModel().select(playerColour5);
+//            System.out.println(playerCount5.getSelectionModel().getSelectedIndex());
+//        }
+//        else if(playerCount.equals(playerCount6))
+//        {
+//            playerCount.getSelectionModel().select(playerColour6);
+//            System.out.println(playerCount6.getSelectionModel().getSelectedIndex());
+//        }
+//        else if(playerCount.equals(playerCount7))
+//        {
+//            playerCount.getSelectionModel().select(playerColour7);
+//            System.out.println(playerCount7.getSelectionModel().getSelectedIndex());
+//        }
+//        else if(playerCount.equals(playerCount0))
+//        {
+//            playerCount.getSelectionModel().select(playerColour0);
+//            System.out.println(playerCount0.getSelectionModel().getSelectedIndex());
+//        }
     }
 
     public static void showWarning()
@@ -148,94 +153,94 @@ public class SettingsController
 
     public void initialize()
     {
-        setData(playerCount1);
-        setData(playerCount2);
-        setData(playerCount3);
-        setData(playerCount4);
-        setData(playerCount5);
-        setData(playerCount6);
-        setData(playerCount7);
-        setData(playerCount0);
-
-        playerCount0.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour0=(int)t1;
-                System.out.println(playerColour0);
-            }
-        });
-
-        playerCount1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour1=(int)t1;
-                System.out.println(playerColour1);
-            }
-        });
-
-        playerCount2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour2=(int)t1;
-                System.out.println(playerColour2);
-            }
-        });
-
-        playerCount3.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour3=(int)t1;
-                System.out.println(playerColour3);
-            }
-        });
-
-        playerCount4.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour4=(int)t1;
-                System.out.println(playerColour4);
-            }
-        });
-
-        playerCount5.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour5=(int)t1;
-                System.out.println(playerColour5);
-            }
-        });
-
-        playerCount6.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour6=(int)t1;
-                System.out.println(playerColour6);
-            }
-        });
-
-        playerCount7.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
-            {
-                playerColour7=(int)t1;
-                System.out.println(playerColour7);
-            }
-        });
+//        setData(playerCount1);
+//        setData(playerCount2);
+//        setData(playerCount3);
+//        setData(playerCount4);
+//        setData(playerCount5);
+//        setData(playerCount6);
+//        setData(playerCount7);
+//        setData(playerCount0);
+//
+//        playerCount0.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour0=(int)t1;
+//                System.out.println(playerColour0);
+//            }
+//        });
+//
+//        playerCount1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour1=(int)t1;
+//                System.out.println(playerColour1);
+//            }
+//        });
+//
+//        playerCount2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour2=(int)t1;
+//                System.out.println(playerColour2);
+//            }
+//        });
+//
+//        playerCount3.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour3=(int)t1;
+//                System.out.println(playerColour3);
+//            }
+//        });
+//
+//        playerCount4.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour4=(int)t1;
+//                System.out.println(playerColour4);
+//            }
+//        });
+//
+//        playerCount5.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour5=(int)t1;
+//                System.out.println(playerColour5);
+//            }
+//        });
+//
+//        playerCount6.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour6=(int)t1;
+//                System.out.println(playerColour6);
+//            }
+//        });
+//
+//        playerCount7.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1)
+//            {
+//                playerColour7=(int)t1;
+//                System.out.println(playerColour7);
+//            }
+//        });
     }
 
     public void backToGame()

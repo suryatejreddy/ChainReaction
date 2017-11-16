@@ -722,6 +722,36 @@ public class Main extends Application implements Serializable
         return cell;
     }
 
+    public static void tryingSomeBullShit(String fileName)
+    {
+        List<String> lines = new ArrayList<String>();
+        String line = null;
+        try{
+            File f1 = new File("src/" + fileName);
+            FileReader fr = new FileReader(f1);
+            BufferedReader br = new BufferedReader(fr);
+            while ((line = br.readLine()) != null) {
+                if (line.contains("java"))
+                    line = line.replace("java", " ");
+                lines.add(line);
+            }
+            fr.close();
+            br.close();
+            lines.set(3, "    cell-border-color: #646464 ;");
+            FileWriter fw = new FileWriter(f1);
+            BufferedWriter out = new BufferedWriter(fw);
+            for(String s : lines)
+                out.write(s + "\n");
+            out.flush();
+            out.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
     private static void setGridBorderColour(ExtendedPlayer curPlayer)
     {
         String colour=curPlayer.getPlayerColourByString().toLowerCase();

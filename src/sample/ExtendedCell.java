@@ -45,7 +45,6 @@ public class ExtendedCell implements Serializable
         this.criticalMass=-1;
         this.numberOfBallsPresent=0;
         this.neighbouringCells=neighbouringCells;
-
     }
 
     public void addAnimation()
