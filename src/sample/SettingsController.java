@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
+
 public class SettingsController
 {
 
@@ -123,6 +125,15 @@ public class SettingsController
 
     public static void showWarning()
     {
+        try
+        {
+            Main.playOnAlert();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
         Alert alert=new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Player colour clash");
         alert.setHeaderText(null);
@@ -240,6 +251,15 @@ public class SettingsController
 
     public void backToGame()
     {
+        try
+        {
+            Main.playOnRecurse();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
         if(clashExists())
         {
             showWarning();

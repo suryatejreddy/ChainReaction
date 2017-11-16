@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ import java.util.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+
+import javax.print.attribute.standard.Media;
 
 public class Main extends Application implements Serializable
 {
@@ -111,6 +114,106 @@ public class Main extends Application implements Serializable
     {
         System.out.println("Main called");
         allPlayers = new LinkedList<ExtendedPlayer>();
+    }
+
+    public static void playOnClick() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/onClick.wav");
+        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void playOnRecurse() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/onButton.wav");
+        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void playOnAlert() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/onAlert.wav");
+        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void playOnEnd() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/gameOver.wav");
+        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
@@ -258,11 +361,20 @@ public class Main extends Application implements Serializable
 
         undoButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
+
             ExtendedGrid newGrid=null;
             Queue<ExtendedPlayer> newPlayers=null;
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                try
+                {
+                    Main.playOnRecurse();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -299,6 +411,14 @@ public class Main extends Application implements Serializable
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                try
+                {
+                    Main.playOnRecurse();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -318,6 +438,14 @@ public class Main extends Application implements Serializable
             @Override
             public void handle(MouseEvent mouseEvent)
             {
+                try
+                {
+                    Main.playOnRecurse();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 Main.setResumeGameBool(true);
                 try
                 {
@@ -520,6 +648,7 @@ public class Main extends Application implements Serializable
     @SuppressWarnings("Duplicates")
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y ) throws IOException
     {
+        Main.playOnClick();
         if (!cellSwitch.get())
             cellSwitch.set(!cellSwitch.get());
         ExtendedPlayer curPlayer=null;
@@ -620,7 +749,14 @@ public class Main extends Application implements Serializable
         {
             System.out.println("thuggs");
 //            e1.printStackTrace();
-            showAlert(curPlayer);
+            try
+            {
+                showAlert(curPlayer);
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
             System.out.print("showAlert called from ");
             e1.printStackTrace();
         }
@@ -633,8 +769,9 @@ public class Main extends Application implements Serializable
         super.stop();
     }
 
-    public static void showAlert(ExtendedPlayer curPlayer)
+    public static void showAlert(ExtendedPlayer curPlayer) throws IOException
     {
+        playOnEnd();
         if(!alertShown)
         {
             alertShown=true;
