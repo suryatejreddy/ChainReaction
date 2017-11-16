@@ -18,6 +18,7 @@ import java.util.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 public class Main extends Application implements Serializable
 {
@@ -292,6 +293,7 @@ public class Main extends Application implements Serializable
                 {
                     newGrid=deserializeGrid(TYPE_UNDO);
                     newPlayers=deserializeQueue(TYPE_UNDO);
+
                     setPlayers(newPlayers);
                     compareGrid(newGrid,newPlayers);
 
@@ -380,17 +382,18 @@ public class Main extends Application implements Serializable
 
     public static void setPlayers(Queue<ExtendedPlayer> newPlayers)
     {
-        List tempList = new ArrayList(newPlayers);
+        ArrayList<ExtendedPlayer> tempList = new ArrayList<>(newPlayers);
         allPlayers.clear();
         int numberOfPlayers = newPlayers.size();
         int i = 0;
         while (i<numberOfPlayers)
         {
-            ExtendedPlayer player = new ExtendedPlayer(ExtendedPlayer.returnColorOfPlayer(i), true, i +1);
+            ExtendedPlayer player = new ExtendedPlayer(tempList.get(i).getPlayerColour(), true, i +1);
             allPlayers.add(player); //adding the player to the game
             i++;
         }
-        initColorForPlayers(allPlayers);
+        System.out.println("Original list is  " + newPlayers);
+        System.out.println("after deSerializing " + allPlayers);
     }
 
 
@@ -433,6 +436,7 @@ public class Main extends Application implements Serializable
     {
         for (ExtendedPlayer p : players)
         {
+            System.out.println(p.playerColor + " " +  color);
             if (compareColors(p.playerColor,color))
             {
                 return p;
@@ -523,7 +527,7 @@ public class Main extends Application implements Serializable
 
     public static boolean compareColors(Color color1 , Color color2)
     {
-        if ((color1.getRed() == color2.getRed())  && (color2.getBlue() == color2.getBlue()) && (color2.getGreen() == color2.getGreen()))
+        if ((color1.getRed() == color2.getRed())  && (color1.getBlue() == color2.getBlue()) && (color1.getGreen() == color2.getGreen()))
         {
             return true;
         }
@@ -748,31 +752,6 @@ public class Main extends Application implements Serializable
         return builder.toString().toUpperCase();
     }
 
-    public static void getColorInCSSFile(int number)
-    {
-        String fileName = "Stylesheets/grid-with-borders-" + number + ".css";
-        List<String> lines = new ArrayList<String>();
-        String line = null;
-        try{
-            File f1 = new File("src/" + fileName);
-            FileReader fr = new FileReader(f1);
-            BufferedReader br = new BufferedReader(fr);
-            while ((line = br.readLine()) != null) {
-                if (line.contains("java"))
-                    line = line.replace("java", " ");
-                lines.add(line);
-            }
-            fr.close();
-            br.close();
-            System.out.println(lines.get(3));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
 
     public static void changeCSSforAllPlayers()
     {
@@ -787,13 +766,6 @@ public class Main extends Application implements Serializable
 
     }
 
-
-
-    private static void setGridBorderColour(ExtendedPlayer curPlayer)
-    {
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(namesOfStylesheets.get(curPlayer.playerNumber - 1));
-    }
 
 
     public static ExtendedGrid setGridPane(ExtendedGrid gridPane)

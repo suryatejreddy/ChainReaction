@@ -139,7 +139,7 @@ public class ExtendedPlayer implements Serializable
     @Override
     public String toString()
     {
-        return (this.getPlayerColourByString() + " " + this.isAliveString() + " in " + this.currentCells.size() +  " cells");
+        return ("Player " +  this.playerNumber  + " " + this.isAliveString() + " in " + this.currentCells.size() +  " cells");
     }
 
     public static Color returnColorOfPlayer(int i)
