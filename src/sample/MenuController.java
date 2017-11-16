@@ -7,10 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.util.Queue;
@@ -112,6 +114,8 @@ public class MenuController
                 {
                     e.printStackTrace();
                 }
+
+
 
                 ExtendedGrid newGrid=null;
                 Queue<ExtendedPlayer> newPlayers=null;

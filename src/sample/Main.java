@@ -34,7 +34,7 @@ public class Main extends Application implements Serializable
 
     public static Queue<ExtendedPlayer> allPlayers;
     private static boolean gameOver;
-    private static Scene scene;
+    public static Scene scene;
     private static int currentN;
     private static int currentX;
     private static int currentY;
@@ -126,7 +126,6 @@ public class Main extends Application implements Serializable
     public static void playOnClick() throws IOException
     {
         File onClick=new File("./src/AudioFiles/onClick.wav");
-        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
         Thread x=new Thread(new Runnable()
@@ -151,7 +150,6 @@ public class Main extends Application implements Serializable
     public static void playOnRecurse() throws IOException
     {
         File onClick=new File("./src/AudioFiles/onButton.wav");
-        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
         Thread x=new Thread(new Runnable()
@@ -176,7 +174,6 @@ public class Main extends Application implements Serializable
     public static void playOnAlert() throws IOException
     {
         File onClick=new File("./src/AudioFiles/onAlert.wav");
-        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
         Thread x=new Thread(new Runnable()
@@ -201,7 +198,6 @@ public class Main extends Application implements Serializable
     public static void playOnEnd() throws IOException
     {
         File onClick=new File("./src/AudioFiles/gameOver.wav");
-        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
         Thread x=new Thread(new Runnable()
@@ -226,7 +222,6 @@ public class Main extends Application implements Serializable
     public static void playOnError() throws IOException
     {
         File onClick=new File("./src/AudioFiles/error.wav");
-        System.out.println(onClick.exists()+" "+onClick.getCanonicalPath());
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
         Thread x=new Thread(new Runnable()
@@ -517,7 +512,15 @@ public class Main extends Application implements Serializable
 
         root1.getChildren().add(rootY);
 
-        scene = new Scene(rootX, (x * 60) + 100, (y * 60) + 100, Color.AZURE);
+        if (x + y == 15)
+        {
+            scene = new Scene(rootX, 560, 560, Color.AZURE);
+        }
+        else
+        {
+            scene = new Scene(rootX, 780, 780, Color.AZURE);
+        }
+
         scene.getStylesheets().clear();
         scene.getStylesheets().add("Stylesheets/grid-with-borders-1.css");
         changeColorOfGrid(allPlayers.peek());
@@ -590,7 +593,6 @@ public class Main extends Application implements Serializable
     {
         for (ExtendedPlayer p : players)
         {
-            System.out.println(p.playerColor + " " +  color);
             if (compareColors(p.playerColor,color))
             {
                 return p;
@@ -637,6 +639,24 @@ public class Main extends Application implements Serializable
         currentN=n;
         currentX=x;
         currentY=y;
+        if (x + y == 15)
+        {
+            MainStage.setWidth(560);
+            MainStage.setMaxWidth(560);
+            MainStage.setMinWidth(560);
+            MainStage.setHeight(560);
+            MainStage.setMaxHeight(560);
+            MainStage.setMinHeight(560);
+        }
+        else
+        {
+            MainStage.setWidth(780);
+            MainStage.setMaxWidth(780);
+            MainStage.setMinWidth(780);
+            MainStage.setHeight(780);
+            MainStage.setMaxHeight(780);
+            MainStage.setMinHeight(780);
+        }
         MainStage.setScene(newScene);
     }
 
@@ -696,8 +716,6 @@ public class Main extends Application implements Serializable
             cellSwitch.set(!cellSwitch.get());
         ExtendedPlayer curPlayer=null;
 
-        serializeQueue(TYPE_UNDO);
-        serializeGrid(TYPE_UNDO);
 
         Iterator<ExtendedPlayer> iterator=allPlayers.iterator();
 
@@ -715,6 +733,8 @@ public class Main extends Application implements Serializable
                 { // check if player is adding to his color
                     //add ball function
                     Main.playOnClick();
+                    serializeQueue(TYPE_UNDO);
+                    serializeGrid(TYPE_UNDO);
                     allPlayers.remove(curPlayer);
                     cellSelected.addBall(curPlayer,true,true);
 
@@ -729,6 +749,8 @@ public class Main extends Application implements Serializable
             else
             {
                 Main.playOnClick();
+                serializeQueue(TYPE_UNDO);
+                serializeGrid(TYPE_UNDO);
                 allPlayers.remove(curPlayer);
                 cellSelected.addBall(curPlayer,true,true);
             }
