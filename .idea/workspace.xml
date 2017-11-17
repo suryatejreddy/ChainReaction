@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeResumeBool.ser" afterPath="$PROJECT_DIR$/serializeResumeBool.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ConnectionHandler.java" afterPath="$PROJECT_DIR$/src/sample/ConnectionHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/MenuController.java" afterPath="$PROJECT_DIR$/src/sample/MenuController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +26,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="1361" column="24" lean-forward="false" selection-start-line="1361" selection-start-column="20" selection-end-line="1361" selection-end-column="24" />
+            <state relative-caret-position="-2797">
+              <caret line="1170" column="24" lean-forward="false" selection-start-line="1170" selection-start-column="24" selection-end-line="1170" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -505,14 +500,7 @@
       <workItem from="1510877060197" duration="4314000" />
       <workItem from="1510925103562" duration="4250000" />
       <workItem from="1510929450731" duration="245000" />
-      <workItem from="1510930949944" duration="5358000" />
-    </task>
-    <task id="LOCAL-00017" summary="Created a function to play music.">
-      <created>1508102273993</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1508102273998</updated>
+      <workItem from="1510930949944" duration="5568000" />
     </task>
     <task id="LOCAL-00018" summary="removed the media thing i tried">
       <created>1508190166362</created>
@@ -850,11 +838,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510937467180</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Its working!!!!!!!!!">
+      <created>1510939252273</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1510939252273</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="238783000" />
+    <option name="totallyTimeSpent" value="238993000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1922" height="1035" extended-state="6" />
@@ -934,7 +929,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Fixed Sood's Bug" />
     <MESSAGE value="Added functionality to show alert only once." />
     <MESSAGE value="Added buttons(exit, new game, undo) in UI." />
     <MESSAGE value="Added functionality for new and exit game buttons." />
@@ -959,7 +953,8 @@
     <MESSAGE value="More additions." />
     <MESSAGE value="More more additions." />
     <MESSAGE value="Buggy multiplayer." />
-    <option name="LAST_COMMIT_MESSAGE" value="Buggy multiplayer." />
+    <MESSAGE value="Its working!!!!!!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Its working!!!!!!!!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1269,8 +1264,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="1361" column="24" lean-forward="false" selection-start-line="1361" selection-start-column="20" selection-end-line="1361" selection-end-column="24" />
+        <state relative-caret-position="-2797">
+          <caret line="1170" column="24" lean-forward="false" selection-start-line="1170" selection-start-column="24" selection-end-line="1170" selection-end-column="24" />
           <folding />
         </state>
       </provider>

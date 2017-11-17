@@ -1069,6 +1069,15 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * Function for multiplayer. It is called when the game receives a move from the other player.
+     * @param x
+     * @param y
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-17
+     */
      public static void multiplayerReceivedCell(int x, int y)
     {
         ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
@@ -1085,6 +1094,16 @@ public class Main extends Application implements Serializable
         setForAllCells(false);
     }
 
+
+    /**
+     * Function for multiplayer.It is called when a player clicks on a cell. Peroforms check for valid moves. Etc.
+     * @param x
+     * @param y
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-17
+     */
     public static void multiplayerClickedOnCell(int x , int y)
     {
         ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
@@ -1143,6 +1162,14 @@ public class Main extends Application implements Serializable
         setForAllCells(true);
     }
 
+    /**
+     * Function is called when the multiplyaer move is completed. Sets grid color and checks if game is over.
+     * @param curPlayer
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-17
+     */
     public static void multiplayerAnimationComplete(ExtendedPlayer curPlayer)
     {
         if (compareColors(curPlayer.getPlayerColour(),Color.VIOLET))
