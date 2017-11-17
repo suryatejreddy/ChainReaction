@@ -1,13 +1,17 @@
 package sample;
 
-import NonUIComponents.Cell;
 import javafx.scene.layout.GridPane;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 
-//class to hold UI of Grid(Matrix)
+/**
+ * Class that holds the UI and NonUI components of the Game Matrix.
+ *
+ * @author Vishaal
+ */
+
 public class ExtendedGrid implements Serializable
 {
     private ArrayList<ExtendedCell> extendedCells;
@@ -17,6 +21,18 @@ public class ExtendedGrid implements Serializable
 
     public static final long serialVersionUID=1266852L;
 
+    /**
+     * Parameterized Constructor
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-23
+     * @param cells
+     * @param grid
+     * @param sideLengthX
+     * @param sideLengthY
+     */
+
     public ExtendedGrid(ArrayList<ExtendedCell> cells, GridPane grid, int sideLengthX, int sideLengthY)
     {
         this.extendedCells = cells;
@@ -25,12 +41,31 @@ public class ExtendedGrid implements Serializable
         this.sideLengthY=sideLengthY;
     }
 
+    /**
+     * Return the cell at passed paramters' coordinates.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-25
+     * @param row
+     * @param column
+     * @return Extended Cell object present at passed parameters' coordinates in Game Matrix
+     */
+
     public ExtendedCell getCellFromCoordinate(int row, int column)
     {
         return this.getCurrentExtendedCell(row, column);
     }
 
-    //method to set the critical mass and neighbouring cells for an extended cell of the extended grid.
+
+    /**
+     *Method to set the critical mass and neighbouring cells for an extended cell of the extended grid.
+     *
+     * @author Vishaal
+     * @version 1.1
+     * @since 2017-10-28
+     */
+
     public void setCellDetails()
     {
         for(int i=0;i<sideLengthY;i++)
@@ -56,6 +91,18 @@ public class ExtendedGrid implements Serializable
         }
     }
 
+
+    /**
+     * Method to return cell at (i, j) coordinates.
+     *
+     * @author Vishaal
+     * @version 1.8
+     * @since 2017-10-25
+     * @param i
+     * @param j
+     * @return cell at (i, j) coordinates
+     */
+
     private ExtendedCell getCurrentExtendedCell(int i, int j)
     {
         ExtendedCell extendedCell=extendedCells.get(0);
@@ -67,6 +114,18 @@ public class ExtendedGrid implements Serializable
 
         return extendedCell;
     }
+
+
+    /**
+     * Returns index of (i, j) cell in the cells arraylist.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-29
+     * @param i
+     * @param j
+     * @return Index of (i, j) cell in the cells arraylist
+     */
 
     public int returnIndexOfCell(int i, int j)
     {
@@ -80,11 +139,14 @@ public class ExtendedGrid implements Serializable
         return -1;
     }
 
-    public void setNewExtendedCell(int i , int j , ExtendedCell newCell)
-    {
-        int index = returnIndexOfCell(i,j);
-        this.getExtendedCells().set(index,newCell);
-    }
+
+    /**
+     * Method to initialize the cells in the Game Matrix.
+     *
+     * @author Vishaal
+     * @version 1.2
+     * @since 2017-10-28
+     */
 
     public void initCells()
     {
@@ -93,6 +155,17 @@ public class ExtendedGrid implements Serializable
             e.getGroup().getChildren().clear();
         });
     }
+
+
+    /**
+     * Method to set the neighbouringCells for Normal cells.(not corner/edge cells)
+     *
+     * @author Vishaal
+     * @version 1.5
+     * @since 2017-10-28
+     * @param i
+     * @param j
+     */
 
     private void setNeighbouringCellsForNormal(int i, int j)
     {
@@ -107,6 +180,17 @@ public class ExtendedGrid implements Serializable
         cellArrayList.add(cell4);
         getCurrentExtendedCell(i, j).setNeighbouringCells(cellArrayList);
     }
+
+
+    /**
+     * Method to set the neighbouringCells for Edge cells.
+     *
+     * @author Vishaal
+     * @version 1.2
+     * @since 2017-10-28
+     * @param i
+     * @param j
+     */
 
     private void setNeighbouringCellsForEdge(int i, int j)
     {
@@ -156,6 +240,17 @@ public class ExtendedGrid implements Serializable
         }
     }
 
+
+    /**
+     * Method to set the neighbouringCells for Corner cells.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-28
+     * @param i
+     * @param j
+     */
+
     private void setNeighbouringCellsForCorner(int i, int j)
     {
         if(i==0 && j==0)
@@ -195,6 +290,19 @@ public class ExtendedGrid implements Serializable
             getCurrentExtendedCell(i, j).setNeighbouringCells(cellArrayList);
         }
     }
+
+
+    /**
+     * Checks if cell is an Edge cell or not.
+     *
+     * @author Vishaal
+     * @version 1.2
+     * @since 2017-10-28
+     * @param i
+     * @param j
+     * @return boolean that checks if cell is an edge cell.
+     */
+
     @SuppressWarnings("Duplicates")
     private boolean cellIsAnEdgeCell(int i, int j)
     {
@@ -209,6 +317,19 @@ public class ExtendedGrid implements Serializable
 
         return false;
     }
+
+
+    /**
+     * hecks if cell is a Corner cell or not.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-28
+     * @param i
+     * @param j
+     * @return boolean that checks if cell is a corner cell.
+     */
+
     @SuppressWarnings("Duplicates")
     private boolean cellIsACornerCell(int i, int j)
     {
@@ -223,61 +344,91 @@ public class ExtendedGrid implements Serializable
         return false;
     }
 
+
+    /**
+     * Getter for Extended cell arraylist
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @return Extended cells arraylist
+     */
+
     public ArrayList<ExtendedCell> getExtendedCells()
     {
         return extendedCells;
     }
+
+
+    /**
+     * Getter for gridPane
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @return gridPane
+     */
 
     public GridPane getGridPane()
     {
         return gridPane;
     }
 
+
+    /**
+     * Setter for Extended Cells arraylist
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @param extendedCells
+     */
+
     public void setExtendedCells(ArrayList<ExtendedCell> extendedCells)
     {
         this.extendedCells = extendedCells;
     }
+
+    /**
+     * Setter for gridPane
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @param gridPane
+     */
 
     public void setGridPane(GridPane gridPane)
     {
         this.gridPane = gridPane;
     }
 
-    public void addExtendedCell(ExtendedCell cell)
-    {
-        this.extendedCells.add(cell);
-    }
-
-    public void printGrid()
-    {
-        for (int i=sideLengthY-1;i>-1;i--)
-        {
-            for (int j =0;j<sideLengthX;j++)
-            {
-                System.out.print(getCellFromCoordinate(i,j) + " \t");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    public void updateGrid()
-    {
-        ExtendedCell cell = getCellFromCoordinate(1,4);
-        System.out.println(cell.getNumberOfBallsPresent() + " " + cell.getGroup().getChildren().size() + "-----------------");
-    }
-
-
+    /**
+     * Getter for sideLengthX
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @return sideLengthX
+     */
 
     public int getSideLengthX()
     {
         return this.sideLengthX;
     }
 
+
+    /**
+     * Getter for sideLengthY
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @return sideLengthY
+     */
+
     public int getSideLengthY()
     {
         return this.sideLengthY;
     }
-
-
 }

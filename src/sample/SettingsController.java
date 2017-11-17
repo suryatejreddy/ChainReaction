@@ -16,6 +16,13 @@ import java.util.ArrayList;
 
 import java.io.IOException;
 
+
+/**
+ * Controller class for Settings.fxml
+ *
+ * @author Suryatej
+ */
+
 public class SettingsController
 {
 
@@ -45,67 +52,14 @@ public class SettingsController
 
     public static ArrayList<Color> selectedColors = new ArrayList<>();
 
-    static {
 
-    }
-
-
-    public void setData(ComboBox playerCount)
-    {
-
-//        playerCount.getItems().clear();
-//
-//        playerCount.getItems().addAll(
-//                "VIOLET",
-//                "BLUE",
-//                "GREEN",
-//                "YELLOW",
-//                "ORANGE",
-//                "RED",
-//                "BROWN",
-//                "WHITE");
-//
-//        if(playerCount.equals(playerCount1))
-//        {
-//            playerCount.getSelectionModel().select(playerColour1);
-//            System.out.println(playerCount1.getSelectionModel().getSelectedIndex());
-//        }
-//        else if(playerCount.equals(playerCount2))
-//        {
-//            playerCount.getSelectionModel().select(playerColour2);
-//            System.out.println(playerCount2.getSelectionModel().getSelectedIndex());
-//        }
-//        else if(playerCount.equals(playerCount3))
-//        {
-//            playerCount.getSelectionModel().select(playerColour3);
-//            System.out.println(playerCount3.getSelectionModel().getSelectedIndex());
-//        }
-//        else if(playerCount.equals(playerCount4))
-//        {
-//            playerCount.getSelectionModel().select(playerColour4);
-//            System.out.println(playerCount4.getSelectionModel().getSelectedIndex());
-//        }
-//        else if(playerCount.equals(playerCount5))
-//        {
-//            playerCount.getSelectionModel().select(playerColour5);
-//            System.out.println(playerCount5.getSelectionModel().getSelectedIndex());
-//        }
-//        else if(playerCount.equals(playerCount6))
-//        {
-//            playerCount.getSelectionModel().select(playerColour6);
-//            System.out.println(playerCount6.getSelectionModel().getSelectedIndex());
-//        }
-//        else if(playerCount.equals(playerCount7))
-//        {
-//            playerCount.getSelectionModel().select(playerColour7);
-//            System.out.println(playerCount7.getSelectionModel().getSelectedIndex());
-//        }
-//        else if(playerCount.equals(playerCount0))
-//        {
-//            playerCount.getSelectionModel().select(playerColour0);
-//            System.out.println(playerCount0.getSelectionModel().getSelectedIndex());
-//        }
-    }
+    /**
+     *Method to show an alert dialog when a clash exists between colours.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-16
+     */
 
     public static void showWarning()
     {
@@ -125,10 +79,13 @@ public class SettingsController
         alert.show();
     }
 
-    public static Color getSelectedColour(int i)
-    {
-        return selectedColors.get(i);
-    }
+    /**
+     * Sets initial values for the colour pickers and adds listeners for the colour picker action events.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-16
+     */
 
     public void setData()
     {
@@ -193,11 +150,27 @@ public class SettingsController
 
     }
 
+    /**
+     * Calls initializer function setData()
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
 
     public void initialize()
     {
         setData();
     }
+
+
+    /**
+     * Adds Colour Picker colours of the players to the selectedColors array.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-06
+     */
 
     public void addColorsToMainArray()
 
@@ -214,6 +187,14 @@ public class SettingsController
         Main.selectedColors = new ArrayList<>(selectedColors);
     }
 
+
+    /**
+     * Function to go back to the Menu display.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
 
     public void backToGame()
     {
@@ -237,6 +218,16 @@ public class SettingsController
         ob.backToMenu();
     }
 
+
+    /**
+     * Sets an array to all the player colours.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-22
+     * @return An array of player colours.
+     */
+
     public static Color[] getSelectedColors()
     {
         Color[] colourArray=new Color[8];
@@ -247,6 +238,16 @@ public class SettingsController
         return  colourArray;
 
     }
+
+
+    /**
+     * Method to check if clash exists between the selected colours of the players.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-20
+     * @return boolean to check if clash exists or not
+     */
 
     public static boolean clashExists()
     {
