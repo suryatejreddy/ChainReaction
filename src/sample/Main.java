@@ -1069,32 +1069,77 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static void multiplayerAddBall(int x , int y)
+    /**
+     * Function for multiplayer. It is called when the game receives a move from the other player.
+     * @param x
+     * @param y
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-17
+     */
+     public static void multiplayerReceivedCell(int x, int y)
     {
         ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
-        ExtendedPlayer curPlayer;
         if (isServer)
         {
-            curPlayer = getPlayerOfColor(Color.BLUE,allPlayers);
+            System.out.println("Server: Received message to add ball at" + "(" + x + "," + y + ")");
+            cellClicked.addBall(getPlayerOfColor(Color.BLUE,allPlayers),true,true);
         }
         else
         {
-            curPlayer = getPlayerOfColor(Color.VIOLET,allPlayers);
+            System.out.println("Client: Received message to add ball at" + "(" + x + "," + y + ")");
+            cellClicked.addBall(getPlayerOfColor(Color.VIOLET,allPlayers),true,true);
         }
-        System.out.println("Callling addBall " + curPlayer + x + " "  + y);
-        cellClicked.addBall(curPlayer,true,true);
+        setForAllCells(false);
     }
 
 
-
-    public static void multiplayerReceivedCell(int x, int y)
-    {
-        multiplayerAddBall(x,y);
-    }
-
+    /**
+     * Function for multiplayer.It is called when a player clicks on a cell. Peroforms check for valid moves. Etc.
+     * @param x
+     * @param y
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-17
+     */
     public static void multiplayerClickedOnCell(int x , int y)
     {
+        ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
+        if (cellClicked.isCellOccupied())
+        {
+            if (isServer)
+            {
+                if (!compareColors(cellClicked.getPlayerOccupiedBy().getPlayerColour(),Color.VIOLET))
+                {
+                    try {
+                        playOnError();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+            }
+            else
+            {
+                if (!compareColors(cellClicked.getPlayerOccupiedBy().getPlayerColour(),Color.BLUE))
+                {
 
+                    try {
+                        playOnError();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+            }
+        }
+        try {
+            playOnClick();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         DataOutputStream temp = null;
         try {
             temp = new DataOutputStream(liveSocket.getOutputStream());
@@ -1102,9 +1147,29 @@ public class Main extends Application implements Serializable
         } catch (IOException e) {
             e.printStackTrace();
         }
-        multiplayerAddBall(x,y);
+        if (isServer)
+        {
+            cellClicked.addBall(getPlayerOfColor(Color.VIOLET,allPlayers),true,true);
+            ConnectionHandler.mainX = x;
+            ConnectionHandler.mainY = y;
+        }
+        else
+        {
+            cellClicked.addBall(getPlayerOfColor(Color.BLUE,allPlayers),true,true);
+            MenuController.mainX = x;
+            MenuController.mainY = y;
+        }
+        setForAllCells(true);
     }
 
+    /**
+     * Function is called when the multiplyaer move is completed. Sets grid color and checks if game is over.
+     * @param curPlayer
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-17
+     */
     public static void multiplayerAnimationComplete(ExtendedPlayer curPlayer)
     {
         if (compareColors(curPlayer.getPlayerColour(),Color.VIOLET))
@@ -1114,6 +1179,15 @@ public class Main extends Application implements Serializable
         else
         {
             changeColorOfGrid(getPlayerOfColor(Color.VIOLET,allPlayers));
+        }
+        updatePlayerStats(allPlayers);
+        if (allPlayers.size() == 1)
+        {
+            try {
+                showAlert(allPlayers.peek());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -1236,6 +1310,31 @@ public class Main extends Application implements Serializable
             gameoverDialog.setTitle("Game Over");
             gameoverDialog.setHeaderText(null);
             gameoverDialog.setContentText("Player " + curPlayer.playerNumber + " won!");
+            if (isMultiplayer)
+            {
+                if (isServer)
+                {
+                    if (compareColors(curPlayer.getPlayerColour(),Color.VIOLET))
+                    {
+                        gameoverDialog.setContentText("You won! Congrats");
+                    }
+                    else
+                    {
+                        gameoverDialog.setContentText("Oops. You Lost! Better Luck Next Time");
+                    }
+                }
+                else
+                {
+                    if (compareColors(curPlayer.getPlayerColour(),Color.BLUE))
+                    {
+                        gameoverDialog.setContentText("You won! Congrats");
+                    }
+                    else
+                    {
+                        gameoverDialog.setContentText("Oops. You Lost! Better Luck Next Time");
+                    }
+                }
+            }
             gameoverDialog.getButtonTypes().removeAll();
             ButtonType buttonType = new ButtonType("Return to Menu");
             gameoverDialog.getButtonTypes().add(buttonType);

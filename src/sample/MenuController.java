@@ -32,7 +32,7 @@ public class MenuController {
 
 
     public static final int PORT = 1234;
-    public static final String SERVER = "192.168.60.159";
+    public static final String SERVER = "localhost";
 
     static int numPlayers;
     static volatile int mainX;
@@ -268,13 +268,13 @@ public class MenuController {
                 while (true) {
                     try {
                         String a = in.readUTF().toString();
-                        System.out.println(a);
                         int x = Integer.parseInt(a.substring(0, 1));
                         int y = Integer.parseInt(a.substring(2, 3));
-                        if (x == mainX && y == mainY)
-                        {
-                            continue;
-                        }
+//                        if (x == mainX && y == mainY)
+//                        {
+//                            System.out.println("Skipping");
+//                            continue;
+//                        }
                         mainX = x;
                         mainY = y;
                         Platform.runLater(new Runnable() {
