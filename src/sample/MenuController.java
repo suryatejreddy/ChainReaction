@@ -253,6 +253,7 @@ public class MenuController {
 
     public void startClient() throws IOException {
         Main.isMultiplayer = true;
+        Main.isServer = false;
         Main.playOnRecurse();
         Socket server = new Socket(SERVER, PORT);
 //        System.out.println("connected to : "+server.getRemoteSocketAddress());
@@ -280,8 +281,8 @@ public class MenuController {
                             @Override
                             public void run() {
                                 try {
-                                    Main.clickedOnCell(new SimpleBooleanProperty(),x,y);
-                                } catch (IOException e) {
+                                    Main.multiplayerReceivedCell(x,y);
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 return;
