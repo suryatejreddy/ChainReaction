@@ -17,9 +17,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.io.*;
+import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Queue;
 
 /**
@@ -32,7 +37,7 @@ public class MenuController {
 
 
     public static final int PORT = 1234;
-    public static final String SERVER = "localhost";
+    public static final String SERVER = "192.168.60.159";
 
     static int numPlayers;
     static volatile int mainX;
@@ -100,6 +105,20 @@ public class MenuController {
             }
 
         });
+        try {
+            Enumeration<NetworkInterface> temp =  NetworkInterface.getNetworkInterfaces();
+            Collections.list(temp).forEach(e ->{
+                if (e.getDisplayName().compareTo("wlp2s0") == 0)
+                {
+                    String address = e.getInterfaceAddresses().get(1).toString();
+                    address = address.substring(1,address.length());
+                    int index = address.indexOf('/');
+                    address = address.substring(0,index);
+                }
+            });
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
     }
 
 
