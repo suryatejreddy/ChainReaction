@@ -19,6 +19,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Queue;
 
+/**
+ * Controller for Menu display
+ *
+ * @author Vishaal and Suraytej
+ */
 
 public class MenuController
 {
@@ -51,6 +56,15 @@ public class MenuController
     {
         numPlayers=2;
     }
+
+
+    /**
+     * Sets initial values for the combo boxes and adds listeners for the combo box action events.
+     *
+     * @author Suryatej
+     * @version 1.1
+     * @since 2017-11-16
+     */
 
     public void setData()
     {
@@ -88,10 +102,15 @@ public class MenuController
         });
     }
 
-    public void enableResumeGame()
-    {
-        resumeGame.setDisable(false);
-    }
+
+    /**
+     * Initializer funtion to add action handler for Resume button.
+     *
+     * @author Suraytej
+     * @version 1.4
+     * @since 2017-11-01
+     * @throws IOException
+     */
 
     public void initialize() throws IOException
     {
@@ -150,6 +169,15 @@ public class MenuController
         });
     }
 
+
+    /**
+     * Action Handler for Play Game Button.
+     *
+     * @author Suryatej
+     * @version 1.2
+     * @since 2017-11-26
+     */
+
     public void startGame()
     {
         try
@@ -199,12 +227,31 @@ public class MenuController
         sample.Main.launchGame(numPlayers,x,y);
     }
 
+
+    /**
+     * Action Handler for Settings Button. Opens the settings display page.
+     *
+     * @author Vishaal
+     * @version 1.1
+     * @since 2017-11-14
+     * @throws Exception
+     */
+
     public void showSettings() throws Exception
     {
         Main.playOnRecurse();
         Main ob = new Main();
         ob.showSettings();
     }
+
+    /**
+     * Action Handler for Start Online Game Button.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-16
+     * @throws IOException
+     */
 
     public void startServer() throws IOException
     {
@@ -220,6 +267,15 @@ public class MenuController
                 break;
         }
     }
+
+    /**
+     * Action Handler for Connect To Online Game Button
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-16
+     * @throws IOException
+     */
 
     public void startClient() throws IOException
     {

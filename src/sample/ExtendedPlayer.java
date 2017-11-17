@@ -1,13 +1,15 @@
 package sample;
 
-import NonUIComponents.Cell;
-import NonUIComponents.Game;
-import NonUIComponents.Matrix;
 import javafx.scene.paint.Color;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
+
+/**
+ * Class that holds all the Player data.
+ *
+ * @author Vishaal and Suryatej
+ */
 
 public class ExtendedPlayer implements Serializable
 {
@@ -47,6 +49,19 @@ public class ExtendedPlayer implements Serializable
     private boolean isAlive;
     private boolean takenFirstMove;
 
+
+    /**
+     * Parameterized Constructor
+     *
+     * @author Vishaal
+     * @version 1.1
+     * @since 2017-10-27
+     *
+     * @param playerColour
+     * @param isAlive
+     * @param p
+     */
+
     public ExtendedPlayer(Color playerColour,boolean isAlive,int p)
     {
         this.isAlive=isAlive;
@@ -59,15 +74,42 @@ public class ExtendedPlayer implements Serializable
         this.playerNumber = p;
     }
 
+    /**
+     * Getter for Player Colour
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @return Player Colour
+     */
+
     public Color getPlayerColour()
     {
         return playerColor;
     }
 
+    /**
+     * Getter for takenFirstMove boolean.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @return takenFirstMove
+     */
+
     public boolean hasTakenFirstMove()
     {
         return takenFirstMove;
     }
+
+    /**
+     * Getter for Player Colour in String format.
+     *
+     * @author Vishaal
+     * @version 1.1
+     * @since 2017-10-27
+     * @return Player Colour in String
+     */
 
     public String getPlayerColourByString()
     {
@@ -75,39 +117,70 @@ public class ExtendedPlayer implements Serializable
     }
 
 
+    /**
+     * Getter for isAlive boolean
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @return isAlive
+     */
+
     public boolean isAlive()
     {
         return isAlive;
     }
+
+    /**
+     * Setter for isAlive boolean
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-27
+     * @param alive
+     */
 
     public void setAlive(boolean alive)
     {
         isAlive = alive;
     }
 
-    public void setPlayerColour(Color playerColour)
-    {
-        this.playerColor = playerColour;
-    }
+    /**
+     * Setter for takenFirstMove boolean
+     *
+     * @author Vishaal
+     * @since 2017-10-27
+     * @param takenFirstMove
+     */
 
     public void setTakenFirstMove(boolean takenFirstMove)
     {
         this.takenFirstMove = takenFirstMove;
     }
 
-    public void makeMove(int coordX, int coordY, Matrix gameMatrix, Game game, int i, Cell cellChosen, NonUIComponents.Player currentPlayer)
-    {
-        ArrayList<Cell> currentRow = gameMatrix.getCells().get(coordY);
-        Cell currentCell = currentRow.get(coordX);
-//        currentCell.addBall(currentPlayer,gameMatrix,game,coordX,coordY,i,cellChosen);
-//        gameMatrix.getCells().get(coordY).get(coordX).addBall(currentPlayer, gameMatrix, game, coordX, coordY, i, cellChosen);
-    }
 
+    /**
+     * Adds passed cell to the arraylist of cells controlled by the player currently.
+     *
+     * @author Vishaal
+     * @version 1.6
+     * @since 2017-10-28
+     * @param curCell
+     */
 
     public void addCell(ExtendedCell curCell)
     {
         currentCells.add(curCell);
     }
+
+    /**
+     * Removes passed cell from the arraylist of cells controlled by the player currently.
+     *
+     * @author Vishaal
+     * @version 1.2
+     * @since 2017-10-28
+     * @param curCell
+     */
 
     public void removeCell(ExtendedCell curCell)
     {
@@ -115,12 +188,30 @@ public class ExtendedPlayer implements Serializable
     }
 
 
-    public void checkPlayerStatus() //updates if the player is dead or alive;
+    /**
+     * Updates if the player is dead or alive
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-02
+     */
+
+    public void checkPlayerStatus()
     {
-        if (this.currentCells.size() == 0) {
+        if (this.currentCells.size() == 0)
+        {
             this.setAlive(false);
         }
     }
+
+    /**
+     * Returns isAlive in String format
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-01
+     * @return isAlive in String
+     */
 
     public String isAliveString()
     {
@@ -135,12 +226,30 @@ public class ExtendedPlayer implements Serializable
     }
 
 
+    /**
+     * Overriden toString() method
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-01
+     * @return Player details
+     */
 
     @Override
     public String toString()
     {
         return ("Player " +  this.playerNumber  + " " + this.isAliveString() + " in " + this.currentCells.size() +  " cells");
     }
+
+    /**
+     * Returns colour of ith player.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-16
+     * @param i
+     * @return colour of ith player
+     */
 
     public static Color returnColorOfPlayer(int i)
     {
@@ -166,15 +275,14 @@ public class ExtendedPlayer implements Serializable
     }
 
 
-    public void setCurrentCells(HashSet<ExtendedCell> currentCells)
-    {
-        this.currentCells=currentCells;
-    }
-
-    public HashSet<ExtendedCell> getCurrentCells()
-    {
-        return currentCells;
-    }
+    /**
+     * Creates a clone of the current player's color object and returns it.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-16
+     * @return Clone of current player's color
+     */
 
     public Color makeNewColor()
     {

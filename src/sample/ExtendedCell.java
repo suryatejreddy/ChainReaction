@@ -1,7 +1,5 @@
 package sample;
 
-import NonUIComponents.Cell;
-import NonUIComponents.Player;
 import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
