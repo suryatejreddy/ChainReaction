@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -13,6 +16,8 @@ import java.net.Socket;
 public class ConnectionHandler implements Runnable
 {
     Socket connection;
+    public static int mainX;
+    public static int mainY;
 
     /**
      * Parameterized Constructor
@@ -39,12 +44,55 @@ public class ConnectionHandler implements Runnable
     @Override
     public void run()
     {
+        Main.isMultiplayer=true;
         try
         {
             DataOutputStream out=new DataOutputStream(connection.getOutputStream());
-            out.writeUTF("Hello C");
-            out.close();
-            connection.close();
+            DataInputStream in=new DataInputStream(connection.getInputStream());
+            out.writeUTF("Accepted");
+            Main.launchGame(2, 9, 6);
+            Main.liveSocket=connection;
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        while(true)
+                        {
+                            String i=in.readUTF();
+                            System.out.println(i);
+
+                            int x=Integer.parseInt(i.substring(0,1));
+                            int y=Integer.parseInt(i.substring(2));
+
+                            if (x == mainX && y == mainY)
+                            {
+                                continue;
+                            }
+                            mainX = x;
+                            mainY = y;
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Main.clickedOnCell(new SimpleBooleanProperty(),x,y);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    return;
+                                }
+                            });
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+            }).start();
         }
         catch(IOException e)
         {
