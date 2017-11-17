@@ -1069,32 +1069,57 @@ public class Main extends Application implements Serializable
         }
     }
 
-    public static void multiplayerAddBall(int x , int y)
+     public static void multiplayerReceivedCell(int x, int y)
     {
+        System.out.println("I am a server  " + isServer + " received ball to add " + x + " " + y);
         ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
-        ExtendedPlayer curPlayer;
         if (isServer)
         {
-            curPlayer = getPlayerOfColor(Color.BLUE,allPlayers);
+            cellClicked.addBall(getPlayerOfColor(Color.BLUE,allPlayers),true,true);
         }
         else
         {
-            curPlayer = getPlayerOfColor(Color.VIOLET,allPlayers);
+            cellClicked.addBall(getPlayerOfColor(Color.VIOLET,allPlayers),true,true);
         }
-        System.out.println("Callling addBall " + curPlayer + x + " "  + y);
-        cellClicked.addBall(curPlayer,true,true);
-    }
-
-
-
-    public static void multiplayerReceivedCell(int x, int y)
-    {
-        multiplayerAddBall(x,y);
+        setForAllCells(false);
     }
 
     public static void multiplayerClickedOnCell(int x , int y)
     {
+        ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
+        if (cellClicked.isCellOccupied())
+        {
+            if (isServer)
+            {
+                if (!compareColors(cellClicked.getPlayerOccupiedBy().getPlayerColour(),Color.VIOLET))
+                {
+                    try {
+                        playOnError();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+            }
+            else
+            {
+                if (!compareColors(cellClicked.getPlayerOccupiedBy().getPlayerColour(),Color.BLUE))
+                {
 
+                    try {
+                        playOnError();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+            }
+        }
+        try {
+            playOnClick();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         DataOutputStream temp = null;
         try {
             temp = new DataOutputStream(liveSocket.getOutputStream());
@@ -1102,7 +1127,19 @@ public class Main extends Application implements Serializable
         } catch (IOException e) {
             e.printStackTrace();
         }
-        multiplayerAddBall(x,y);
+        if (isServer)
+        {
+            cellClicked.addBall(getPlayerOfColor(Color.VIOLET,allPlayers),true,true);
+            ConnectionHandler.mainX = x;
+            ConnectionHandler.mainY = y;
+        }
+        else
+        {
+            cellClicked.addBall(getPlayerOfColor(Color.BLUE,allPlayers),true,true);
+            MenuController.mainX = x;
+            MenuController.mainY = y;
+        }
+        setForAllCells(true);
     }
 
     public static void multiplayerAnimationComplete(ExtendedPlayer curPlayer)

@@ -63,11 +63,9 @@ public class ConnectionHandler implements Runnable
                         while(true)
                         {
                             String i=in.readUTF();
-                            System.out.println(i);
 
                             int x=Integer.parseInt(i.substring(0,1));
                             int y=Integer.parseInt(i.substring(2));
-
                             if (x == mainX && y == mainY)
                             {
                                 continue;
