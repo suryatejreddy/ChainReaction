@@ -15,12 +15,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Queue;
 
 
 public class MenuController
 {
 
+
+    public static final int PORT=1234;
+    public static final String SERVER="localhost";
 
     static int numPlayers;
 
@@ -199,6 +204,32 @@ public class MenuController
         Main.playOnRecurse();
         Main ob = new Main();
         ob.showSettings();
+    }
+
+    public void startServer() throws IOException
+    {
+        Main.playOnRecurse();
+        ServerSocket me=new ServerSocket(PORT);
+
+        while(true)
+        {
+            Socket connection=me.accept();
+            System.out.println("Connected");
+            new Thread(new ConnectionHandler(connection)).start();
+            if(connection.isConnected())
+                break;
+        }
+    }
+
+    public void startClient() throws IOException
+    {
+        Main.playOnRecurse();
+        Socket server=new Socket(SERVER, PORT);
+        System.out.println("connected to : "+server.getRemoteSocketAddress());
+        DataInputStream in=new DataInputStream(server.getInputStream());
+        System.out.println(in.readUTF());
+        in.close();
+        server.close();
     }
 }
 

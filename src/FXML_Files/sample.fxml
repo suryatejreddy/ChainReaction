@@ -28,5 +28,15 @@
         <Button layoutX="109.0" layoutY="305.0" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="41.0" prefWidth="139.0" text="Play Game" fx:id="playGame"/>
         <Button layoutX="313.0" layoutY="305.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="139.0" text="Resume Game" fx:id="resumeGame" />
         <Button layoutX="215.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#showSettings" prefHeight="41.0" prefWidth="107.0" text="Settings"  fx:id="settings"/>
+        <Button onMouseClicked="#startServer" layoutX="109.0" layoutY="455.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="139.0" text="Start Online Game" fx:id="startServer" >
+                <font>
+                    <Font size="12"/>
+                </font>
+        </Button>
+        <Button onMouseClicked="#startClient" layoutX="313.0" layoutY="455.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="139.0" text="Connect to Online Game" fx:id="startClient" >
+            <font>
+                <Font size="10"/>
+            </font>
+        </Button>
     </children>
 </AnchorPane>
