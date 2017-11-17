@@ -1075,35 +1075,21 @@ public class Main extends Application implements Serializable
         ExtendedPlayer curPlayer;
         if (isServer)
         {
-            curPlayer = getPlayerOfColor(Color.VIOLET,allPlayers);
+            curPlayer = getPlayerOfColor(Color.BLUE,allPlayers);
         }
         else
         {
-            curPlayer = getPlayerOfColor(Color.BLUE,allPlayers);
+            curPlayer = getPlayerOfColor(Color.VIOLET,allPlayers);
         }
         System.out.println("Callling addBall " + curPlayer + x + " "  + y);
         cellClicked.addBall(curPlayer,true,true);
     }
-
-    public static void multiplayerChangeGridColor()
-    {
-        if (isServer)
-        {
-            changeColorOfGrid(getPlayerOfColor(Color.BLUE,allPlayers));
-        }
-        else
-        {
-            changeColorOfGrid(getPlayerOfColor(Color.VIOLET,allPlayers));
-        }
-    }
-
 
 
 
     public static void multiplayerReceivedCell(int x, int y)
     {
         multiplayerAddBall(x,y);
-        multiplayerChangeGridColor();
     }
 
     public static void multiplayerClickedOnCell(int x , int y)
@@ -1117,7 +1103,18 @@ public class Main extends Application implements Serializable
             e.printStackTrace();
         }
         multiplayerAddBall(x,y);
-        multiplayerChangeGridColor();
+    }
+
+    public static void multiplayerAnimationComplete(ExtendedPlayer curPlayer)
+    {
+        if (compareColors(curPlayer.getPlayerColour(),Color.VIOLET))
+        {
+            changeColorOfGrid(getPlayerOfColor(Color.BLUE,allPlayers));
+        }
+        else
+        {
+            changeColorOfGrid(getPlayerOfColor(Color.VIOLET,allPlayers));
+        }
     }
 
 
@@ -1162,6 +1159,7 @@ public class Main extends Application implements Serializable
     {
         try{
 //            gridPane.printGrid();
+
             updatePlayerStats(allPlayers);  //remove dead players
             ExtendedPlayer nextPlayer = allPlayers.peek();
             changeColorOfGrid(nextPlayer);
