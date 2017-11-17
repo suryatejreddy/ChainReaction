@@ -1,6 +1,8 @@
 package sample;
 
 
+import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.scene.paint.Color;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLSyntaxErrorException;
 import java.util.Queue;
 
 /**
@@ -25,14 +28,15 @@ import java.util.Queue;
  * @author Vishaal and Suraytej
  */
 
-public class MenuController
-{
+public class MenuController {
 
 
-    public static final int PORT=1234;
-    public static final String SERVER="localhost";
+    public static final int PORT = 1234;
+    public static final String SERVER = "192.168.60.159";
 
     static int numPlayers;
+    static volatile int mainX;
+    static volatile int mainY;
 
     @FXML
     public ImageView myImage;
@@ -52,9 +56,8 @@ public class MenuController
     @FXML
     public Button settings;
 
-    static
-    {
-        numPlayers=2;
+    static {
+        numPlayers = 2;
     }
 
 
@@ -66,8 +69,7 @@ public class MenuController
      * @since 2017-11-16
      */
 
-    public void setData()
-    {
+    public void setData() {
 
         playerCount.getItems().clear();
 
@@ -84,19 +86,17 @@ public class MenuController
 
         playerCount.setOnAction((Event t2) -> {
             numPlayers = Integer.parseInt(playerCount.getValue().toString());
-        } );
+        });
         gridSize.getItems().clear();
 
-        gridSize.getItems().addAll("9x6","15x10");
+        gridSize.getItems().addAll("9x6", "15x10");
 
         gridSize.getSelectionModel().selectFirst();
 
-        gridSize.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
-        {
+        gridSize.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1)
-            {
-                numPlayers=Integer.parseInt(playerCount.getValue().toString());
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                numPlayers = Integer.parseInt(playerCount.getValue().toString());
             }
 
         });
@@ -106,14 +106,13 @@ public class MenuController
     /**
      * Initializer funtion to add action handler for Resume button.
      *
+     * @throws IOException
      * @author Suraytej
      * @version 1.4
      * @since 2017-11-01
-     * @throws IOException
      */
 
-    public void initialize() throws IOException
-    {
+    public void initialize() throws IOException {
         System.out.println("init called");
         setData();
 
@@ -124,45 +123,34 @@ public class MenuController
 
         resumeGame.setDisable(!Main.resumeGameBool);
 
-        resumeGame.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
+        resumeGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             @Override
-            public void handle(MouseEvent mouseEvent)
-            {
-                try
-                {
+            public void handle(MouseEvent mouseEvent) {
+                try {
                     Main.playOnRecurse();
-                }
-                catch(IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
 
+                ExtendedGrid newGrid = null;
+                Queue<ExtendedPlayer> newPlayers = null;
 
-                ExtendedGrid newGrid=null;
-                Queue<ExtendedPlayer> newPlayers=null;
-
-                try
-                {
-                    newPlayers=Main.deserializeQueue(Main.TYPE_RESUME);
-                    newGrid=Main.deserializeGrid(Main.TYPE_RESUME);
+                try {
+                    newPlayers = Main.deserializeQueue(Main.TYPE_RESUME);
+                    newGrid = Main.deserializeGrid(Main.TYPE_RESUME);
 
 
                     Main.launchGame(newPlayers.size(), newGrid.getSideLengthX(), newGrid.getSideLengthY());
                     Main.setPlayers(newPlayers);
                     Main.initColorForPlayers(Main.allPlayers);
                     Main.initColorForPlayers(newPlayers);
-                    Main.compareGrid(newGrid,newPlayers);
+                    Main.compareGrid(newGrid, newPlayers);
 
-                }
-                catch(IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
-                }
-                catch(ClassNotFoundException e)
-                {
+                } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -178,24 +166,18 @@ public class MenuController
      * @since 2017-11-26
      */
 
-    public void startGame()
-    {
-        try
-        {
+    public void startGame() {
+        try {
             Main.playOnRecurse();
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         numPlayers = Integer.parseInt(playerCount.getValue().toString());
         int x;
         int y;
 
-        if (Main.selectedColors.size() > 0)
-        {
-            if(SettingsController.clashExists())
-            {
+        if (Main.selectedColors.size() > 0) {
+            if (SettingsController.clashExists()) {
                 SettingsController.showWarning();
                 return;
             }
@@ -203,42 +185,35 @@ public class MenuController
 
         String gridSizeData = (gridSize.getValue().toString());
 
-        if (gridSizeData.compareTo("9x6") == 0)
-        {
+        if (gridSizeData.compareTo("9x6") == 0) {
             x = 6;
             y = 9;
-        }
-        else
-        {
+        } else {
             x = 10;
             y = 15;
         }
 
         System.out.println("starting now");
         Main.setResumeGameBool(true);
-        try
-        {
+        try {
             Main.serializeResume();
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        sample.Main.launchGame(numPlayers,x,y);
+        sample.Main.launchGame(numPlayers, x, y);
     }
 
 
     /**
      * Action Handler for Settings Button. Opens the settings display page.
      *
+     * @throws Exception
      * @author Vishaal
      * @version 1.1
      * @since 2017-11-14
-     * @throws Exception
      */
 
-    public void showSettings() throws Exception
-    {
+    public void showSettings() throws Exception {
         Main.playOnRecurse();
         Main ob = new Main();
         ob.showSettings();
@@ -247,24 +222,21 @@ public class MenuController
     /**
      * Action Handler for Start Online Game Button.
      *
+     * @throws IOException
      * @author Vishaal
      * @version 1.0
      * @since 2017-11-16
-     * @throws IOException
      */
 
-    public void startServer() throws IOException
-    {
+    public void startServer() throws IOException {
         Main.playOnRecurse();
-        ServerSocket me=new ServerSocket(PORT);
+        ServerSocket me = new ServerSocket(PORT);
 
-        while(true)
-        {
-            Socket connection=me.accept();
+        while (true) {
+            Socket connection = me.accept();
             System.out.println("Connected");
-            ConnectionHandler handler=new ConnectionHandler(connection);
-            handler.run();
-            if(connection.isConnected())
+            new Thread(new ConnectionHandler(connection)).start();
+            if (connection.isConnected())
                 break;
         }
     }
@@ -272,21 +244,65 @@ public class MenuController
     /**
      * Action Handler for Connect To Online Game Button
      *
+     * @throws IOException
      * @author Vishaal
      * @version 1.0
      * @since 2017-11-16
-     * @throws IOException
      */
 
-    public void startClient() throws IOException
-    {
+
+    public void startClient() throws IOException {
+        Main.isMultiplayer = true;
         Main.playOnRecurse();
-        Socket server=new Socket(SERVER, PORT);
-        System.out.println("connected to : "+server.getRemoteSocketAddress());
-        DataInputStream in=new DataInputStream(server.getInputStream());
+        Socket server = new Socket(SERVER, PORT);
+//        System.out.println("connected to : "+server.getRemoteSocketAddress());
+        DataInputStream in = new DataInputStream(server.getInputStream());
         System.out.println(in.readUTF());
-        in.close();
-        server.close();
+        Main.liveSocket = server;
+        Main.launchGame(2, 9, 6);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        String a = in.readUTF().toString();
+                        System.out.println(a);
+                        int x = Integer.parseInt(a.substring(0, 1));
+                        int y = Integer.parseInt(a.substring(2, 3));
+                        if (x == mainX && y == mainY)
+                        {
+                            continue;
+                        }
+                        mainX = x;
+                        mainY = y;
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Main.clickedOnCell(new SimpleBooleanProperty(),x,y);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                return;
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+
+    }
+
+    public void onPlsWorkDone(DataInputStream in) {
+        try {
+            Main.clickedOnCell(new SimpleBooleanProperty(), mainX, mainY);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
