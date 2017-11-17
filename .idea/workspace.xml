@@ -2,30 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="Added">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/NonUIComponents/Cell.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/NonUIComponents/Game.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/NonUIComponents/Matrix.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/NonUIComponents/Player.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/NonUIComponents/WrongOptionException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Controller.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedCell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedGrid.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedGrid.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedPlayer.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/ExtendedPlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$1.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$2.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$3.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$1.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$2.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/MenuController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController.class" afterPath="$PROJECT_DIR$/out/production/ChainReaction/sample/SettingsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridResume.ser" afterPath="$PROJECT_DIR$/serializeGridResume.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridUndo.ser" afterPath="$PROJECT_DIR$/serializeGridUndo.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueResume.ser" afterPath="$PROJECT_DIR$/serializeQueueResume.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueUndo.ser" afterPath="$PROJECT_DIR$/serializeQueueUndo.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/MenuController.java" afterPath="$PROJECT_DIR$/src/sample/MenuController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ChainReaction/FXML_Files/Settings.fxml" afterPath="$PROJECT_DIR$/out/production/ChainReaction/FXML_Files/Settings.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeResumeBool.ser" afterPath="$PROJECT_DIR$/serializeResumeBool.ser" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FXML_Files/Settings.fxml" afterPath="$PROJECT_DIR$/src/FXML_Files/Settings.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ConnectionHandler.java" afterPath="$PROJECT_DIR$/src/sample/ConnectionHandler.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,14 +29,9 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="1291" column="6" lean-forward="true" selection-start-line="1291" selection-start-column="6" selection-end-line="1291" selection-end-column="6" />
-              <folding>
-                <element signature="e#30153#30154#0" expanded="true" />
-                <element signature="e#30192#30193#0" expanded="true" />
-                <element signature="e#30262#30263#0" expanded="true" />
-                <element signature="e#30301#30302#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="419">
+              <caret line="1374" column="87" lean-forward="true" selection-start-line="1374" selection-start-column="87" selection-end-line="1374" selection-end-column="87" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/src/sample/ExtendedPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4680">
-              <caret line="287" column="5" lean-forward="true" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
+              <caret line="287" column="5" lean-forward="false" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
               <folding>
                 <element signature="e#5969#5970#0" expanded="true" />
               </folding>
@@ -75,7 +51,7 @@
       <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="4374">
               <caret line="272" column="41" lean-forward="false" selection-start-line="272" selection-start-column="41" selection-end-line="272" selection-end-column="41" />
               <folding />
             </state>
@@ -85,8 +61,8 @@
       <file leaf-file-name="ConnectionHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ConnectionHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+            <state relative-caret-position="720">
+              <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -238,6 +214,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -266,9 +245,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -549,6 +525,7 @@
       <workItem from="1510870873348" duration="3790000" />
       <workItem from="1510877060197" duration="4314000" />
       <workItem from="1510925103562" duration="4250000" />
+      <workItem from="1510929450731" duration="24000" />
     </task>
     <task id="LOCAL-00013" summary="Tried it for 3x3. Going to simulate the game in the mobile and test now.">
       <created>1508010620914</created>
@@ -897,7 +874,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="233180000" />
+    <option name="totallyTimeSpent" value="233204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1922" height="1035" extended-state="6" />
@@ -905,14 +882,13 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790446" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4549403" sideWeight="0.5151042" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20412596" sideWeight="0.48489583" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.029315962" sideWeight="0.49375" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20412596" sideWeight="0.48489583" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -922,8 +898,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.043431055" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -931,6 +907,7 @@
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790446" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="5.2083336E-4" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4277959" sideWeight="0.497318" order="1" side_tool="false" content_ui="tabs" />
@@ -1015,12 +992,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="1343" column="24" lean-forward="false" selection-start-line="1343" selection-start-column="24" selection-end-line="1343" selection-end-column="24" />
-          <folding>
-            <element signature="e#30153#30154#0" expanded="true" />
-            <element signature="e#30192#30193#0" expanded="true" />
-            <element signature="e#30262#30263#0" expanded="true" />
-            <element signature="e#30301#30302#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1281,7 +1253,7 @@
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/MenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state relative-caret-position="4374">
           <caret line="272" column="41" lean-forward="false" selection-start-line="272" selection-start-column="41" selection-end-line="272" selection-end-column="41" />
           <folding />
         </state>
@@ -1297,8 +1269,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/ConnectionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+        <state relative-caret-position="720">
+          <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1308,7 +1280,7 @@
     <entry file="file://$PROJECT_DIR$/src/sample/ExtendedPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4680">
-          <caret line="287" column="5" lean-forward="true" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
+          <caret line="287" column="5" lean-forward="false" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
           <folding>
             <element signature="e#5969#5970#0" expanded="true" />
           </folding>
@@ -1317,14 +1289,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="1291" column="6" lean-forward="true" selection-start-line="1291" selection-start-column="6" selection-end-line="1291" selection-end-column="6" />
-          <folding>
-            <element signature="e#30153#30154#0" expanded="true" />
-            <element signature="e#30192#30193#0" expanded="true" />
-            <element signature="e#30262#30263#0" expanded="true" />
-            <element signature="e#30301#30302#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="419">
+          <caret line="1374" column="87" lean-forward="true" selection-start-line="1374" selection-start-column="87" selection-end-line="1374" selection-end-column="87" />
+          <folding />
         </state>
       </provider>
     </entry>
