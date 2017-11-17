@@ -74,12 +74,17 @@ public class ConnectionHandler implements Runnable
                             }
                             mainX = x;
                             mainY = y;
-                            Platform.runLater(new Runnable() {
+                            Platform.runLater(new Runnable()
+                            {
                                 @Override
-                                public void run() {
-                                    try {
+                                public void run()
+                                {
+                                    try
+                                    {
                                         Main.multiplayerReceivedCell(x,y);
-                                    } catch (Exception e) {
+                                    }
+                                    catch (Exception e)
+                                    {
                                         e.printStackTrace();
                                     }
                                     return;
