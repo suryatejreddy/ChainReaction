@@ -262,7 +262,8 @@ public class MenuController
         {
             Socket connection=me.accept();
             System.out.println("Connected");
-            new Thread(new ConnectionHandler(connection)).start();
+            ConnectionHandler handler=new ConnectionHandler(connection);
+            handler.run();
             if(connection.isConnected())
                 break;
         }
