@@ -45,6 +45,7 @@ public class ConnectionHandler implements Runnable
     public void run()
     {
         Main.isMultiplayer=true;
+        Main.isServer = true;
         try
         {
             DataOutputStream out=new DataOutputStream(connection.getOutputStream());
@@ -77,8 +78,8 @@ public class ConnectionHandler implements Runnable
                                 @Override
                                 public void run() {
                                     try {
-                                        Main.clickedOnCell(new SimpleBooleanProperty(),x,y);
-                                    } catch (IOException e) {
+                                        Main.multiplayerReceivedCell(x,y);
+                                    } catch (Exception e) {
                                         e.printStackTrace();
                                     }
                                     return;
