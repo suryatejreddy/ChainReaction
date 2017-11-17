@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 import java.io.*;
+import java.net.Socket;
 import java.util.*;
 
 import javafx.fxml.FXMLLoader;
@@ -73,6 +74,12 @@ public class Main extends Application implements Serializable
     public static StackPane mainRoot;
 
     public static boolean tempUsed = false;
+
+    public static boolean isMultiplayer = false;
+
+    public static Socket liveSocket;
+
+    public static boolean isServer;
 
     static
     {
@@ -505,7 +512,7 @@ public class Main extends Application implements Serializable
     /**
      * This is a function that initializes the application and loads the starting menu.
      *
-     * @param type
+     * @param
      * @return Queue of Players
      * @throws IOException
      * @throws ClassNotFoundException
@@ -990,7 +997,7 @@ public class Main extends Application implements Serializable
 
     /**
      * Most important function. This function is called when a player clicks on a particularCell and is responsible for balls being added to the cell.
-     * @param e
+     * @param
      * @param cellSwitch
      * @param x
      * @param y
@@ -1001,7 +1008,7 @@ public class Main extends Application implements Serializable
      * @since 2017-10-24
      */
     @SuppressWarnings("Duplicates")
-    private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y ) throws IOException
+    public static void clickedOnCell(BooleanProperty cellSwitch, int x , int y ) throws IOException
     {
 
         if (!cellSwitch.get())
@@ -1011,6 +1018,12 @@ public class Main extends Application implements Serializable
 
         Iterator<ExtendedPlayer> iterator=allPlayers.iterator();
 
+        if (isMultiplayer)
+        {
+            DataOutputStream temp = new DataOutputStream(liveSocket.getOutputStream());
+            temp.writeUTF(x + "," + y );
+
+        }
 
         try
         {
@@ -1061,6 +1074,34 @@ public class Main extends Application implements Serializable
             e2.printStackTrace();
         }
     }
+
+    public static void multiplayerAddBall(int x , int y)
+    {
+        ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
+        ExtendedPlayer curPlayer;
+        if (isServer)
+        {
+            curPlayer = getPlayerOfColor(Color.VIOLET,allPlayers);
+        }
+        else
+        {
+            curPlayer = getPlayerOfColor(Color.BLUE,allPlayers);
+        }
+        cellClicked.addBall(curPlayer,true,true);
+    }
+
+
+    public static void multiplayerReceivedCell(int x, int y)
+    {
+        multiplayerAddBall(x,y);
+    }
+
+    public static void multiplayerClickedOnCell(int x , int y)
+    {
+        multiplayerAddBall(x,y);
+    }
+
+
 
     /**
      * A function that loads and renders the menu fxml .
@@ -1227,7 +1268,11 @@ public class Main extends Application implements Serializable
         {
             try
             {
-                clickedOnCell(e,cellSwitch,x,y);
+                clickedOnCell(cellSwitch,x,y);
+                if (isMultiplayer)
+                {
+                    multiplayerAddBall(x,y);
+                }
             }
             catch(IOException e1)
             {
