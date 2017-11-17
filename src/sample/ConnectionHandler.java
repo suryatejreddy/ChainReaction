@@ -66,10 +66,11 @@ public class ConnectionHandler implements Runnable
 
                             int x=Integer.parseInt(i.substring(0,1));
                             int y=Integer.parseInt(i.substring(2));
-                            if (x == mainX && y == mainY)
-                            {
-                                continue;
-                            }
+//                            if (x == mainX && y == mainY)
+//                            {
+//                                System.out.println("Skipping.");
+//                                continue;
+//                            }
                             mainX = x;
                             mainY = y;
                             Platform.runLater(new Runnable()

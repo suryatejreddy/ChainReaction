@@ -270,10 +270,11 @@ public class MenuController {
                         String a = in.readUTF().toString();
                         int x = Integer.parseInt(a.substring(0, 1));
                         int y = Integer.parseInt(a.substring(2, 3));
-                        if (x == mainX && y == mainY)
-                        {
-                            continue;
-                        }
+//                        if (x == mainX && y == mainY)
+//                        {
+//                            System.out.println("Skipping");
+//                            continue;
+//                        }
                         mainX = x;
                         mainY = y;
                         Platform.runLater(new Runnable() {

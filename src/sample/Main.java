@@ -1071,14 +1071,15 @@ public class Main extends Application implements Serializable
 
      public static void multiplayerReceivedCell(int x, int y)
     {
-        System.out.println("I am a server  " + isServer + " received ball to add " + x + " " + y);
         ExtendedCell cellClicked = gridPane.getCellFromCoordinate(y,x);
         if (isServer)
         {
+            System.out.println("Server: Received message to add ball at" + "(" + x + "," + y + ")");
             cellClicked.addBall(getPlayerOfColor(Color.BLUE,allPlayers),true,true);
         }
         else
         {
+            System.out.println("Client: Received message to add ball at" + "(" + x + "," + y + ")");
             cellClicked.addBall(getPlayerOfColor(Color.VIOLET,allPlayers),true,true);
         }
         setForAllCells(false);
@@ -1151,6 +1152,15 @@ public class Main extends Application implements Serializable
         else
         {
             changeColorOfGrid(getPlayerOfColor(Color.VIOLET,allPlayers));
+        }
+        updatePlayerStats(allPlayers);
+        if (allPlayers.size() == 1)
+        {
+            try {
+                showAlert(allPlayers.peek());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -1273,6 +1283,31 @@ public class Main extends Application implements Serializable
             gameoverDialog.setTitle("Game Over");
             gameoverDialog.setHeaderText(null);
             gameoverDialog.setContentText("Player " + curPlayer.playerNumber + " won!");
+            if (isMultiplayer)
+            {
+                if (isServer)
+                {
+                    if (compareColors(curPlayer.getPlayerColour(),Color.VIOLET))
+                    {
+                        gameoverDialog.setContentText("You won! Congrats");
+                    }
+                    else
+                    {
+                        gameoverDialog.setContentText("Oops. You Lost! Better Luck Next Time");
+                    }
+                }
+                else
+                {
+                    if (compareColors(curPlayer.getPlayerColour(),Color.BLUE))
+                    {
+                        gameoverDialog.setContentText("You won! Congrats");
+                    }
+                    else
+                    {
+                        gameoverDialog.setContentText("Oops. You Lost! Better Luck Next Time");
+                    }
+                }
+            }
             gameoverDialog.getButtonTypes().removeAll();
             ButtonType buttonType = new ButtonType("Return to Menu");
             gameoverDialog.getButtonTypes().add(buttonType);
