@@ -1087,6 +1087,7 @@ public class Main extends Application implements Serializable
         {
             curPlayer = getPlayerOfColor(Color.BLUE,allPlayers);
         }
+        System.out.println("Callling addBall " + curPlayer + x + " "  + y);
         cellClicked.addBall(curPlayer,true,true);
     }
 
@@ -1268,10 +1269,12 @@ public class Main extends Application implements Serializable
         {
             try
             {
-                clickedOnCell(cellSwitch,x,y);
                 if (isMultiplayer)
                 {
-                    multiplayerAddBall(x,y);
+                    multiplayerClickedOnCell(x,y);
+                }
+                else{
+                    clickedOnCell(cellSwitch,x,y);
                 }
             }
             catch(IOException e1)

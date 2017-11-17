@@ -235,7 +235,8 @@ public class MenuController {
         while (true) {
             Socket connection = me.accept();
             System.out.println("Connected");
-            new Thread(new ConnectionHandler(connection)).start();
+            ConnectionHandler handler=new ConnectionHandler(connection);
+            handler.run();
             if (connection.isConnected())
                 break;
         }
@@ -256,7 +257,6 @@ public class MenuController {
         Main.isServer = false;
         Main.playOnRecurse();
         Socket server = new Socket(SERVER, PORT);
-//        System.out.println("connected to : "+server.getRemoteSocketAddress());
         DataInputStream in = new DataInputStream(server.getInputStream());
         System.out.println(in.readUTF());
         Main.liveSocket = server;
