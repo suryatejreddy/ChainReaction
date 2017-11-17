@@ -540,8 +540,15 @@ public class ExtendedCell implements Serializable
                 }
                 if (flag)
                 {
-                    System.out.println(this + " is lastt ");
-                    Main.onAnimationCompleted(curPlayer);
+                    if (Main.isMultiplayer)
+                    {
+                        Main.multiplayerAnimationComplete(curPlayer);
+                    }
+                    else
+                    {
+                        Main.onAnimationCompleted(curPlayer);
+                    }
+
                 }
             });
         }
@@ -557,6 +564,11 @@ public class ExtendedCell implements Serializable
 //            }
             if (callFromMain)
             {
+                if (Main.isMultiplayer)
+                {
+                    Main.multiplayerAnimationComplete(curPlayer);
+                }
+                else
                 Main.onAnimationCompleted(curPlayer);
             }
         }
