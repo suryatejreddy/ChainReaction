@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="Added server/client base code.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExtendedCell.java" afterPath="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,7 +23,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="236">
@@ -43,6 +42,18 @@
             <state relative-caret-position="380">
               <caret line="218" column="12" lean-forward="false" selection-start-line="218" selection-start-column="12" selection-end-line="218" selection-end-column="12" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExtendedCell.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="588" column="24" lean-forward="false" selection-start-line="588" selection-start-column="24" selection-end-line="588" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -173,11 +184,11 @@
         <option value="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-1.css" />
         <option value="$PROJECT_DIR$/src/Stylesheets/grid-with-borders-2.css" />
         <option value="$PROJECT_DIR$/src/sample/ExtendedPlayer.java" />
-        <option value="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
         <option value="$PROJECT_DIR$/src/FXML_Files/sample.fxml" />
         <option value="$PROJECT_DIR$/src/sample/ConnectionHandler.java" />
         <option value="$PROJECT_DIR$/src/sample/MenuController.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/sample/ExtendedCell.java" />
       </list>
     </option>
   </component>
@@ -523,14 +534,7 @@
       <workItem from="1510836944932" duration="24677000" />
       <workItem from="1510870610928" duration="131000" />
       <workItem from="1510870873348" duration="3790000" />
-      <workItem from="1510877060197" duration="3339000" />
-    </task>
-    <task id="LOCAL-00012" summary="Code is working on 2x2 grid for two players. Have to test more.">
-      <created>1508008323464</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1508008323464</updated>
+      <workItem from="1510877060197" duration="4314000" />
     </task>
     <task id="LOCAL-00013" summary="Tried it for 3x3. Going to simulate the game in the mobile and test now.">
       <created>1508010620914</created>
@@ -868,11 +872,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510873616815</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Documented Main.java file">
+      <created>1510880412599</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1510880412599</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="222337000" />
+    <option name="totallyTimeSpent" value="223312000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="128" y="4" width="1922" height="1035" extended-state="6" />
@@ -952,7 +963,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Animation working only in UI, not refelected in grid. IMP COMMIT!" />
     <MESSAGE value="Its fucking working." />
     <MESSAGE value="Added serialize and deserialize funtion." />
     <MESSAGE value="Movement Direction Bug" />
@@ -977,18 +987,11 @@
     <MESSAGE value="Added error files." />
     <MESSAGE value="Window resize fixes." />
     <MESSAGE value="Added server/client base code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added server/client base code." />
+    <MESSAGE value="Documented Main.java file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documented Main.java file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/ExtendedCell.java</url>
-          <line>135</line>
-          <properties />
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
@@ -1287,16 +1290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5238">
-          <caret line="342" column="39" lean-forward="false" selection-start-line="342" selection-start-column="39" selection-end-line="342" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/SettingsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
@@ -1343,6 +1336,16 @@
           <folding>
             <element signature="e#4734#4735#0" expanded="true" />
             <element signature="e#4795#4796#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/ExtendedCell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="588" column="24" lean-forward="false" selection-start-line="588" selection-start-column="24" selection-end-line="588" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
