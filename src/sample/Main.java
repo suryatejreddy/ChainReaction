@@ -23,6 +23,17 @@ import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import javax.print.attribute.standard.Media;
 
+
+/**
+ * This is the core Class that runs the entire Game and consists of static methods and variables
+ * that handle the gave environment. Functions for Initialization of the game, serialization, de serialization etc.
+ * are present in this class.
+ *
+ * @author Suryatej and Vishaal
+ * @version 1.1
+ * @since 2017-10-26
+ *
+ */
 public class Main extends Application implements Serializable
 {
 
@@ -84,10 +95,27 @@ public class Main extends Application implements Serializable
 
     }
 
+    /**
+     * It is a setter function for the resumeGameBool that helps in serialization.
+     * @param resumeGameBool
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-01
+     */
     public static void setResumeGameBool(boolean resumeGameBool)
     {
         Main.resumeGameBool=resumeGameBool;
     }
+
+    /**
+     * We serialize the resumeBoolean that tells us if the previous game was completed or not.
+     * @throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-01
+     */
 
     public static void serializeResume() throws IOException
     {
@@ -103,6 +131,15 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * We deserialize the resumeBoolean that tells us if the previous game was completed or not.
+     * @throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-01
+     */
+
     public static void deserializeResume() throws IOException
     {
         ObjectInputStream in=null;
@@ -117,12 +154,26 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * Function initializes a list of players.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-01
+     */
     public Main()
     {
-        System.out.println("Main called");
         allPlayers = new LinkedList<ExtendedPlayer>();
     }
 
+    /**
+     * It is a function that plays a sound upon click of a cell in the game.
+     *@throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-6
+     */
     public static void playOnClick() throws IOException
     {
         File onClick=new File("./src/AudioFiles/onClick.wav");
@@ -147,6 +198,14 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * It is a function that plays a sound when user clicks on a button in the game.
+     *@throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-6
+     */
     public static void playOnRecurse() throws IOException
     {
         File onClick=new File("./src/AudioFiles/onButton.wav");
@@ -170,6 +229,14 @@ public class Main extends Application implements Serializable
             e.printStackTrace();
         }
     }
+    /**
+     * It is a function that plays a sound when an alert is raised for the user.
+     *@throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-6
+     */
 
     public static void playOnAlert() throws IOException
     {
@@ -195,6 +262,15 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * It is a function that plays a sound when the game is completed.
+     *@throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-6
+     */
+
     public static void playOnEnd() throws IOException
     {
         File onClick=new File("./src/AudioFiles/gameOver.wav");
@@ -219,6 +295,14 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * It is a function that plays a sound when the user tries to perform an invalid move.
+     *@throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-6
+     */
     public static void playOnError() throws IOException
     {
         File onClick=new File("./src/AudioFiles/error.wav");
@@ -244,12 +328,25 @@ public class Main extends Application implements Serializable
     }
 
 
-
+    /**
+     * Main function requires no introduction. It starts the javafx application.
+     * @param args
+     */
     public static void main(String[] args)
     {
         launch(args);
     }
 
+    /**
+     * It is a function that serializes the queue of players (i.e, storing current state of players in the game) into a file.
+     * The file (undo or resume) depends on the input passed as a parameter.
+     * @param type
+     * @throws IOException
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
     public static void serializeQueue(int type) throws IOException
     {
         ObjectOutputStream out=null;
@@ -273,6 +370,17 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * It is a function that serializes the entire grid ( all cells and children data ).
+     * The file (undo or resume) depends on the input passed as a parameter.
+     *
+     * @param type
+     * @throws IOException
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
     public static void serializeGrid(int type) throws IOException
     {
         ObjectOutputStream out=null;
@@ -296,6 +404,15 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     *It is a function that re constructs the JavaFx Color field from the rgb value as the Color field is not serializable.
+     *
+     * @param tempPlayers
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-5
+     */
     public static void initColorForPlayers(Queue<ExtendedPlayer> tempPlayers)
     {
         for (ExtendedPlayer temp : tempPlayers)
@@ -303,6 +420,20 @@ public class Main extends Application implements Serializable
             temp.playerColor = Color.color(temp.r,temp.g,temp.b);
         }
     }
+
+    /**
+     * This functions deserializes the queue of players from the undo file or resume file depending on the type
+     * passed as a parameter.
+     *
+     * @param type
+     * @return Queue of Players
+     * @throws IOException
+     * @throws ClassNotFoundException
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
 
     public static Queue<ExtendedPlayer> deserializeQueue(int type) throws IOException, ClassNotFoundException
     {
@@ -331,6 +462,19 @@ public class Main extends Application implements Serializable
         return ret;
     }
 
+    /**
+     * This functions deserializes the game grid from the undo file or resume file depending on the type
+     * passed as a parameter.
+     *
+     * @param type
+     * @return Queue of Players
+     * @throws IOException
+     * @throws ClassNotFoundException
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
 
     public static ExtendedGrid deserializeGrid(int type) throws IOException, ClassNotFoundException
     {
@@ -358,6 +502,18 @@ public class Main extends Application implements Serializable
     }
 
 
+    /**
+     * This is a function that initializes the application and loads the starting menu.
+     *
+     * @param type
+     * @return Queue of Players
+     * @throws IOException
+     * @throws ClassNotFoundException
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-10-20
+     */
 
     public static Scene getGameScene(int numberOfPlayers, int x , int y) throws IOException
     {
@@ -530,6 +686,14 @@ public class Main extends Application implements Serializable
         return scene;
     }
 
+    /**
+     * A function that changes the color of the grid for the next player to take a turn.
+     * @param curPlayer
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
     public static void changeColorOfGrid(ExtendedPlayer curPlayer)
     {
         Color presentColor = curPlayer.getPlayerColour();
@@ -537,6 +701,14 @@ public class Main extends Application implements Serializable
         mainRoot.setStyle("cell-border-color: " + colorInString + " ;");
     }
 
+    /**
+     * A function that takes a paramter, the deserialzed queue of players and initilizes a new Queue to match the game environment.
+     * @param newPlayers
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
     public static void setPlayers(Queue<ExtendedPlayer> newPlayers)
     {
         ArrayList<ExtendedPlayer> tempList = new ArrayList<>(newPlayers);
@@ -553,7 +725,16 @@ public class Main extends Application implements Serializable
         System.out.println("after deSerializing " + allPlayers);
     }
 
-
+    /**
+     * A function that takes in data de-serialized as parameters and compares with current game state to perform undo / resume functionalities.
+     * @param newGrid
+     * @param newPlayers
+     *
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
     public static void compareGrid(ExtendedGrid newGrid, Queue<ExtendedPlayer> newPlayers)
     {
         for (int i=newGrid.getSideLengthY()-1;i>-1;i--)
@@ -589,6 +770,16 @@ public class Main extends Application implements Serializable
         changeColorOfGrid(allPlayers.peek());
     }
 
+    /**
+     * It is a function that searched for a player of the given color in the queue passed as a parameter.
+     * @param color
+     * @param players
+     * @return
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
     public static ExtendedPlayer getPlayerOfColor(Color color, Queue<ExtendedPlayer> players)
     {
         for (ExtendedPlayer p : players)
@@ -602,12 +793,27 @@ public class Main extends Application implements Serializable
     }
 
 
-
+    /**
+     * This function starts a new game.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     private static void startNewGame()
     {
         Main.launchGame(currentN, currentX, currentY);
     }
 
+    /**
+     * This is a function that is called when the programs launches. It loads and renders the fxml files for the menu.
+     * @param primaryStage
+     * @throws Exception
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-10-24
+     */
     @Override
     public void start(Stage primaryStage) throws Exception
     {
@@ -625,6 +831,17 @@ public class Main extends Application implements Serializable
         primaryStage.show();
     }
 
+    /**
+     * This is the golden function that is called when the user clicks on Play/Resume Game. It sets up the cells , arranges players in a queue
+     * to play.
+     * @param n
+     * @param x
+     * @param y
+     *
+     * @author Vishaal and Suryate
+     * @version 1.0
+     * @since 2017-10-24
+     */
     public static void launchGame(int n, int x , int y)
     {
         Scene newScene = null;
@@ -660,6 +877,15 @@ public class Main extends Application implements Serializable
         MainStage.setScene(newScene);
     }
 
+    /**
+     * A function that loads and renders the Settings fxml to disaplay the settings page.
+     * @throws Exception
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
+
     public void showSettings() throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML_Files/Settings.fxml"));
@@ -670,20 +896,43 @@ public class Main extends Application implements Serializable
 
     }
 
+    /**
+     * A function that takes leaves the game and moves back to the meny screen.
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     public void backToMenu()
     {
         MainStage.setScene(menu);
     }
 
 
-
+    /**
+     * Return color of the player passed as a parameter.
+     * @param player
+     * @return
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-4
+     */
     public static Color getColor(ExtendedPlayer player)
     {
         return player.getPlayerColour();
     }
 
 
-
+    /**
+     * This a function that is called after move to remove players who have died in that move. It uses the Iterator design principle .
+     *
+     * @param allPlayers
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-3
+     */
     public static void updatePlayerStats(Queue<ExtendedPlayer> allPlayers)
     {
         for(Iterator<ExtendedPlayer> iter = allPlayers.iterator(); iter.hasNext(); ) {
@@ -699,6 +948,16 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * A function that compares two colors based on rgb values.
+     * @param color1
+     * @param color2
+     * @return true or false
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
     public static boolean compareColors(Color color1 , Color color2)
     {
         if ((color1.getRed() == color2.getRed())  && (color1.getBlue() == color2.getBlue()) && (color1.getGreen() == color2.getGreen()))
@@ -708,6 +967,14 @@ public class Main extends Application implements Serializable
         return false;
     }
 
+    /**
+     * A function that enables/disables all the cells and renders them clickable/ un clickable accordingly.
+     * @param flag
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
     public static void setForAllCells(Boolean flag)
     {
 
@@ -721,6 +988,18 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * Most important function. This function is called when a player clicks on a particularCell and is responsible for balls being added to the cell.
+     * @param e
+     * @param cellSwitch
+     * @param x
+     * @param y
+     * @throws IOException
+     *
+     * @author Vishaal and Suryatej
+     * @version 1.0
+     * @since 2017-10-24
+     */
     @SuppressWarnings("Duplicates")
     private static void clickedOnCell(MouseEvent e, BooleanProperty cellSwitch, int x , int y ) throws IOException
     {
@@ -783,6 +1062,15 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * A function that loads and renders the menu fxml .
+     * @throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
+
     public static void showMenu() throws IOException
     {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("../FXML_Files/sample.fxml"));
@@ -801,6 +1089,15 @@ public class Main extends Application implements Serializable
         MainStage.show();
     }
 
+    /**
+     * A function that is called when all the recursive calls are completed and hence denotes the end of the move.
+     * Players are removed here and game is prepared to take in next move.
+     * @param curPlayer
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-1
+     */
     public static void onAnimationCompleted(ExtendedPlayer curPlayer)
     {
         try{
@@ -845,6 +1142,16 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * This function is called while quitting the mainStage.
+     * @throws Exception
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-4
+     */
+
+
     @Override
     public void stop() throws Exception
     {
@@ -852,6 +1159,15 @@ public class Main extends Application implements Serializable
         super.stop();
     }
 
+    /**
+     * Function raises an alert once the game is completed.
+     * @param curPlayer
+     * @throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-4
+     */
     public static void showAlert(ExtendedPlayer curPlayer) throws IOException
     {
         playOnEnd();
@@ -891,6 +1207,17 @@ public class Main extends Application implements Serializable
 
     }
 
+    /**
+     * A function that creates a cell to be placed inside the grid and adds an event handler to it.
+     * @param cellSwitch
+     * @param x
+     * @param y
+     * @return Cell
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     private static ExtendedCell createCell(BooleanProperty cellSwitch, int x, int y)
     {
         Group group = new Group();
@@ -911,6 +1238,17 @@ public class Main extends Application implements Serializable
         cell.getCell().getStyleClass().add("cell");
         return cell;
     }
+
+    /**
+     * A function that dynamically modifies the css files to change color of grid.
+     *
+     * @param color
+     * @param fileName
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
 
     public static void changeCss( Color color, String fileName)
     {
@@ -943,10 +1281,30 @@ public class Main extends Application implements Serializable
         }
     }
 
+    /**
+     * A function that converts rgb to web based hex to use in the grid CSS.
+     * @param r
+     * @param g
+     * @param b
+     * @return String
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
     public static String toHex(int r, int g, int b) {
         return "#" + toBrowserHexValue(r) + toBrowserHexValue(g) + toBrowserHexValue(b);
     }
 
+    /**
+     * Helper function for above mentioned function.
+     * @param number
+     * @return
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
     private static String toBrowserHexValue(int number) {
         StringBuilder builder = new StringBuilder(Integer.toHexString(number & 0xff));
         while (builder.length() < 2) {
@@ -955,7 +1313,13 @@ public class Main extends Application implements Serializable
         return builder.toString().toUpperCase();
     }
 
-
+    /**
+     * Updates the CSS files to map to each player.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-10
+     */
     public static void changeCSSforAllPlayers()
     {
         changeCss(ExtendedPlayer.colorOfPlayer1,"Stylesheets/grid-with-borders-1.css");
@@ -969,72 +1333,16 @@ public class Main extends Application implements Serializable
 
     }
 
-
-
-    public static ExtendedGrid setGridPane(ExtendedGrid gridPane)
-    {
-        //System.out.println("came to grid pane");
-        GridPane grid = new GridPane();
-        for (int x = 0; x < gridPane.getSideLengthX(); x++)
-        {
-            ColumnConstraints cc = new ColumnConstraints();
-            cc.setFillWidth(true);
-            cc.setPercentWidth(100);
-//            cc.setHgrow(Priority.SOMETIMES);
-            grid.getColumnConstraints().add(cc);
-        }
-
-        for (int y = 0; y < gridPane.getSideLengthY(); y++)
-        {
-            RowConstraints rc = new RowConstraints();
-            rc.setFillHeight(true);
-            rc.setPercentHeight(100);
-//            rc.setVgrow(Priority.SOMETIMES);
-            grid.getRowConstraints().add(rc);
-        }
-
-        BooleanProperty[][] switches=new BooleanProperty[gridPane.getSideLengthX()][gridPane.getSideLengthY()];
-
-        for (int i = 0; i <gridPane.getExtendedCells().size() ; i++)
-        {
-            //System.out.println("for loop "+i);
-            gridPane.getExtendedCells().get(i).setGroup(new Group());
-            for(int j=0;j<gridPane.getExtendedCells().get(i).getNumberOfBallsPresent();j++)
-            {
-                gridPane.getExtendedCells().get(j).getGroup().getChildren().add(ExtendedCell.staticGetSphere(Main.getColor(gridPane.getExtendedCells().get(i).getPlayerOccupiedBy())));
-            }
-            //System.out.println(gridPane.getExtendedCells().get(i).getNumberOfBallsPresent());
-            if(gridPane.getExtendedCells().get(i).getNumberOfBallsPresent()>0)
-            {
-                System.out.println(gridPane.getExtendedCells().get(i).getNumberOfBallsPresent() + " in " + gridPane.getExtendedCells().get(i).getCoordX() + " ," + gridPane.getExtendedCells().get(i).getCoordY() + " by player " + gridPane.getExtendedCells().get(i).getPlayerOccupiedBy().getPlayerColourByString());
-                System.out.println(gridPane.getExtendedCells().get(i).getCriticalMass()+" cell is null"+gridPane.getExtendedCells().get(i).getGroup());
-
-
-                gridPane.getExtendedCells().get(i).setCell(new StackPane());
-                gridPane.getExtendedCells().get(i).getCell().getChildren().clear();
-                gridPane.getExtendedCells().get(i).getCell().getChildren().add(gridPane.getExtendedCells().get(i).getGroup());
-
-                gridPane.getExtendedCells().get(i).getCell().setOnMouseClicked(e ->
-                {
-                    try
-                    {
-                        clickedOnCell(e,new SimpleBooleanProperty(),gridPane.getSideLengthX(),gridPane.getSideLengthY());
-                    }
-                    catch(IOException e1)
-                    {
-                        e1.printStackTrace();
-                    }
-                });
-
-                gridPane.getExtendedCells().get(i).getCell().getStyleClass().add("cell");
-            }
-        }
-        grid.getStyleClass().add("grid");
-        gridPane.setGridPane(grid);
-        changeColorOfGrid(allPlayers.peek());
-        return gridPane;
-    }
-
+    /**
+     * A function that creates a game grid based on X and Y coordinates. It creates cells and sets basic css.
+     * @param sidelengthX
+     * @param sidelengthY
+     * @return
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-23
+     */
     private static ExtendedGrid createGrid(int sidelengthX, int sidelengthY)
     {
         GridPane grid = new GridPane();

@@ -13,6 +13,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * A class to denote each cell in the grid. Contains a group to hold the balls and various other attributes such as player , neighbouring cells etc.
+ *
+ * @author Suryatej and Vishaal
+ * @version 1.0
+ * @since 2017-10-20
+ */
 
 //class to hold UI of Cell.
 public class ExtendedCell implements Serializable
@@ -33,6 +40,20 @@ public class ExtendedCell implements Serializable
     private boolean cellIsOccupied;
     private transient Group group;
 
+
+    /**
+     * Basic constructor function to initialize a cell.
+     * @param group
+     * @param cell
+     * @param coordX
+     * @param coordY
+     * @param player
+     * @param neighbouringCells
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-20
+     */
     public ExtendedCell(Group group, StackPane cell, int coordX, int coordY, ExtendedPlayer player, ArrayList<ExtendedCell> neighbouringCells)
     {
         this.group=group;
@@ -45,6 +66,14 @@ public class ExtendedCell implements Serializable
         this.numberOfBallsPresent=0;
         this.neighbouringCells=neighbouringCells;
     }
+
+    /**
+     * Function that adds animation to the group of Spheres inside the cell.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-10-24
+     */
 
     public void addAnimation()
     {
@@ -61,97 +90,206 @@ public class ExtendedCell implements Serializable
 
     }
 
+    /**
+     * Function that starts the rotation defined above.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-10-24
+     */
+
     public void startRotation()
     {
         this.addAnimation();
     }
+
+    /**
+     * Getter function for playerOccupiedBy.
+     * @return Player
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
 
     public ExtendedPlayer getPlayerOccupiedBy()
     {
         return playerOccupiedBy;
     }
 
+    /**
+     * Getter function for X coordinate;
+     * @return int
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     public int getCoordX()
     {
         return coordX;
     }
+
+    /**
+     * Getter function for Y coordinate;
+     * @return int
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
 
     public int getCoordY()
     {
         return coordY;
     }
 
+    /**
+     * Getter function for child stackPane;
+     * @return int
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
+
     public StackPane getCell()
     {
         return cell;
     }
+
+    /**
+     * Getter function for neighbouringCells.;
+     * @return StackPane
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
 
     public ArrayList<ExtendedCell> getNeighbouringCells()
     {
         return neighbouringCells;
     }
 
+    /**
+     * Getter function for isCellOccupied.;
+     * @return ArrayList of ExtendedCells
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
+
     public boolean isCellOccupied()
     {
         return cellIsOccupied;
     }
+
+    /**
+     * Getter function for group of spheres.
+     * @return boolean
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
 
     public Group getGroup()
     {
         return group;
     }
 
+    /**
+     * Getter function for numberOfBalls present.
+     * @return Group
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
+
     public int getNumberOfBallsPresent()
     {
         return numberOfBallsPresent;
     }
 
-
+    /**
+     * Getter function for critical Mass;
+     *
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     public int getCriticalMass()
     {
         return criticalMass;
     }
 
+    /**
+     * Setter function for child stackPane;
+     *
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     public void setCell(StackPane cell)
     {
         this.cell = cell;
     }
 
+    /**
+     * Setter function for criticalMass;
+     *
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     public void setCriticalMass(int criticalMass)
     {
         this.criticalMass = criticalMass;
     }
 
-    public void setCoordX(int coordX)
-    {
-        this.coordX = coordX;
-    }
-
-    public void setCoordY(int coordY)
-    {
-        this.coordY = coordY;
-    }
-
-    public void setPlayer(ExtendedPlayer player)
-    {
-        this.playerOccupiedBy = player;
-    }
-
-    public void setNumberOfBallsPresent(int numberOfBallsPresent)
-    {
-        this.numberOfBallsPresent = numberOfBallsPresent;
-    }
+    /**
+     * Setter function for neighbouring cells;
+     *
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
 
     public void setNeighbouringCells(ArrayList<ExtendedCell> neighbouringCells)
     {
         this.neighbouringCells = neighbouringCells;
     }
 
+    /**
+     * Setter function for cell Occupied boolean;
+     *
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
+
     public void setCellIsOccupied(boolean cellIsOccupied)
     {
         this.cellIsOccupied = cellIsOccupied;
     }
 
+
+    /**
+     * Setter function for player occupied by.
+     * @param playerOccupiedBy
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-24
+     */
     public void setPlayerOccupiedBy(ExtendedPlayer playerOccupiedBy)
     {
         //what should happen here?
@@ -160,6 +298,14 @@ public class ExtendedCell implements Serializable
         //TODO change color of balls for UI
     }
 
+
+    /**
+     * This function clears the cell and makes all data zero. It is used when the balls in the cell split up.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-1
+     */
     public void emptyCell()
     { //to be called when the cell bursts
 
@@ -191,16 +337,16 @@ public class ExtendedCell implements Serializable
         cell.getChildren().add(getGroup());
     }
 
-    public static Sphere staticGetSphere(Color color)
-    {
-        Sphere s=new Sphere(10);
-        PhongMaterial phongMaterial=new PhongMaterial();
-        phongMaterial.setDiffuseColor(color);
-        phongMaterial.setSpecularColor(Color.BLACK);
-        s.setMaterial(phongMaterial);
-        return s;
-    }
 
+    /**
+     * Creates a new Sphere of given Color and returns it.
+     * @param color
+     * @return Sphere
+     *
+     * * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-1
+     */
     public Sphere getNewSphere(Color color)
     {
         Sphere s1 = new Sphere(10);
@@ -211,6 +357,16 @@ public class ExtendedCell implements Serializable
         return s1;
     }
 
+    /**
+     * Creates an arraylist of spheres and returns it.
+     * @param color
+     * @param numberOfSpheres
+     * @return
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-1
+     */
     public ArrayList<Sphere> getAllSpheres(Color color,int numberOfSpheres)
     {
         ArrayList<Sphere> temp = new ArrayList<Sphere>();
@@ -220,6 +376,15 @@ public class ExtendedCell implements Serializable
         }
         return temp;
     }
+
+    /**
+     * Sets translation to sphere so that spheres of the cell don't overlap over each other.
+     * @param sphere
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-1
+     */
 
     public void setTranslationToSphere(Sphere sphere)
     {
@@ -244,6 +409,16 @@ public class ExtendedCell implements Serializable
     }
 
 
+    /**
+     * The million dollar function that is the hear and soul of the game that recursively adds balls in its neighbours once each level of animation is complete.
+     * @param curPlayer
+     * @param addBallInUI
+     * @param callFromMain
+     *
+     * * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-2
+     */
 
     public void addBall(ExtendedPlayer curPlayer, boolean addBallInUI, boolean callFromMain)
     {
@@ -298,15 +473,6 @@ public class ExtendedCell implements Serializable
 
         if (this.numberOfBallsPresent >= this.getCriticalMass())
         {
-
-//            try
-//            {
-//                Main.playOnRecurse();
-//            }
-//            catch(IOException e)
-//            {
-//                e.printStackTrace();
-//            }
 
             //NON_UI Part
             this.emptyCell();
@@ -397,10 +563,30 @@ public class ExtendedCell implements Serializable
 
     }
 
+
+    /**
+     * Setter for Group.
+     * @param group
+     *
+     * * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-20
+     */
+
     public void setGroup(Group group)
     {
         this.group = group;
     }
+
+    /**
+     * Returns string representation of the cell. Usefull in debugging.
+     * @return String
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-10-20
+     */
+
 
     public String toString()
     {
