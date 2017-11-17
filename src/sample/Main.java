@@ -1018,12 +1018,6 @@ public class Main extends Application implements Serializable
 
         Iterator<ExtendedPlayer> iterator=allPlayers.iterator();
 
-        if (isMultiplayer)
-        {
-            DataOutputStream temp = new DataOutputStream(liveSocket.getOutputStream());
-            temp.writeUTF(x + "," + y );
-
-        }
 
         try
         {
@@ -1091,15 +1085,39 @@ public class Main extends Application implements Serializable
         cellClicked.addBall(curPlayer,true,true);
     }
 
+    public static void multiplayerChangeGridColor()
+    {
+        if (isServer)
+        {
+            changeColorOfGrid(getPlayerOfColor(Color.BLUE,allPlayers));
+        }
+        else
+        {
+            changeColorOfGrid(getPlayerOfColor(Color.VIOLET,allPlayers));
+        }
+    }
+
+
+
 
     public static void multiplayerReceivedCell(int x, int y)
     {
         multiplayerAddBall(x,y);
+        multiplayerChangeGridColor();
     }
 
     public static void multiplayerClickedOnCell(int x , int y)
     {
+
+        DataOutputStream temp = null;
+        try {
+            temp = new DataOutputStream(liveSocket.getOutputStream());
+            temp.writeUTF(x + "," + y );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         multiplayerAddBall(x,y);
+        multiplayerChangeGridColor();
     }
 
 
