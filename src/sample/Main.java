@@ -205,6 +205,41 @@ public class Main extends Application implements Serializable
         }
     }
 
+
+
+    /**
+     * It is a function that plays music upon intro in the game.
+     *@throws IOException
+     *
+     * @author Vishaal
+     * @version 1.0
+     * @since 2017-11-16
+     */
+
+    public static void playOnIntro() throws IOException
+    {
+        File onClick=new File("./src/AudioFiles/startGame.wav");
+        javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
+        MediaPlayer mediaPlayer=new MediaPlayer(hit);
+        Thread x=new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mediaPlayer.play();
+            }
+        });
+        x.start();
+        try
+        {
+            x.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * It is a function that plays a sound when user clicks on a button in the game.
      *@throws IOException

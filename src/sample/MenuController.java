@@ -239,6 +239,12 @@ public class MenuController {
             e.printStackTrace();
         }
         sample.Main.launchGame(numPlayers, x, y);
+        try{
+            Main.playOnIntro();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
