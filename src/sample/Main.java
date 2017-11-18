@@ -572,7 +572,7 @@ public class Main extends Application implements Serializable
                 {
                     Main.playOnRecurse();
                 }
-                catch(IOException e)
+                catch(Exception e)
                 {
                     e.printStackTrace();
                 }
@@ -617,7 +617,7 @@ public class Main extends Application implements Serializable
                 {
                     Main.playOnRecurse();
                 }
-                catch(IOException e)
+                catch(Exception e)
                 {
                     e.printStackTrace();
                 }
@@ -644,7 +644,7 @@ public class Main extends Application implements Serializable
                 {
                     Main.playOnRecurse();
                 }
-                catch(IOException e)
+                catch(Exception e)
                 {
                     e.printStackTrace();
                 }
@@ -1030,7 +1030,13 @@ public class Main extends Application implements Serializable
                 if (curPlayer!=null && compareColors(curCellColor,curPlayer.getPlayerColour()))
                 { // check if player is adding to his color
                     //add ball function
-                    Main.playOnClick();
+                    try{
+                        Main.playOnClick();
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                     serializeQueue(TYPE_UNDO);
                     serializeGrid(TYPE_UNDO);
                     allPlayers.remove(curPlayer);
@@ -1042,12 +1048,24 @@ public class Main extends Application implements Serializable
                 {  //if not
                     //show error, wrong move
                     //we should not remove the player from the queue
-                    playOnError();
+                    try {
+                        playOnError();
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                 }
             }
             else
             {
-                Main.playOnClick();
+                try{
+                    Main.playOnClick();
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
                 serializeQueue(TYPE_UNDO);
                 serializeGrid(TYPE_UNDO);
                 allPlayers.remove(curPlayer);
@@ -1115,7 +1133,7 @@ public class Main extends Application implements Serializable
                 {
                     try {
                         playOnError();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     return;
@@ -1128,7 +1146,7 @@ public class Main extends Application implements Serializable
 
                     try {
                         playOnError();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     return;
@@ -1137,7 +1155,7 @@ public class Main extends Application implements Serializable
         }
         try {
             playOnClick();
-        } catch (IOException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
         DataOutputStream temp = null;
@@ -1302,7 +1320,14 @@ public class Main extends Application implements Serializable
      */
     public static void showAlert(ExtendedPlayer curPlayer) throws IOException
     {
-        playOnEnd();
+        try{
+            playOnEnd();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
         if(!alertShown)
         {
             alertShown=true;

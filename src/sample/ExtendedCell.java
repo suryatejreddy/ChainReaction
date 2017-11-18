@@ -505,7 +505,7 @@ public class ExtendedCell implements Serializable
             {
                 try {
                     Main.playOnClick();
-                } catch (IOException e1) {
+                } catch (Exception e1) {
                     e1.printStackTrace();
                 }
                 this.cell.getChildren().clear();
