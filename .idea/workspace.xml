@@ -2,21 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2db37871-ae0f-4ec1-a073-06ad33c81360" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/allclasses-frame.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/allclasses-noframe.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/constant-values.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/deprecated-list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/help-doc.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overview-tree.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package-list" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/script.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serialized-form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/stylesheet.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridResume.ser" afterPath="$PROJECT_DIR$/serializeGridResume.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeGridUndo.ser" afterPath="$PROJECT_DIR$/serializeGridUndo.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueResume.ser" afterPath="$PROJECT_DIR$/serializeQueueResume.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serializeQueueUndo.ser" afterPath="$PROJECT_DIR$/serializeQueueUndo.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -559,13 +544,6 @@
       <workItem from="1510930949944" duration="7385000" />
       <workItem from="1511003270595" duration="136000" />
     </task>
-    <task id="LOCAL-00021" summary="FXML linked awesome to main code">
-      <created>1508773193613</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1508773193613</updated>
-    </task>
     <task id="LOCAL-00022" summary="Settings also working.">
       <created>1508776258188</created>
       <option name="number" value="00022" />
@@ -902,7 +880,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510998841108</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Finally done">
+      <created>1511006271493</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1511006271493</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -985,7 +970,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Undo working(few bugs)" />
     <MESSAGE value="2nd commit for undo.(not fully functional)" />
     <MESSAGE value="Added resume game enabling/disabling function." />
     <MESSAGE value="Resume Working Partially. Before modifying compareGrid function." />
@@ -1010,7 +994,8 @@
     <MESSAGE value="Added documentation for new functions." />
     <MESSAGE value="Finally final." />
     <MESSAGE value="Finally done, i guess." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finally done, i guess." />
+    <MESSAGE value="Finally done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finally done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
