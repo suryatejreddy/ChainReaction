@@ -1320,16 +1320,17 @@ public class Main extends Application implements Serializable
      */
     public static void showAlert(ExtendedPlayer curPlayer) throws IOException
     {
-        try{
-            playOnEnd();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+
 
         if(!alertShown)
         {
+            try{
+                playOnEnd();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
             alertShown=true;
             Alert gameoverDialog = new Alert(Alert.AlertType.NONE);
             gameoverDialog.setTitle("Game Over");
