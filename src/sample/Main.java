@@ -183,7 +183,7 @@ public class Main extends Application implements Serializable
      */
     public static void playOnClick() throws IOException
     {
-        File onClick=new File("./src/AudioFiles/onClick.wav");
+        File onClick=new File("./src/AudioFiles/onClick2.wav");
         javafx.scene.media.Media hit=new javafx.scene.media.Media(onClick.toURI().toString());
         MediaPlayer mediaPlayer=new MediaPlayer(hit);
         Thread x=new Thread(new Runnable()
