@@ -10,11 +10,13 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.NetworkInterface;
@@ -37,7 +39,7 @@ public class MenuController {
 
 
     public static final int PORT = 1234;
-    public static final String SERVER = "192.168.60.159";
+    public static String SERVER="192.168.60.159";
 
     static int numPlayers;
     static volatile int mainX;
@@ -105,9 +107,24 @@ public class MenuController {
             }
 
         });
-        try {
+    }
+
+
+    /**
+     * Updates server string with current IP address.
+     *
+     * @author Suryatej
+     * @version 1.0
+     * @since 2017-11-17
+     */
+
+    public static void updateServer()
+    {
+        try
+        {
             Enumeration<NetworkInterface> temp =  NetworkInterface.getNetworkInterfaces();
-            Collections.list(temp).forEach(e ->{
+            Collections.list(temp).forEach(e ->
+            {
                 if (e.getDisplayName().compareTo("wlp2s0") == 0)
                 {
                     String address = e.getInterfaceAddresses().get(1).toString();
@@ -116,7 +133,9 @@ public class MenuController {
                     address = address.substring(0,index);
                 }
             });
-        } catch (SocketException e) {
+        }
+        catch (SocketException e)
+        {
             e.printStackTrace();
         }
     }
@@ -249,17 +268,22 @@ public class MenuController {
 
     public void startServer() throws IOException {
         Main.playOnRecurse();
+        updateServer();
         ServerSocket me = new ServerSocket(PORT);
 
-        while (true) {
+        while (true)
+        {
             Socket connection = me.accept();
             System.out.println("Connected");
             ConnectionHandler handler=new ConnectionHandler(connection);
             handler.run();
             if (connection.isConnected())
+            {
                 break;
+            }
         }
     }
+
 
     /**
      * Action Handler for Connect To Online Game Button
@@ -289,11 +313,7 @@ public class MenuController {
                         String a = in.readUTF().toString();
                         int x = Integer.parseInt(a.substring(0, 1));
                         int y = Integer.parseInt(a.substring(2, 3));
-//                        if (x == mainX && y == mainY)
-//                        {
-//                            System.out.println("Skipping");
-//                            continue;
-//                        }
+
                         mainX = x;
                         mainY = y;
                         Platform.runLater(new Runnable() {
@@ -313,16 +333,6 @@ public class MenuController {
                 }
             }
         }).start();
-
-
-    }
-
-    public void onPlsWorkDone(DataInputStream in) {
-        try {
-            Main.clickedOnCell(new SimpleBooleanProperty(), mainX, mainY);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
 
