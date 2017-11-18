@@ -167,7 +167,7 @@ public class MenuController {
             public void handle(MouseEvent mouseEvent) {
                 try {
                     Main.playOnRecurse();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -207,7 +207,7 @@ public class MenuController {
     public void startGame() {
         try {
             Main.playOnRecurse();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         numPlayers = Integer.parseInt(playerCount.getValue().toString());
@@ -267,7 +267,13 @@ public class MenuController {
      */
 
     public void startServer() throws IOException {
-        Main.playOnRecurse();
+        try {
+            Main.playOnRecurse();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
         updateServer();
         ServerSocket me = new ServerSocket(PORT);
 
@@ -298,7 +304,12 @@ public class MenuController {
     public void startClient() throws IOException {
         Main.isMultiplayer = true;
         Main.isServer = false;
-        Main.playOnRecurse();
+        try {
+            Main.playOnRecurse();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         Socket server = new Socket(SERVER, PORT);
         DataInputStream in = new DataInputStream(server.getInputStream());
         System.out.println(in.readUTF());
