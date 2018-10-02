@@ -51,6 +51,9 @@ public class Main extends Application implements Serializable
     private static int currentX;
     private static int currentY;
 
+    public static idgaf;
+    public static func;
+
     public static final String SERIALIZE_RESUME_BOOL="serializeResumeBool.ser";
     public static final String SERIALIZE_QUEUE_FILE_UNDO="serializeQueueUndo.ser";
     public static final String SERIALIZE_GRID_FILE_UNDO="serializeGridUndo.ser";
